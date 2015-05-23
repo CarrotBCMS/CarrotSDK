@@ -7,7 +7,48 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface CRBeacon : NSObject
+
+/**
+ Name of the beacon.
+ */
+@property (strong) NSString *name;
+
+/**
+ UUID string, e.g. 123e4567-e89b-12d3-a456-426655440000.
+ */
+@property (readonly) NSString *uuid;
+
+/**
+ Major identifier, e.g. 523423
+ */
+@property (readonly) NSString *major;
+
+/**
+ Minor identifier, e.g. 233123.
+ */
+@property (readonly) NSString *minor;
+
+/**
+ Minor identifier, e.g. 233123.
+ */
+@property (strong) CLBeacon *beacon;
+
+/**
+ Events dictionary.
+    E.g. use key "CRBeaconTextEventsKey" to retrieve an array of all text events associated with this beacon.
+ */
+@property (strong) NSDictionary *events;
+
+///---------------------------------------------------------------------------------------
+/// @name Lifecycle
+///---------------------------------------------------------------------------------------
+
+/**
+ Initialize this proxy by providing a CLBeacon object.
+ */
+- (instancetype)initWithCLBeacon: (CLBeacon *)beacon;
 
 @end

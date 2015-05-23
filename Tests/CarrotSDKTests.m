@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "CRBeaconManagerDelegate.h"
 
 @interface CarrotSDKTests : XCTestCase
 @end
