@@ -10,7 +10,6 @@
 #import <XCTest/XCTest.h>
 
 @interface CarrotSDKTests : XCTestCase
-
 @end
 
 @implementation CarrotSDKTests
