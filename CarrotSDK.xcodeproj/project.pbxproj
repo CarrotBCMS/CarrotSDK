@@ -53,8 +53,8 @@
 		6061DA591B111AF5002DC83B = {
 			isa = PBXGroup;
 			children = (
-				6061DA651B111AF5002DC83B /* CarrotSDK */,
-				6061DA721B111AF5002DC83B /* CarrotSDKTests */,
+				6061DA651B111AF5002DC83B /* Source */,
+				6061DA721B111AF5002DC83B /* Tests */,
 				6061DA641B111AF5002DC83B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,13 +68,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6061DA651B111AF5002DC83B /* CarrotSDK */ = {
+		6061DA651B111AF5002DC83B /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				6061DA681B111AF5002DC83B /* CarrotSDK.h */,
 				6061DA661B111AF5002DC83B /* Supporting Files */,
 			);
-			path = CarrotSDK;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		6061DA661B111AF5002DC83B /* Supporting Files */ = {
@@ -85,13 +85,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6061DA721B111AF5002DC83B /* CarrotSDKTests */ = {
+		6061DA721B111AF5002DC83B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				6061DA751B111AF5002DC83B /* CarrotSDKTests.m */,
 				6061DA731B111AF5002DC83B /* Supporting Files */,
 			);
-			path = CarrotSDKTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		6061DA731B111AF5002DC83B /* Supporting Files */ = {
@@ -326,7 +326,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CarrotSDK/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -341,7 +341,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CarrotSDK/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -360,7 +360,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = CarrotSDKTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -373,7 +373,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = CarrotSDKTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
