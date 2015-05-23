@@ -18,9 +18,9 @@
 /// @name Callbacks
 ///---------------------------------------------------------------------------------------
 
--(void)manager:(CRBeaconManager *)beaconManager didEnterBeacon:(CRBeacon *)beacon;
+-(void)manager:(CRBeaconManager *)beaconManager didEnterBeaconRadius:(CRBeacon *)beacon;
 
--(void)manager:(CRBeaconManager *)beaconManager didExitBeacon:(CRBeacon *)beacon;
+-(void)manager:(CRBeaconManager *)beaconManager didExitBeaconRadius:(CRBeacon *)beacon;
 
 ///---------------------------------------------------------------------------------------
 /// @name Other (derived from CLBeaconManagerDelegate)

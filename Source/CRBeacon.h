@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface CRBeacon : NSObject
+@interface CRBeacon : NSObject <NSSecureCoding>
 
 /**
  Name of the beacon.
@@ -32,7 +32,7 @@
 @property (readonly) NSString *minor;
 
 /**
- Minor identifier, e.g. 233123.
+ Related beacon (CoreLocation).
  */
 @property (strong) CLBeacon *beacon;
 
@@ -49,6 +49,8 @@
 /**
  Initialize this proxy by providing a CLBeacon object.
  */
-- (instancetype)initWithCLBeacon: (CLBeacon *)beacon;
+- (instancetype)initWithCLBeacon: (CLBeacon *)beacon
+                            name: (NSString *)name
+                          events: (NSDictionary *)events;
 
 @end

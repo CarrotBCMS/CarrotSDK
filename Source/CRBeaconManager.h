@@ -14,6 +14,8 @@
 @interface CRBeaconManager : NSObject
 
 @property (nonatomic, assign) id <CRBeaconManagerDelegate> delegate;
+@property (readonly) NSURL *url;
+@property (readonly) NSString *appKey;
 
 ///---------------------------------------------------------------------------------------
 /// @name Lifecycle

@@ -114,10 +114,10 @@
 		6061DA651B111AF5002DC83B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				6061DA681B111AF5002DC83B /* CarrotSDK.h */,
 				6061DA811B111CB8002DC83B /* Core */,
 				6061DA801B111CAD002DC83B /* Persistence */,
 				6061DA7F1B111CA5002DC83B /* Network */,
-				6061DA681B111AF5002DC83B /* CarrotSDK.h */,
 				6061DA661B111AF5002DC83B /* Supporting Files */,
 			);
 			path = Source;
@@ -172,10 +172,10 @@
 		6061DA811B111CB8002DC83B /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6061DA821B111D21002DC83B /* CRBeaconManager.h */,
-				6061DA831B111D21002DC83B /* CRBeaconManager.m */,
 				6009ED311B1139EC0090C1A7 /* CRDefinitions.h */,
 				6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */,
+				6061DA821B111D21002DC83B /* CRBeaconManager.h */,
+				6061DA831B111D21002DC83B /* CRBeaconManager.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
