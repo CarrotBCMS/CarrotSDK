@@ -8,6 +8,23 @@
 
 #import "CREvent.h"
 
-@implementation CREvent
+@implementation CREvent {
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Initialising
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super init];
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 @end

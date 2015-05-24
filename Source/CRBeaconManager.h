@@ -41,9 +41,9 @@
  @param url URL to CarrotBMS
  @param key Application key
  */
--(instancetype)initWithDelegate: (id<CRBeaconManagerDelegate>)delegate
-                            url: (NSURL *)url
-                         appKey: (NSString *)key;
+-(instancetype)initWithDelegate:(id<CRBeaconManagerDelegate>)delegate
+                            url:(NSURL *)url
+                         appKey:(NSString *)key;
 
 ///---------------------------------------------------------------------------------------
 /// @name Monitoring
@@ -73,7 +73,7 @@
  
  @param error Error pointer
  */
--(BOOL)startSyncingProcessWithError: (NSError * __autoreleasing *)error;
+-(BOOL)startSyncingProcessWithError:(NSError * __autoreleasing *)error;
 
 /**
  Stop syncing beacon data.

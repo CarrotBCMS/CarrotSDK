@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define CRBeaconTextEventsKey @"CRBeaconTextEventsKey"
-
 @interface CREvent : NSObject <NSSecureCoding>
 
 @end

@@ -24,12 +24,12 @@
 /**
  Major identifier, e.g. 523423
  */
-@property (readonly) NSString *major;
+@property (readonly) NSNumber *major;
 
 /**
  Minor identifier, e.g. 233123.
  */
-@property (readonly) NSString *minor;
+@property (readonly) NSNumber *minor;
 
 /**
  Related beacon (CoreLocation).
@@ -48,9 +48,17 @@
 
 /**
  Initialize this proxy by providing a CLBeacon object.
+ 
+ @param uuid UUID string
+ @param major Major identifier
+ @param minor Minor identifier
+ @param name Name
+ @param events Dictionary with associated events
  */
-- (instancetype)initWithCLBeacon: (CLBeacon *)beacon
-                            name: (NSString *)name
-                          events: (NSDictionary *)events;
+- (instancetype)initWithUUID:(NSString *)uuid
+                       major:(NSNumber *)major
+                       minor:(NSNumber *)minor
+                        name:(NSString *)name
+                      events:(NSDictionary *)events;
 
 @end
