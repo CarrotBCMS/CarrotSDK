@@ -19,7 +19,8 @@
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// Constants
+// Paths
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define CRBeaconTextEventsKey @"CRBeaconTextEventsKey"
+#define CRBeaconDataBasePath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/.data/carrot/"]
+#define CRBeaconDataFilePath [RCBeaconDataBasePath stringByAppendingString:@"data"]

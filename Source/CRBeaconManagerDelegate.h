@@ -23,6 +23,9 @@
  
  @see CRBeaconManager
  @see CRBeacon
+ 
+ @param beaconManager Beacon manager
+ @param beacon Single beacon
  */
 -(void)manager:(CRBeaconManager *)beaconManager didEnterBeaconRadius:(CRBeacon *)beacon;
 
@@ -32,6 +35,9 @@
  
  @see CRBeaconManager
  @see CRBeacon
+ 
+ @param beaconManager Beacon manager
+ @param beacon Single beacon
  */
 -(void)manager:(CRBeaconManager *)beaconManager didExitBeaconRadius:(CRBeacon *)beacon;
 
@@ -45,6 +51,10 @@
  @see CLBeaconManagerDelegate
  @see CRBeaconManager
  @see CLBeaconRegion
+ 
+ @param beaconManager Beacon manager
+ @param region The specific region
+ @param beacons All beacons
  */
 - (void)manager:(CRBeaconManager *)beaconManager
  didEnterRegion:(CLBeaconRegion *)region
@@ -56,6 +66,10 @@
  @see CLBeaconManagerDelegate
  @see CRBeaconManager
  @see CLBeaconRegion
+ 
+ @param beaconManager Beacon manager
+ @param region The specific region
+ @param beacons Array with beacons
  */
 - (void)manager:(CRBeaconManager *)beaconManager
   didExitRegion:(CLBeacon *)region
@@ -67,6 +81,10 @@
  @see CLBeaconManagerDelegate
  @see CRBeaconManager
  @see CLBeaconRegion
+ 
+ @param beaconManager Beacon manager
+ @param state The current state
+ @param region The specific region
  */
 - (void)manager:(CRBeaconManager *)beaconManager didDetermineState:(CLRegionState)state
       forRegion:(CLBeaconRegion *)region;
@@ -78,6 +96,10 @@
  @see CLBeaconManagerDelegate
  @see CRBeaconManager
  @see CLBeaconRegion
+ 
+ @param beaconManager Beacon manager
+ @param beacons Array with beacons
+ @param region The specific region
  */
 - (void)manager:(CRBeaconManager *)beaconManager didRangeBeacons:(NSArray *)beacons
        inRegion:(CLBeaconRegion *)region;
@@ -90,14 +112,21 @@
  Invoked whenever an error occurs.
  
  @see CRBeaconManager
+ 
+ @param beaconManager Beacon manager
+ @param error Error
  */
 - (void)manager:(CRBeaconManager *)manager didFailWithError:(NSError *)error;
 
 /**
- Invoked whenever there is a ranging error for the specific region
+ Invoked whenever there is a ranging error for the specific region.
  
  @see CRBeaconManager
  @see CLBeaconRegion
+ 
+ @param beaconManager Beacon manager
+ @param beaconManager Current region
+ @param error Error
  */
 - (void)manager:(CRBeaconManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
       withError:(NSError *)error;

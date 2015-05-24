@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CREvent.h"
 
-@interface CRTextEvent : NSObject <NSSecureCoding>
+@interface CRTextEvent : CREvent <NSSecureCoding>
 
 @end

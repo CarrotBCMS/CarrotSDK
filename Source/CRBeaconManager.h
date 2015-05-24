@@ -13,8 +13,19 @@
 
 @interface CRBeaconManager : NSObject
 
+/**
+ Delegate property
+ */
 @property (nonatomic, assign) id <CRBeaconManagerDelegate> delegate;
+
+/**
+ URL to CarrotBMS
+ */
 @property (readonly) NSURL *url;
+
+/**
+ Application key
+ */
 @property (readonly) NSString *appKey;
 
 ///---------------------------------------------------------------------------------------
@@ -23,7 +34,12 @@
 
 /**
  Initialize a CRBeaconManager instance. Must provide a valid app key and url to corresponding bms.
+ 
  @see CRBeaconManagerDelegate
+ 
+ @param delegate Manager delegate
+ @param url URL to CarrotBMS
+ @param key Application key
  */
 -(instancetype)initWithDelegate: (id<CRBeaconManagerDelegate>)delegate
                             url: (NSURL *)url
@@ -54,6 +70,8 @@
 
 /**
  Connect to CarrotBMS and start syncing beacons and events.
+ 
+ @param error Error pointer
  */
 -(BOOL)startSyncingProcessWithError: (NSError * __autoreleasing *)error;
 

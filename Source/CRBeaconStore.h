@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CRPersistentStore.h"
 
-@interface CRBeaconStore : NSObject
+/**
+ `CRBeaconStore` is a sublcass of `CRPersistentStore`
+ This is a concret implementation to store (serialize) Beacon data.
+ Have a look at `CRDefinitions.h` for more information on storage paths.
+ 
+ @see CRPersistentStore
+ */
+@interface CRBeaconStore : CRPersistentStore
 
 @end
