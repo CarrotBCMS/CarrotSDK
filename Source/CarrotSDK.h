@@ -17,4 +17,7 @@ FOUNDATION_EXPORT const unsigned char CarrotSDKVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <CarrotSDK/PublicHeader.h>
 
 #import <CarrotSDK/CRBeaconManager.h>
+#import <CarrotSDK/CRBeaconManagerDelegate.h>
 #import <CarrotSDK/CRBeacon.h>
+#import <CarrotSDK/CREvent.h>
+#import <CarrotSDK/CRTextEvent.h>

@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED311B1139EC0090C1A7 /* CRDefinitions.h */; };
-		6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */; };
-		6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3A1B1144B00090C1A7 /* CREvent.h */; };
+		6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3A1B1144B00090C1A7 /* CREvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED3D1B1144B00090C1A7 /* CREvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3B1B1144B00090C1A7 /* CREvent.m */; };
-		6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */; };
+		6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED411B11451E0090C1A7 /* CRTextEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */; };
 		6061DA691B111AF5002DC83B /* CarrotSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 6061DA681B111AF5002DC83B /* CarrotSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6061DA6F1B111AF5002DC83B /* CarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA631B111AF5002DC83B /* CarrotSDK.framework */; };
@@ -196,14 +196,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */,
+				6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */,
+				6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */,
 				6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */,
 				6061DA841B111D21002DC83B /* CRBeaconManager.h in Headers */,
 				6061DA901B111DB3002DC83B /* CRBeacon.h in Headers */,
-				6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */,
 				6061DA691B111AF5002DC83B /* CarrotSDK.h in Headers */,
 				6061DA8C1B111D95002DC83B /* CRSyncManager.h in Headers */,
 				6061DA881B111D84002DC83B /* CRBeaconStore.h in Headers */,
-				6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
