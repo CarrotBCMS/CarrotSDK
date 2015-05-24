@@ -10,7 +10,7 @@
 
 /**
  `CRPersistentStore` is a class to store (serialize) abstract objects to disk.
- This class can be overriden for more concrete implementations
+ This class may be overriden for more concrete implementations
  Have a look at `CRDefinitions.h` for more information on storage paths.
  */
 @interface CRPersistentStore : NSObject {

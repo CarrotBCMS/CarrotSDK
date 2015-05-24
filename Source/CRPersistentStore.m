@@ -10,4 +10,80 @@
 
 @implementation CRPersistentStore
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Initialising
+
+- (id)initWithStoragePath:(NSString *)path {
+    self = [super init];
+    
+    if (self) {
+        _storagePath = path;
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        @try {
+            if ([fileManager fileExistsAtPath:_storagePath]) {
+                _objects = [NSKeyedUnarchiver unarchiveObjectWithFile:_storagePath];
+            }
+        } @finally {
+            if (!_objects) {
+                _objects = [NSMutableArray array];
+            }
+        }
+    }
+    
+    return self;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Public interface
+
+- (void)addObject:(id)object {
+    if (object) {
+        [_objects addObject:object];
+        [self _save];
+    }
+}
+
+- (void)removeObject:(id)object {
+    if (object) {
+        [_objects removeObject:object];
+        [self _save];
+    }
+}
+
+- (void)addObjectsFromArray:(NSArray *)array {
+    if (array) {
+        [_objects addObjectsFromArray:array];
+        [self _save];
+    }
+}
+
+- (void)removeObjectsInArray:(NSArray *)array {
+    if (array) {
+        [_objects removeObjectsInArray:array];
+        [self _save];
+    }
+}
+
+- (NSArray *)objects {
+    return [NSArray arrayWithArray:_objects];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Private
+
+- (void)_save {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *dirpath = [_storagePath stringByDeletingLastPathComponent];
+    if (![fileManager fileExistsAtPath:dirpath]) {
+        [fileManager createDirectoryAtPath:dirpath withIntermediateDirectories:YES attributes:nil error:NULL];
+    }
+    
+    [NSKeyedArchiver archiveRootObject:_objects toFile:_storagePath];
+}
+
 @end
