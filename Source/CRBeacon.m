@@ -56,4 +56,18 @@
     return YES;
 }
 
+- (BOOL)isEqual:(id)object {
+    CRBeacon *aObject = (CRBeacon *)object;
+    if (!object ||
+        ![aObject.uuid isEqualToString:self.uuid] ||
+        ![aObject.major isEqualToNumber:self.major] ||
+        ![aObject.minor isEqualToNumber:self.minor]
+        )
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

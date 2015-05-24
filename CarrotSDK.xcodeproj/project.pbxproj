@@ -11,6 +11,7 @@
 		6002B0DC1B126D8000459AAC /* CRPersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DA1B126D8000459AAC /* CRPersistentStore.m */; };
 		6002B0DF1B12768D00459AAC /* CRBeaconStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 6002B0DD1B12768D00459AAC /* CRBeaconStore.h */; };
 		6002B0E01B12768D00459AAC /* CRBeaconStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DE1B12768D00459AAC /* CRBeaconStore.m */; };
+		6002B0E21B1277C700459AAC /* CRPersistentStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0E11B1277C700459AAC /* CRPersistentStoreTests.m */; };
 		6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED311B1139EC0090C1A7 /* CRDefinitions.h */; };
 		6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3A1B1144B00090C1A7 /* CREvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,6 +45,7 @@
 		6002B0DA1B126D8000459AAC /* CRPersistentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPersistentStore.m; sourceTree = "<group>"; };
 		6002B0DD1B12768D00459AAC /* CRBeaconStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconStore.h; sourceTree = "<group>"; };
 		6002B0DE1B12768D00459AAC /* CRBeaconStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconStore.m; sourceTree = "<group>"; };
+		6002B0E11B1277C700459AAC /* CRPersistentStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPersistentStoreTests.m; sourceTree = "<group>"; };
 		6009ED311B1139EC0090C1A7 /* CRDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRDefinitions.h; sourceTree = "<group>"; };
 		6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconManagerDelegate.h; sourceTree = "<group>"; };
 		6009ED3A1B1144B00090C1A7 /* CREvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREvent.h; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				6061DA751B111AF5002DC83B /* CarrotSDKTests.m */,
+				6002B0E11B1277C700459AAC /* CRPersistentStoreTests.m */,
 				6061DA731B111AF5002DC83B /* Supporting Files */,
 			);
 			path = Tests;
@@ -325,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6061DA761B111AF5002DC83B /* CarrotSDKTests.m in Sources */,
+				6002B0E21B1277C700459AAC /* CRPersistentStoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +475,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Source/**";
 			};
 			name = Debug;
 		};
@@ -484,6 +489,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Source/**";
 			};
 			name = Release;
 		};
