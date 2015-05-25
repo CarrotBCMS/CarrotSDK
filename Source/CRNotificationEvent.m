@@ -2,7 +2,7 @@
 //  CRNotificationEvent.m
 //  CarrotSDK
 //
-//  Created by Heiko Dreyer on 25.05.15.
+//  Created by Heiko Dreyer on 05/25/15.
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
