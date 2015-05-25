@@ -1,5 +1,5 @@
 //
-//  CRBeaconStore.h
+//  CRBeaconStorage.h
 //  CarrotSDK
 //
 //  Created by Heiko Dreyer on 05/24/15.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CRPersistentStore.h"
+#import "CRPersistentStorage.h"
 
-@interface CRBeaconStore : CRPersistentStore
+@interface CRBeaconStorage : CRPersistentStorage
 
 // TODO: Implement specific CRUD methods like "get beacon with uuid, major, minor"
 

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@class CRBeaconManager, CRBeacon;
+@class CRBeaconManager, CRBeacon, CRNotificationEvent;
 
 @protocol CRBeaconManagerDelegate <NSObject>
 @optional
@@ -29,7 +29,6 @@
  */
 -(void)manager:(CRBeaconManager *)beaconManager didEnterBeaconRadius:(CRBeacon *)beacon;
 
-
 /**
  Invoked whenever a known beacon exists proximity range.
  
@@ -40,6 +39,20 @@
  @param beacon Single beacon
  */
 -(void)manager:(CRBeaconManager *)beaconManager didExitBeaconRadius:(CRBeacon *)beacon;
+
+/**
+ Invoked whenever a notification has been fired.
+ 
+ @see CRBeaconManager
+ @see CRNotificationEvent
+ @see CRBeacon
+ 
+ @param beaconManager Beacon manager
+ @param notification Notification event
+ @param beacon Single beacon
+ */
+-(void)manager:(CRBeaconManager *)beaconManager didFireNotification:(CRNotificationEvent *)notification
+        beacon:(CRBeacon *)beacon;
 
 ///---------------------------------------------------------------------------------------
 /// @name Other (derived from ´CLBeaconManagerDelegate´)
@@ -88,7 +101,6 @@
  */
 - (void)manager:(CRBeaconManager *)beaconManager didDetermineState:(CLRegionState)state
       forRegion:(CLBeaconRegion *)region;
-
 
 /**
  Invoked whenever beacons were ranged.

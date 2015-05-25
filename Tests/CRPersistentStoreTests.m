@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "CRPersistentStore.h"
+#import "CRPersistentStorage.h"
 #import "CRBeacon.h"
 
 @interface CRPersistentStoreTests : XCTestCase
@@ -18,7 +18,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation CRPersistentStoreTests {
-    CRPersistentStore *_store;
+    CRPersistentStorage *_store;
     CRBeacon *_beacon;
     NSFileManager *_fileManager;
     NSString *_storagePath;
@@ -28,7 +28,7 @@
     [super setUp];
     
     _storagePath = [NSTemporaryDirectory() stringByAppendingString:@"data"];
-    _store = [[CRPersistentStore alloc] initWithStoragePath: _storagePath];
+    _store = [[CRPersistentStorage alloc] initWithStoragePath: _storagePath];
     _beacon = [[CRBeacon alloc] initWithUUID:@"testuuid" major:@222 minor:@111 name:@"Test" events:nil];
     _fileManager = [NSFileManager defaultManager];
 }
@@ -71,7 +71,7 @@
 - (void)testRestoringObjects {
     [_store addObject:_beacon];
     
-    CRPersistentStore *newStore = [[CRPersistentStore alloc] initWithStoragePath:_storagePath];
+    CRPersistentStorage *newStore = [[CRPersistentStorage alloc] initWithStoragePath:_storagePath];
     XCTAssert([[newStore objects] count] == 1);
     
     CRBeacon *aBeacon = [[newStore objects] lastObject];

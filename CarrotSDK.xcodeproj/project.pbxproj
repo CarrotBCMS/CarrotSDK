@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6002B0DB1B126D8000459AAC /* CRPersistentStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 6002B0D91B126D8000459AAC /* CRPersistentStore.h */; };
-		6002B0DC1B126D8000459AAC /* CRPersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DA1B126D8000459AAC /* CRPersistentStore.m */; };
-		6002B0DF1B12768D00459AAC /* CRBeaconStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 6002B0DD1B12768D00459AAC /* CRBeaconStore.h */; };
-		6002B0E01B12768D00459AAC /* CRBeaconStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DE1B12768D00459AAC /* CRBeaconStore.m */; };
+		6002B0DB1B126D8000459AAC /* CRPersistentStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6002B0D91B126D8000459AAC /* CRPersistentStorage.h */; };
+		6002B0DC1B126D8000459AAC /* CRPersistentStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DA1B126D8000459AAC /* CRPersistentStorage.m */; };
+		6002B0DF1B12768D00459AAC /* CRBeaconStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6002B0DD1B12768D00459AAC /* CRBeaconStorage.h */; };
+		6002B0E01B12768D00459AAC /* CRBeaconStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */; };
 		6002B0E21B1277C700459AAC /* CRPersistentStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0E11B1277C700459AAC /* CRPersistentStoreTests.m */; };
 		6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED311B1139EC0090C1A7 /* CRDefinitions.h */; };
 		6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,6 +28,8 @@
 		6061DA901B111DB3002DC83B /* CRBeacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 6061DA8E1B111DB3002DC83B /* CRBeacon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6061DA911B111DB3002DC83B /* CRBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6061DA8F1B111DB3002DC83B /* CRBeacon.m */; };
 		6061DA931B111E61002DC83B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA921B111E61002DC83B /* CoreLocation.framework */; };
+		60C8BAD71B132A5B009024F8 /* CRNotificationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C8BAD51B132A5B009024F8 /* CRNotificationEvent.h */; };
+		60C8BAD81B132A5B009024F8 /* CRNotificationEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,10 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6002B0D91B126D8000459AAC /* CRPersistentStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRPersistentStore.h; sourceTree = "<group>"; };
-		6002B0DA1B126D8000459AAC /* CRPersistentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPersistentStore.m; sourceTree = "<group>"; };
-		6002B0DD1B12768D00459AAC /* CRBeaconStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconStore.h; sourceTree = "<group>"; };
-		6002B0DE1B12768D00459AAC /* CRBeaconStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconStore.m; sourceTree = "<group>"; };
+		6002B0D91B126D8000459AAC /* CRPersistentStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRPersistentStorage.h; sourceTree = "<group>"; };
+		6002B0DA1B126D8000459AAC /* CRPersistentStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPersistentStorage.m; sourceTree = "<group>"; };
+		6002B0DD1B12768D00459AAC /* CRBeaconStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconStorage.h; sourceTree = "<group>"; };
+		6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconStorage.m; sourceTree = "<group>"; };
 		6002B0E11B1277C700459AAC /* CRPersistentStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPersistentStoreTests.m; sourceTree = "<group>"; };
 		6009ED311B1139EC0090C1A7 /* CRDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRDefinitions.h; sourceTree = "<group>"; };
 		6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconManagerDelegate.h; sourceTree = "<group>"; };
@@ -65,6 +67,8 @@
 		6061DA8E1B111DB3002DC83B /* CRBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeacon.h; sourceTree = "<group>"; };
 		6061DA8F1B111DB3002DC83B /* CRBeacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeacon.m; sourceTree = "<group>"; };
 		6061DA921B111E61002DC83B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		60C8BAD51B132A5B009024F8 /* CRNotificationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRNotificationEvent.h; sourceTree = "<group>"; };
+		60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRNotificationEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 				6009ED3B1B1144B00090C1A7 /* CREvent.m */,
 				6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */,
 				6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */,
+				60C8BAD51B132A5B009024F8 /* CRNotificationEvent.h */,
+				60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -168,10 +174,10 @@
 			isa = PBXGroup;
 			children = (
 				6009ED391B1144A30090C1A7 /* Model */,
-				6002B0D91B126D8000459AAC /* CRPersistentStore.h */,
-				6002B0DA1B126D8000459AAC /* CRPersistentStore.m */,
-				6002B0DD1B12768D00459AAC /* CRBeaconStore.h */,
-				6002B0DE1B12768D00459AAC /* CRBeaconStore.m */,
+				6002B0D91B126D8000459AAC /* CRPersistentStorage.h */,
+				6002B0DA1B126D8000459AAC /* CRPersistentStorage.m */,
+				6002B0DD1B12768D00459AAC /* CRBeaconStorage.h */,
+				6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */,
 				6061DA8E1B111DB3002DC83B /* CRBeacon.h */,
 				6061DA8F1B111DB3002DC83B /* CRBeacon.m */,
 			);
@@ -205,14 +211,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */,
-				6002B0DF1B12768D00459AAC /* CRBeaconStore.h in Headers */,
+				6002B0DF1B12768D00459AAC /* CRBeaconStorage.h in Headers */,
 				6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */,
 				6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */,
 				6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */,
-				6002B0DB1B126D8000459AAC /* CRPersistentStore.h in Headers */,
+				6002B0DB1B126D8000459AAC /* CRPersistentStorage.h in Headers */,
 				6061DA841B111D21002DC83B /* CRBeaconManager.h in Headers */,
 				6061DA901B111DB3002DC83B /* CRBeacon.h in Headers */,
 				6061DA691B111AF5002DC83B /* CarrotSDK.h in Headers */,
+				60C8BAD71B132A5B009024F8 /* CRNotificationEvent.h in Headers */,
 				6061DA8C1B111D95002DC83B /* CRSyncManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,10 +323,11 @@
 				6061DA8D1B111D95002DC83B /* CRSyncManager.m in Sources */,
 				6009ED411B11451E0090C1A7 /* CRTextEvent.m in Sources */,
 				6061DA911B111DB3002DC83B /* CRBeacon.m in Sources */,
-				6002B0E01B12768D00459AAC /* CRBeaconStore.m in Sources */,
+				6002B0E01B12768D00459AAC /* CRBeaconStorage.m in Sources */,
 				6009ED3D1B1144B00090C1A7 /* CREvent.m in Sources */,
 				6061DA851B111D21002DC83B /* CRBeaconManager.m in Sources */,
-				6002B0DC1B126D8000459AAC /* CRPersistentStore.m in Sources */,
+				60C8BAD81B132A5B009024F8 /* CRNotificationEvent.m in Sources */,
+				6002B0DC1B126D8000459AAC /* CRPersistentStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

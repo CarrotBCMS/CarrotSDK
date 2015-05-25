@@ -1,5 +1,5 @@
 //
-//  CRPersistentStore.h
+//  CRPersistentStorage.h
 //  CarrotSDK
 //
 //  Created by Heiko Dreyer on 05/24/15.
@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 
 /**
- `CRPersistentStore` is a class to store (serialize) abstract objects to disk.
+ `CRPersistentStorage` is a class to store (serialize) abstract objects to disk.
  This class may be overriden for more concrete implementations
  Have a look at `CRDefinitions.h` for more information on storage paths.
  */
-@interface CRPersistentStore : NSObject {
+@interface CRPersistentStorage : NSObject {
 @protected
     NSMutableArray *_objects;
 }

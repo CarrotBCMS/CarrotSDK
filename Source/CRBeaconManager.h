@@ -33,7 +33,7 @@
 ///---------------------------------------------------------------------------------------
 
 /**
- Initialize a CRBeaconManager instance. Must provide a valid app key and url to corresponding bms.
+ Initialize a CRBeaconManager instance. Must provide a valid app key and url to a running bms endpoint.
  
  @see CRBeaconManagerDelegate
  
