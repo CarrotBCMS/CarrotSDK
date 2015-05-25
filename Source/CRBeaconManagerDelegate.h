@@ -70,8 +70,7 @@
  @param beacons All beacons
  */
 - (void)manager:(CRBeaconManager *)beaconManager
- didEnterRegion:(CLBeaconRegion *)region
-        beacons:(NSArray *)beacons;
+ didEnterRegion:(CLBeaconRegion *)region;
 
 /**
  Invoked whenever the user exits a region.
@@ -85,8 +84,7 @@
  @param beacons Array with beacons
  */
 - (void)manager:(CRBeaconManager *)beaconManager
-  didExitRegion:(CLBeacon *)region
-        beacons:(NSArray *)beacons;
+  didExitRegion:(CLBeacon *)region;
 
 /**
  Invoked whenever a region state was determined.
