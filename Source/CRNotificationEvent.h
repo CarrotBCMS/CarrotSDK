@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CREvent.h"
 
-@interface CRNotificationEvent : NSObject
+#define CRBeaconNotificationEventsKey @"CRBeaconNotificationEventsKey"
+
+@interface CRNotificationEvent : CREvent
 
 @end
