@@ -7,6 +7,7 @@
 //
 
 #import "CRBeaconManager.h"
+#import "CRBeaconManagerDelegate.h"
 
 @interface CRBeaconManager () <CLLocationManagerDelegate>
 - (void)_setup;
@@ -102,6 +103,90 @@
     // Important for iOS 8 cases.
     if([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         [_locationManager requestAlwaysAuthorization];
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+-(void)_sendLocalNotificationWithMessage:(NSString*)message {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = message;
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager
+        didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
+{
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didRangeBeacons:inRegion:)]) {
+        [_delegate manager:self didRangeBeacons:beacons inRegion:region];
+    }
+
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+      didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+{
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didDetermineState:forRegion:)]) {
+        [_delegate manager:self didDetermineState:state forRegion:(CLBeaconRegion *)region];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
+              withError:(NSError *)error
+{
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:rangingBeaconsDidFailForRegion:withError:)]) {
+        [_delegate manager:self rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:error];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+         didEnterRegion:(CLRegion *)region
+{
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didEnterRegion:)]) {
+        [_delegate manager:self didEnterRegion:(CLBeaconRegion *)region];
+    }
+    
+    // Start ranging here
+    [manager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+    [manager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+          didExitRegion:(CLRegion *)region
+{
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitRegion:)]) {
+        [_delegate manager:self didExitRegion:(CLBeaconRegion *)region];
+    }
+    
+    // Stop ranging here
+    [manager stopRangingBeaconsInRegion:(CLBeaconRegion*)region];
+    [manager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error
+{
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didFailWithError:)]) {
+        [_delegate manager:self didFailWithError:error];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region
+              withError:(NSError *)error
+{
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:monitoringDidFailForRegion:withError:)]) {
+        [_delegate manager:self monitoringDidFailForRegion:(CLBeaconRegion *)region withError:error];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didChangeAuthorizationStatus:)]) {
+        [_delegate manager:self didChangeAuthorizationStatus:status];
     }
 }
 

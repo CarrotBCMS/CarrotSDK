@@ -15,7 +15,7 @@
 @optional
 
 ///---------------------------------------------------------------------------------------
-/// @name Ranging callbacks
+/// @name Beacon ranging callbacks
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -73,6 +73,17 @@
 ///---------------------------------------------------------------------------------------
 
 /**
+ Invoked whenever authorization status changes.
+ 
+ @see CLBeaconManagerDelegate
+ @see CRBeaconManager
+ 
+ @param beaconManager Beacon manager
+ @param status Authorization status
+ */
+- (void)manager:(CRBeaconManager *)beaconManager didChangeAuthorizationStatus:(CLAuthorizationStatus)status;
+
+/**
  Invoked whenever the user enters a region.
  
  @see CLBeaconManagerDelegate
@@ -98,7 +109,7 @@
  @param beacons Array with beacons
  */
 - (void)manager:(CRBeaconManager *)beaconManager
-  didExitRegion:(CLBeacon *)region;
+  didExitRegion:(CLBeaconRegion *)region;
 
 /**
  Invoked whenever a region state was determined.
@@ -141,6 +152,18 @@
  @param error Error
  */
 - (void)manager:(CRBeaconManager *)manager didFailWithError:(NSError *)error;
+
+/**
+ Invoked whenever an error occurs while monitoring a specific region.
+ 
+ @see CRBeaconManager
+ 
+ @param beaconManager Beacon manager
+ @param region The region
+ @param error Error
+ */
+- (void)manager:(CRBeaconManager *)manager monitoringDidFailForRegion:(CLBeaconRegion *)region
+      withError:(NSError *)error;
 
 /**
  Invoked whenever there is a ranging error for the specific region.
