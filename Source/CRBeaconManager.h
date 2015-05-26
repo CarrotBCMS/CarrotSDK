@@ -84,6 +84,17 @@
 + (BOOL)isRangingAvailable;
 
 /**
+ Determines whether the device has (iBeacon) monitoring support.
+ */
++ (BOOL)isMonitoringAvailable;
+
+
+/**
+ Determines whether the background fetching is activated.
+ */
++ (BOOL)isBackgroundFetchingAvailable;
+
+/**
  Determines whether the user has location services enabled.
  */
 + (BOOL)locationServicesEnabled;

@@ -15,7 +15,7 @@
 
 #pragma mark - Initialising
 
-- (instancetype)initWithUUID:(NSString *)uuid
+- (instancetype)initWithUUID:(NSString *)uuidString
                        major:(NSNumber *)major
                        minor:(NSNumber *)minor
                         name:(NSString *)name
@@ -25,7 +25,7 @@
     
     if (self) {
         _name = name;
-        _uuid = uuid;
+        _uuidString = uuidString;
         _major = major;
         _minor = minor;
         _beacon = nil;
@@ -45,7 +45,7 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:_uuid forKey:@"uuid"];
+    [aCoder encodeObject:_uuidString forKey:@"uuid"];
     [aCoder encodeObject:_major forKey:@"major"];
     [aCoder encodeObject:_minor forKey:@"minor"];
     [aCoder encodeObject:_name forKey:@"name"];
@@ -59,7 +59,7 @@
 - (BOOL)isEqual:(id)object {
     CRBeacon *aObject = (CRBeacon *)object;
     if (!object ||
-        ![aObject.uuid isEqualToString:self.uuid] ||
+        ![aObject.uuidString isEqualToString:self.uuidString] ||
         ![aObject.major isEqualToNumber:self.major] ||
         ![aObject.minor isEqualToNumber:self.minor]
         )
@@ -68,6 +68,10 @@
     }
     
     return YES;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"CRBeacon - UUID: %@ - Major: %@ - Minor: %@", _uuidString, _major, _minor];
 }
 
 @end

@@ -9,9 +9,21 @@
 #import "CRBeaconManager.h"
 #import "CRBeaconManagerDelegate.h"
 #import "CRDefinitions.h"
+#import "CRBeaconProxyCache.h"
+#import "CRBeaconProxy.h"
+#import "CRBeacon.h"
+#import "CRBeacon+Proxy.h"
 
 @interface CRBeaconManager () <CLLocationManagerDelegate>
+
 - (void)_setup;
+- (NSString *)_stringForState:(CLRegionState)state;
+- (void)_sendLocalNotificationWithMessage:(NSString*)message;
+- (NSArray *)_regions;
+
+- (void)_handleEnterBeacons:(NSArray *)beacons;
+- (void)_handleExitBeacons:(NSArray *)beacons;
+
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +32,7 @@
     CLLocationManager *_locationManager;
     NSArray *_regions;
     BOOL _isActive;
+    CRBeaconProxyCache *_proxyCache;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,11 +62,23 @@
 #pragma mark - Monitoring
 
 - (void)startMonitoringBeacons {
+    if (![CRBeaconManager isRangingAvailable] || ![CRBeaconManager isMonitoringAvailable]) {
+        CRLog("No hardware support for ranging and monitoring.");
+        return;
+    }
+    
     CRLog("Start monitoring beacons.");
     [[self _regions] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [_locationManager startMonitoringForRegion:obj];
+        CRLog("Start monitoring region: %@", obj);
+        CLBeaconRegion *region = (CLBeaconRegion *)obj;
+        region.notifyOnEntry = YES;
+        region.notifyOnExit = YES;
+        region.notifyEntryStateOnDisplay = YES;
+        [_locationManager startRangingBeaconsInRegion:region];
+        [_locationManager startMonitoringForRegion:region];
     }];
     [_locationManager startUpdatingLocation];
+    _monitoringIsActive = YES;
 }
 
 - (void)stopMonitoringBeacons {
@@ -62,6 +87,7 @@
         [_locationManager stopMonitoringForRegion:obj];
     }];
     [_locationManager stopUpdatingLocation];
+    _monitoringIsActive = NO;
 }
 
 
@@ -77,8 +103,16 @@
     return [CLLocationManager isRangingAvailable];
 }
 
++ (BOOL)isMonitoringAvailable {
+    return [CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]];
+}
+
 + (BOOL)locationServicesEnabled {
     return [CLLocationManager locationServicesEnabled];
+}
+
++ (BOOL)isBackgroundFetchingAvailable {
+    return [UIApplication sharedApplication].backgroundRefreshStatus == UIBackgroundRefreshStatusAvailable;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,6 +121,7 @@
 
 - (BOOL)startSyncingProcessWithError:(NSError * __autoreleasing *)error {
     CRLog("Start syncing process.");
+    _syncingIsActive = YES;
     return YES;
 }
 
@@ -98,8 +133,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Private
+
 - (void)_setup {
     _regions = [NSArray array];
+    _proxyCache = [[CRBeaconProxyCache alloc] init];
     
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -111,16 +148,63 @@
     }
 }
 
--(void)_sendLocalNotificationWithMessage:(NSString*)message {
+- (void)_sendLocalNotificationWithMessage:(NSString*)message {
     CRLog("Sending local notification.");
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = message;
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
+- (NSString *)_stringForState:(CLRegionState)state {
+    NSString *stateString;
+    
+    switch (state) {
+        case CLRegionStateInside:
+            stateString = @"CLRegionStateInside";
+            break;
+            
+        case CLRegionStateOutside:
+            stateString = @"CLRegionStateOutside";
+            break;
+            
+        default:
+            stateString = @"CLRegionStateUnknown";
+            break;
+    }
+    
+    return stateString;
+}
+
 - (NSArray *)_regions {
     // return _regions;
-    return @[[[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0003"] identifier:@"Sensorberg Test Beacons" ]];
+    return @[[[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0003"] identifier:@"Sensorberg Test Beacons" ],
+             [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0001"] identifier:@"Sensorberg Test Beacons 2" ]];
+}
+
+- (void)_handleEnterBeacons:(NSArray *)beacons {
+    [beacons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        CRBeaconProxy *beacon = nil;
+        if ([obj isKindOfClass:[CRBeaconProxy class]]) {
+            beacon = obj;
+        }
+        
+        if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didEnterBeaconRadius:)]) {
+            [_delegate manager:self didEnterBeaconRadius:[[CRBeacon alloc] initFromProxy:beacon]];
+        }
+    }];
+}
+
+- (void)_handleExitBeacons:(NSArray *)beacons {
+    [beacons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        CRBeaconProxy *beacon = nil;
+        if ([obj isKindOfClass:[CRBeaconProxy class]]) {
+            beacon = obj;
+        }
+        
+        if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitBeaconRadius:)]) {
+            [_delegate manager:self didExitBeaconRadius:[[CRBeacon alloc] initFromProxy:beacon]];
+        }
+    }];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -130,18 +214,30 @@
 - (void)locationManager:(CLLocationManager *)manager
         didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
-    CRLog("Did range beacons: %@ - Region: %@", beacons, region);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didRangeBeacons:inRegion:)]) {
         [_delegate manager:self didRangeBeacons:beacons inRegion:region];
     }
 
+    NSArray *enteredBeacons = [_proxyCache enteredBeaconProxiesForRangedBeacons:beacons inRegion:region];
+    NSArray *exitedBeacons = [_proxyCache exitedBeaconProxiesForRangedBeacons:beacons inRegion:region];
     
+    if (enteredBeacons.count > 0) {
+        CRLog(@"Entered beacons: %@", enteredBeacons);
+        [self _handleEnterBeacons:enteredBeacons];
+    }
+    
+    if (exitedBeacons.count > 0) {
+        CRLog(@"Exited beacons: %@", exitedBeacons);
+        [self _handleExitBeacons:exitedBeacons];
+    }
+    
+    [_proxyCache addBeaconsAsProxies:beacons forUUIDString:region.proximityUUID.UUIDString];
 }
 
 - (void)locationManager:(CLLocationManager *)manager
       didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
-    CRLog("Did determine state: %ld - Region: %@", state, region);
+    CRLog("Did determine state: %@ - Region: %@", [self _stringForState:state], region);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didDetermineState:forRegion:)]) {
         [_delegate manager:self didDetermineState:state forRegion:(CLBeaconRegion *)region];
     }
@@ -194,12 +290,15 @@
 - (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region
               withError:(NSError *)error
 {
+    CRLog("Did fail for Region: %@ - Error: %@", region, error);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:monitoringDidFailForRegion:withError:)]) {
         [_delegate manager:self monitoringDidFailForRegion:(CLBeaconRegion *)region withError:error];
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    CRLog("Did change authorization status: %d", status);
+    
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didChangeAuthorizationStatus:)]) {
         [_delegate manager:self didChangeAuthorizationStatus:status];
     }

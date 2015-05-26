@@ -19,7 +19,7 @@
 /**
  UUID string, e.g. 123e4567-e89b-12d3-a456-426655440000.
  */
-@property (readonly) NSString *uuid;
+@property (readonly) NSString *uuidString;
 
 /**
  Major identifier, e.g. 523423
@@ -55,7 +55,7 @@
  @param name Name
  @param events Dictionary with associated events
  */
-- (instancetype)initWithUUID:(NSString *)uuid
+- (instancetype)initWithUUID:(NSString *)uuidString
                        major:(NSNumber *)major
                        minor:(NSNumber *)minor
                         name:(NSString *)name
