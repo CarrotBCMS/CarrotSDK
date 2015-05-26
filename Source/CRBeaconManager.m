@@ -8,6 +8,7 @@
 
 #import "CRBeaconManager.h"
 #import "CRBeaconManagerDelegate.h"
+#import "CRDefinitions.h"
 
 @interface CRBeaconManager () <CLLocationManagerDelegate>
 - (void)_setup;
@@ -48,14 +49,16 @@
 #pragma mark - Monitoring
 
 - (void)startMonitoringBeacons {
-    [_regions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    CRLog("Start monitoring beacons.");
+    [[self _regions] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [_locationManager startMonitoringForRegion:obj];
     }];
     [_locationManager startUpdatingLocation];
 }
 
 - (void)stopMonitoringBeacons {
-    [_regions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    CRLog("Stop monitoring beacons.");
+    [[self _regions] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [_locationManager stopMonitoringForRegion:obj];
     }];
     [_locationManager stopUpdatingLocation];
@@ -83,10 +86,12 @@
 #pragma mark - Syncing
 
 - (BOOL)startSyncingProcessWithError:(NSError * __autoreleasing *)error {
+    CRLog("Start syncing process.");
     return YES;
 }
 
 - (BOOL)cancelSyncingProcess {
+    CRLog("Stop syncing process.");
     return YES;
 }
 
@@ -106,12 +111,16 @@
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 -(void)_sendLocalNotificationWithMessage:(NSString*)message {
+    CRLog("Sending local notification.");
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = message;
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
+- (NSArray *)_regions {
+    // return _regions;
+    return @[[[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0003"] identifier:@"Sensorberg Test Beacons" ]];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -121,6 +130,7 @@
 - (void)locationManager:(CLLocationManager *)manager
         didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
+    CRLog("Did range beacons: %@ - Region: %@", beacons, region);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didRangeBeacons:inRegion:)]) {
         [_delegate manager:self didRangeBeacons:beacons inRegion:region];
     }
@@ -131,6 +141,7 @@
 - (void)locationManager:(CLLocationManager *)manager
       didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
+    CRLog("Did determine state: %@ - Region: %@", state, region);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didDetermineState:forRegion:)]) {
         [_delegate manager:self didDetermineState:state forRegion:(CLBeaconRegion *)region];
     }
@@ -139,6 +150,7 @@
 - (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
               withError:(NSError *)error
 {
+    CRLog("Ranging beacons failed for region: %@ - Error: %@", region, error);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:rangingBeaconsDidFailForRegion:withError:)]) {
         [_delegate manager:self rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:error];
     }
@@ -147,6 +159,7 @@
 - (void)locationManager:(CLLocationManager *)manager
          didEnterRegion:(CLRegion *)region
 {
+    CRLog("Did enter region: %@", region);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didEnterRegion:)]) {
         [_delegate manager:self didEnterRegion:(CLBeaconRegion *)region];
     }
@@ -159,6 +172,7 @@
 - (void)locationManager:(CLLocationManager *)manager
           didExitRegion:(CLRegion *)region
 {
+    CRLog("Did exit region: %@", region);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitRegion:)]) {
         [_delegate manager:self didExitRegion:(CLBeaconRegion *)region];
     }
@@ -171,6 +185,7 @@
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
+    CRLog("Did fail: %@", error);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didFailWithError:)]) {
         [_delegate manager:self didFailWithError:error];
     }
