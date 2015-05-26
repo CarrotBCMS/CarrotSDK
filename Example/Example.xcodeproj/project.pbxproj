@@ -16,6 +16,8 @@
 		603CC7C61B14A9FA0077A48C /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7C51B14A9FA0077A48C /* ExampleTests.m */; };
 		603CC7D91B14AA410077A48C /* CarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7D81B14AA410077A48C /* CarrotSDK.framework */; };
 		603CC7DC1B14AA5F0077A48C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7DB1B14AA5F0077A48C /* CoreLocation.framework */; };
+		603CC7DF1B14B11A0077A48C /* CarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */; };
+		603CC7E01B14B11B0077A48C /* CarrotSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +29,20 @@
 			remoteInfo = Example;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		603CC7E11B14B11B0077A48C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				603CC7E01B14B11B0077A48C /* CarrotSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		603CC7A31B14A9FA0077A48C /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +60,7 @@
 		603CC7C51B14A9FA0077A48C /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
 		603CC7D81B14AA410077A48C /* CarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarrotSDK.framework; path = "../../build/Debug-iphoneos/CarrotSDK.framework"; sourceTree = "<group>"; };
 		603CC7DB1B14AA5F0077A48C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CarrotSDK.framework; path = "/Users/bfolder/Library/Developer/Xcode/DerivedData/CarrotSDK-gbrvxflweoctsvgthcjctgyygira/Build/Products/Debug-iphoneos/CarrotSDK.framework"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				603CC7DC1B14AA5F0077A48C /* CoreLocation.framework in Frameworks */,
+				603CC7DF1B14B11A0077A48C /* CarrotSDK.framework in Frameworks */,
 				603CC7D91B14AA410077A48C /* CarrotSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,6 +147,7 @@
 		603CC7DD1B14AA6B0077A48C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */,
 				603CC7DB1B14AA5F0077A48C /* CoreLocation.framework */,
 				603CC7D81B14AA410077A48C /* CarrotSDK.framework */,
 			);
@@ -145,6 +164,7 @@
 				603CC79F1B14A9FA0077A48C /* Sources */,
 				603CC7A01B14A9FA0077A48C /* Frameworks */,
 				603CC7A11B14A9FA0077A48C /* Resources */,
+				603CC7E11B14B11B0077A48C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -368,6 +388,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/bfolder/Workspaces/Xcode/Lab/CarrotSDK/build/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/CarrotSDK-gbrvxflweoctsvgthcjctgyygira/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -382,6 +403,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/bfolder/Workspaces/Xcode/Lab/CarrotSDK/build/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/CarrotSDK-gbrvxflweoctsvgthcjctgyygira/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

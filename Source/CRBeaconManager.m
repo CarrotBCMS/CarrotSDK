@@ -141,7 +141,7 @@
 - (void)locationManager:(CLLocationManager *)manager
       didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
-    CRLog("Did determine state: %@ - Region: %@", state, region);
+    CRLog("Did determine state: %ld - Region: %@", state, region);
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didDetermineState:forRegion:)]) {
         [_delegate manager:self didDetermineState:state forRegion:(CLBeaconRegion *)region];
     }
