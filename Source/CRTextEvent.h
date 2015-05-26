@@ -11,6 +11,6 @@
 
 #define CRBeaconTextEventsKey @"CRBeaconTextEventsKey"
 
-@interface CRTextEvent : CREvent <NSSecureCoding>
+@interface CRTextEvent : CREvent
 
 @end

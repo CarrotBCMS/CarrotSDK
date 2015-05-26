@@ -30,6 +30,7 @@
 		6061DA931B111E61002DC83B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA921B111E61002DC83B /* CoreLocation.framework */; };
 		60C8BAD71B132A5B009024F8 /* CRNotificationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C8BAD51B132A5B009024F8 /* CRNotificationEvent.h */; };
 		60C8BAD81B132A5B009024F8 /* CRNotificationEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */; };
+		60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CF25B91B1456E30069053A /* CRBeaconTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		6061DA921B111E61002DC83B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		60C8BAD51B132A5B009024F8 /* CRNotificationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRNotificationEvent.h; sourceTree = "<group>"; };
 		60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRNotificationEvent.m; sourceTree = "<group>"; };
+		60CF25B91B1456E30069053A /* CRBeaconTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				6061DA751B111AF5002DC83B /* CarrotSDKTests.m */,
+				60CF25B91B1456E30069053A /* CRBeaconTests.m */,
 				6002B0E11B1277C700459AAC /* CRPersistentStoreTests.m */,
 				6061DA731B111AF5002DC83B /* Supporting Files */,
 			);
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6061DA761B111AF5002DC83B /* CarrotSDKTests.m in Sources */,
+				60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */,
 				6002B0E21B1277C700459AAC /* CRPersistentStoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

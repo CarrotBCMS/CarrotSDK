@@ -12,7 +12,6 @@
 #import "CRBeacon.h"
 
 @interface CRPersistentStoreTests : XCTestCase
-
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,6 +77,5 @@
     XCTAssertNotNil(aBeacon);
     XCTAssert([_beacon isEqual:aBeacon]);
 }
-
 
 @end

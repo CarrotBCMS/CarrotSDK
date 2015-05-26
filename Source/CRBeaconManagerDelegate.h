@@ -15,7 +15,7 @@
 @optional
 
 ///---------------------------------------------------------------------------------------
-/// @name Callbacks
+/// @name Ranging callbacks
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -53,6 +53,20 @@
  */
 -(void)manager:(CRBeaconManager *)beaconManager didFireNotification:(CRNotificationEvent *)notification
         beacon:(CRBeacon *)beacon;
+
+///---------------------------------------------------------------------------------------
+/// @name Syncing
+///---------------------------------------------------------------------------------------
+
+/**
+ Invoked whenever a syncing error occurs.
+ 
+ @see CRBeaconManager
+ 
+ @param beaconManager Beacon manager
+ @param error The error
+ */
+-(void)manager:(CRBeaconManager *)beaconManager syncingDidFailWithError:(NSError *)error;
 
 ///---------------------------------------------------------------------------------------
 /// @name Other (derived from ´CLBeaconManagerDelegate´)
