@@ -28,6 +28,16 @@
  */
 @property (readonly) NSString *appKey;
 
+/**
+ Whether monitoring is active or not
+ */
+@property (readonly) BOOL monitoringIsActive;
+
+/**
+ Whether syncing is active or not
+ */
+@property (readonly) BOOL syncingIsActive;
+
 ///---------------------------------------------------------------------------------------
 /// @name Lifecycle
 ///---------------------------------------------------------------------------------------
@@ -41,7 +51,7 @@
  @param url URL to CarrotBMS
  @param key Application key
  */
--(instancetype)initWithDelegate:(id<CRBeaconManagerDelegate>)delegate
+- (instancetype)initWithDelegate:(id<CRBeaconManagerDelegate>)delegate
                             url:(NSURL *)url
                          appKey:(NSString *)key;
 
@@ -50,19 +60,33 @@
 ///---------------------------------------------------------------------------------------
 
 /**
- Handles all forms of authorization to allow Carrot to work. E.g. checking Bluetooth status, asking for permissions.
+ Start monitoring beacons. Checking for proximity of available beacons.
  */
--(void)handleAuthorization;
+- (void)startMonitoringBeacons;
 
 /**
- Start ranging beacons. Checking for proximity of available beacons.
+ Stop monitoring beacons. No further delegate methods are being called.
  */
--(void)startRangingBeacons;
+- (void)stopMonitoringBeacons;
+
+///---------------------------------------------------------------------------------------
+/// @name Syncing
+///---------------------------------------------------------------------------------------
 
 /**
- Stop ranging beacons. No further delegate methods are being called.
+ Determines whether the user has granted authorization to use the location at any time.
  */
--(void)stopRangingBeacons;
++ (BOOL)isAuthorized;
+
+/**
+ Determines whether the device has (iBeacon) ranging support.
+ */
++ (BOOL)isRangingAvailable;
+
+/**
+ Determines whether the user has location services enabled.
+ */
++ (BOOL)locationServicesEnabled;
 
 ///---------------------------------------------------------------------------------------
 /// @name Syncing
@@ -73,11 +97,11 @@
  
  @param error Error pointer
  */
--(BOOL)startSyncingProcessWithError:(NSError * __autoreleasing *)error;
+- (BOOL)startSyncingProcessWithError:(NSError * __autoreleasing *)error;
 
 /**
  Stop syncing beacon data.
  */
--(BOOL)cancelSyncingProcess;
+- (BOOL)cancelSyncingProcess;
 
 @end

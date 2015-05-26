@@ -27,7 +27,7 @@
  @param beaconManager Beacon manager
  @param beacon Single beacon
  */
--(void)manager:(CRBeaconManager *)beaconManager didEnterBeaconRadius:(CRBeacon *)beacon;
+- (void)manager:(CRBeaconManager *)beaconManager didEnterBeaconRadius:(CRBeacon *)beacon;
 
 /**
  Invoked whenever a known beacon exists proximity range.
@@ -38,7 +38,7 @@
  @param beaconManager Beacon manager
  @param beacon Single beacon
  */
--(void)manager:(CRBeaconManager *)beaconManager didExitBeaconRadius:(CRBeacon *)beacon;
+- (void)manager:(CRBeaconManager *)beaconManager didExitBeaconRadius:(CRBeacon *)beacon;
 
 /**
  Invoked whenever a notification has been fired.
@@ -51,8 +51,8 @@
  @param notification Notification event
  @param beacon Single beacon
  */
--(void)manager:(CRBeaconManager *)beaconManager didFireNotification:(CRNotificationEvent *)notification
-        beacon:(CRBeacon *)beacon;
+- (void)manager:(CRBeaconManager *)beaconManager didFireNotification:(CRNotificationEvent *)notification
+         beacon:(CRBeacon *)beacon;
 
 ///---------------------------------------------------------------------------------------
 /// @name Syncing
@@ -66,7 +66,7 @@
  @param beaconManager Beacon manager
  @param error The error
  */
--(void)manager:(CRBeaconManager *)beaconManager syncingDidFailWithError:(NSError *)error;
+- (void)manager:(CRBeaconManager *)beaconManager syncingDidFailWithError:(NSError *)error;
 
 ///---------------------------------------------------------------------------------------
 /// @name Other (derived from ´CLBeaconManagerDelegate´)

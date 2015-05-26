@@ -11,6 +11,6 @@
 
 @interface CRBeaconStorage : CRPersistentStorage
 
-// TODO: Implement specific CRUD methods like "get beacon with uuid, major, minor"
+- (NSArray *)UUIDRegions;
 
 @end

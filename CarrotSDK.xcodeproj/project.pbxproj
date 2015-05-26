@@ -18,6 +18,7 @@
 		6009ED3D1B1144B00090C1A7 /* CREvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3B1B1144B00090C1A7 /* CREvent.m */; };
 		6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED411B11451E0090C1A7 /* CRTextEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */; };
+		603CC7991B1492B40077A48C /* CRBeaconManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */; };
 		6061DA691B111AF5002DC83B /* CarrotSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 6061DA681B111AF5002DC83B /* CarrotSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6061DA6F1B111AF5002DC83B /* CarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA631B111AF5002DC83B /* CarrotSDK.framework */; };
 		6061DA761B111AF5002DC83B /* CarrotSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6061DA751B111AF5002DC83B /* CarrotSDKTests.m */; };
@@ -55,6 +56,7 @@
 		6009ED3B1B1144B00090C1A7 /* CREvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREvent.m; sourceTree = "<group>"; };
 		6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTextEvent.h; sourceTree = "<group>"; };
 		6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTextEvent.m; sourceTree = "<group>"; };
+		603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconManagerTests.m; sourceTree = "<group>"; };
 		6061DA631B111AF5002DC83B /* CarrotSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CarrotSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6061DA671B111AF5002DC83B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6061DA681B111AF5002DC83B /* CarrotSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarrotSDK.h; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				6061DA751B111AF5002DC83B /* CarrotSDKTests.m */,
 				60CF25B91B1456E30069053A /* CRBeaconTests.m */,
+				603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */,
 				6002B0E11B1277C700459AAC /* CRPersistentStoreTests.m */,
 				6061DA731B111AF5002DC83B /* Supporting Files */,
 			);
@@ -338,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				603CC7991B1492B40077A48C /* CRBeaconManagerTests.m in Sources */,
 				6061DA761B111AF5002DC83B /* CarrotSDKTests.m in Sources */,
 				60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */,
 				6002B0E21B1277C700459AAC /* CRPersistentStoreTests.m in Sources */,
