@@ -15,7 +15,8 @@
 
 - (void)_save:(CRBeacon *)beacon;
 - (NSMutableArray *)_allEventsForBeacon:(CRBeacon *)beacon;
-- (NSMutableArray *)_addOrReplaceEvent:(CREvent *)event allEvents:(NSMutableArray *)allEvents;
+- (NSMutableArray *)_addOrReplaceEvent:(CREvent *)event fromEvents:(NSMutableArray *)allEvents;
+- (NSMutableArray *)_removeEvent:(CREvent *)event fromEvents:(NSMutableArray *)allEvents;
 
 @end
 
@@ -31,18 +32,19 @@
 
 #pragma mark - Initialising
 
-- (id)initWithBaseStoragePath:(NSString *)path {
+- (instancetype)initWithBaseStoragePath:(NSString *)path {
     self = [super init];
     
     if (self) {
         _basePath = path;
         _fileManager = [NSFileManager defaultManager];
+        _objects = [NSMutableDictionary dictionary];
         
         if (![_fileManager fileExistsAtPath:_basePath]) {
             NSError *error;
             [_fileManager createDirectoryAtPath:_basePath withIntermediateDirectories:YES attributes:nil error:&error];
             if (error) {
-                CRLog(@"Error creating event storage path: %@", error);
+                CRLog(@"There was a error creating the event storage path: %@", error);
             }
         }
     }
@@ -56,17 +58,46 @@
 
 - (void)addEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon {
     NSMutableArray *allEvents = [self _allEventsForBeacon:beacon];
-    [self _addOrReplaceEvent:event allEvents:allEvents];
+    [self _addOrReplaceEvent:event fromEvents:allEvents];
     [self _save:beacon];
 }
 
 - (void)addEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon {
     NSMutableArray *allEvents = [self _allEventsForBeacon:beacon];
     [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self _addOrReplaceEvent:obj allEvents:allEvents];
+        [self _addOrReplaceEvent:obj fromEvents:allEvents];
     }];
     
     [self _save:beacon];
+}
+
+- (void)removeEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon {
+    NSMutableArray *allEvents = [self _allEventsForBeacon:beacon];
+    [self _removeEvent:event fromEvents: allEvents];
+    [self _save:beacon];
+}
+
+- (void)removeEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon {
+    NSMutableArray *allEvents = [self _allEventsForBeacon:beacon];
+    [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self _removeEvent:obj fromEvents:allEvents];
+    }];
+    
+    [self _save:beacon];
+}
+
+- (void)removeAllEventsForBeacon:(CRBeacon *)beacon {
+    NSString *path = [_basePath stringByAppendingPathComponent:beacon.uuid.UUIDString];
+    [_objects removeObjectForKey:beacon.uuid.UUIDString];
+    
+    NSError *error;
+    if ([_fileManager fileExistsAtPath:path isDirectory:NULL]) {
+        [_fileManager removeItemAtPath:path error:&error];
+    }
+    
+    if (error) {
+        CRLog(@"There was a error removing all events for beacon: %@ - Error: %@", beacon, error);
+    }
 }
 
 - (NSArray *)findAllEventsForBeacon:(CRBeacon *)beacon {
@@ -87,7 +118,7 @@
 
 #pragma mark - Private
 
-- (NSMutableArray *)_addOrReplaceEvent:(CREvent *)event allEvents:(NSMutableArray *)allEvents {
+- (NSMutableArray *)_addOrReplaceEvent:(CREvent *)event fromEvents:(NSMutableArray *)allEvents {
     NSUInteger index = [allEvents indexOfObject:event];
     if (index == NSNotFound) {
         [allEvents addObject:event];
@@ -95,6 +126,11 @@
         [allEvents replaceObjectAtIndex:index withObject:event];
     }
     
+    return allEvents;
+}
+
+- (NSMutableArray *)_removeEvent:(CREvent *)event fromEvents:(NSMutableArray *)allEvents {
+    [allEvents removeObject:event];
     return allEvents;
 }
 
@@ -112,7 +148,7 @@
             array = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
         }
     }
-    @catch (NSException *exception) {
+    @finally {
         if (!array) {
             array = [NSMutableArray array];
         }

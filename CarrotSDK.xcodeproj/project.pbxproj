@@ -37,6 +37,7 @@
 		60C8BAD81B132A5B009024F8 /* CRNotificationEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */; };
 		60CC3B031B15FC3700229A55 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */; };
 		60CC3B071B15FFEF00229A55 /* CRBeaconManagerEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CC3B061B15FFA600229A55 /* CRBeaconManagerEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60CC3B091B1622B200229A55 /* CREventStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CC3B081B1622B200229A55 /* CREventStorageTest.m */; };
 		60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CF25B91B1456E30069053A /* CRBeaconTests.m */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRNotificationEvent.m; sourceTree = "<group>"; };
 		60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		60CC3B061B15FFA600229A55 /* CRBeaconManagerEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBeaconManagerEnums.h; sourceTree = "<group>"; };
+		60CC3B081B1622B200229A55 /* CREventStorageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventStorageTest.m; sourceTree = "<group>"; };
 		60CF25B91B1456E30069053A /* CRBeaconTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,6 +183,7 @@
 			children = (
 				6061DA751B111AF5002DC83B /* CarrotSDKTests.m */,
 				60CF25B91B1456E30069053A /* CRBeaconTests.m */,
+				60CC3B081B1622B200229A55 /* CREventStorageTest.m */,
 				603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */,
 				6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */,
 				6061DA731B111AF5002DC83B /* Supporting Files */,
@@ -383,6 +386,7 @@
 			files = (
 				603CC7991B1492B40077A48C /* CRBeaconManagerTests.m in Sources */,
 				6061DA761B111AF5002DC83B /* CarrotSDKTests.m in Sources */,
+				60CC3B091B1622B200229A55 /* CREventStorageTest.m in Sources */,
 				60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */,
 				6002B0E21B1277C700459AAC /* CRSingleFileStorageTests.m in Sources */,
 			);

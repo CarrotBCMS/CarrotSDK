@@ -26,9 +26,9 @@
 }
 
 - (void)testIsEqual {
-    CRBeacon *beaconOne = [[CRBeacon alloc] initWithUUID:@"testuuid" major:@112 minor:@111 name:@"testbeacon" events:nil];
-    CRBeacon *beaconTwo = [[CRBeacon alloc] initWithUUID:@"testuuid" major:@112 minor:@111 name:@"testbeacon" events:nil];
-    CRBeacon *beaconThree = [[CRBeacon alloc] initWithUUID:@"_testuuid_" major:@112222 minor:@1111213 name:@"testbeacon" events:nil];
+    CRBeacon *beaconOne = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@112 minor:@111 name:@"testbeacon"];
+    CRBeacon *beaconTwo = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"]  major:@112 minor:@111 name:@"testbeacon"];
+    CRBeacon *beaconThree = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655190000"]  major:@112222 minor:@1111213 name:@"testbeacon"];
     XCTAssertEqualObjects(beaconOne, beaconTwo);
     XCTAssertNotEqualObjects(beaconOne, beaconThree);
     XCTAssertNotEqualObjects(beaconTwo, beaconThree);

@@ -28,7 +28,7 @@
     
     _storagePath = [NSTemporaryDirectory() stringByAppendingString:@"data"];
     _store = [[CRSingleFileStorage alloc] initWithStoragePath: _storagePath];
-    _beacon = [[CRBeacon alloc] initWithUUID:@"testuuid" major:@222 minor:@111 name:@"Test" events:nil];
+    _beacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@222 minor:@111 name:@"Test"];
     _fileManager = [NSFileManager defaultManager];
 }
 
@@ -40,15 +40,10 @@
     [super tearDown];
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 - (void)testAddingObject {
     [_store addObject:_beacon];
     XCTAssertEqual([[_store objects] lastObject], _beacon);
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)testRemovingObject {
     [_store addObject:_beacon];
@@ -57,15 +52,11 @@
     XCTAssert([[_store objects] count] == 0);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 - (void)testStoringObject {
     XCTAssert(![_fileManager fileExistsAtPath:_storagePath isDirectory:NULL]);
     [_store addObject:_beacon];
     XCTAssert([_fileManager fileExistsAtPath:_storagePath isDirectory:NULL]);
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)testRestoringObjects {
     [_store addObject:_beacon];
