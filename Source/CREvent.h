@@ -10,4 +10,9 @@
 
 @interface CREvent : NSObject <NSSecureCoding>
 
+/**
+ Unique event id.
+ */
+@property (strong) NSNumber *eventId;
+
 @end

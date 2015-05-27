@@ -12,8 +12,16 @@
 @class CRBeacon;
 @interface CRBeaconStorage : CRSingleFileStorage
 
+///---------------------------------------------------------------------------------------
+/// @name CRUD methods
+///---------------------------------------------------------------------------------------
+
 /**
  Finds a specific beacon.
+ 
+ @param path The uuid
+ @param major Major
+ @param minor Minor
  */
 - (CRBeacon *)findCRBeaconWithUUID: (NSUUID *)uuid major:(NSNumber *)major minor:(NSNumber *)minor;
 

@@ -59,6 +59,10 @@
     return YES;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - NSObject
+
 - (BOOL)isEqual:(id)object {
     CRBeacon *aObject = (CRBeacon *)object;
     if (!object ||

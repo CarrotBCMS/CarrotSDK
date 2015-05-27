@@ -34,6 +34,8 @@
 
 /**
  Inits a Storage with given path.
+ 
+ @param path The storage path
  */
 - (id)initWithStoragePath:(NSString *)path;
 

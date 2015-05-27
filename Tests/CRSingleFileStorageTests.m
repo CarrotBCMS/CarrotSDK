@@ -11,12 +11,12 @@
 #import "CRSingleFileStorage.h"
 #import "CRBeacon.h"
 
-@interface CRGeneralStorageTests : XCTestCase
+@interface CRSingleFileStorageTests : XCTestCase
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-@implementation CRGeneralStorageTests {
+@implementation CRSingleFileStorageTests {
     CRSingleFileStorage *_store;
     CRBeacon *_beacon;
     NSFileManager *_fileManager;

@@ -27,4 +27,18 @@
     return YES;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - NSObject
+
+- (BOOL)isEqual:(id)object {
+    CREvent *aObject = (CREvent *)object;
+    if (!aObject || ![self.eventId isEqualToNumber:aObject.eventId])
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end
