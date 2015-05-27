@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "CREvent.h"
 
-#define CRBeaconTextEventsKey @"CRBeaconTextEventsKey"
-
 @interface CRTextEvent : CREvent
 
 @end

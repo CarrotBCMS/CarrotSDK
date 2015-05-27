@@ -55,6 +55,20 @@
 - (void)manager:(CRBeaconManager *)beaconManager didFireNotification:(CRNotificationEvent *)notification
          beacon:(CRBeacon *)beacon;
 
+/**
+ Invoked whenever one or more events are triggered and ready to be presented.
+ 
+ @see CRBeaconManager
+ @see CREvent
+ @see CRBeacon
+ 
+ @param beaconManager Beacon manager
+ @param events An array containing all events that should be presented
+ @param beacon Single beacon
+ */
+- (void)manager:(CRBeaconManager *)beaconManager shouldPresentEvents:(NSArray *)events
+         beacon:(CRBeacon *)beacon;
+
 ///---------------------------------------------------------------------------------------
 /// @name Syncing
 ///---------------------------------------------------------------------------------------

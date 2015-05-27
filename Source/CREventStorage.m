@@ -87,8 +87,8 @@
 }
 
 - (void)removeAllEventsForBeacon:(CRBeacon *)beacon {
-    NSString *path = [_basePath stringByAppendingPathComponent:beacon.uuid.UUIDString];
-    [_objects removeObjectForKey:beacon.uuid.UUIDString];
+    NSString *path = [_basePath stringByAppendingPathComponent:[self filename:beacon]];
+    [_objects removeObjectForKey:[self filename:beacon]];
     
     NSError *error;
     if ([_fileManager fileExistsAtPath:path isDirectory:NULL]) {
@@ -135,13 +135,13 @@
 }
 
 - (NSMutableArray *) _allEventsForBeacon:(CRBeacon *)beacon {
-    NSMutableArray *array = [_objects objectForKey:beacon.uuid.UUIDString];
+    NSMutableArray *array = [_objects objectForKey:[self filename:beacon]];
     
     if (array) {
         return array;
     }
     
-    NSString *path = [_basePath stringByAppendingPathComponent:beacon.uuid.UUIDString];
+    NSString *path = [_basePath stringByAppendingPathComponent:[self filename:beacon]];
     
     @try {
         if ([_fileManager fileExistsAtPath:path]) {
@@ -154,15 +154,19 @@
         }
     }
     
-    [_objects setObject:array forKey:beacon.uuid.UUIDString];
+    [_objects setObject:array forKey:[self filename:beacon]];
     
     return array;
 }
 
 - (void)_save:(CRBeacon *)beacon {
-    NSString *path = [_basePath stringByAppendingPathComponent:beacon.uuid.UUIDString];
-    NSMutableArray *array = [_objects objectForKey:beacon.uuid.UUIDString];
+    NSString *path = [_basePath stringByAppendingPathComponent:[self filename:beacon]];
+    NSMutableArray *array = [_objects objectForKey:[self filename:beacon]];
     [NSKeyedArchiver archiveRootObject:array toFile:path];
+}
+
+- (NSString *)filename:(CRBeacon *)beacon {
+    return [NSString stringWithFormat: @"%@_%@_%@", beacon.uuid.UUIDString, beacon.major, beacon.minor];
 }
 
 @end

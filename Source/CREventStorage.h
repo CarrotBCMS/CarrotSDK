@@ -11,8 +11,8 @@
 @class CREvent, CRBeacon;
 
 /**
- In contrast to the `CRSingleFileStorage`, this storage persists an array containing all events for a specific beacon.
- File name is the uuid string from the corresponding beacon.
+ In contrast to the `CRSingleFileStorage`, this storage persists an array containing all events for a specific beacon region
+ in a single file. There is a single file per region. File name is the uuid string.
  
  @see CRSingleFileStorage
  @see CRBeaconStorage

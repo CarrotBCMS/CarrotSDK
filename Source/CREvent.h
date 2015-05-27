@@ -15,4 +15,14 @@
  */
 @property (strong) NSNumber *eventId;
 
+/**
+ The threshold in seconds.
+ */
+@property (strong) NSNumber *threshold;
+
+/**
+ Last time this event was triggered.
+ */
+@property (strong) NSDate *lastTriggered;
+
 @end

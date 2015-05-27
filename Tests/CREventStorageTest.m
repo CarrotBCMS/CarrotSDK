@@ -31,7 +31,7 @@
 - (void)setUp {
     [super setUp];
     _fileManager = [NSFileManager defaultManager];
-    _basePath = [NSTemporaryDirectory() stringByAppendingString:@"data/"];
+    _basePath = [NSTemporaryDirectory() stringByAppendingString:@"data"];
     _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:_basePath];
     _beacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@111 minor:@222];
     _beaconTwo = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440002"] major:@113 minor:@225];
@@ -51,7 +51,7 @@
 }
 
 - (void)testInitWithStoragePath {
-    BOOL dir = false;
+    BOOL dir = NO;
     XCTAssertTrue([_fileManager fileExistsAtPath:_eventStorage.basePath isDirectory:&dir]);
     XCTAssertTrue(dir);
 }
@@ -115,5 +115,28 @@
     [_eventStorage addEvents:@[notEvent, notEventTwo] forBeacon:_beacon];
     XCTAssert([_eventStorage findNotificationEventsForBeacon:_beacon].count == 2);
 }
+
+- (void)testEventsWithSameUUIDDifferentMinor {
+    CRBeacon *newBeacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@113 minor:@226];
+    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:newBeacon];
+    XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 0);
+}
+
+- (void)testEventsWithSameUUIDDifferentMajor {
+    CRBeacon *newBeacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@116 minor:@222];
+    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:newBeacon];
+    XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 0);
+}
+
+- (void)testBeaconEventsFileName {
+    CRBeacon *newBeacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@116 minor:@222];
+    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:newBeacon];
+    
+    NSString *path = [_eventStorage.basePath stringByAppendingFormat:@"/%@_%@_%@", newBeacon.uuid.UUIDString, newBeacon.major, newBeacon.minor];
+    BOOL dir = YES;
+    XCTAssert([_fileManager fileExistsAtPath:path isDirectory:&dir]);
+    XCTAssert(!dir);
+}
+
 
 @end
