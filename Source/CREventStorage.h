@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class CREvent, CRBeacon;
+
+/**
+ In contrast to the `CRSingleFileStorage`, this storage persists an array containing all events for a specific beacon.
+ File name is the uuid string from the corresponding beacon.
+ 
+ @see CRSingleFileStorage
+ @see CRBeaconStorage
+ */
 @interface CREventStorage : NSObject
 
 ///---------------------------------------------------------------------------------------

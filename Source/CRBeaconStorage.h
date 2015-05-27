@@ -10,6 +10,10 @@
 #import "CRSingleFileStorage.h"
 
 @class CRBeacon;
+
+/**
+ This Subclass adds several ceacon specific crud methods to the superclass.
+ */
 @interface CRBeaconStorage : CRSingleFileStorage
 
 ///---------------------------------------------------------------------------------------
