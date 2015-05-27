@@ -12,7 +12,14 @@
 @class CRBeacon;
 @interface CRBeaconStorage : CRSingleFileStorage
 
+/**
+ Finds a specific beacon.
+ */
 - (CRBeacon *)findCRBeaconWithUUID: (NSUUID *)uuid major:(NSNumber *)major minor:(NSNumber *)minor;
+
+/**
+ Finds all uuid regions.
+ */
 - (NSArray *)UUIDRegions;
 
 @end

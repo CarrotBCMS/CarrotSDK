@@ -33,7 +33,13 @@
 }
 
 - (NSArray *)UUIDRegions {
-    return [NSArray array];
+    NSMutableSet *uuids = [NSMutableSet set];
+    NSArray *objects = [self objects];
+    for (CRBeacon *aBeacon in objects) {
+        [uuids addObject:aBeacon.uuid];
+    }
+    
+    return [uuids allObjects];
 }
 
 @end
