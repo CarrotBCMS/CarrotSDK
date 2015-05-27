@@ -2,7 +2,7 @@
 //  CREventStorageTest.m
 //  CarrotSDK
 //
-//  Created by Heiko Dreyer on 27.05.15.
+//  Created by Heiko Dreyer on 05/27/15.
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
@@ -33,8 +33,12 @@
     _fileManager = [NSFileManager defaultManager];
     _basePath = [NSTemporaryDirectory() stringByAppendingString:@"data"];
     _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:_basePath];
-    _beacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@111 minor:@222];
-    _beaconTwo = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440002"] major:@113 minor:@225];
+    _beacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"]
+                                       major:@111
+                                       minor:@222];
+    _beaconTwo = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440002"]
+                                          major:@113
+                                          minor:@225];
     _event = [[CREvent alloc] init];
     _event.eventId = @111;
     _eventTwo = [[CREvent alloc] init];

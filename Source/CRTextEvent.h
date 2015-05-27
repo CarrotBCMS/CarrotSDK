@@ -11,4 +11,9 @@
 
 @interface CRTextEvent : CREvent
 
+/**
+ Text value
+ */
+@property (strong) NSString *text;
+
 @end

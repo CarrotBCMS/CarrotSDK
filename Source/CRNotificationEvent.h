@@ -9,8 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "CREvent.h"
 
-#define CRBeaconNotificationEventsKey @"CRBeaconNotificationEventsKey"
-
 @interface CRNotificationEvent : CREvent
+
+/**
+ Title of the notification
+ */
+@property (strong) NSString *title;
+
+/**
+ Notification message
+ */
+@property (strong) NSString *message;
 
 @end
