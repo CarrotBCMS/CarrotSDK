@@ -7,12 +7,30 @@
 //
 
 #import "CRBeaconStorage.h"
+#import "CRBeacon.h"
 
 @implementation CRBeaconStorage
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Beacon specific CRUD methods
+
+- (CRBeacon *)findCRBeaconWithUUID: (NSString *)uuid major:(NSNumber *)major minor:(NSNumber *)minor {
+    CRBeacon *beacon = [[CRBeacon alloc] initWithUUID:uuid major:major minor:minor];
+    CRBeacon *result = beacon;
+    /*
+    CRBeacon *result = nil;
+    
+    NSArray *objects = [self objects];
+    for (CRBeacon *aBeacon in objects) {
+        if ([aBeacon isEqual:beacon]) {
+            result = aBeacon;
+            break;
+        }
+    }*/
+    
+    return result;
+}
 
 - (NSArray *)UUIDRegions {
     return [NSArray array];

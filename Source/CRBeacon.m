@@ -35,6 +35,13 @@
     return self;
 }
 
+
+- (instancetype)initWithUUID:(NSString *)uuidString
+                       major:(NSNumber *)major
+                       minor:(NSNumber *)minor {
+    return [self initWithUUID:uuidString major:major minor:minor name:nil events:nil];
+}
+
 - (id)initWithCoder:(NSCoder *)coder {
     self = [self initWithUUID:[coder decodeObjectOfClass:[NSString class] forKey:@"uuid"]
                         major:[coder decodeObjectOfClass:[NSString class] forKey:@"major"]

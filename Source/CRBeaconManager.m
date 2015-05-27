@@ -9,10 +9,9 @@
 #import "CRBeaconManager.h"
 #import "CRBeaconManagerDelegate.h"
 #import "CRDefinitions.h"
-#import "CRBeaconProxyCache.h"
-#import "CRBeaconProxy.h"
+#import "CRBeaconCache.h"
 #import "CRBeacon.h"
-#import "CRBeacon+Proxy.h"
+#import "CRBeaconStorage.h"
 
 @interface CRBeaconManager () <CLLocationManagerDelegate>
 
@@ -32,7 +31,9 @@
     CLLocationManager *_locationManager;
     NSArray *_regions;
     BOOL _isActive;
-    CRBeaconProxyCache *_proxyCache;
+    
+    CRBeaconCache *_beaconCache;
+    CRBeaconStorage *_beaconStorage;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,7 +137,8 @@
 
 - (void)_setup {
     _regions = [NSArray array];
-    _proxyCache = [[CRBeaconProxyCache alloc] init];
+    _beaconCache = [[CRBeaconCache alloc] init];
+    _beaconStorage = [[CRBeaconStorage alloc] initWithStoragePath:CRBeaconDataFilePath];
     
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -183,26 +185,33 @@
 
 - (void)_handleEnterBeacons:(NSArray *)beacons {
     [beacons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        CRBeaconProxy *beacon = nil;
-        if ([obj isKindOfClass:[CRBeaconProxy class]]) {
+        CRBeacon *beacon = nil;
+        if ([obj isKindOfClass:[CRBeacon class]]) {
             beacon = obj;
         }
         
-        if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didEnterBeaconRadius:)]) {
-            [_delegate manager:self didEnterBeaconRadius:[[CRBeacon alloc] initFromProxy:beacon]];
+        // Find concrete CRBeacon instance in storage
+        // Only call delegate if a CRBeacon was found
+        beacon = [_beaconStorage findCRBeaconWithUUID:beacon.uuidString major:beacon.major minor:beacon.minor];
+        
+        if (beacon && [(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didEnterBeaconRadius:)]) {
+            [_delegate manager:self didEnterBeaconRadius:beacon];
         }
     }];
 }
 
 - (void)_handleExitBeacons:(NSArray *)beacons {
     [beacons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        CRBeaconProxy *beacon = nil;
-        if ([obj isKindOfClass:[CRBeaconProxy class]]) {
+        CRBeacon *beacon = nil;
+        if ([obj isKindOfClass:[CRBeacon class]]) {
             beacon = obj;
         }
+        // Find concrete CRBeacon instance in storage
+        // Only call delegate if a CRBeacon was foundon instance from storage
+        beacon = [_beaconStorage findCRBeaconWithUUID:beacon.uuidString major:beacon.major minor:beacon.minor];
         
-        if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitBeaconRadius:)]) {
-            [_delegate manager:self didExitBeaconRadius:[[CRBeacon alloc] initFromProxy:beacon]];
+        if (beacon && [(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitBeaconRadius:)]) {
+            [_delegate manager:self didExitBeaconRadius:beacon];
         }
     }];
 }
@@ -218,8 +227,8 @@
         [_delegate manager:self didRangeBeacons:beacons inRegion:region];
     }
 
-    NSArray *enteredBeacons = [_proxyCache enteredBeaconProxiesForRangedBeacons:beacons inRegion:region];
-    NSArray *exitedBeacons = [_proxyCache exitedBeaconProxiesForRangedBeacons:beacons inRegion:region];
+    NSArray *enteredBeacons = [_beaconCache enteredCRBeaconsForRangedBeacons:beacons inRegion:region];
+    NSArray *exitedBeacons = [_beaconCache exitedCRBeaconsRangedBeacons:beacons inRegion:region];
     
     if (enteredBeacons.count > 0) {
         CRLog(@"Entered beacons: %@", enteredBeacons);
@@ -231,7 +240,7 @@
         [self _handleExitBeacons:exitedBeacons];
     }
     
-    [_proxyCache addBeaconsAsProxies:beacons forUUIDString:region.proximityUUID.UUIDString];
+    [_beaconCache addCRBeacons:beacons forUUIDString:region.proximityUUID.UUIDString];
 }
 
 - (void)locationManager:(CLLocationManager *)manager

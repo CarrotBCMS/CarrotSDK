@@ -12,7 +12,7 @@
 @interface CRBeacon : NSObject <NSSecureCoding>
 
 /**
- Name of the beacon.
+ Name of the beacon. Might be null.
  */
 @property (strong) NSString *name;
 
@@ -60,5 +60,17 @@
                        minor:(NSNumber *)minor
                         name:(NSString *)name
                       events:(NSDictionary *)events;
+
+
+/**
+ Initialize this proxy by providing a CLBeacon object.
+ 
+ @param uuid UUID string
+ @param major Major identifier
+ @param minor Minor identifier
+ */
+- (instancetype)initWithUUID:(NSString *)uuidString
+                       major:(NSNumber *)major
+                       minor:(NSNumber *)minor;
 
 @end

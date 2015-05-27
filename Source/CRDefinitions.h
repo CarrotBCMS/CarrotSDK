@@ -23,4 +23,4 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #define CRBeaconDataBasePath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/.data/carrot/"]
-#define CRBeaconDataFilePath [RCBeaconDataBasePath stringByAppendingString:@"data"]
+#define CRBeaconDataFilePath [CRBeaconDataBasePath stringByAppendingString:@"data"]

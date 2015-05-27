@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "CRPersistentStorage.h"
 
+@class CRBeacon;
 @interface CRBeaconStorage : CRPersistentStorage
 
+- (CRBeacon *)findCRBeaconWithUUID: (NSString *)uuid major:(NSNumber *)major minor:(NSNumber *)minor;
 - (NSArray *)UUIDRegions;
 
 @end
