@@ -18,6 +18,7 @@
 		603CC7DC1B14AA5F0077A48C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7DB1B14AA5F0077A48C /* CoreLocation.framework */; };
 		603CC7DF1B14B11A0077A48C /* CarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */; };
 		603CC7E01B14B11B0077A48C /* CarrotSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		60CC3B051B15FC4400229A55 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CC3B041B15FC4400229A55 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		603CC7D81B14AA410077A48C /* CarrotSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarrotSDK.framework; path = "../../build/Debug-iphoneos/CarrotSDK.framework"; sourceTree = "<group>"; };
 		603CC7DB1B14AA5F0077A48C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CarrotSDK.framework; path = "/Users/bfolder/Library/Developer/Xcode/DerivedData/CarrotSDK-gbrvxflweoctsvgthcjctgyygira/Build/Products/Debug-iphoneos/CarrotSDK.framework"; sourceTree = "<absolute>"; };
+		60CC3B041B15FC4400229A55 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60CC3B051B15FC4400229A55 /* CoreBluetooth.framework in Frameworks */,
 				603CC7DC1B14AA5F0077A48C /* CoreLocation.framework in Frameworks */,
 				603CC7DF1B14B11A0077A48C /* CarrotSDK.framework in Frameworks */,
 				603CC7D91B14AA410077A48C /* CarrotSDK.framework in Frameworks */,
@@ -87,6 +90,7 @@
 		603CC79A1B14A9FA0077A48C = {
 			isa = PBXGroup;
 			children = (
+				60CC3B041B15FC4400229A55 /* CoreBluetooth.framework */,
 				603CC7A51B14A9FA0077A48C /* Example */,
 				603CC7C21B14A9FA0077A48C /* ExampleTests */,
 				603CC7A41B14A9FA0077A48C /* Products */,

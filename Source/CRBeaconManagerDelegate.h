@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "CRBeaconManagerEnums.h"
 
 @class CRBeaconManager, CRBeacon, CRNotificationEvent;
 
@@ -67,6 +68,20 @@
  @param error The error
  */
 - (void)manager:(CRBeaconManager *)beaconManager syncingDidFailWithError:(NSError *)error;
+
+///---------------------------------------------------------------------------------------
+/// @name Bluetooth
+///---------------------------------------------------------------------------------------
+
+/**
+ Invoked whenever a known beacon exists proximity range.
+ 
+ @see CRBeaconManager
+ 
+ @param beaconManager Beacon manager
+ @param state The bluetooth state
+ */
+- (void)manager:(CRBeaconManager *)beaconManager didUpdateBluetoothState:(CRBluetoothState)state;
 
 ///---------------------------------------------------------------------------------------
 /// @name Other (derived from ´CLBeaconManagerDelegate´)

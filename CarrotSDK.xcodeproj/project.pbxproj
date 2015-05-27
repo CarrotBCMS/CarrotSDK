@@ -35,6 +35,8 @@
 		6061DA931B111E61002DC83B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA921B111E61002DC83B /* CoreLocation.framework */; };
 		60C8BAD71B132A5B009024F8 /* CRNotificationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C8BAD51B132A5B009024F8 /* CRNotificationEvent.h */; };
 		60C8BAD81B132A5B009024F8 /* CRNotificationEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */; };
+		60CC3B031B15FC3700229A55 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */; };
+		60CC3B071B15FFEF00229A55 /* CRBeaconManagerEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CC3B061B15FFA600229A55 /* CRBeaconManagerEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CF25B91B1456E30069053A /* CRBeaconTests.m */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +82,8 @@
 		6061DA921B111E61002DC83B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		60C8BAD51B132A5B009024F8 /* CRNotificationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRNotificationEvent.h; sourceTree = "<group>"; };
 		60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRNotificationEvent.m; sourceTree = "<group>"; };
+		60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		60CC3B061B15FFA600229A55 /* CRBeaconManagerEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBeaconManagerEnums.h; sourceTree = "<group>"; };
 		60CF25B91B1456E30069053A /* CRBeaconTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60CC3B031B15FC3700229A55 /* CoreBluetooth.framework in Frameworks */,
 				6061DA931B111E61002DC83B /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +139,7 @@
 		6061DA591B111AF5002DC83B = {
 			isa = PBXGroup;
 			children = (
+				60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */,
 				6061DA651B111AF5002DC83B /* Source */,
 				6061DA721B111AF5002DC83B /* Tests */,
 				6061DA641B111AF5002DC83B /* Products */,
@@ -214,6 +220,7 @@
 				608491E81B150DDD008CBF49 /* Caching */,
 				6009ED311B1139EC0090C1A7 /* CRDefinitions.h */,
 				6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */,
+				60CC3B061B15FFA600229A55 /* CRBeaconManagerEnums.h */,
 				6061DA821B111D21002DC83B /* CRBeaconManager.h */,
 				6061DA831B111D21002DC83B /* CRBeaconManager.m */,
 			);
@@ -250,6 +257,7 @@
 				6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */,
 				6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */,
 				6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */,
+				60CC3B071B15FFEF00229A55 /* CRBeaconManagerEnums.h in Headers */,
 				6002B0DB1B126D8000459AAC /* CRSingleFileStorage.h in Headers */,
 				6061DA841B111D21002DC83B /* CRBeaconManager.h in Headers */,
 				6061DA901B111DB3002DC83B /* CRBeacon.h in Headers */,

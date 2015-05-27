@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "CRBeaconManagerEnums.h"
 
 @protocol CRBeaconManagerDelegate;
 
@@ -76,28 +77,31 @@
 /**
  Determines whether the user has granted authorization to use the location at any time.
  */
-+ (BOOL)isAuthorized;
+- (BOOL)isAuthorized;
 
 /**
  Determines whether the device has (iBeacon) ranging support.
  */
-+ (BOOL)isRangingAvailable;
+- (BOOL)isRangingAvailable;
 
 /**
  Determines whether the device has (iBeacon) monitoring support.
  */
-+ (BOOL)isMonitoringAvailable;
-
+- (BOOL)isMonitoringAvailable;
 
 /**
  Determines whether the background fetching is activated.
  */
-+ (BOOL)isBackgroundFetchingAvailable;
+- (BOOL)isBackgroundFetchingAvailable;
 
 /**
  Determines whether the user has location services enabled.
  */
-+ (BOOL)locationServicesEnabled;
+- (BOOL)locationServicesEnabled;
+
+/**
+ Determines bluetooth state */
+- (CRBluetoothState)bluetoothState;
 
 ///---------------------------------------------------------------------------------------
 /// @name Syncing

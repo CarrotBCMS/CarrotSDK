@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
+#import <CoreBluetooth/CoreBluetooth.h>
 #import "CRBeaconManager.h"
 #import "CRBeaconManagerDelegate.h"
 #import "CRDefinitions.h"
@@ -13,7 +14,7 @@
 #import "CRBeacon.h"
 #import "CRBeaconStorage.h"
 
-@interface CRBeaconManager () <CLLocationManagerDelegate>
+@interface CRBeaconManager () <CLLocationManagerDelegate, CBCentralManagerDelegate>
 
 - (void)_setup;
 - (NSString *)_stringForState:(CLRegionState)state;
@@ -29,6 +30,7 @@
 
 @implementation CRBeaconManager {
     CLLocationManager *_locationManager;
+    CBCentralManager *_bluetoothManager;
     NSArray *_regions;
     BOOL _isActive;
     
@@ -63,7 +65,7 @@
 #pragma mark - Monitoring
 
 - (void)startMonitoringBeacons {
-    if (![CRBeaconManager isRangingAvailable] || ![CRBeaconManager isMonitoringAvailable]) {
+    if (![self isRangingAvailable] || ![self isMonitoringAvailable]) {
         CRLog("No hardware support for ranging and monitoring.");
         return;
     }
@@ -96,24 +98,28 @@
 
 #pragma mark - Status
 
-+ (BOOL)isAuthorized {
+- (BOOL)isAuthorized {
     return [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways;
 }
 
-+ (BOOL)isRangingAvailable {
+- (BOOL)isRangingAvailable {
     return [CLLocationManager isRangingAvailable];
 }
 
-+ (BOOL)isMonitoringAvailable {
+- (BOOL)isMonitoringAvailable {
     return [CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]];
 }
 
-+ (BOOL)locationServicesEnabled {
+- (BOOL)locationServicesEnabled {
     return [CLLocationManager locationServicesEnabled];
 }
 
-+ (BOOL)isBackgroundFetchingAvailable {
+- (BOOL)isBackgroundFetchingAvailable {
     return [UIApplication sharedApplication].backgroundRefreshStatus == UIBackgroundRefreshStatusAvailable;
+}
+
+- (CRBluetoothState)bluetoothState {
+    return (CRBluetoothState)_bluetoothManager.state;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,6 +145,10 @@
     _regions = [NSArray array];
     _beaconCache = [[CRBeaconCache alloc] init];
     _beaconStorage = [[CRBeaconStorage alloc] initWithStoragePath:CRBeaconDataFilePath];
+    
+    _bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self
+                                                             queue:dispatch_get_main_queue()
+                                                           options:@{CBCentralManagerOptionShowPowerAlertKey: @NO}];
     
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -310,6 +320,18 @@
     
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didChangeAuthorizationStatus:)]) {
         [_delegate manager:self didChangeAuthorizationStatus:status];
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - CBCentralManagerDelegate
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
+    CRLog("Did update bluetooth state: %ld", (long)central.state);
+    
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didUpdateBluetoothState:)]) {
+        [_delegate manager:self didUpdateBluetoothState:(CRBluetoothState)central.state];
     }
 }
 

@@ -57,7 +57,7 @@
 -(NSArray *)_CRBeaconArrayFromBeaconArray:(NSArray *)beacons {
     NSMutableArray *crBeaconArray = [NSMutableArray array];
     for (CLBeacon *beacon in beacons) {
-        CRBeacon *crBeacon = [[CRBeacon alloc] initWithUUID:beacon.proximityUUID.UUIDString
+        CRBeacon *crBeacon = [[CRBeacon alloc] initWithUUID:beacon.proximityUUID
                                                       major:beacon.major
                                                       minor:beacon.minor];
         crBeacon.beacon = beacon;
