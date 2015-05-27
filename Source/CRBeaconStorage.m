@@ -15,7 +15,7 @@
 
 #pragma mark - Beacon specific CRUD methods
 
-- (CRBeacon *)findCRBeaconWithUUID: (NSString *)uuid major:(NSNumber *)major minor:(NSNumber *)minor {
+- (CRBeacon *)findCRBeaconWithUUID: (NSUUID *)uuid major:(NSNumber *)major minor:(NSNumber *)minor {
     CRBeacon *beacon = [[CRBeacon alloc] initWithUUID:uuid major:major minor:minor];
     CRBeacon *result = beacon;
     /*

@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CRPersistentStorage.h"
+#import "CRSingleFileStorage.h"
 
 @class CRBeacon;
-@interface CRBeaconStorage : CRPersistentStorage
+@interface CRBeaconStorage : CRSingleFileStorage
 
-- (CRBeacon *)findCRBeaconWithUUID: (NSString *)uuid major:(NSNumber *)major minor:(NSNumber *)minor;
+- (CRBeacon *)findCRBeaconWithUUID: (NSUUID *)uuid major:(NSNumber *)major minor:(NSNumber *)minor;
 - (NSArray *)UUIDRegions;
 
 @end

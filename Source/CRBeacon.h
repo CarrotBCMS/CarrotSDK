@@ -17,9 +17,9 @@
 @property (strong) NSString *name;
 
 /**
- UUID string, e.g. 123e4567-e89b-12d3-a456-426655440000.
+ UUID, e.g. 123e4567-e89b-12d3-a456-426655440000.
  */
-@property (readonly) NSString *uuidString;
+@property (readonly) NSUUID *uuid;
 
 /**
  Major identifier, e.g. 523423
@@ -36,12 +36,6 @@
  */
 @property (strong) CLBeacon *beacon;
 
-/**
- Events dictionary.
-    E.g. use key "CRBeaconTextEventsKey" to retrieve an array of all text events associated with this beacon.
- */
-@property (strong) NSDictionary *events;
-
 ///---------------------------------------------------------------------------------------
 /// @name Lifecycle
 ///---------------------------------------------------------------------------------------
@@ -55,11 +49,10 @@
  @param name Name
  @param events Dictionary with associated events
  */
-- (instancetype)initWithUUID:(NSString *)uuidString
+- (instancetype)initWithUUID:(NSUUID *)uuid
                        major:(NSNumber *)major
                        minor:(NSNumber *)minor
-                        name:(NSString *)name
-                      events:(NSDictionary *)events;
+                        name:(NSString *)name;
 
 
 /**
@@ -69,7 +62,7 @@
  @param major Major identifier
  @param minor Minor identifier
  */
-- (instancetype)initWithUUID:(NSString *)uuidString
+- (instancetype)initWithUUID:(NSUUID *)uuid
                        major:(NSNumber *)major
                        minor:(NSNumber *)minor;
 

@@ -1,5 +1,5 @@
 //
-//  CRPersistentStorage.h
+//  CRSingleFileStorage.h
 //  CarrotSDK
 //
 //  Created by Heiko Dreyer on 05/24/15.
@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 
 /**
- `CRPersistentStorage` is a class to store (serialize) abstract objects to disk.
- This class may be overriden for more concrete implementations
+ `CRSingleFileStorage` is a class to store (serialize) abstract objects in a single file.
+ This class may be overriden for more concrete implementations. 
+ Keep in mind that there is no lazy loading of any kind. The object graph is stored in-memory permanently.
  Have a look at `CRDefinitions.h` for more information on storage paths.
  */
-@interface CRPersistentStorage : NSObject {
+@interface CRSingleFileStorage : NSObject {
 @protected
     NSMutableArray *_objects;
 }
