@@ -132,6 +132,26 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		60374FC31B171EDD0053ADEC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */,
+				60053CDB1B16F95900A9FA03 /* CRBeaconCacheTests.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		60374FC41B171EEB0053ADEC /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				60CF25B91B1456E30069053A /* CRBeaconTests.m */,
+				60053CE61B17183F00A9FA03 /* CREventTests.m */,
+				60CC3B081B1622B200229A55 /* CREventStorageTest.m */,
+				6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */,
+			);
+			name = Persistence;
+			sourceTree = "<group>";
+		};
 		604601B31B15AF0D00F32E80 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,12 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				6061DA751B111AF5002DC83B /* CarrotSDKTests.m */,
-				60CF25B91B1456E30069053A /* CRBeaconTests.m */,
-				60053CE61B17183F00A9FA03 /* CREventTests.m */,
-				60CC3B081B1622B200229A55 /* CREventStorageTest.m */,
-				603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */,
-				6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */,
-				60053CDB1B16F95900A9FA03 /* CRBeaconCacheTests.m */,
+				60374FC31B171EDD0053ADEC /* Core */,
+				60374FC41B171EEB0053ADEC /* Persistence */,
 				6061DA731B111AF5002DC83B /* Supporting Files */,
 			);
 			path = Tests;
@@ -560,8 +576,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",
-					/Volumes/OCMock,
-					3.1.2/iOS,
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -587,8 +601,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",
-					/Volumes/OCMock,
-					3.1.2/iOS,
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
