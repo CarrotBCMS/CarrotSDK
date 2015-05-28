@@ -13,12 +13,16 @@
 #import "CRBeaconCache.h"
 #import "CRBeacon.h"
 #import "CRBeaconStorage.h"
+#import "CREventStorage.h"
+#import "CREventCoordinator.h"
 
 @interface CRBeaconManager () <CLLocationManagerDelegate, CBCentralManagerDelegate>
 
 - (void)_setup;
 - (NSString *)_stringForState:(CLRegionState)state;
-- (void)_sendLocalNotificationWithMessage:(NSString*)message;
+- (void)_sendLocalNotificationsAndNotifyDelegateWithEvents:(NSArray *)notificationObjects
+                                                    beacon:(CRBeacon *)beacon;
+- (void)_notifyDelegateToPresentEvents:(NSArray *)objects beacon:(CRBeacon *)beacon;
 - (NSArray *)_regions;
 
 - (void)_handleEnterBeacons:(NSArray *)beacons;
@@ -36,6 +40,8 @@
     
     CRBeaconCache *_beaconCache;
     CRBeaconStorage *_beaconStorage;
+    CREventStorage *_eventStorage;
+    CREventCoordinator *_eventCoordinator;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,6 +151,8 @@
     _regions = [NSArray array];
     _beaconCache = [[CRBeaconCache alloc] init];
     _beaconStorage = [[CRBeaconStorage alloc] initWithStoragePath:CRBeaconDataFilePath];
+    _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:CRBeaconDataBasePath];
+    _eventCoordinator = [[CREventCoordinator alloc] initWithEventStorage:_eventStorage];
     
     _bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self
                                                              queue:dispatch_get_main_queue()
@@ -158,13 +166,6 @@
     if([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         [_locationManager requestAlwaysAuthorization];
     }
-}
-
-- (void)_sendLocalNotificationWithMessage:(NSString*)message {
-    CRLog("Sending local notification.");
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertBody = message;
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 - (NSString *)_stringForState:(CLRegionState)state {
@@ -204,13 +205,19 @@
         // Only call delegate if a CRBeacon was found
         beacon = [_beaconStorage findCRBeaconWithUUID:beacon.uuid major:beacon.major minor:beacon.minor];
         
-        if (beacon && [(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didEnterBeaconRadius:)]) {
-            [_delegate manager:self didEnterBeaconRadius:beacon];
+        if (beacon) {
+            if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didEnterBeaconRadius:)]) {
+                [_delegate manager:self didEnterBeaconRadius:beacon];
+            }
+            
+            // Check and perform notification handling if necessary.
+            NSArray *notificationObjects = [_eventCoordinator validEnterNotificationEventsForBeacon:beacon];
+            [self _sendLocalNotificationsAndNotifyDelegateWithEvents:notificationObjects beacon:beacon];
+            
+            // Check and perform event handling if necessary.
+            NSArray *objects = [_eventCoordinator validEnterEventsForBeacon:beacon];
+            [self _notifyDelegateToPresentEvents:objects beacon:beacon];
         }
-        
-        // Check and perform event handling if necessary.
-        
-        
     }];
 }
 
@@ -224,12 +231,39 @@
         // Only call delegate if a CRBeacon was foundon instance from storage
         beacon = [_beaconStorage findCRBeaconWithUUID:beacon.uuid major:beacon.major minor:beacon.minor];
         
-        if (beacon && [(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitBeaconRadius:)]) {
-            [_delegate manager:self didExitBeaconRadius:beacon];
+        if (beacon) {
+            if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitBeaconRadius:)]) {
+                [_delegate manager:self didExitBeaconRadius:beacon];
+            }
+            
+            // Check and perform notification handling if necessary.
+            NSArray *notificationObjects = [_eventCoordinator validExitNotificationEventsForBeacon:beacon];
+            [self _sendLocalNotificationsAndNotifyDelegateWithEvents:notificationObjects beacon:beacon];
+            
+            // Check and perform event handling if necessary.
+            NSArray *objects = [_eventCoordinator validExitEventsForBeacon:beacon];
+            [self _notifyDelegateToPresentEvents:objects beacon:beacon];
         }
-        
-        // Check and perform event handling if necessary.
     }];
+}
+
+- (void)_sendLocalNotificationsAndNotifyDelegateWithEvents:(NSArray *)notificationObjects
+                                                    beacon:(CRBeacon *)beacon
+{
+    for (CRNotificationEvent *event in notificationObjects) {
+        [_eventCoordinator sendLocalNotificationWithEvent:event];
+        if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didFireNotification:beacon:)]) {
+            [_delegate manager:self didFireNotification:event beacon:beacon];
+        }
+    }
+}
+
+- (void)_notifyDelegateToPresentEvents:(NSArray *)objects beacon:(CRBeacon *)beacon {
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:shouldPresentEvents:beacon:)]) {
+        if (objects && objects.count > 0) {
+            [_delegate manager:self shouldPresentEvents:objects beacon:beacon];
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

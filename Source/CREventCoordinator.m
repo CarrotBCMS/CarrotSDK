@@ -7,6 +7,17 @@
 //
 
 #import "CREventCoordinator.h"
+#import "CREventStorage.h"
+#import "CREventStorage+Filter.h"
+#import "CREvent.h"
+#import "CRNotificationEvent.h"
+#import "CRDefinitions.h"
+
+@interface CREventCoordinator ()
+
+@end
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation CREventCoordinator {
     CREventStorage *_storage;
@@ -30,19 +41,49 @@
 #pragma mark - Coordination
 
 - (NSArray *)validEnterEventsForBeacon:(CRBeacon *)beacon {
-    return nil;
+    NSArray *allEvents = [_storage findAllEnterEventsForBeacon:beacon];
+    return [self _filterPermittedEvents:allEvents];
 }
 
 - (NSArray *)validExitEventsForBeacon:(CRBeacon *)beacon {
-    return nil;
+    NSArray *allEvents = [_storage findAllExitEventsForBeacon:beacon];
+    return [self _filterPermittedEvents:allEvents];
 }
 
 - (NSArray *)validEnterNotificationEventsForBeacon:(CRBeacon *)beacon {
-    return nil;
+    NSArray *allEvents = [_storage findAllNotificationEnterEventsForBeacon:beacon];
+    return [self _filterPermittedEvents:allEvents];
 }
 
 - (NSArray *)validExitNotificationEventsForBeacon:(CRBeacon *)beacon {
-    return nil;
+    NSArray *allEvents = [_storage findAllNotificationExitEventsForBeacon:beacon];
+    return [self _filterPermittedEvents:allEvents];
+}
+
+- (void)sendLocalNotificationWithEvent:(CRNotificationEvent *)event {
+    CRLog("Sending local notification.");
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertTitle = event.title;
+    notification.alertBody = event.message;
+    notification.userInfo = @{@"payload": event.payload, @"id": event.eventId};
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Private
+
+- (NSArray *)_filterPermittedEvents:(NSArray*)events {
+    NSMutableArray *results = [NSMutableArray array];
+    [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        CREvent *event = (CREvent *)obj;
+        NSDate *lastTriggered = event.lastTriggered;
+        if ([lastTriggered timeIntervalSinceNow] + event.threshold <= 0) {
+            [results addObject:event];
+        }
+    }];
+
+    return [NSArray arrayWithArray:results];
 }
 
 @end

@@ -76,25 +76,26 @@
 - (void)removeEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon;
 
 /**
- Removes all events for the corresponding beacon
+ Removes all events for the corresponding beacon.
  
  @param beacon The corresponding beacon
  */
 - (void)removeAllEventsForBeacon:(CRBeacon *)beacon;
 
 /**
- Finds all events for a corresponding beacon
+ Finds all events for a corresponding beacon. 
+ Notification events are not included.
  
  @param beacon The beacon
  */
 - (NSArray *)findAllEventsForBeacon:(CRBeacon *)beacon;
 
 /**
- Finds all notification events for a corresponding beacon
+ Finds all notification events for a corresponding beacon.
  
  @param beacon The beacon
  */
-- (NSArray *)findNotificationEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray *)findAllNotificationEventsForBeacon:(CRBeacon *)beacon;
 
 
 @end

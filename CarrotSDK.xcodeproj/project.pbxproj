@@ -24,6 +24,8 @@
 		6036C8A51B1732B800D4CA87 /* CREventCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6036C8A31B1732B800D4CA87 /* CREventCoordinator.h */; };
 		6036C8A61B1732B800D4CA87 /* CREventCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8A41B1732B800D4CA87 /* CREventCoordinator.m */; };
 		6036C8A81B17346B00D4CA87 /* CREventCoordinatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8A71B17346B00D4CA87 /* CREventCoordinatorTests.m */; };
+		6036C8AB1B174AC900D4CA87 /* CREventStorage+Filter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6036C8A91B174AC900D4CA87 /* CREventStorage+Filter.h */; };
+		6036C8AC1B174AC900D4CA87 /* CREventStorage+Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8AA1B174AC900D4CA87 /* CREventStorage+Filter.m */; };
 		603CC7991B1492B40077A48C /* CRBeaconManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */; };
 		603CC7E41B14BF8C0077A48C /* CRBeaconCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 603CC7E21B14BF8C0077A48C /* CRBeaconCache.h */; };
 		603CC7E51B14BF8C0077A48C /* CRBeaconCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7E31B14BF8C0077A48C /* CRBeaconCache.m */; };
@@ -75,6 +77,8 @@
 		6036C8A31B1732B800D4CA87 /* CREventCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREventCoordinator.h; sourceTree = "<group>"; };
 		6036C8A41B1732B800D4CA87 /* CREventCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventCoordinator.m; sourceTree = "<group>"; };
 		6036C8A71B17346B00D4CA87 /* CREventCoordinatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventCoordinatorTests.m; sourceTree = "<group>"; };
+		6036C8A91B174AC900D4CA87 /* CREventStorage+Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CREventStorage+Filter.h"; sourceTree = "<group>"; };
+		6036C8AA1B174AC900D4CA87 /* CREventStorage+Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CREventStorage+Filter.m"; sourceTree = "<group>"; };
 		603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconManagerTests.m; sourceTree = "<group>"; };
 		603CC7E21B14BF8C0077A48C /* CRBeaconCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconCache.h; sourceTree = "<group>"; };
 		603CC7E31B14BF8C0077A48C /* CRBeaconCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconCache.m; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 				6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */,
 				604601B41B15AF4C00F32E80 /* CREventStorage.h */,
 				604601B51B15AF4C00F32E80 /* CREventStorage.m */,
+				6036C8A91B174AC900D4CA87 /* CREventStorage+Filter.h */,
+				6036C8AA1B174AC900D4CA87 /* CREventStorage+Filter.m */,
 			);
 			name = Storage;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 				6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */,
 				60CC3B071B15FFEF00229A55 /* CRBeaconManagerEnums.h in Headers */,
 				6002B0DB1B126D8000459AAC /* CRSingleFileStorage.h in Headers */,
+				6036C8AB1B174AC900D4CA87 /* CREventStorage+Filter.h in Headers */,
 				6061DA841B111D21002DC83B /* CRBeaconManager.h in Headers */,
 				6061DA901B111DB3002DC83B /* CRBeacon.h in Headers */,
 				6061DA691B111AF5002DC83B /* CarrotSDK.h in Headers */,
@@ -410,6 +417,7 @@
 				6009ED3D1B1144B00090C1A7 /* CREvent.m in Sources */,
 				6036C8A61B1732B800D4CA87 /* CREventCoordinator.m in Sources */,
 				603CC7E51B14BF8C0077A48C /* CRBeaconCache.m in Sources */,
+				6036C8AC1B174AC900D4CA87 /* CREventStorage+Filter.m in Sources */,
 				6061DA851B111D21002DC83B /* CRBeaconManager.m in Sources */,
 				604601B71B15AF4C00F32E80 /* CREventStorage.m in Sources */,
 				60C8BAD81B132A5B009024F8 /* CRNotificationEvent.m in Sources */,

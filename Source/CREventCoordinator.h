@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@class CRBeacon, CREventStorage;
+@class CRBeacon, CREventStorage, CRNotificationEvent;
 
 /**
  Coordinates validation and retrieval of stored events.
@@ -43,5 +43,6 @@
 - (NSArray *)validEnterNotificationEventsForBeacon:(CRBeacon *)beacon;
 - (NSArray *)validExitNotificationEventsForBeacon:(CRBeacon *)beacon;
 
+- (void)sendLocalNotificationWithEvent:(CRNotificationEvent *)event;
 
 @end

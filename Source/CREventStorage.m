@@ -101,17 +101,22 @@
 }
 
 - (NSArray *)findAllEventsForBeacon:(CRBeacon *)beacon {
-    return [NSArray arrayWithArray:[self _allEventsForBeacon:beacon]];
+    NSMutableArray *allEvents = [[self _allEventsForBeacon:beacon] mutableCopy];
+    [allEvents filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ![evaluatedObject isKindOfClass:[CRNotificationEvent class]] &&
+                [evaluatedObject isKindOfClass:[CREvent class]];
+    }]];
     
+    return [NSArray arrayWithArray:allEvents];
 }
 
-- (NSArray *)findNotificationEventsForBeacon:(CRBeacon *)beacon {
+- (NSArray *)findAllNotificationEventsForBeacon:(CRBeacon *)beacon {
     NSMutableArray *allEvents = [[self _allEventsForBeacon:beacon] mutableCopy];
     [allEvents filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return [evaluatedObject isKindOfClass:[CRNotificationEvent class]];
     }]];
      
-     return [NSArray arrayWithArray:allEvents];
+    return [NSArray arrayWithArray:allEvents];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
