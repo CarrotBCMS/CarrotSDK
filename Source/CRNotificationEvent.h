@@ -21,4 +21,9 @@
  */
 @property (strong) NSString *message;
 
+/**
+ A payload
+ */
+@property (strong) NSString *payload;
+
 @end

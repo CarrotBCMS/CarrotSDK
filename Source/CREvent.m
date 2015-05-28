@@ -13,14 +13,37 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Initialising
+#pragma mark - Initialising & NSCoding
 
-- (id)initWithCoder:(NSCoder *)coder {
+- (instancetype)initWithEventId:(NSNumber *)eventId
+                      threshold:(NSTimeInterval)threshold
+                  lastTriggered:(NSDate *)lastTriggered
+                      eventType:(CREventType)eventType;
+{
     self = [super init];
+    if (self) {
+        _threshold = threshold;
+        _eventId = eventId;
+        _lastTriggered = lastTriggered;
+        _eventType = eventType;
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [self initWithEventId:[coder decodeObjectOfClass:[NSNumber class] forKey:@"eventId"]
+                       threshold:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"threshold"]).doubleValue
+                   lastTriggered:[coder decodeObjectOfClass:[NSDate class] forKey:@"lastTriggered"]
+                       eventType:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"eventType"]).integerValue];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:_eventId forKey:@"eventId"];
+    [aCoder encodeObject:[NSNumber numberWithDouble:_threshold] forKey:@"threshold"];
+    [aCoder encodeObject:_lastTriggered forKey:@"lastTriggered"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:_eventType] forKey:@"eventType"];
 }
 
 + (BOOL)supportsSecureCoding {

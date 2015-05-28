@@ -40,10 +40,10 @@
     return [self initWithUUID:uuid major:major minor:minor name:nil];
 }
 
-- (id)initWithCoder:(NSCoder *)coder {
+- (instancetype)initWithCoder:(NSCoder *)coder {
     self = [self initWithUUID:[coder decodeObjectOfClass:[NSString class] forKey:@"uuid"]
-                        major:[coder decodeObjectOfClass:[NSString class] forKey:@"major"]
-                        minor:[coder decodeObjectOfClass:[NSString class] forKey:@"minor"]
+                        major:[coder decodeObjectOfClass:[NSNumber class] forKey:@"major"]
+                        minor:[coder decodeObjectOfClass:[NSNumber class] forKey:@"minor"]
                          name:[coder decodeObjectOfClass:[NSString class] forKey:@"name"]];
     return self;
 }

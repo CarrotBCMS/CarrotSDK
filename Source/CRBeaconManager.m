@@ -207,6 +207,10 @@
         if (beacon && [(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didEnterBeaconRadius:)]) {
             [_delegate manager:self didEnterBeaconRadius:beacon];
         }
+        
+        // Check and perform event handling if necessary.
+        
+        
     }];
 }
 
@@ -223,6 +227,8 @@
         if (beacon && [(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitBeaconRadius:)]) {
             [_delegate manager:self didExitBeaconRadius:beacon];
         }
+        
+        // Check and perform event handling if necessary.
     }];
 }
 

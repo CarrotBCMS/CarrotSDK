@@ -7,22 +7,44 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CRBeaconManagerEnums.h"
 
 @interface CREvent : NSObject <NSSecureCoding>
 
 /**
  Unique event id.
  */
-@property (strong) NSNumber *eventId;
+@property (readonly, strong) NSNumber *eventId;
 
 /**
- The threshold in seconds.
+ The threshold in milliseconds.
  */
-@property (strong) NSNumber *threshold;
+@property (readonly, assign) NSTimeInterval threshold;
 
 /**
  Last time this event was triggered.
  */
 @property (strong) NSDate *lastTriggered;
 
+/**
+ Event type
+ */
+@property (readonly, assign) CREventType eventType;
+
+///---------------------------------------------------------------------------------------
+/// @name Lifecycle
+///---------------------------------------------------------------------------------------
+
+/**
+ Initialize this event.
+ 
+ @param eventId UUID string
+ @param threshold Threshold in milliseconds
+ @param lastTriggered Last time triggered
+ @param eventType Event type
+ */
+- (instancetype)initWithEventId:(NSNumber *)eventId
+                      threshold:(NSTimeInterval)threshold
+                  lastTriggered:(NSDate *)lastTriggered
+                      eventType:(CREventType)eventType;
 @end

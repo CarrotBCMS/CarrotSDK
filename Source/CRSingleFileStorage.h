@@ -37,7 +37,7 @@
  
  @param path The storage path
  */
-- (id)initWithStoragePath:(NSString *)path;
+- (instancetype)initWithStoragePath:(NSString *)path;
 
 ///---------------------------------------------------------------------------------------
 /// @name Adding, deleting & retrieving objects

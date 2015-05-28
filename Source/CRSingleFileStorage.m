@@ -14,7 +14,7 @@
 
 #pragma mark - Initialising
 
-- (id)initWithStoragePath:(NSString *)path {
+- (instancetype)initWithStoragePath:(NSString *)path {
     self = [super init];
     
     if (self) {

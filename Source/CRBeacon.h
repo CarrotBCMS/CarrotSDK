@@ -41,7 +41,7 @@
 ///---------------------------------------------------------------------------------------
 
 /**
- Initialize this proxy by providing a CLBeacon object.
+ Initialize this proxy.
  
  @param uuid UUID string
  @param major Major identifier

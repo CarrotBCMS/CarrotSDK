@@ -39,10 +39,8 @@
     _beaconTwo = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440002"]
                                           major:@113
                                           minor:@225];
-    _event = [[CREvent alloc] init];
-    _event.eventId = @111;
-    _eventTwo = [[CREvent alloc] init];
-    _eventTwo.eventId = @112;
+    _event = [[CREvent alloc] initWithEventId:@1 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
+    _eventTwo = [[CREvent alloc] initWithEventId:@12 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
     
 }
 
@@ -97,10 +95,8 @@
 
 - (void)testFindAllEventsForBeacon {
     [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:_beacon];
-    CREvent *eventThree = [[CREvent alloc] init];
-    eventThree.eventId = @932;
-    CREvent *eventFour = [[CREvent alloc] init];
-    eventFour.eventId = @931;
+    CREvent *eventThree = [[CREvent alloc] initWithEventId:@1213 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
+    CREvent *eventFour = [[CREvent alloc] initWithEventId:@1111 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
     [_eventStorage addEvents:@[eventThree, eventFour] forBeacon:_beaconTwo];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beaconTwo].count == 2);
     NSArray *array = [_eventStorage findAllEventsForBeacon:_beacon];
@@ -112,10 +108,8 @@
     [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:_beacon];
     XCTAssert([_eventStorage findNotificationEventsForBeacon:_beacon].count == 0);
     
-    CRNotificationEvent *notEvent = [[CRNotificationEvent alloc] init];
-    notEvent.eventId = @1111;
-    CRNotificationEvent *notEventTwo = [[CRNotificationEvent alloc] init];
-    notEventTwo.eventId = @1112;
+    CRNotificationEvent *notEvent = [[CRNotificationEvent alloc] initWithEventId:@12 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
+    CRNotificationEvent *notEventTwo = [[CRNotificationEvent alloc] initWithEventId:@1 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
     [_eventStorage addEvents:@[notEvent, notEventTwo] forBeacon:_beacon];
     XCTAssert([_eventStorage findNotificationEventsForBeacon:_beacon].count == 2);
 }
