@@ -21,7 +21,7 @@
 
 #pragma mark - Storing, Caching and general fiddling
 
-- (void)addCRBeaconsFromBeacon:(NSArray *)beacons forUUIDString:(NSString *)uuidString {
+- (void)addCRBeaconsFromBeacons:(NSArray *)beacons forUUIDString:(NSString *)uuidString {
     [self setObject:[NSArray arrayWithArray:[self _CRBeaconArrayFromBeaconArray:beacons]] forKey:uuidString];
 }
 

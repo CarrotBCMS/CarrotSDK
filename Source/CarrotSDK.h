@@ -21,3 +21,5 @@ FOUNDATION_EXPORT const unsigned char CarrotSDKVersionString[];
 #import <CarrotSDK/CRBeacon.h>
 #import <CarrotSDK/CREvent.h>
 #import <CarrotSDK/CRTextEvent.h>
+#import <CarrotSDK/CRNotificationEvent.h>
+#import <CarrotSDK/CRBeaconManagerEnums.h>

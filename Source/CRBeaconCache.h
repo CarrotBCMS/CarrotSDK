@@ -11,7 +11,7 @@
 
 @interface CRBeaconCache : NSCache
 
-- (void)addCRBeaconsFromBeacon:(NSArray *)beacons forUUIDString:(NSString *)uuidString;
+- (void)addCRBeaconsFromBeacons:(NSArray *)beacons forUUIDString:(NSString *)uuidString;
 - (NSArray *)CRbeaconsForUUIDString:(NSString *)uuidString;
 
 - (NSArray *)enteredCRBeaconsForRangedBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region;

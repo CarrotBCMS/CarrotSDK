@@ -12,6 +12,7 @@
 		6002B0DF1B12768D00459AAC /* CRBeaconStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6002B0DD1B12768D00459AAC /* CRBeaconStorage.h */; };
 		6002B0E01B12768D00459AAC /* CRBeaconStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */; };
 		6002B0E21B1277C700459AAC /* CRSingleFileStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */; };
+		60053CDC1B16F95900A9FA03 /* CRBeaconCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60053CDB1B16F95900A9FA03 /* CRBeaconCacheTests.m */; };
 		6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED311B1139EC0090C1A7 /* CRDefinitions.h */; };
 		6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3A1B1144B00090C1A7 /* CREvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,7 +34,7 @@
 		6061DA901B111DB3002DC83B /* CRBeacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 6061DA8E1B111DB3002DC83B /* CRBeacon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6061DA911B111DB3002DC83B /* CRBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6061DA8F1B111DB3002DC83B /* CRBeacon.m */; };
 		6061DA931B111E61002DC83B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA921B111E61002DC83B /* CoreLocation.framework */; };
-		60C8BAD71B132A5B009024F8 /* CRNotificationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C8BAD51B132A5B009024F8 /* CRNotificationEvent.h */; };
+		60C8BAD71B132A5B009024F8 /* CRNotificationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C8BAD51B132A5B009024F8 /* CRNotificationEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60C8BAD81B132A5B009024F8 /* CRNotificationEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */; };
 		60CC3B031B15FC3700229A55 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */; };
 		60CC3B071B15FFEF00229A55 /* CRBeaconManagerEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CC3B061B15FFA600229A55 /* CRBeaconManagerEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -57,6 +58,7 @@
 		6002B0DD1B12768D00459AAC /* CRBeaconStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconStorage.h; sourceTree = "<group>"; };
 		6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconStorage.m; sourceTree = "<group>"; };
 		6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSingleFileStorageTests.m; sourceTree = "<group>"; };
+		60053CDB1B16F95900A9FA03 /* CRBeaconCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconCacheTests.m; sourceTree = "<group>"; };
 		6009ED311B1139EC0090C1A7 /* CRDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRDefinitions.h; sourceTree = "<group>"; };
 		6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconManagerDelegate.h; sourceTree = "<group>"; };
 		6009ED3A1B1144B00090C1A7 /* CREvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREvent.h; sourceTree = "<group>"; };
@@ -141,7 +143,6 @@
 		6061DA591B111AF5002DC83B = {
 			isa = PBXGroup;
 			children = (
-				60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */,
 				6061DA651B111AF5002DC83B /* Source */,
 				6061DA721B111AF5002DC83B /* Tests */,
 				6061DA641B111AF5002DC83B /* Products */,
@@ -186,6 +187,7 @@
 				60CC3B081B1622B200229A55 /* CREventStorageTest.m */,
 				603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */,
 				6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */,
+				60053CDB1B16F95900A9FA03 /* CRBeaconCacheTests.m */,
 				6061DA731B111AF5002DC83B /* Supporting Files */,
 			);
 			path = Tests;
@@ -233,6 +235,7 @@
 		6061DA941B111E71002DC83B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */,
 				6061DA921B111E61002DC83B /* CoreLocation.framework */,
 			);
 			name = Vendor;
@@ -257,6 +260,7 @@
 				6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */,
 				6002B0DF1B12768D00459AAC /* CRBeaconStorage.h in Headers */,
 				603CC7E41B14BF8C0077A48C /* CRBeaconCache.h in Headers */,
+				60C8BAD71B132A5B009024F8 /* CRNotificationEvent.h in Headers */,
 				6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */,
 				6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */,
 				6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */,
@@ -265,7 +269,6 @@
 				6061DA841B111D21002DC83B /* CRBeaconManager.h in Headers */,
 				6061DA901B111DB3002DC83B /* CRBeacon.h in Headers */,
 				6061DA691B111AF5002DC83B /* CarrotSDK.h in Headers */,
-				60C8BAD71B132A5B009024F8 /* CRNotificationEvent.h in Headers */,
 				604601B61B15AF4C00F32E80 /* CREventStorage.h in Headers */,
 				6061DA8C1B111D95002DC83B /* CRSyncManager.h in Headers */,
 			);
@@ -385,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				603CC7991B1492B40077A48C /* CRBeaconManagerTests.m in Sources */,
+				60053CDC1B16F95900A9FA03 /* CRBeaconCacheTests.m in Sources */,
 				6061DA761B111AF5002DC83B /* CarrotSDKTests.m in Sources */,
 				60CC3B091B1622B200229A55 /* CREventStorageTest.m in Sources */,
 				60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */,
@@ -501,6 +505,11 @@
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -516,6 +525,11 @@
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -534,8 +548,18 @@
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Source/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Source/** $(SRCROOT)/Vendor/**";
 			};
 			name = Debug;
 		};
@@ -548,8 +572,18 @@
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Source/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Source/** $(SRCROOT)/Vendor/**";
 			};
 			name = Release;
 		};

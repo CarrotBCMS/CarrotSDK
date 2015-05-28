@@ -24,8 +24,8 @@
 
 @implementation CREventStorage {
     NSString *_basePath;
-    NSMutableDictionary *_objects;
-    NSFileManager *_fileManager;;
+    NSFileManager *_fileManager;
+    NSCache *_objects; // Using a cache here should prevent low-memory circumstances 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@
     if (self) {
         _basePath = path;
         _fileManager = [NSFileManager defaultManager];
-        _objects = [NSMutableDictionary dictionary];
+        _objects = [[NSCache alloc] init];
         
         if (![_fileManager fileExistsAtPath:_basePath]) {
             NSError *error;
@@ -162,7 +162,9 @@
 - (void)_save:(CRBeacon *)beacon {
     NSString *path = [_basePath stringByAppendingPathComponent:[self filename:beacon]];
     NSMutableArray *array = [_objects objectForKey:[self filename:beacon]];
-    [NSKeyedArchiver archiveRootObject:array toFile:path];
+    if (array) {
+        [NSKeyedArchiver archiveRootObject:array toFile:path];
+    }
 }
 
 - (NSString *)filename:(CRBeacon *)beacon {
