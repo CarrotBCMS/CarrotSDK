@@ -55,18 +55,35 @@
 - (void)testStoringObject {
     XCTAssert(![_fileManager fileExistsAtPath:_storagePath isDirectory:NULL]);
     [_store addObject:_beacon];
-    XCTAssert([_fileManager fileExistsAtPath:_storagePath isDirectory:NULL]);
+    
+    // This is a little poor I know. Saving is an async method, I expect it to be written within 2 seconds though.
+    XCTestExpectation *dummyExpectation = [self expectationWithDescription:@"write file to disk"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [dummyExpectation fulfill];
+    });
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        XCTAssert([_fileManager fileExistsAtPath:_storagePath isDirectory:NULL]);
+    }];
 }
 
 - (void)testRestoringObjects {
     [_store addObject:_beacon];
     
-    CRSingleFileStorage *newStore = [[CRSingleFileStorage alloc] initWithStoragePath:_storagePath];
-    XCTAssert([[newStore objects] count] == 1);
+    // This is a little poor I know. Saving is an async method, I expect it to be written within 2 seconds though.
+    XCTestExpectation *dummyExpectation = [self expectationWithDescription:@"write file to disk"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [dummyExpectation fulfill];
+    });
     
-    CRBeacon *aBeacon = [[newStore objects] lastObject];
-    XCTAssertNotNil(aBeacon);
-    XCTAssert([_beacon isEqual:aBeacon]);
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        CRSingleFileStorage *newStore = [[CRSingleFileStorage alloc] initWithStoragePath:_storagePath];
+        XCTAssert([[newStore objects] count] == 1);
+        
+        CRBeacon *aBeacon = [[newStore objects] lastObject];
+        XCTAssertNotNil(aBeacon);
+        XCTAssert([_beacon isEqual:aBeacon]);
+    }];
 }
 
 @end

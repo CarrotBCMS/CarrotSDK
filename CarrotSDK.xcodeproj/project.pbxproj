@@ -33,7 +33,6 @@
 		604601B71B15AF4C00F32E80 /* CREventStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 604601B51B15AF4C00F32E80 /* CREventStorage.m */; };
 		6061DA691B111AF5002DC83B /* CarrotSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 6061DA681B111AF5002DC83B /* CarrotSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6061DA6F1B111AF5002DC83B /* CarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA631B111AF5002DC83B /* CarrotSDK.framework */; };
-		6061DA761B111AF5002DC83B /* CarrotSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6061DA751B111AF5002DC83B /* CarrotSDKTests.m */; };
 		6061DA841B111D21002DC83B /* CRBeaconManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6061DA821B111D21002DC83B /* CRBeaconManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6061DA851B111D21002DC83B /* CRBeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6061DA831B111D21002DC83B /* CRBeaconManager.m */; };
 		6061DA8C1B111D95002DC83B /* CRSyncManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6061DA8A1B111D95002DC83B /* CRSyncManager.h */; };
@@ -89,7 +88,6 @@
 		6061DA681B111AF5002DC83B /* CarrotSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarrotSDK.h; sourceTree = "<group>"; };
 		6061DA6E1B111AF5002DC83B /* CarrotSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarrotSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6061DA741B111AF5002DC83B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6061DA751B111AF5002DC83B /* CarrotSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarrotSDKTests.m; sourceTree = "<group>"; };
 		6061DA821B111D21002DC83B /* CRBeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconManager.h; sourceTree = "<group>"; };
 		6061DA831B111D21002DC83B /* CRBeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconManager.m; sourceTree = "<group>"; };
 		6061DA8A1B111D95002DC83B /* CRSyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSyncManager.h; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 		6061DA721B111AF5002DC83B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6061DA751B111AF5002DC83B /* CarrotSDKTests.m */,
 				60374FC31B171EDD0053ADEC /* Core */,
 				60374FC41B171EEB0053ADEC /* Persistence */,
 				6061DA731B111AF5002DC83B /* Supporting Files */,
@@ -433,7 +430,6 @@
 				603CC7991B1492B40077A48C /* CRBeaconManagerTests.m in Sources */,
 				6036C8A81B17346B00D4CA87 /* CREventCoordinatorTests.m in Sources */,
 				60053CDC1B16F95900A9FA03 /* CRBeaconCacheTests.m in Sources */,
-				6061DA761B111AF5002DC83B /* CarrotSDKTests.m in Sources */,
 				60CC3B091B1622B200229A55 /* CREventStorageTest.m in Sources */,
 				60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */,
 				6002B0E21B1277C700459AAC /* CRSingleFileStorageTests.m in Sources */,

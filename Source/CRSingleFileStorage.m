@@ -8,7 +8,8 @@
 
 #import "CRSingleFileStorage.h"
 
-@implementation CRSingleFileStorage
+@implementation CRSingleFileStorage {
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -77,13 +78,15 @@
 #pragma mark - Private
 
 - (void)_save {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *dirpath = [_storagePath stringByDeletingLastPathComponent];
-    if (![fileManager fileExistsAtPath:dirpath]) {
-        [fileManager createDirectoryAtPath:dirpath withIntermediateDirectories:YES attributes:nil error:NULL];
-    }
-    
-    [NSKeyedArchiver archiveRootObject:_objects toFile:_storagePath];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *dirpath = [_storagePath stringByDeletingLastPathComponent];
+        if (![fileManager fileExistsAtPath:dirpath]) {
+            [fileManager createDirectoryAtPath:dirpath withIntermediateDirectories:YES attributes:nil error:NULL];
+        }
+        
+        [NSKeyedArchiver archiveRootObject:_objects toFile:_storagePath];
+    });
 }
 
 @end

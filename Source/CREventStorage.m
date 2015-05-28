@@ -165,11 +165,13 @@
 }
 
 - (void)_save:(CRBeacon *)beacon {
-    NSString *path = [_basePath stringByAppendingPathComponent:[self filename:beacon]];
-    NSMutableArray *array = [_objects objectForKey:[self filename:beacon]];
-    if (array) {
-        [NSKeyedArchiver archiveRootObject:array toFile:path];
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        NSString *path = [_basePath stringByAppendingPathComponent:[self filename:beacon]];
+        NSMutableArray *array = [_objects objectForKey:[self filename:beacon]];
+        if (array) {
+            [NSKeyedArchiver archiveRootObject:array toFile:path];
+        }
+    });
 }
 
 - (NSString *)filename:(CRBeacon *)beacon {

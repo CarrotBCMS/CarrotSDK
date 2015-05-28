@@ -133,9 +133,18 @@
     [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:newBeacon];
     
     NSString *path = [_eventStorage.basePath stringByAppendingFormat:@"/%@_%@_%@", newBeacon.uuid.UUIDString, newBeacon.major, newBeacon.minor];
-    BOOL dir = YES;
-    XCTAssert([_fileManager fileExistsAtPath:path isDirectory:&dir]);
-    XCTAssert(!dir);
+    
+    // This is a little poor I know. Saving is an async method, I expect it to be written within 2 seconds though.
+    XCTestExpectation *dummyExpectation = [self expectationWithDescription:@"write file to disk"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [dummyExpectation fulfill];
+    });
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        BOOL dir = YES;
+        XCTAssert([_fileManager fileExistsAtPath:path isDirectory:&dir]);
+        XCTAssert(!dir);
+    }];
 }
 
 
