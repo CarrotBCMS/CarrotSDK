@@ -25,7 +25,7 @@
     [super tearDown];
 }
 
-- (void)testIsEqual {
+- (void)testEquality {
     CRBeacon *beaconOne = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@112 minor:@111 name:@"testbeacon"];
     CRBeacon *beaconTwo = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"]  major:@112 minor:@111 name:@"testbeacon"];
     CRBeacon *beaconThree = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655190000"]  major:@112222 minor:@1111213 name:@"testbeacon"];

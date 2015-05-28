@@ -36,8 +36,7 @@
     _beacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"]
                                        major:@1
                                        minor:@2];
-    
-    _event = [[CREvent alloc] init];
+
     _event = [[CREvent alloc] initWithEventId:@1
                                     threshold:1000
                                 lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-2000]
@@ -46,7 +45,7 @@
     _eventTwo = [[CREvent alloc] initWithEventId:@2
                                        threshold:1000
                                    lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-1000]
-                                       eventType:CREventTypeEnter];
+                                       eventType:CREventTypeExit];
     
     _notEvent = [[CRNotificationEvent alloc] initWithEventId:@12
                                                    threshold:1000
@@ -57,15 +56,19 @@
     _notEvent.payload = @"testpayload";
     
     _notEventTwo = [[CRNotificationEvent alloc] initWithEventId:@12
-                                                   threshold:1000
-                                               lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-5000]
-                                                   eventType:CREventTypeEnter];
+                                                      threshold:1000
+                                                  lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-5000]
+                                                      eventType:CREventTypeExit];
     _notEventTwo.message = @"testmessage";
     _notEventTwo.title = @"testtitle";
     _notEventTwo.payload = @"testpayload";
     
-    _storage = OCMClassMock([CREventStorage class]);
+    _storage = OCMPartialMock([[CREventStorage alloc] init]);
     _coordinator = [[CREventCoordinator alloc] initWithEventStorage:_storage];
+    NSArray *array = @[_event, _eventTwo];
+    NSArray *notArray = @[_notEvent, _notEventTwo];
+    OCMStub([_storage findAllEventsForBeacon:[OCMArg any]]).andReturn(array);
+    OCMStub([_storage findAllNotificationEventsForBeacon:[OCMArg any]]).andReturn(notArray);
 }
 
 - (void)tearDown {
@@ -74,22 +77,27 @@
 
 - (void)testValidEnterEvents {
     NSArray *result = [_coordinator validEnterEventsForBeacon:_beacon];
-    XCTAssert(result.count == 2);
+    XCTAssert(result.count == 1);
 }
 
 - (void)testValidExitEvents {
-    NSArray *result = [_coordinator validEnterEventsForBeacon:_beacon];
-    XCTAssert(result.count == 2);
+    NSArray *result = [_coordinator validExitEventsForBeacon:_beacon];
+    XCTAssert(result.count == 1);
 }
 
 - (void)testValidEnterNotificationEvents {
     NSArray *result = [_coordinator validEnterNotificationEventsForBeacon:_beacon];
-    XCTAssert(result.count == 2);
+    XCTAssert(result.count == 1);
 }
 
 - (void)testValidExitNotificationEvents {
     NSArray *result = [_coordinator validExitNotificationEventsForBeacon:_beacon];
-    XCTAssert(result.count == 0);
+    XCTAssert(result.count == 1);
+}
+
+- (void)testInvalidExitNotificationEvents {
+    NSArray *result = [_coordinator validExitNotificationEventsForBeacon:_beacon];
+    XCTAssert(result.count == 1);
 }
 
 @end
