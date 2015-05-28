@@ -250,7 +250,7 @@
         [self _handleExitBeacons:exitedBeacons];
     }
     
-    [_beaconCache addCRBeaconsFromBeacons:beacons forUUIDString:region.proximityUUID.UUIDString];
+    [_beaconCache addCRBeaconsFromRangedBeacons:beacons forUUID:region.proximityUUID];
 }
 
 - (void)locationManager:(CLLocationManager *)manager

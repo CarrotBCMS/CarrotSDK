@@ -13,6 +13,8 @@
 		6002B0E01B12768D00459AAC /* CRBeaconStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */; };
 		6002B0E21B1277C700459AAC /* CRSingleFileStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */; };
 		60053CDC1B16F95900A9FA03 /* CRBeaconCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60053CDB1B16F95900A9FA03 /* CRBeaconCacheTests.m */; };
+		60053CE51B16FE8C00A9FA03 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60053CE41B16FE8C00A9FA03 /* libOCMock.a */; };
+		60053CE71B17183F00A9FA03 /* CREventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60053CE61B17183F00A9FA03 /* CREventTests.m */; };
 		6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED311B1139EC0090C1A7 /* CRDefinitions.h */; };
 		6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3A1B1144B00090C1A7 /* CREvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -59,6 +61,8 @@
 		6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconStorage.m; sourceTree = "<group>"; };
 		6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSingleFileStorageTests.m; sourceTree = "<group>"; };
 		60053CDB1B16F95900A9FA03 /* CRBeaconCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconCacheTests.m; sourceTree = "<group>"; };
+		60053CE41B16FE8C00A9FA03 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = Vendor/libOCMock.a; sourceTree = "<group>"; };
+		60053CE61B17183F00A9FA03 /* CREventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventTests.m; sourceTree = "<group>"; };
 		6009ED311B1139EC0090C1A7 /* CRDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRDefinitions.h; sourceTree = "<group>"; };
 		6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconManagerDelegate.h; sourceTree = "<group>"; };
 		6009ED3A1B1144B00090C1A7 /* CREvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREvent.h; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6061DA6F1B111AF5002DC83B /* CarrotSDK.framework in Frameworks */,
+				60053CE51B16FE8C00A9FA03 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +189,7 @@
 			children = (
 				6061DA751B111AF5002DC83B /* CarrotSDKTests.m */,
 				60CF25B91B1456E30069053A /* CRBeaconTests.m */,
+				60053CE61B17183F00A9FA03 /* CREventTests.m */,
 				60CC3B081B1622B200229A55 /* CREventStorageTest.m */,
 				603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */,
 				6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */,
@@ -235,6 +241,7 @@
 		6061DA941B111E71002DC83B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				60053CE41B16FE8C00A9FA03 /* libOCMock.a */,
 				60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */,
 				6061DA921B111E61002DC83B /* CoreLocation.framework */,
 			);
@@ -387,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60053CE71B17183F00A9FA03 /* CREventTests.m in Sources */,
 				603CC7991B1492B40077A48C /* CRBeaconManagerTests.m in Sources */,
 				60053CDC1B16F95900A9FA03 /* CRBeaconCacheTests.m in Sources */,
 				6061DA761B111AF5002DC83B /* CarrotSDKTests.m in Sources */,
@@ -538,6 +546,7 @@
 		6061DA7D1B111AF5002DC83B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -551,6 +560,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",
+					/Volumes/OCMock,
+					3.1.2/iOS,
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -566,6 +577,7 @@
 		6061DA7E1B111AF5002DC83B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -575,6 +587,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",
+					/Volumes/OCMock,
+					3.1.2/iOS,
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

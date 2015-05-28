@@ -21,15 +21,19 @@
     CLBeacon *_beacon;
     CLBeacon *_beaconTwo;
     CRBeaconCache *_cache;
+    NSUUID *_uuid;
+    NSUUID *_uuidSecondInstance;
 }
 
 - (void)setUp {
     [super setUp];
     
-    _beacon = OCMPartialMock([[CLBeacon alloc] init]);
-    _beaconTwo = OCMPartialMock([[CLBeacon alloc] init]);
-    OCMStub([_beacon proximityUUID]).andReturn([[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"]);
-    OCMStub([_beaconTwo proximityUUID]).andReturn([[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"]);
+    _beacon = OCMClassMock([CLBeacon class]);
+    _beaconTwo = OCMClassMock([CLBeacon class]);
+    _uuid = [[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"];
+    _uuidSecondInstance = [[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"];
+    OCMStub([_beacon proximityUUID]).andReturn(_uuid);
+    OCMStub([_beaconTwo proximityUUID]).andReturn(_uuid);
     OCMStub([_beacon major]).andReturn(@111);
     OCMStub([_beaconTwo major]).andReturn(@111);
     OCMStub([_beacon minor]).andReturn(@1);
@@ -43,19 +47,41 @@
 }
 
 - (void)testAddCRBeacons {
-    [_cache addCRBeaconsFromBeacons:@[_beacon, _beaconTwo] forUUIDString:@"123e4567-e89b-12d3-a456-426655440000"];
+    [_cache addCRBeaconsFromRangedBeacons:@[_beacon, _beaconTwo] forUUID:_uuid];
+    
+    NSArray *result = [_cache CRbeaconsForUUID:_uuidSecondInstance];
+    XCTAssert(result.count == 2);
 }
 
 - (void)testCRBeaconsForUUID {
+    [_cache addCRBeaconsFromRangedBeacons:@[_beacon, _beaconTwo] forUUID:_uuid];
     
+    NSArray *result = [_cache CRbeaconsForUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440002"]];
+    XCTAssert(result.count == 0);
+    result = [_cache CRbeaconsForUUID:_uuidSecondInstance];
+    XCTAssert(result.count == 2);
 }
 
 - (void)testEnteredCRBeacons {
+    CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:_uuid identifier:@"test"];
     
+    NSArray *result = [_cache enteredCRBeaconsForRangedBeacons:@[_beacon, _beaconTwo] inRegion:region];
+    XCTAssert(result.count == 2);
 }
 
 - (void)testExitedCRBeacons {
+    CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:_uuid identifier:@"test"];
+    NSArray *result = [_cache enteredCRBeaconsForRangedBeacons:@[_beacon, _beaconTwo] inRegion:region];
+    XCTAssert(result.count == 2);
     
+    result = [_cache exitedCRBeaconsRangedBeacons:@[_beacon] inRegion:region];
+    XCTAssert(result.count == 0);
+    
+    [_cache addCRBeaconsFromRangedBeacons:@[_beacon, _beaconTwo] forUUID:_uuidSecondInstance];
+    result = [_cache CRbeaconsForUUID:_uuid];
+    XCTAssert(result.count == 2);
+    result = [_cache exitedCRBeaconsRangedBeacons:@[_beacon] inRegion:region];
+    XCTAssert(result.count == 1);
 }
 
 @end
