@@ -25,7 +25,7 @@
     [self setObject:[NSArray arrayWithArray:[self _CRBeaconArrayFromBeaconArray:beacons]] forKey:uuid.UUIDString];
 }
 
-- (NSArray *)CRbeaconsForUUID:(NSUUID *)uuid {
+- (NSArray *)CRBeaconsForUUID:(NSUUID *)uuid {
     NSArray *object = [self objectForKey:uuid.UUIDString];
     if (!object) {
         object = [NSArray array];
@@ -35,7 +35,7 @@
 
 - (NSArray *)enteredCRBeaconsForRangedBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
     NSArray *beaconsInRange = [self _CRBeaconArrayFromBeaconArray:beacons];
-    NSArray *prevBeaconsInRange = [NSArray arrayWithArray:[self CRbeaconsForUUID:region.proximityUUID]];
+    NSArray *prevBeaconsInRange = [NSArray arrayWithArray:[self CRBeaconsForUUID:region.proximityUUID]];
 
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT SELF IN %@", prevBeaconsInRange];
@@ -44,7 +44,7 @@
 
 - (NSArray *)exitedCRBeaconsRangedBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
     NSArray *beaconsInRange = [self _CRBeaconArrayFromBeaconArray:beacons];
-    NSArray *prevBeaconsInRange = [NSArray arrayWithArray:[self CRbeaconsForUUID:region.proximityUUID]];
+    NSArray *prevBeaconsInRange = [NSArray arrayWithArray:[self CRBeaconsForUUID:region.proximityUUID]];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT SELF IN %@", beaconsInRange];
     return [prevBeaconsInRange filteredArrayUsingPredicate:predicate];

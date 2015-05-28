@@ -49,16 +49,16 @@
 - (void)testAddCRBeacons {
     [_cache addCRBeaconsFromRangedBeacons:@[_beacon, _beaconTwo] forUUID:_uuid];
     
-    NSArray *result = [_cache CRbeaconsForUUID:_uuidSecondInstance];
+    NSArray *result = [_cache CRBeaconsForUUID:_uuidSecondInstance];
     XCTAssert(result.count == 2);
 }
 
 - (void)testCRBeaconsForUUID {
     [_cache addCRBeaconsFromRangedBeacons:@[_beacon, _beaconTwo] forUUID:_uuid];
     
-    NSArray *result = [_cache CRbeaconsForUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440002"]];
+    NSArray *result = [_cache CRBeaconsForUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440002"]];
     XCTAssert(result.count == 0);
-    result = [_cache CRbeaconsForUUID:_uuidSecondInstance];
+    result = [_cache CRBeaconsForUUID:_uuidSecondInstance];
     XCTAssert(result.count == 2);
 }
 
@@ -78,7 +78,7 @@
     XCTAssert(result.count == 0);
     
     [_cache addCRBeaconsFromRangedBeacons:@[_beacon, _beaconTwo] forUUID:_uuidSecondInstance];
-    result = [_cache CRbeaconsForUUID:_uuid];
+    result = [_cache CRBeaconsForUUID:_uuid];
     XCTAssert(result.count == 2);
     result = [_cache exitedCRBeaconsRangedBeacons:@[_beacon] inRegion:region];
     XCTAssert(result.count == 1);

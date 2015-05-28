@@ -100,7 +100,8 @@
 - (BOOL)locationServicesEnabled;
 
 /**
- Determines bluetooth state */
+ Determines bluetooth state 
+ */
 - (CRBluetoothState)bluetoothState;
 
 ///---------------------------------------------------------------------------------------
