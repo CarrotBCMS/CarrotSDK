@@ -20,6 +20,21 @@
 
 @interface CRSyncManager : NSObject
 
+/**
+ The delegate
+ */
+@property (assign) id<CRSyncManagerDelegate> delegate;
+
+/**
+ The event storage
+ */
+@property (readonly, strong) CREventStorage *eventStorage;
+
+/**
+ The beacon storage
+ */
+@property (readonly, strong) CRBeaconStorage *beaconStorage;
+
 ///---------------------------------------------------------------------------------------
 /// @name Lifecycle
 ///---------------------------------------------------------------------------------------
