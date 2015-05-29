@@ -83,6 +83,11 @@
 - (void)removeAllEventsForBeacon:(CRBeacon *)beacon;
 
 /**
+ Manually triggers a refresh.
+ */
+- (void)refresh:(CRBeacon *)beacon;
+
+/**
  Finds all events for a corresponding beacon. 
  Notification events are not included.
  
@@ -96,6 +101,5 @@
  @param beacon The beacon
  */
 - (NSArray *)findAllNotificationEventsForBeacon:(CRBeacon *)beacon;
-
 
 @end

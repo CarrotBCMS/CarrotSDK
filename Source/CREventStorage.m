@@ -100,6 +100,14 @@
     }
 }
 
+
+/**
+ Triggers a refresh.
+ */
+- (void)refresh:(CRBeacon *)beacon {
+    [self _save:beacon];
+}
+
 - (NSArray *)findAllEventsForBeacon:(CRBeacon *)beacon {
     NSMutableArray *allEvents = [[self _allEventsForBeacon:beacon] mutableCopy];
     [allEvents filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {

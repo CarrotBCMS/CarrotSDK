@@ -78,7 +78,11 @@
     [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CREvent *event = (CREvent *)obj;
         NSDate *lastTriggered = event.lastTriggered;
-        if ([lastTriggered timeIntervalSinceNow] + event.threshold <= 0) {
+        if (!lastTriggered || [lastTriggered timeIntervalSinceNow] + event.threshold <= 0) {
+            // Assign a new date for "lastTriggered" - We assume that those events will get triggered eventually.
+            event.lastTriggered = [NSDate date];
+            
+            // Add object to results
             [results addObject:event];
         }
     }];
