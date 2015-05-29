@@ -40,15 +40,25 @@
     // Setup events
     NSArray *arrayOne = [_eventStorage findAllEventsForBeacon:beacon];
     NSArray *arrayTwo = [_eventStorage findAllNotificationEventsForBeacon:beacon];
+    
     CRTextEvent *event = [[CRTextEvent alloc] initWithEventId:@1 threshold:30 lastTriggered:nil eventType:CREventTypeEnter];
+    event.text = @"This is a dummy text";
+    
     CRTextEvent *eventTwo = [[CRTextEvent alloc] initWithEventId:@2 threshold:30 lastTriggered:nil eventType:CREventTypeExit];
-    CRNotificationEvent *eventThree = [[CRNotificationEvent alloc] initWithEventId:@2 threshold:120 lastTriggered:nil eventType:CREventTypeEnter];
+    eventTwo.text = @"This is a dummy text. Number 2.";
+    
+    CRNotificationEvent *eventThree = [[CRNotificationEvent alloc] initWithEventId:@3 threshold:60 lastTriggered:nil eventType:CREventTypeEnter];
     eventThree.title = @"Willkommmen in Beacon 1";
     eventThree.message = @"Du bist hier genau richtig. Alles ist super!";
-    eventThree.payload = @"Custom data";
+    eventThree.payload = @"Custom data enter";
     
-    NSArray *events = @[];
-    NSArray *eventNotification = @[eventThree];
+    CRNotificationEvent *eventFour = [[CRNotificationEvent alloc] initWithEventId:@4 threshold:60 lastTriggered:nil eventType:CREventTypeExit];
+    eventFour.title = @"Tschüss aus Beacon 1";
+    eventFour.message = @"Schade dass du gehst!";
+    eventFour.payload = @"Custom data exit";
+    
+    NSArray *events = @[event, eventTwo];
+    NSArray *eventNotification = @[eventThree, eventFour];
     
     for (CREvent *aEvent in events) {
         if (![arrayOne containsObject:aEvent]) {
