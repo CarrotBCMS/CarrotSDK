@@ -78,7 +78,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"CRBeacon - UUID: %@ - Major: %@ - Minor: %@", _uuid, _major, _minor];
+    return [NSString stringWithFormat:@"CRBeacon - UUID: %@ - Major: %@ - Minor: %@ - Name: %@", _uuid, _major, _minor, _name];
 }
 
 @end

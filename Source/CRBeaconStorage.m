@@ -17,8 +17,6 @@
 
 - (CRBeacon *)findCRBeaconWithUUID: (NSUUID *)uuid major:(NSNumber *)major minor:(NSNumber *)minor {
     CRBeacon *beacon = [[CRBeacon alloc] initWithUUID:uuid major:major minor:minor];
-    CRBeacon *result = beacon;
-    /*
     CRBeacon *result = nil;
     
     NSArray *objects = [self objects];
@@ -27,7 +25,7 @@
             result = aBeacon;
             break;
         }
-    }*/
+    }
     
     return result;
 }
@@ -36,7 +34,7 @@
     NSMutableSet *uuids = [NSMutableSet set];
     NSArray *objects = [self objects];
     for (CRBeacon *aBeacon in objects) {
-        [uuids addObject:aBeacon.uuid];
+        [uuids addObject:[[CLBeaconRegion alloc] initWithProximityUUID:aBeacon.uuid identifier:aBeacon.uuid.UUIDString]];
     }
     
     return [uuids allObjects];

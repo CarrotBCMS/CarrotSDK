@@ -31,6 +31,10 @@
 
 - (void)setUp {
     [super setUp];
+    if ([_fileManager fileExistsAtPath:_eventStorage.basePath isDirectory:NULL]) {
+        [_fileManager removeItemAtPath:_eventStorage.basePath error:NULL];
+    }
+    
     _fileManager = [NSFileManager defaultManager];
     _basePath = [NSTemporaryDirectory() stringByAppendingString:@"data"];
     _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:_basePath];
@@ -43,7 +47,6 @@
     _event = [[CREvent alloc] initWithEventId:@1 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
     _eventTwo = [[CREvent alloc] initWithEventId:@12 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
     _notEvent = [[CRNotificationEvent alloc] initWithEventId:@122 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
-    
 }
 
 - (void)tearDown {

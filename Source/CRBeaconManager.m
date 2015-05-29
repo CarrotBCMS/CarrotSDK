@@ -37,7 +37,6 @@
     CLLocationManager *_locationManager;
     CBCentralManager *_bluetoothManager;
     NSArray *_regions;
-    BOOL _isActive;
     
     CRBeaconCache *_beaconCache;
     CRBeaconStorage *_beaconStorage;
@@ -155,6 +154,10 @@
 - (void)syncManagerDidFinishSyncing:(CRSyncManager *)syncManager {
     CRLog("Syncing process finished.");
     _isSyncing = NO;
+    
+    if (_monitoringIsActive) {
+        [self startMonitoringBeacons];
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,9 +209,7 @@
 }
 
 - (NSArray *)_regions {
-    // return _regions;
-    return @[[[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0003"] identifier:@"Sensorberg Test Beacons" ],
-             [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0001"] identifier:@"Sensorberg Test Beacons 2" ]];
+    return [_beaconStorage UUIDRegions];
 }
 
 - (void)_handleEnterBeacons:(NSArray *)beacons {

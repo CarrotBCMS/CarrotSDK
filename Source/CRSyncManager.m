@@ -9,6 +9,8 @@
 #import "CRSyncManager.h"
 #import "CREventStorage.h"
 #import "CRBeaconStorage.h"
+#import "CRBeacon.h"
+#import "CREvent.h"
 
 @implementation CRSyncManager
 
@@ -28,7 +30,11 @@
 }
 
 - (void)startSyncing {
-    
+    CRBeacon *beacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0003"] major:@2 minor:@560 name:@"Beacon 1"];
+    CRBeacon *beaconTwo = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0001"] major:@2 minor:@559 name:@"Beacon 2"];
+    CRBeacon *beaconThree = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0003"] major:@2 minor:@558 name:@"Beacon 3"];
+    // Setup beacons
+    [_beaconStorage addObjectsFromArray:@[beacon, beaconTwo, beaconThree]];
 }
 
 - (void)stopSyncing {

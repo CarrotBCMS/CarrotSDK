@@ -25,13 +25,8 @@
     NSURL *urlToBMS = [NSURL URLWithString:@"http://test.com"];
     _beaconManager = [[CRBeaconManager alloc] initWithDelegate:self url:urlToBMS appKey:@"123456"];
     
-    NSError *error;
-    [_beaconManager startSyncingProcessWithError:&error];
+    [_beaconManager startSyncing];
     [_beaconManager startMonitoringBeacons];
-    
-    if (error) {
-        NSLog(@"Error starting sync process: %@", error.localizedDescription);
-    }
     
     return YES;
 }
