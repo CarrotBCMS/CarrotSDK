@@ -5,6 +5,6 @@
       location = "group:CarrotSDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Example/Example.xcodeproj">
+      location = "group:/Users/bfolder/Workspaces/Xcode/Lab/CarrotSDK/Example/Example.xcodeproj">
    </FileRef>
 </Workspace>

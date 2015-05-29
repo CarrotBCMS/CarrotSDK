@@ -33,8 +33,10 @@
 - (NSArray *)UUIDRegions {
     NSMutableSet *uuids = [NSMutableSet set];
     NSArray *objects = [self objects];
+    CLBeaconRegion *region;
     for (CRBeacon *aBeacon in objects) {
-        [uuids addObject:[[CLBeaconRegion alloc] initWithProximityUUID:aBeacon.uuid identifier:aBeacon.uuid.UUIDString]];
+        region = [[CLBeaconRegion alloc] initWithProximityUUID:aBeacon.uuid identifier:aBeacon.uuid.UUIDString];
+        [uuids addObject:region];
     }
     
     return [uuids allObjects];

@@ -133,6 +133,14 @@
     return (CRBluetoothState)_bluetoothManager.state;
 }
 
+- (void)grantNotficationPermission {
+    UIApplication *application = [UIApplication sharedApplication];
+    [application registerUserNotificationSettings:[UIUserNotificationSettings
+                                                   settingsForTypes:
+                                                   UIUserNotificationTypeAlert|UIUserNotificationTypeSound
+                                                   categories:nil]];
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Syncing & CRSyncManagerDelegate

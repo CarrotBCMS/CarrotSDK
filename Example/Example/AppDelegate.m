@@ -25,6 +25,7 @@
     NSURL *urlToBMS = [NSURL URLWithString:@"http://test.com"];
     _beaconManager = [[CRBeaconManager alloc] initWithDelegate:self url:urlToBMS appKey:@"123456"];
     
+    [_beaconManager grantNotficationPermission];
     [_beaconManager startSyncing];
     [_beaconManager startMonitoringBeacons];
     

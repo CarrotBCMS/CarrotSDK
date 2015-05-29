@@ -11,6 +11,7 @@
 #import "CRBeaconStorage.h"
 #import "CRBeacon.h"
 #import "CRTextEvent.h"
+#import "CRNotificationEvent.h"
 
 @implementation CRSyncManager
 
@@ -39,10 +40,20 @@
     // Setup events
     NSArray *arrayOne = [_eventStorage findAllEventsForBeacon:beacon];
     CRTextEvent *event = [[CRTextEvent alloc] initWithEventId:@1 threshold:30 lastTriggered:nil eventType:CREventTypeEnter];
+    CRTextEvent *eventTwo = [[CRTextEvent alloc] initWithEventId:@2 threshold:30 lastTriggered:nil eventType:CREventTypeExit];
+    CRNotificationEvent *eventThree = [[CRNotificationEvent alloc] initWithEventId:@2 threshold:120 lastTriggered:nil eventType:CREventTypeEnter];
+    eventThree.title = @"Willkommmen in Beacon 1";
+    eventThree.message = @"Du bist hier genau richtig. Alles ist super!";
+    eventThree.payload = @"Custom data";
     
-    if (![arrayOne containsObject:event]) {
-        [_eventStorage addEvent:event forBeacon:beacon];
+    NSArray *events = @[event, eventTwo, eventThree];
+    
+    for (CREvent *aEvent in events) {
+        if (![arrayOne containsObject:aEvent]) {
+            [_eventStorage addEvent:aEvent forBeacon:beacon];
+        }
     }
+    
 }
 
 - (void)stopSyncing {

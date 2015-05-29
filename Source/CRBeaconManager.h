@@ -99,6 +99,11 @@
  */
 - (CRBluetoothState)bluetoothState;
 
+/**
+ Asking for permission to send local notifications.
+ */
+- (void)grantNotficationPermission;
+
 ///---------------------------------------------------------------------------------------
 /// @name Syncing
 ///---------------------------------------------------------------------------------------
