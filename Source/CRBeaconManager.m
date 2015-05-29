@@ -135,11 +135,13 @@
 - (void)startSyncing {
     CRLog("Start syncing process.");
     _isSyncing = YES;
+    [_syncManager startSyncing];
 }
 
 - (void)stopSyncing {
     CRLog("Stop syncing process.");
     _isSyncing = NO;
+    [_syncManager stopSyncing];
 }
 
 - (void)syncManager:(CRSyncManager *)syncManager didFailWithError:(NSError *)error {
