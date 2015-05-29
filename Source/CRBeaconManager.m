@@ -76,6 +76,12 @@
         return;
     }
     
+    // Stop ranging and monitoring beacons from previous sessions
+    [_locationManager.rangedRegions enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        [_locationManager stopMonitoringForRegion:(CLBeaconRegion *)obj];
+        [_locationManager stopRangingBeaconsInRegion:(CLBeaconRegion *)obj];
+    }];
+    
     CRLog("Start monitoring beacons.");
     [[self _regions] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CRLog("Start monitoring region: %@", obj);
