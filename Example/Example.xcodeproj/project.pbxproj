@@ -90,10 +90,10 @@
 		603CC79A1B14A9FA0077A48C = {
 			isa = PBXGroup;
 			children = (
-				60CC3B041B15FC4400229A55 /* CoreBluetooth.framework */,
 				603CC7A51B14A9FA0077A48C /* Example */,
 				603CC7C21B14A9FA0077A48C /* ExampleTests */,
 				603CC7A41B14A9FA0077A48C /* Products */,
+				60CC3B041B15FC4400229A55 /* CoreBluetooth.framework */,
 			);
 			sourceTree = "<group>";
 		};

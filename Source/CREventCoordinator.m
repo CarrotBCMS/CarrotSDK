@@ -15,6 +15,8 @@
 
 @interface CREventCoordinator ()
 
+- (NSArray *)_updateAndReturnPermittedEvents:(NSArray*)events beacon:(CRBeacon *)beacon;
+
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,22 +44,22 @@
 
 - (NSArray *)validEnterEventsForBeacon:(CRBeacon *)beacon {
     NSArray *allEvents = [_storage findAllEnterEventsForBeacon:beacon];
-    return [self _filterPermittedEvents:allEvents];
+    return [self _updateAndReturnPermittedEvents:allEvents beacon:beacon];
 }
 
 - (NSArray *)validExitEventsForBeacon:(CRBeacon *)beacon {
     NSArray *allEvents = [_storage findAllExitEventsForBeacon:beacon];
-    return [self _filterPermittedEvents:allEvents];
+    return [self _updateAndReturnPermittedEvents:allEvents beacon:beacon];
 }
 
 - (NSArray *)validEnterNotificationEventsForBeacon:(CRBeacon *)beacon {
     NSArray *allEvents = [_storage findAllNotificationEnterEventsForBeacon:beacon];
-    return [self _filterPermittedEvents:allEvents];
+    return [self _updateAndReturnPermittedEvents:allEvents beacon:beacon];
 }
 
 - (NSArray *)validExitNotificationEventsForBeacon:(CRBeacon *)beacon {
     NSArray *allEvents = [_storage findAllNotificationExitEventsForBeacon:beacon];
-    return [self _filterPermittedEvents:allEvents];
+    return [self _updateAndReturnPermittedEvents:allEvents beacon:beacon];
 }
 
 - (void)sendLocalNotificationWithEvent:(CRNotificationEvent *)event {
@@ -73,7 +75,7 @@
 
 #pragma mark - Private
 
-- (NSArray *)_filterPermittedEvents:(NSArray*)events {
+- (NSArray *)_updateAndReturnPermittedEvents:(NSArray*)events beacon:(CRBeacon *)beacon {
     NSMutableArray *results = [NSMutableArray array];
     [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CREvent *event = (CREvent *)obj;
@@ -81,6 +83,7 @@
         if (!lastTriggered || [lastTriggered timeIntervalSinceNow] + event.threshold <= 0) {
             // Assign a new date for "lastTriggered" - We assume that those events will get triggered eventually.
             event.lastTriggered = [NSDate date];
+            [_storage refresh:beacon];
             
             // Add object to results
             [results addObject:event];

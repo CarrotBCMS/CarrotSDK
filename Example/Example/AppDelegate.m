@@ -58,4 +58,12 @@
     NSLog(@"Exited radius (Example): %@", beacon);
 }
 
+- (void)manager:(CRBeaconManager *)beaconManager didFireNotification:(CRNotificationEvent *)notification beacon:(CRBeacon *)beacon {
+    NSLog(@"Fired notification: %@ - Beacon: %@", notification, beacon);
+}
+
+- (void)manager:(CRBeaconManager *)beaconManager shouldPresentEvents:(NSArray *)events beacon:(CRBeacon *)beacon {
+    NSLog(@"Should present events: %@ - Beacon: %@", events, beacon);
+}
+
 @end
