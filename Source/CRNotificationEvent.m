@@ -8,8 +8,27 @@
 
 #import "CRNotificationEvent.h"
 
-@implementation CRNotificationEvent
+@implementation CRNotificationEvent {
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Initialising
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    _title = [coder decodeObjectOfClass:[NSNumber class] forKey:@"CRNotificationEvent_title"];
+    _message = [coder decodeObjectOfClass:[NSNumber class] forKey:@"CRNotificationEvent_message"];
+    _payload = [coder decodeObjectOfClass:[NSNumber class] forKey:@"CRNotificationEvent_payload"];
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:_title forKey:@"CRNotificationEvent_title"];
+    [aCoder encodeObject:_message forKey:@"CRNotificationEvent_message"];
+    [aCoder encodeObject:_payload forKey:@"CRNotificationEvent_payload"];
+}
 
 @end

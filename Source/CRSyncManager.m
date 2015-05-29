@@ -39,6 +39,7 @@
     
     // Setup events
     NSArray *arrayOne = [_eventStorage findAllEventsForBeacon:beacon];
+    NSArray *arrayTwo = [_eventStorage findAllNotificationEventsForBeacon:beacon];
     CRTextEvent *event = [[CRTextEvent alloc] initWithEventId:@1 threshold:30 lastTriggered:nil eventType:CREventTypeEnter];
     CRTextEvent *eventTwo = [[CRTextEvent alloc] initWithEventId:@2 threshold:30 lastTriggered:nil eventType:CREventTypeExit];
     CRNotificationEvent *eventThree = [[CRNotificationEvent alloc] initWithEventId:@2 threshold:120 lastTriggered:nil eventType:CREventTypeEnter];
@@ -46,7 +47,8 @@
     eventThree.message = @"Du bist hier genau richtig. Alles ist super!";
     eventThree.payload = @"Custom data";
     
-    NSArray *events = @[event, eventTwo, eventThree];
+    NSArray *events = @[];
+    NSArray *eventNotification = @[eventThree];
     
     for (CREvent *aEvent in events) {
         if (![arrayOne containsObject:aEvent]) {
@@ -54,6 +56,11 @@
         }
     }
     
+    for (CRNotificationEvent *aEvent in eventNotification) {
+        if (![arrayTwo containsObject:aEvent]) {
+            [_eventStorage addEvent:aEvent forBeacon:beacon];
+        }
+    }
 }
 
 - (void)stopSyncing {

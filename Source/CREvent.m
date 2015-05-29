@@ -32,18 +32,18 @@
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-    self = [self initWithEventId:[coder decodeObjectOfClass:[NSNumber class] forKey:@"eventId"]
-                       threshold:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"threshold"]).doubleValue
-                   lastTriggered:[coder decodeObjectOfClass:[NSDate class] forKey:@"lastTriggered"]
-                       eventType:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"eventType"]).integerValue];
+    self = [self initWithEventId:[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_eventId"]
+                       threshold:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_threshold"]).doubleValue
+                   lastTriggered:[coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_lastTriggered"]
+                       eventType:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_eventType"]).integerValue];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:_eventId forKey:@"eventId"];
-    [aCoder encodeObject:[NSNumber numberWithDouble:_threshold] forKey:@"threshold"];
-    [aCoder encodeObject:_lastTriggered forKey:@"lastTriggered"];
-    [aCoder encodeObject:[NSNumber numberWithInteger:_eventType] forKey:@"eventType"];
+    [aCoder encodeObject:_eventId forKey:@"CREvent_eventId"];
+    [aCoder encodeObject:[NSNumber numberWithDouble:_threshold] forKey:@"CREvent_threshold"];
+    [aCoder encodeObject:_lastTriggered forKey:@"CREvent_lastTriggered"];
+    [aCoder encodeObject:[NSNumber numberWithInteger:_eventType] forKey:@"CREvent_eventType"];
 }
 
 + (BOOL)supportsSecureCoding {

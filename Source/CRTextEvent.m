@@ -8,10 +8,23 @@
 
 #import "CRTextEvent.h"
 
-@implementation CRTextEvent
+@implementation CRTextEvent {
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Initialising
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    _text = [coder decodeObjectOfClass:[NSNumber class] forKey:@"CRTextEvent_text"];
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:_text forKey:@"CRTextEvent_text"];
+}
 
 @end
