@@ -37,8 +37,12 @@
     [_beaconStorage addObjectsFromArray:@[beacon, beaconTwo, beaconThree]];
     
     // Setup events
-    CRTextEvent *event = [[CRTextEvent alloc] initWithEventId:@1 threshold:0 lastTriggered:nil eventType:CREventTypeEnter];
-    [_eventStorage addEvent:event forBeacon:beacon];
+    NSArray *arrayOne = [_eventStorage findAllEventsForBeacon:beacon];
+    CRTextEvent *event = [[CRTextEvent alloc] initWithEventId:@1 threshold:30 lastTriggered:nil eventType:CREventTypeEnter];
+    
+    if (![arrayOne containsObject:event]) {
+        [_eventStorage addEvent:event forBeacon:beacon];
+    }
 }
 
 - (void)stopSyncing {
