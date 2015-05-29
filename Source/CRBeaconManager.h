@@ -34,11 +34,6 @@
  */
 @property (readonly) BOOL monitoringIsActive;
 
-/**
- Whether syncing is active or not
- */
-@property (readonly) BOOL syncingIsActive;
-
 ///---------------------------------------------------------------------------------------
 /// @name Lifecycle
 ///---------------------------------------------------------------------------------------
@@ -109,15 +104,18 @@
 ///---------------------------------------------------------------------------------------
 
 /**
- Connect to CarrotBMS and start syncing beacons and events.
- 
- @param error Error pointer
+ Whether manager is currently syncing with the BMS.
  */
-- (BOOL)startSyncingProcessWithError:(NSError * __autoreleasing *)error;
+@property (readonly) BOOL isSyncing;
 
 /**
- Stop syncing beacon data.
+ Connect to CarrotBMS and start syncing beacons and events.
  */
-- (BOOL)cancelSyncingProcess;
+- (void)startSyncing;
+
+/**
+ Cancecel active sync process beacon data.
+ */
+- (void)stopSyncing;
 
 @end

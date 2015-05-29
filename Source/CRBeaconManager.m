@@ -15,8 +15,9 @@
 #import "CRBeaconStorage.h"
 #import "CREventStorage.h"
 #import "CREventCoordinator.h"
+#import "CRSyncManager.h"
 
-@interface CRBeaconManager () <CLLocationManagerDelegate, CBCentralManagerDelegate>
+@interface CRBeaconManager () <CLLocationManagerDelegate, CBCentralManagerDelegate, CRSyncManagerDelegate>
 
 - (void)_setup;
 - (NSString *)_stringForState:(CLRegionState)state;
@@ -42,6 +43,7 @@
     CRBeaconStorage *_beaconStorage;
     CREventStorage *_eventStorage;
     CREventCoordinator *_eventCoordinator;
+    CRSyncManager *_syncManager;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,7 +60,7 @@
         _appKey = key;
         _delegate = delegate;
         _monitoringIsActive = NO;
-        _syncingIsActive = NO;
+        _isSyncing = NO;
         [self _setup];
     }
     
@@ -130,17 +132,29 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Syncing
+#pragma mark - Syncing & CRSyncManagerDelegate
 
-- (BOOL)startSyncingProcessWithError:(NSError * __autoreleasing *)error {
+- (void)startSyncing {
     CRLog("Start syncing process.");
-    _syncingIsActive = YES;
-    return YES;
+    _isSyncing = YES;
 }
 
-- (BOOL)cancelSyncingProcess {
+- (void)stopSyncing {
     CRLog("Stop syncing process.");
-    return YES;
+    _isSyncing = NO;
+}
+
+- (void)syncManager:(CRSyncManager *)syncManager didFailWithError:(NSError *)error {
+    CRLog("Syncing process failed with error: %@", error);
+    
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:syncingDidFailWithError:)]) {
+        [_delegate manager:self syncingDidFailWithError:error];
+    }
+}
+
+- (void)syncManagerDidFinishSyncing:(CRSyncManager *)syncManager {
+    CRLog("Syncing process finished.");
+    _isSyncing = NO;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,6 +167,9 @@
     _beaconStorage = [[CRBeaconStorage alloc] initWithStoragePath:CRBeaconDataFilePath];
     _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:CRBeaconDataBasePath];
     _eventCoordinator = [[CREventCoordinator alloc] initWithEventStorage:_eventStorage];
+    
+    _syncManager = [[CRSyncManager alloc] initWithDelegate:self eventStorage:_eventStorage
+                                             beaconStorage:_beaconStorage];
     
     _bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self
                                                              queue:dispatch_get_main_queue()
