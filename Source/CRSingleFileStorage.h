@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  `CRSingleFileStorage` is a class to store (serialize) abstract objects in a single file.
