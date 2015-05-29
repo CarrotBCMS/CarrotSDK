@@ -17,7 +17,7 @@
 @property (readonly, strong) NSNumber *eventId;
 
 /**
- The threshold in milliseconds.
+ The threshold in seconds.
  */
 @property (readonly, assign) NSTimeInterval threshold;
 
