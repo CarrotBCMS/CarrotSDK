@@ -15,6 +15,10 @@
 
 @implementation CRSyncManager
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Initialising
+
 - (instancetype)initWithDelegate:(id<CRSyncManagerDelegate>)delegate
                     eventStorage:(CREventStorage*)eventStorage
                    beaconStorage:(CRBeaconStorage *)beaconStorage
@@ -29,6 +33,10 @@
     
     return self;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Syncing
 
 - (void)startSyncing {
     // Setup beacons
