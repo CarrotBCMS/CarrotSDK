@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#define BASE_COLOR [UIColor greenColor]
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

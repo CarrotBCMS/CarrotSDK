@@ -1,5 +1,5 @@
 //
-//  MasterViewController.h
+//  BeaconsViewController.h
 //  Example
 //
 //  Created by Heiko Dreyer on 05/26/15.
@@ -11,7 +11,7 @@
 
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController
+@interface BeaconsViewController : UITableViewController <CRBeaconManagerDelegate>
 
 @property (strong, nonatomic) CRBeaconManager *beaconManager;
 

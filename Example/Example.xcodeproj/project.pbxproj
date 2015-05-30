@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		603CC7A91B14A9FA0077A48C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7A81B14A9FA0077A48C /* main.m */; };
 		603CC7AC1B14A9FA0077A48C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7AB1B14A9FA0077A48C /* AppDelegate.m */; };
-		603CC7AF1B14A9FA0077A48C /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7AE1B14A9FA0077A48C /* MasterViewController.m */; };
+		603CC7AF1B14A9FA0077A48C /* BeaconsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7AE1B14A9FA0077A48C /* BeaconsViewController.m */; };
 		603CC7B51B14A9FA0077A48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 603CC7B31B14A9FA0077A48C /* Main.storyboard */; };
 		603CC7B71B14A9FA0077A48C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 603CC7B61B14A9FA0077A48C /* Images.xcassets */; };
 		603CC7BA1B14A9FA0077A48C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 603CC7B81B14A9FA0077A48C /* LaunchScreen.xib */; };
@@ -51,8 +51,8 @@
 		603CC7A81B14A9FA0077A48C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		603CC7AA1B14A9FA0077A48C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		603CC7AB1B14A9FA0077A48C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		603CC7AD1B14A9FA0077A48C /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		603CC7AE1B14A9FA0077A48C /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		603CC7AD1B14A9FA0077A48C /* BeaconsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeaconsViewController.h; sourceTree = "<group>"; };
+		603CC7AE1B14A9FA0077A48C /* BeaconsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeaconsViewController.m; sourceTree = "<group>"; };
 		603CC7B41B14A9FA0077A48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		603CC7B61B14A9FA0077A48C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		603CC7B91B14A9FA0077A48C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -111,8 +111,8 @@
 			children = (
 				603CC7AA1B14A9FA0077A48C /* AppDelegate.h */,
 				603CC7AB1B14A9FA0077A48C /* AppDelegate.m */,
-				603CC7AD1B14A9FA0077A48C /* MasterViewController.h */,
-				603CC7AE1B14A9FA0077A48C /* MasterViewController.m */,
+				603CC7AD1B14A9FA0077A48C /* BeaconsViewController.h */,
+				603CC7AE1B14A9FA0077A48C /* BeaconsViewController.m */,
 				603CC7B31B14A9FA0077A48C /* Main.storyboard */,
 				603CC7B81B14A9FA0077A48C /* LaunchScreen.xib */,
 				603CC7B61B14A9FA0077A48C /* Images.xcassets */,
@@ -265,7 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				603CC7AC1B14A9FA0077A48C /* AppDelegate.m in Sources */,
-				603CC7AF1B14A9FA0077A48C /* MasterViewController.m in Sources */,
+				603CC7AF1B14A9FA0077A48C /* BeaconsViewController.m in Sources */,
 				603CC7A91B14A9FA0077A48C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
