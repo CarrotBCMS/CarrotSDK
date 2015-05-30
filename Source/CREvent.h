@@ -14,7 +14,7 @@
 /**
  Unique event id.
  */
-@property (readonly, strong) NSNumber *eventId;
+@property (readonly, assign) NSUInteger eventId;
 
 /**
  The threshold in seconds.
@@ -43,7 +43,7 @@
  @param lastTriggered Last time triggered
  @param eventType Event type
  */
-- (instancetype)initWithEventId:(NSNumber *)eventId
+- (instancetype)initWithEventId:(NSUInteger)eventId
                       threshold:(NSTimeInterval)threshold
                   lastTriggered:(NSDate *)lastTriggered
                       eventType:(CREventType)eventType;

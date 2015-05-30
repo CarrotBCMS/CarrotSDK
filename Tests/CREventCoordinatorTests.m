@@ -37,17 +37,17 @@
                                        major:@1
                                        minor:@2];
 
-    _event = [[CREvent alloc] initWithEventId:@1
+    _event = [[CREvent alloc] initWithEventId:1
                                     threshold:1000
                                 lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-2000]
                                     eventType:CREventTypeEnter];
     
-    _eventTwo = [[CREvent alloc] initWithEventId:@2
+    _eventTwo = [[CREvent alloc] initWithEventId:2
                                        threshold:1000
                                    lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-1000]
                                        eventType:CREventTypeExit];
     
-    _notEvent = [[CRNotificationEvent alloc] initWithEventId:@12
+    _notEvent = [[CRNotificationEvent alloc] initWithEventId:12
                                                    threshold:1000
                                                lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-4000]
                                                    eventType:CREventTypeEnter];
@@ -55,7 +55,7 @@
     _notEvent.title = @"testtitle";
     _notEvent.payload = @"testpayload";
     
-    _notEventTwo = [[CRNotificationEvent alloc] initWithEventId:@12
+    _notEventTwo = [[CRNotificationEvent alloc] initWithEventId:12
                                                       threshold:1000
                                                   lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-5000]
                                                       eventType:CREventTypeExit];

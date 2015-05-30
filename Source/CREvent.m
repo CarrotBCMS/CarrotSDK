@@ -15,7 +15,7 @@
 
 #pragma mark - Initialising & NSCoding
 
-- (instancetype)initWithEventId:(NSNumber *)eventId
+- (instancetype)initWithEventId:(NSUInteger)eventId
                       threshold:(NSTimeInterval)threshold
                   lastTriggered:(NSDate *)lastTriggered
                       eventType:(CREventType)eventType;
@@ -32,7 +32,7 @@
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-    self = [self initWithEventId:[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_eventId"]
+    self = [self initWithEventId:[[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_eventId"] integerValue]
                        threshold:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_threshold"]).doubleValue
                    lastTriggered:[coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_lastTriggered"]
                        eventType:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_eventType"]).integerValue];
@@ -40,10 +40,10 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:_eventId forKey:@"CREvent_eventId"];
-    [aCoder encodeObject:[NSNumber numberWithDouble:_threshold] forKey:@"CREvent_threshold"];
+    [aCoder encodeObject:@(_eventId) forKey:@"CREvent_eventId"];
+    [aCoder encodeObject:@(_threshold) forKey:@"CREvent_threshold"];
     [aCoder encodeObject:_lastTriggered forKey:@"CREvent_lastTriggered"];
-    [aCoder encodeObject:[NSNumber numberWithInteger:_eventType] forKey:@"CREvent_eventType"];
+    [aCoder encodeObject:@(_eventType) forKey:@"CREvent_eventType"];
 }
 
 + (BOOL)supportsSecureCoding {
@@ -56,7 +56,7 @@
 
 - (BOOL)isEqual:(id)object {
     CREvent *aObject = (CREvent *)object;
-    if (!aObject || ![self.eventId isEqualToNumber:aObject.eventId])
+    if (!aObject || self.eventId != aObject.eventId)
     {
         return NO;
     }

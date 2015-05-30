@@ -26,9 +26,9 @@
 }
 
 - (void)testIsEquality {
-    CREvent *event = [[CREvent alloc] initWithEventId:@1 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
-    CREvent *eventTwo = [[CREvent alloc] initWithEventId:@1 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
-    CREvent *eventThree = [[CREvent alloc] initWithEventId:@3 threshold:1000 lastTriggered:nil eventType:CREventTypeExit];
+    CREvent *event = [[CREvent alloc] initWithEventId:1 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
+    CREvent *eventTwo = [[CREvent alloc] initWithEventId:1 threshold:1000 lastTriggered:nil eventType:CREventTypeEnter];
+    CREvent *eventThree = [[CREvent alloc] initWithEventId:3 threshold:1000 lastTriggered:nil eventType:CREventTypeExit];
     
     XCTAssertEqualObjects(event, eventTwo);
     XCTAssertNotEqualObjects(event, eventThree);
