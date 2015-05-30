@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  Example
 //
-//  Created by Heiko Dreyer on 26.05.15.
+//  Created by Heiko Dreyer on 05/26/15.
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
@@ -22,6 +22,10 @@
 #pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Setup visuals
+    _window.tintColor = [UIColor orangeColor];
+    
+    // Setup CarrotSDK
     NSURL *urlToBMS = [NSURL URLWithString:@"http://test.com"];
     _beaconManager = [[CRBeaconManager alloc] initWithDelegate:self url:urlToBMS appKey:@"123456"];
     
@@ -32,39 +36,24 @@
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-}
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - CRBeaconManagerDelegate
 
 - (void)manager:(CRBeaconManager *)beaconManager didEnterBeaconRadius:(CRBeacon *)beacon {
-    NSLog(@"Entered radius (Example): %@", beacon);
+    NSLog(@"CarrotExample: Entered radius (Example): %@", beacon);
 }
 
 - (void)manager:(CRBeaconManager *)beaconManager didExitBeaconRadius:(CRBeacon *)beacon {
-    NSLog(@"Exited radius (Example): %@", beacon);
+    NSLog(@"CarrotExample: Exited radius (Example): %@", beacon);
 }
 
 - (void)manager:(CRBeaconManager *)beaconManager didFireNotification:(CRNotificationEvent *)notification beacon:(CRBeacon *)beacon {
-    NSLog(@"Fired notification: %@ - Beacon: %@", notification, beacon);
+    NSLog(@"CarrotExample: Fired notification: %@ - Beacon: %@", notification, beacon);
 }
 
 - (void)manager:(CRBeaconManager *)beaconManager shouldPresentEvents:(NSArray *)events beacon:(CRBeacon *)beacon {
-    NSLog(@"Should present events: %@ - Beacon: %@", events, beacon);
+    NSLog(@"CarrotExample: Should present events: %@ - Beacon: %@", events, beacon);
 }
 
 @end

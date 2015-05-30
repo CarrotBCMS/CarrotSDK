@@ -114,8 +114,8 @@
 				603CC7AD1B14A9FA0077A48C /* MasterViewController.h */,
 				603CC7AE1B14A9FA0077A48C /* MasterViewController.m */,
 				603CC7B31B14A9FA0077A48C /* Main.storyboard */,
-				603CC7B61B14A9FA0077A48C /* Images.xcassets */,
 				603CC7B81B14A9FA0077A48C /* LaunchScreen.xib */,
+				603CC7B61B14A9FA0077A48C /* Images.xcassets */,
 				603CC7DD1B14AA6B0077A48C /* Frameworks */,
 				603CC7A61B14A9FA0077A48C /* Supporting Files */,
 			);
