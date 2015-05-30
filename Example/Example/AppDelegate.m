@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "BeaconsViewController.h"
+#import "BeaconViewController.h"
 #import <CarrotSDK/CarrotSDK.h>
 
 @interface AppDelegate ()
@@ -23,7 +23,7 @@
 #pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    _window.tintColor = [UIColor orangeColor];
+    _window.tintColor = BASE_COLOR;
     
     return YES;
 }

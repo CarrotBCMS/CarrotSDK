@@ -11,7 +11,7 @@
 
 @class DetailViewController;
 
-@interface BeaconsViewController : UITableViewController <CRBeaconManagerDelegate>
+@interface BeaconViewController : UITableViewController <CRBeaconManagerDelegate>
 
 @property (strong, nonatomic) CRBeaconManager *beaconManager;
 

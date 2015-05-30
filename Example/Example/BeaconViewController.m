@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
-#import "BeaconsViewController.h"
+#import "BeaconViewController.h"
 #import "AppDelegate.h"
 
-@interface BeaconsViewController ()
+@interface BeaconViewController ()
 @property NSMutableArray *objects;
 @end
 
-@implementation BeaconsViewController {
+@implementation BeaconViewController {
     UILabel *backgroundLabel;
 }
 
@@ -44,7 +44,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+    NSInteger count = self.objects.count;
+    backgroundLabel.hidden = count != 0;
+    
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

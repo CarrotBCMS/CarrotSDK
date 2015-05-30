@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define BASE_COLOR [UIColor greenColor]
+#define BASE_COLOR [UIColor orangeColor]
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
