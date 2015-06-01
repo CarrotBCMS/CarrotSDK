@@ -27,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _objects = [NSMutableArray array];
     [self setupVisuals];
     [self setupCarrotSDK];
 }
@@ -55,7 +56,7 @@
 
     CRBeacon *beacon = self.objects[indexPath.row];
     cell.textLabel.text = beacon.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"UUID: %@  Major: %@   Minor: %@", beacon.uuid.UUIDString, beacon.major, beacon.minor];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Major: %@ - Minor: %@ - UUID: %@", beacon.major, beacon.minor, beacon.uuid.UUIDString];
     return cell;
 }
 
