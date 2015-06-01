@@ -236,6 +236,7 @@
         // Find concrete CRBeacon instance in storage
         // Only call delegate if a CRBeacon was found
         beacon = [_beaconStorage findCRBeaconWithUUID:beacon.uuid major:beacon.major minor:beacon.minor];
+        beacon.beacon = ((CRBeacon *)obj).beacon;
         
         if (beacon) {
             if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didEnterBeaconRadius:)]) {
@@ -262,6 +263,7 @@
         // Find concrete CRBeacon instance in storage
         // Only call delegate if a CRBeacon was foundon instance from storage
         beacon = [_beaconStorage findCRBeaconWithUUID:beacon.uuid major:beacon.major minor:beacon.minor];
+        beacon.beacon = ((CRBeacon *)obj).beacon;
         
         if (beacon) {
             if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitBeaconRadius:)]) {

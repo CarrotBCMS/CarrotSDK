@@ -80,7 +80,7 @@
 - (void)manager:(CRBeaconManager *)beaconManager didExitBeaconRadius:(CRBeacon *)beacon {
     NSLog(@"CarrotExample: Exited radius (Example): %@", beacon);
     
-    if (![_objects containsObject:beacon]) {
+    if ([_objects containsObject:beacon]) {
         [_objects removeObject:beacon];
         [self.tableView reloadData];
     }
