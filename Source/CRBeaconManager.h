@@ -66,7 +66,7 @@
 - (void)stopMonitoringBeacons;
 
 ///---------------------------------------------------------------------------------------
-/// @name Syncing
+/// @name Capabilities & Permissions
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -85,14 +85,14 @@
 - (BOOL)isMonitoringAvailable;
 
 /**
- Determines whether the background fetching is activated.
- */
-- (BOOL)isBackgroundFetchingAvailable;
-
-/**
  Determines whether the user has location services enabled.
  */
 - (BOOL)locationServicesEnabled;
+
+/**
+ Determines whether permissions are granted.
+ */
+- (BOOL)notificationsEnabled;
 
 /**
  Determines bluetooth state 

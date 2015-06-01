@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CarrotSDK/CarrotSDK.h>
 
 @interface StatusViewController : UITableViewController
+
+@property (strong, nonatomic) CRBeaconManager *beaconManager;
 
 @end

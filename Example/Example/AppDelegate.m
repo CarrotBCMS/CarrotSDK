@@ -7,16 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "BeaconViewController.h"
 #import <CarrotSDK/CarrotSDK.h>
 
 @interface AppDelegate ()
 
 @end
 
-@implementation AppDelegate {
-    CRBeaconManager *_beaconManager;
-}
+@implementation AppDelegate
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -24,6 +21,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     _window.tintColor = BASE_COLOR;
+    
+    UITabBarController *tabBarController = (UITabBarController *)_window.rootViewController;
+    BeaconViewController *beaconViewController = (BeaconViewController *)((UINavigationController *)tabBarController.viewControllers[0]).topViewController;
+    StatusViewController *statusViewController = (StatusViewController *)((UINavigationController *)tabBarController.viewControllers[1]).topViewController;
+
+    
+    NSURL *urlToBMS = [NSURL URLWithString:@"http://test.com"];
+    CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:@"123456"];
+    beaconViewController.beaconManager = beaconManager;
+    statusViewController.beaconManager = beaconManager;
     
     return YES;
 }

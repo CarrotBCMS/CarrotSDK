@@ -125,8 +125,9 @@
     return [CLLocationManager locationServicesEnabled];
 }
 
-- (BOOL)isBackgroundFetchingAvailable {
-    return [UIApplication sharedApplication].backgroundRefreshStatus == UIBackgroundRefreshStatusAvailable;
+- (BOOL)notificationsEnabled {
+    UIUserNotificationSettings *settings = [UIApplication sharedApplication].currentUserNotificationSettings;
+    return settings.types == (UIUserNotificationTypeAlert|UIUserNotificationTypeSound);
 }
 
 - (CRBluetoothState)bluetoothState {

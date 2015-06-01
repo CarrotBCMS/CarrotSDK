@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CarrotSDK/CarrotSDK.h>
 
-@class DetailViewController;
-
 @interface BeaconViewController : UITableViewController <CRBeaconManagerDelegate>
 
 @property (strong, nonatomic) CRBeaconManager *beaconManager;

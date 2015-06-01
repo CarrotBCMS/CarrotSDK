@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BeaconViewController.h"
+#import "StatusViewController.h"
 
-#define BASE_COLOR [UIColor orangeColor]
+#define BASE_COLOR [UIColor colorWithRed:0.913 green:0.478 blue:0.141 alpha:1.0]
+#define RED_COLOR [UIColor redColor]
+#define GREEN_COLOR [UIColor colorWithRed:0.403 green:0.658 blue:0.266 alpha:1.0]
 
+@class CRBeaconManager;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end
 
