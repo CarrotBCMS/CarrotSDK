@@ -1,14 +1,14 @@
 //
-//  CRAnalyticsHandler.m
+//  CRAnalyticsProvider.m
 //  CarrotSDK
 //
 //  Created by Heiko Dreyer on 06/01/15.
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
-#import "CRAnalyticsHandler.h"
+#import "CRAnalyticsProvider.h"
 
-@implementation CRAnalyticsHandler
+@implementation CRAnalyticsProvider
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 

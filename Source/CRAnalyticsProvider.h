@@ -1,5 +1,5 @@
 //
-//  CRAnalyticsHandler.h
+//  CRAnalyticsProvider.h
 //  CarrotSDK
 //
 //  Created by Heiko Dreyer on 06/01/15.
@@ -10,7 +10,7 @@
 
 @class CREvent, CRBeacon;
 
-@interface CRAnalyticsHandler : NSObject
+@interface CRAnalyticsProvider : NSObject
 
 ///---------------------------------------------------------------------------------------
 /// @name Analytics

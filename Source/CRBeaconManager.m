@@ -16,7 +16,7 @@
 #import "CREventStorage.h"
 #import "CREventCoordinator.h"
 #import "CRSyncManager.h"
-#import "CRAnalyticsHandler.h"
+#import "CRAnalyticsProvider.h"
 
 @interface CRBeaconManager () <CLLocationManagerDelegate, CBCentralManagerDelegate, CRSyncManagerDelegate>
 
@@ -44,7 +44,7 @@
     CREventStorage *_eventStorage;
     CREventCoordinator *_eventCoordinator;
     CRSyncManager *_syncManager;
-    CRAnalyticsHandler *_analyticsHandler;
+    CRAnalyticsProvider *_analyticsHandler;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -190,7 +190,7 @@
     
     _syncManager = [[CRSyncManager alloc] initWithDelegate:self eventStorage:_eventStorage
                                              beaconStorage:_beaconStorage];
-    _analyticsHandler = [[CRAnalyticsHandler alloc] init];
+    _analyticsHandler = [[CRAnalyticsProvider alloc] init];
     
     _bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self
                                                              queue:dispatch_get_main_queue()
