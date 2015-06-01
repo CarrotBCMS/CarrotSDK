@@ -16,6 +16,7 @@
 #import "CREventStorage.h"
 #import "CREventCoordinator.h"
 #import "CRSyncManager.h"
+#import "CRAnalyticsHandler.h"
 
 @interface CRBeaconManager () <CLLocationManagerDelegate, CBCentralManagerDelegate, CRSyncManagerDelegate>
 
@@ -43,6 +44,7 @@
     CREventStorage *_eventStorage;
     CREventCoordinator *_eventCoordinator;
     CRSyncManager *_syncManager;
+    CRAnalyticsHandler *_analyticsHandler;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,6 +190,7 @@
     
     _syncManager = [[CRSyncManager alloc] initWithDelegate:self eventStorage:_eventStorage
                                              beaconStorage:_beaconStorage];
+    _analyticsHandler = [[CRAnalyticsHandler alloc] init];
     
     _bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self
                                                              queue:dispatch_get_main_queue()
@@ -286,6 +289,7 @@
                                                     beacon:(CRBeacon *)beacon
 {
     for (CRNotificationEvent *event in notificationObjects) {
+        [_analyticsHandler logEvent:(CREvent *)event forBeacon:beacon];
         [_eventCoordinator sendLocalNotificationWithEvent:event];
         if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didFireNotification:beacon:)]) {
             [_delegate manager:self didFireNotification:event beacon:beacon];
@@ -296,6 +300,7 @@
 - (void)_notifyDelegateToPresentEvents:(NSArray *)objects beacon:(CRBeacon *)beacon {
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:shouldPresentEvents:beacon:)]) {
         if (objects && objects.count > 0) {
+            [_analyticsHandler logEvents:objects forBeacon:beacon];
             [_delegate manager:self shouldPresentEvents:objects beacon:beacon];
         }
     }
