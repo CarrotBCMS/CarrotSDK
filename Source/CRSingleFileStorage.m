@@ -9,6 +9,7 @@
 #import "CRSingleFileStorage.h"
 
 @implementation CRSingleFileStorage {
+    NSOperationQueue *_queue;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +21,7 @@
     
     if (self) {
         _storagePath = path;
+        _queue = [[NSOperationQueue alloc] init];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
         
@@ -78,7 +80,7 @@
 #pragma mark - Private
 
 - (void)_save {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    [_queue addOperationWithBlock:^{
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *dirpath = [_storagePath stringByDeletingLastPathComponent];
         if (![fileManager fileExistsAtPath:dirpath]) {
@@ -86,7 +88,7 @@
         }
         
         [NSKeyedArchiver archiveRootObject:_objects toFile:_storagePath];
-    });
+    }];
 }
 
 @end

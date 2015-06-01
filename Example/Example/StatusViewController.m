@@ -99,6 +99,4 @@
     cell.detailTextLabel.text = status;
 }
 
-
-
 @end
