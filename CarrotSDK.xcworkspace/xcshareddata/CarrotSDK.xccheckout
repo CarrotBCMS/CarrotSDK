@@ -22,7 +22,7 @@
 		<key>147227E5E6ECEC1713725C417708C6F91476184C</key>
 		<string>..</string>
 		<key>DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8</key>
-		<string>../Vendor/AFNetworking/</string>
+		<string>../Vendor/AFNetworking</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>bitbucket.org:bfolder/carrotsdk.git</string>
