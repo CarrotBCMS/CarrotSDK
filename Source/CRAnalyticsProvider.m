@@ -15,11 +15,9 @@
 #pragma mark - Analytics
 
 - (void)logEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon {
-    
 }
 
 - (void)logEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon {
-    
 }
 
 @end
