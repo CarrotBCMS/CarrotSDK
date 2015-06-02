@@ -12,6 +12,8 @@
 	<dict>
 		<key>147227E5E6ECEC1713725C417708C6F91476184C</key>
 		<string>bitbucket.org:bfolder/carrotsdk.git</string>
+		<key>DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8</key>
+		<string>https://github.com/AFNetworking/AFNetworking.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>CarrotSDK.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>147227E5E6ECEC1713725C417708C6F91476184C</key>
 		<string>..</string>
+		<key>DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8</key>
+		<string>../Vendor/AFNetworking/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>bitbucket.org:bfolder/carrotsdk.git</string>
@@ -28,6 +32,14 @@
 	<string>147227E5E6ECEC1713725C417708C6F91476184C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AFNetworking</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
