@@ -18,7 +18,7 @@
 - (instancetype)initWithEventId:(NSUInteger)eventId
                       threshold:(NSTimeInterval)threshold
                   lastTriggered:(NSDate *)lastTriggered
-                      eventType:(CREventType)eventType;
+                      eventType:(CREventType)eventType
 {
     self = [super init];
     if (self) {
@@ -36,6 +36,8 @@
                        threshold:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_threshold"]).doubleValue
                    lastTriggered:[coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_lastTriggered"]
                        eventType:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_eventType"]).integerValue];
+    self.scheduledStartDate = [coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_scheduledStartDate"];
+    self.scheduledEndDate = [coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_scheduledEndDate"];
     return self;
 }
 
@@ -43,6 +45,8 @@
     [aCoder encodeObject:@(_eventId) forKey:@"CREvent_eventId"];
     [aCoder encodeObject:@(_threshold) forKey:@"CREvent_threshold"];
     [aCoder encodeObject:_lastTriggered forKey:@"CREvent_lastTriggered"];
+    [aCoder encodeObject:_scheduledStartDate forKey:@"CREvent_scheduledStartDate"];
+    [aCoder encodeObject:_scheduledEndDate forKey:@"CREvent_scheduledEndDate"];
     [aCoder encodeObject:@(_eventType) forKey:@"CREvent_eventType"];
 }
 

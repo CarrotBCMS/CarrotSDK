@@ -27,6 +27,16 @@
 @property (strong) NSDate *lastTriggered;
 
 /**
+ Scheduled start date for this event - Might be null.
+ */
+@property (strong) NSDate *scheduledStartDate;
+
+/**
+ Scheduled end date for this event - Might be null.
+ */
+@property (strong) NSDate *scheduledEndDate;
+
+/**
  Event type
  */
 @property (readonly, assign) CREventType eventType;

@@ -16,6 +16,7 @@
 @interface CREventCoordinator ()
 
 - (NSArray *)_updateAndReturnPermittedEvents:(NSArray*)events beacon:(CRBeacon *)beacon;
+- (BOOL)_eventInSchedule:(CREvent *)event;
 
 @end
 
@@ -87,16 +88,30 @@
         CREvent *event = (CREvent *)obj;
         NSDate *lastTriggered = event.lastTriggered;
         if (!lastTriggered || [lastTriggered timeIntervalSinceNow] + event.threshold <= 0) {
-            // Assign a new date for "lastTriggered" - We assume that those events will get triggered eventually.
-            event.lastTriggered = [NSDate date];
-            [_storage refresh:beacon];
-            
-            // Add object to results
-            [results addObject:event];
+            if ((!event.scheduledStartDate && !event.scheduledEndDate) || [self _eventInSchedule:event]) {
+                // Assign a new date for "lastTriggered" - We assume that those events will get triggered eventually.
+                event.lastTriggered = [NSDate date];
+                [_storage refresh:beacon];
+                
+                // Add object to results
+                [results addObject:event];
+            }
         }
     }];
 
     return [NSArray arrayWithArray:results];
+}
+
+- (BOOL)_eventInSchedule:(CREvent *)event {
+    NSDate *currentDate = [NSDate date];
+    NSDate *startDate = event.scheduledStartDate;
+    NSDate *endDate = event.scheduledEndDate;
+    if (!startDate || !endDate) {
+        return NO;
+    }
+    
+    const NSTimeInterval i = [currentDate timeIntervalSinceReferenceDate];
+    return ([startDate timeIntervalSinceReferenceDate] <= i && [endDate timeIntervalSinceReferenceDate] >= i);
 }
 
 @end

@@ -100,4 +100,26 @@
     XCTAssert(result.count == 1);
 }
 
+- (void)testPositiveScheduledValidation {
+    _event.scheduledStartDate = [NSDate dateWithTimeIntervalSinceNow:-10000];
+    _event.scheduledEndDate = [NSDate dateWithTimeIntervalSinceNow: 100000];
+    
+    NSArray *result = [_coordinator validEnterEventsForBeacon:_beacon];
+    XCTAssert(result.count == 1);
+}
+
+- (void)testNegativeScheduledValidation {
+    _event.scheduledStartDate = [NSDate dateWithTimeIntervalSinceNow:100];
+    _event.scheduledEndDate = [NSDate dateWithTimeIntervalSinceNow: 100000];
+    
+    NSArray *result = [_coordinator validEnterEventsForBeacon:_beacon];
+    XCTAssert(result.count == 0);
+    
+    _event.scheduledStartDate = [NSDate dateWithTimeIntervalSinceNow:-1000000];
+    _event.scheduledEndDate = [NSDate dateWithTimeIntervalSinceNow: -100000];
+    
+    result = [_coordinator validEnterEventsForBeacon:_beacon];
+    XCTAssert(result.count == 0);
+}
+
 @end
