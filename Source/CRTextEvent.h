@@ -14,6 +14,6 @@
 /**
  Text value
  */
-@property (strong) NSString *text;
+@property (readonly, strong) NSString *text;
 
 @end

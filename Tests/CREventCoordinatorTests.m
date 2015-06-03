@@ -58,9 +58,9 @@
                                             scheduledEndDate:nil
                                                lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-4000]
                                                    eventType:CREventTypeEnter];
-    _notEvent.message = @"testmessage";
-    _notEvent.title = @"testtitle";
-    _notEvent.payload = @"testpayload";
+    [_notEvent __setMessage:@"testmessage"];
+    [_notEvent __setTitle:@"testtitle"];
+    [_notEvent __setPayload:@"testpayload"];
     
     _notEventTwo = [[CRNotificationEvent alloc] initWithEventId:12
                                                       threshold:1000
@@ -68,9 +68,9 @@
                                                scheduledEndDate:nil
                                                   lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-5000]
                                                       eventType:CREventTypeExit];
-    _notEventTwo.message = @"testmessage";
-    _notEventTwo.title = @"testtitle";
-    _notEventTwo.payload = @"testpayload";
+    [_notEventTwo __setMessage:@"testmessage"];
+    [_notEventTwo __setTitle:@"testtitle"];
+    [_notEventTwo __setPayload:@"testpayload"];
     
     _storage = OCMPartialMock([[CREventStorage alloc] init]);
     _coordinator = [[CREventCoordinator alloc] initWithEventStorage:_storage];

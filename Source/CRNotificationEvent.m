@@ -31,4 +31,20 @@
     [aCoder encodeObject:_payload forKey:@"CRNotificationEvent_payload"];
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Internal
+
+- (void)__setTitle:(NSString *)title {
+    _title = title;
+}
+
+- (void)__setMessage:(NSString *)message {
+    _message = message;
+}
+
+- (void)__setPayload:(NSString *)payload {
+    _payload = payload;
+}
+
 @end

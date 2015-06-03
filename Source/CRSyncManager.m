@@ -12,6 +12,7 @@
 #import "CRBeacon.h"
 #import "CRTextEvent.h"
 #import "CRNotificationEvent.h"
+#import "CREvent_Internal.h"
 
 @implementation CRSyncManager
 
@@ -55,7 +56,7 @@
                                              scheduledEndDate:nil
                                                 lastTriggered:nil
                                                     eventType:CREventTypeEnter];
-    event.text = @"This is a dummy text";
+    [event __setText:@"This is a dummy text"];
     
     CRTextEvent *eventTwo = [[CRTextEvent alloc] initWithEventId:2
                                                        threshold:30
@@ -63,7 +64,7 @@
                                                 scheduledEndDate:nil
                                                    lastTriggered:nil
                                                        eventType:CREventTypeExit];
-    eventTwo.text = @"This is a dummy text. Number 2.";
+    [eventTwo __setText:@"This is a dummy text"];
     
     CRNotificationEvent *eventThree = [[CRNotificationEvent alloc] initWithEventId:3
                                                                          threshold:60
@@ -71,9 +72,9 @@
                                                                   scheduledEndDate:nil
                                                                      lastTriggered:nil
                                                                          eventType:CREventTypeEnter];
-    eventThree.title = @"Willkommmen in Beacon 1";
-    eventThree.message = @"Du bist hier genau richtig. Alles ist super!";
-    eventThree.payload = @"Custom data enter";
+    [eventThree __setTitle:@"Willkommmen in Beacon 1"];
+    [eventThree __setMessage:@"Du bist hier genau richtig. Alles ist super!"];
+    [eventThree __setPayload:@"Custom data enter"];
     
     CRNotificationEvent *eventFour = [[CRNotificationEvent alloc] initWithEventId:4
                                                                         threshold:60
@@ -81,9 +82,9 @@
                                                                  scheduledEndDate:nil
                                                                     lastTriggered:nil
                                                                         eventType:CREventTypeExit];
-    eventFour.title = @"Tschüss aus Beacon 1";
-    eventFour.message = @"Schade dass du gehst!";
-    eventFour.payload = @"Custom data exit";
+    [eventFour __setTitle:@"Tschüss aus Beacon 1"];
+    [eventFour __setMessage:@"Schade dass du gehst!"];
+    [eventFour __setPayload:@"Custom data exit"];
     
     NSArray *events = @[event, eventTwo];
     NSArray *eventNotification = @[eventThree, eventFour];

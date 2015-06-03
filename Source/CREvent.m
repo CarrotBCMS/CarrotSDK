@@ -7,7 +7,6 @@
 //
 
 #import "CREvent.h"
-#import "CREvent_Internal.h"
 
 @implementation CREvent {
 }
@@ -61,7 +60,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Internal Accessors 
+#pragma mark - Internal
 
 - (void)__setScheduledEndDate:(NSDate *)endDate {
     _scheduledEndDate = endDate;

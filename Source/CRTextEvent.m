@@ -27,4 +27,12 @@
     [aCoder encodeObject:_text forKey:@"CRTextEvent_text"];
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Internal
+
+- (void)__setText:(NSString *)text {
+    _text = text;
+}
+
 @end

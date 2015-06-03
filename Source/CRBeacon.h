@@ -14,22 +14,22 @@
 /**
  Name of the beacon. Might be null.
  */
-@property (strong) NSString *name;
+@property (readonly, strong) NSString *name;
 
 /**
  UUID, e.g. 123e4567-e89b-12d3-a456-426655440000.
  */
-@property (readonly) NSUUID *uuid;
+@property (readonly, strong) NSUUID *uuid;
 
 /**
  Major identifier, e.g. 523423
  */
-@property (readonly) NSNumber *major;
+@property (readonly, strong) NSNumber *major;
 
 /**
  Minor identifier, e.g. 233123.
  */
-@property (readonly) NSNumber *minor;
+@property (readonly, strong) NSNumber *minor;
 
 /**
  Related beacon (CoreLocation).

@@ -15,3 +15,17 @@
 - (void)__setLastTriggered:(NSDate *)lastTriggered;
 
 @end
+
+@interface CRNotificationEvent (Internal)
+
+- (void)__setTitle:(NSString *)title;
+- (void)__setMessage:(NSString *)message;
+- (void)__setPayload:(NSString *)payload;
+
+@end
+
+@interface CRTextEvent (Internal)
+
+- (void)__setText:(NSString *)text;
+
+@end
