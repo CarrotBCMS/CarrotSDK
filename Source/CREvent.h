@@ -24,17 +24,17 @@
 /**
  Last time this event was triggered.
  */
-@property (strong) NSDate *lastTriggered;
+@property (readonly, strong) NSDate *lastTriggered;
 
 /**
  Scheduled start date for this event - Might be null.
  */
-@property (strong) NSDate *scheduledStartDate;
+@property (readonly, strong) NSDate *scheduledStartDate;
 
 /**
  Scheduled end date for this event - Might be null.
  */
-@property (strong) NSDate *scheduledEndDate;
+@property (readonly, strong) NSDate *scheduledEndDate;
 
 /**
  Event type
@@ -55,6 +55,8 @@
  */
 - (instancetype)initWithEventId:(NSUInteger)eventId
                       threshold:(NSTimeInterval)threshold
+             scheduledStartDate:(NSDate *)startDate
+               scheduledEndDate:(NSDate *)endDate
                   lastTriggered:(NSDate *)lastTriggered
                       eventType:(CREventType)eventType;
 @end

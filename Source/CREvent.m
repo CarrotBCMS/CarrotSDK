@@ -7,6 +7,7 @@
 //
 
 #import "CREvent.h"
+#import "CREvent_Internal.h"
 
 @implementation CREvent {
 }
@@ -17,8 +18,10 @@
 
 - (instancetype)initWithEventId:(NSUInteger)eventId
                       threshold:(NSTimeInterval)threshold
+             scheduledStartDate:(NSDate *)startDate
+               scheduledEndDate:(NSDate *)endDate
                   lastTriggered:(NSDate *)lastTriggered
-                      eventType:(CREventType)eventType
+                      eventType:(CREventType)eventType;
 {
     self = [super init];
     if (self) {
@@ -26,6 +29,8 @@
         _eventId = eventId;
         _lastTriggered = lastTriggered;
         _eventType = eventType;
+        _scheduledEndDate = endDate;
+        _scheduledStartDate = startDate;
     }
     
     return self;
@@ -34,10 +39,10 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [self initWithEventId:[[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_eventId"] integerValue]
                        threshold:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_threshold"]).doubleValue
+            scheduledStartDate:[coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_scheduledStartDate"]
+                scheduledEndDate:[coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_scheduledEndDate"]
                    lastTriggered:[coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_lastTriggered"]
                        eventType:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_eventType"]).integerValue];
-    self.scheduledStartDate = [coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_scheduledStartDate"];
-    self.scheduledEndDate = [coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_scheduledEndDate"];
     return self;
 }
 
@@ -52,6 +57,22 @@
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Internal Accessors 
+
+- (void)__setScheduledEndDate:(NSDate *)endDate {
+    _scheduledEndDate = endDate;
+}
+
+- (void)__setScheduledStartDate:(NSDate *)startDate {
+    _scheduledStartDate = startDate;
+}
+
+- (void)__setLastTriggered:(NSDate *)lastTriggered {
+    _lastTriggered = lastTriggered;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

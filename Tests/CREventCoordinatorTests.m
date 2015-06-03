@@ -11,6 +11,7 @@
 #import <OCMock/OCMock.h>
 #import "CREventCoordinator.h"
 #import "CREvent.h"
+#import "CREvent_Internal.h"
 #import "CRNotificationEvent.h"
 #import "CRBeacon.h"
 #import "CREventStorage.h"
@@ -39,16 +40,22 @@
 
     _event = [[CREvent alloc] initWithEventId:1
                                     threshold:1000
+                           scheduledStartDate:nil
+                             scheduledEndDate:nil
                                 lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-2000]
                                     eventType:CREventTypeEnter];
     
     _eventTwo = [[CREvent alloc] initWithEventId:2
                                        threshold:1000
+                              scheduledStartDate:nil
+                                scheduledEndDate:nil
                                    lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-1000]
                                        eventType:CREventTypeExit];
     
     _notEvent = [[CRNotificationEvent alloc] initWithEventId:12
                                                    threshold:1000
+                                          scheduledStartDate:nil
+                                            scheduledEndDate:nil
                                                lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-4000]
                                                    eventType:CREventTypeEnter];
     _notEvent.message = @"testmessage";
@@ -57,6 +64,8 @@
     
     _notEventTwo = [[CRNotificationEvent alloc] initWithEventId:12
                                                       threshold:1000
+                                             scheduledStartDate:nil
+                                               scheduledEndDate:nil
                                                   lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-5000]
                                                       eventType:CREventTypeExit];
     _notEventTwo.message = @"testmessage";
@@ -101,22 +110,22 @@
 }
 
 - (void)testPositiveScheduledValidation {
-    _event.scheduledStartDate = [NSDate dateWithTimeIntervalSinceNow:-10000];
-    _event.scheduledEndDate = [NSDate dateWithTimeIntervalSinceNow: 100000];
+    [_event __setScheduledStartDate:[NSDate dateWithTimeIntervalSinceNow:-10000]];
+    [_event __setScheduledEndDate:[NSDate dateWithTimeIntervalSinceNow:100000]];
     
     NSArray *result = [_coordinator validEnterEventsForBeacon:_beacon];
     XCTAssert(result.count == 1);
 }
 
 - (void)testNegativeScheduledValidation {
-    _event.scheduledStartDate = [NSDate dateWithTimeIntervalSinceNow:100];
-    _event.scheduledEndDate = [NSDate dateWithTimeIntervalSinceNow: 100000];
+    [_event __setScheduledStartDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+    [_event __setScheduledEndDate:[NSDate dateWithTimeIntervalSinceNow:100000]];
     
     NSArray *result = [_coordinator validEnterEventsForBeacon:_beacon];
     XCTAssert(result.count == 0);
     
-    _event.scheduledStartDate = [NSDate dateWithTimeIntervalSinceNow:-1000000];
-    _event.scheduledEndDate = [NSDate dateWithTimeIntervalSinceNow: -100000];
+    [_event __setScheduledStartDate:[NSDate dateWithTimeIntervalSinceNow:-1000000]];
+    [_event __setScheduledEndDate:[NSDate dateWithTimeIntervalSinceNow:-100000]];
     
     result = [_coordinator validEnterEventsForBeacon:_beacon];
     XCTAssert(result.count == 0);

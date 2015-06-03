@@ -10,6 +10,7 @@
 #import "CREventStorage.h"
 #import "CREventStorage+Filter.h"
 #import "CREvent.h"
+#import "CREvent_Internal.h"
 #import "CRNotificationEvent.h"
 #import "CRDefinitions.h"
 
@@ -90,7 +91,7 @@
         if (!lastTriggered || [lastTriggered timeIntervalSinceNow] + event.threshold <= 0) {
             if ((!event.scheduledStartDate && !event.scheduledEndDate) || [self _eventInSchedule:event]) {
                 // Assign a new date for "lastTriggered" - We assume that those events will get triggered eventually.
-                event.lastTriggered = [NSDate date];
+                [event __setLastTriggered:[NSDate date]];
                 [_storage refresh:beacon];
                 
                 // Add object to results
