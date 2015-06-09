@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CRBeacon : NSObject <NSSecureCoding>
 
 /**
  Name of the beacon. Might be null.
  */
-@property (readonly, strong) NSString *name;
+@property (readonly, strong, nullable) NSString *name;
 
 /**
  UUID, e.g. 123e4567-e89b-12d3-a456-426655440000.
@@ -34,7 +36,7 @@
 /**
  Related beacon (CoreLocation).
  */
-@property (strong) CLBeacon *beacon;
+@property (strong, nullable) CLBeacon *beacon;
 
 ///---------------------------------------------------------------------------------------
 /// @name Lifecycle
@@ -52,7 +54,7 @@
 - (instancetype)initWithUUID:(NSUUID *)uuid
                        major:(NSNumber *)major
                        minor:(NSNumber *)minor
-                        name:(NSString *)name;
+                        name:(NSString *__nullable)name;
 
 
 /**
@@ -67,3 +69,5 @@
                        minor:(NSNumber *)minor;
 
 @end
+
+NS_ASSUME_NONNULL_END

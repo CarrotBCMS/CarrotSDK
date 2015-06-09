@@ -19,17 +19,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Delegate property
  */
-@property (nonatomic, assign) id <CRBeaconManagerDelegate> delegate;
+@property (nonatomic, assign, nullable) id <CRBeaconManagerDelegate> delegate;
 
 /**
  URL to CarrotBMS
  */
-@property (readonly) NSURL *url;
+@property (readonly, nonnull) NSURL *url;
 
 /**
  Application key
  */
-@property (readonly) NSString *appKey;
+@property (readonly, nonnull) NSString *appKey;
 
 /**
  Whether monitoring is active or not
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param url URL to CarrotBMS
  @param key Application key
  */
-- (instancetype)initWithDelegate:(id<CRBeaconManagerDelegate>)delegate
+- (instancetype)initWithDelegate:(id<CRBeaconManagerDelegate> __nullable)delegate
                             url:(NSURL *)url
                          appKey:(NSString *)key;
 

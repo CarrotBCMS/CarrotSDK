@@ -9,7 +9,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "CRBeaconManager.h"
 #import "CRBeaconManagerDelegate.h"
-#import "CRDefinitions.h"
+#import "CRDefines.h"
 #import "CRBeaconCache.h"
 #import "CRBeacon.h"
 #import "CRBeaconStorage.h"

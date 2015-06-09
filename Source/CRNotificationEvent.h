@@ -14,16 +14,16 @@
 /**
  Title of the notification
  */
-@property (readonly, strong) NSString *title;
+@property (readonly, strong, nullable) NSString *title;
 
 /**
  Notification message
  */
-@property (readonly, strong) NSString *message;
+@property (readonly, strong, nullable) NSString *message;
 
 /**
  A payload
  */
-@property (readonly, strong) NSString *payload;
+@property (readonly, strong, nullable) NSString *payload;
 
 @end

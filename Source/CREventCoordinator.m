@@ -12,7 +12,7 @@
 #import "CREvent.h"
 #import "CREvent_Internal.h"
 #import "CRNotificationEvent.h"
-#import "CRDefinitions.h"
+#import "CRDefines.h"
 
 @interface CREventCoordinator ()
 

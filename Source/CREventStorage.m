@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
-#import "CRDefinitions.h"
+#import "CRDefines.h"
 #import "CREventStorage.h"
 #import "CRBeacon.h"
 #import "CRNotificationEvent.h"

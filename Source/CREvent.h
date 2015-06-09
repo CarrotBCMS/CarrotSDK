@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CRBeaconManagerEnums.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CREvent : NSObject <NSSecureCoding>
 
 /**
@@ -24,17 +26,17 @@
 /**
  Last time this event was triggered.
  */
-@property (readonly, strong) NSDate *lastTriggered;
+@property (readonly, strong, nullable) NSDate *lastTriggered;
 
 /**
  Scheduled start date for this event - Might be null.
  */
-@property (readonly, strong) NSDate *scheduledStartDate;
+@property (readonly, strong, nullable) NSDate *scheduledStartDate;
 
 /**
  Scheduled end date for this event - Might be null.
  */
-@property (readonly, strong) NSDate *scheduledEndDate;
+@property (readonly, strong, nullable) NSDate *scheduledEndDate;
 
 /**
  Event type
@@ -55,8 +57,10 @@
  */
 - (instancetype)initWithEventId:(NSUInteger)eventId
                       threshold:(NSTimeInterval)threshold
-             scheduledStartDate:(NSDate *)startDate
-               scheduledEndDate:(NSDate *)endDate
-                  lastTriggered:(NSDate *)lastTriggered
+             scheduledStartDate:(NSDate *__nullable)startDate
+               scheduledEndDate:(NSDate *__nullable)endDate
+                  lastTriggered:(NSDate *__nullable)lastTriggered
                       eventType:(CREventType)eventType;
 @end
+
+NS_ASSUME_NONNULL_END

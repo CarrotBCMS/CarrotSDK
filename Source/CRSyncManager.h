@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The delegate
  */
-@property (assign) id<CRSyncManagerDelegate> delegate;
+@property (assign, nullable) id<CRSyncManagerDelegate> delegate;
 
 /**
  The event storage
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Init instance with storages.
  */
-- (instancetype)initWithDelegate:(id<CRSyncManagerDelegate>)delegate
+- (instancetype)initWithDelegate:(id<CRSyncManagerDelegate> __nullable)delegate
                     eventStorage:(CREventStorage*)eventStorage
                    beaconStorage:(CRBeaconStorage *)beaconStorage;
 

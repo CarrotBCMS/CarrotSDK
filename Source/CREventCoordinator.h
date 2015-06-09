@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Storage
  */
-@property (readonly, strong) CREventStorage *storage;
+@property (readonly, strong, nonnull) CREventStorage *storage;
 
 ///---------------------------------------------------------------------------------------
 /// @name Lifecycle
