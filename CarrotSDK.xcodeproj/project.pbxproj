@@ -15,7 +15,7 @@
 		60053CDC1B16F95900A9FA03 /* CRBeaconCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60053CDB1B16F95900A9FA03 /* CRBeaconCacheTests.m */; };
 		60053CE51B16FE8C00A9FA03 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60053CE41B16FE8C00A9FA03 /* libOCMock.a */; };
 		60053CE71B17183F00A9FA03 /* CREventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60053CE61B17183F00A9FA03 /* CREventTests.m */; };
-		6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED311B1139EC0090C1A7 /* CRDefinitions.h */; };
+		6009ED331B1139EC0090C1A7 /* CRDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED311B1139EC0090C1A7 /* CRDefines.h */; };
 		6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED3C1B1144B00090C1A7 /* CREvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3A1B1144B00090C1A7 /* CREvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED3D1B1144B00090C1A7 /* CREvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3B1B1144B00090C1A7 /* CREvent.m */; };
@@ -106,7 +106,7 @@
 		60053CDB1B16F95900A9FA03 /* CRBeaconCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconCacheTests.m; sourceTree = "<group>"; };
 		60053CE41B16FE8C00A9FA03 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = Vendor/libOCMock.a; sourceTree = "<group>"; };
 		60053CE61B17183F00A9FA03 /* CREventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventTests.m; sourceTree = "<group>"; };
-		6009ED311B1139EC0090C1A7 /* CRDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRDefinitions.h; sourceTree = "<group>"; };
+		6009ED311B1139EC0090C1A7 /* CRDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRDefines.h; sourceTree = "<group>"; };
 		6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconManagerDelegate.h; sourceTree = "<group>"; };
 		6009ED3A1B1144B00090C1A7 /* CREvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREvent.h; sourceTree = "<group>"; };
 		6009ED3B1B1144B00090C1A7 /* CREvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREvent.m; sourceTree = "<group>"; };
@@ -336,7 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				608491E81B150DDD008CBF49 /* Caching */,
-				6009ED311B1139EC0090C1A7 /* CRDefinitions.h */,
+				6009ED311B1139EC0090C1A7 /* CRDefines.h */,
 				6009ED351B1142A50090C1A7 /* CRBeaconManagerDelegate.h */,
 				60CC3B061B15FFA600229A55 /* CRBeaconManagerEnums.h */,
 				6061DA821B111D21002DC83B /* CRBeaconManager.h */,
@@ -429,7 +429,7 @@
 			files = (
 				604225E41B1F792500115CD0 /* CREvent_Internal.h in Headers */,
 				60AC5ED31B1DFC2600957B9C /* AFURLSessionManager.h in Headers */,
-				6009ED331B1139EC0090C1A7 /* CRDefinitions.h in Headers */,
+				6009ED331B1139EC0090C1A7 /* CRDefines.h in Headers */,
 				60AC5ECB1B1DFC2600957B9C /* AFSecurityPolicy.h in Headers */,
 				6002B0DF1B12768D00459AAC /* CRBeaconStorage.h in Headers */,
 				60AC5ECD1B1DFC2600957B9C /* AFURLConnectionOperation.h in Headers */,

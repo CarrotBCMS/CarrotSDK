@@ -10,7 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CREvent, CRBeacon;
+@class CREvent;
+@class CRBeacon;
 
 @interface CRAnalyticsProvider : NSObject
 

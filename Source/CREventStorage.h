@@ -10,7 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CREvent, CRBeacon;
+@class CREvent;
+@class CRBeacon;
 
 /**
  In contrast to the `CRSingleFileStorage`, this storage persists an array containing all events for a specific beacon region

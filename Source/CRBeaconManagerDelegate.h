@@ -10,7 +10,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CRBeaconManagerEnums.h"
 
-@class CRBeaconManager, CRBeacon, CRNotificationEvent;
+@class CRBeaconManager;
+@class CRBeacon;
+@class CRNotificationEvent;
 
 @protocol CRBeaconManagerDelegate <NSObject>
 @optional

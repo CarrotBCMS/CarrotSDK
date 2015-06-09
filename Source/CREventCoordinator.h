@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CRBeacon, CREventStorage, CRNotificationEvent;
+@class CRBeacon;
+@class CREventStorage;
+@class CRNotificationEvent;
 
 /**
  Coordinates validation and retrieval of stored events.
