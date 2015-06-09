@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CRBeacon, CREventStorage, CRNotificationEvent;
 
 /**
@@ -44,5 +46,7 @@
 - (NSArray *)validExitNotificationEventsForBeacon:(CRBeacon *)beacon;
 
 - (void)sendLocalNotificationWithEvent:(CRNotificationEvent *)event;
+
+NS_ASSUME_NONNULL_END
 
 @end

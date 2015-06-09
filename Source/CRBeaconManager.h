@@ -10,6 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CRBeaconManagerEnums.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol CRBeaconManagerDelegate;
 
 @interface CRBeaconManager : NSObject
@@ -124,3 +126,5 @@
 - (void)stopSyncing;
 
 @end
+
+NS_ASSUME_NONNULL_END

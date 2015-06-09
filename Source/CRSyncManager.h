@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CRSyncManager;
 @protocol CRSyncManagerDelegate <NSObject>
 
@@ -61,3 +63,5 @@
 - (void)stopSyncing;
 
 @end
+
+NS_ASSUME_NONNULL_END

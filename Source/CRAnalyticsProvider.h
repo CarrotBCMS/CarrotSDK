@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CREvent, CRBeacon;
 
 @interface CRAnalyticsProvider : NSObject
@@ -21,3 +23,5 @@
 - (void)logEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon;
 
 @end
+
+NS_ASSUME_NONNULL_END

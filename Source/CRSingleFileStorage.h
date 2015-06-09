@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  `CRSingleFileStorage` is a class to store (serialize) abstract objects in a single file.
  This class may be overriden for more concrete implementations. 
@@ -75,5 +77,7 @@
  @param array An array
  */
 - (void)removeObjectsInArray:(NSArray *)array;
+
+NS_ASSUME_NONNULL_END
 
 @end

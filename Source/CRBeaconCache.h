@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Temporarily stores beacons. See `NSCache` for memory related details.
  
@@ -62,3 +64,5 @@
 - (NSArray *)exitedCRBeaconsRangedBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region;
 
 @end
+
+NS_ASSUME_NONNULL_END
