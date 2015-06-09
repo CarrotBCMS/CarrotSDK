@@ -278,7 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				6061DA681B111AF5002DC83B /* CarrotSDK.h */,
-				6061DA811B111CB8002DC83B /* Core */,
+				6061DA811B111CB8002DC83B /* Common */,
 				6061DA801B111CAD002DC83B /* Persistence */,
 				6061DA7F1B111CA5002DC83B /* Network */,
 				6061DA661B111AF5002DC83B /* Supporting Files */,
@@ -332,7 +332,7 @@
 			name = Persistence;
 			sourceTree = "<group>";
 		};
-		6061DA811B111CB8002DC83B /* Core */ = {
+		6061DA811B111CB8002DC83B /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				608491E81B150DDD008CBF49 /* Caching */,
@@ -344,7 +344,7 @@
 				6036C8A31B1732B800D4CA87 /* CREventCoordinator.h */,
 				6036C8A41B1732B800D4CA87 /* CREventCoordinator.m */,
 			);
-			name = Core;
+			name = Common;
 			sourceTree = "<group>";
 		};
 		6061DA941B111E71002DC83B /* Vendor */ = {
