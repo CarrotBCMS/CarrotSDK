@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@class CREventStorage, CRBeaconStorage;
+@class CREventStorage;
+@class CRBeaconStorage;
 
 @interface CRSyncManager : NSObject
 
