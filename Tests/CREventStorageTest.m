@@ -128,6 +128,15 @@
                                             lastTriggered:nil
                                                 eventType:CREventTypeEnter];
     [_eventStorage addEvents:@[eventThree, eventFour] forBeacon:_beaconTwo];
+    
+    CREvent *eventFive = [[CREvent alloc] initWithEventId:1111
+                                                threshold:1000
+                                       scheduledStartDate:nil
+                                         scheduledEndDate:nil
+                                            lastTriggered:nil
+                                                eventType:CREventTypeBoth];
+    
+    [_eventStorage addEvents:@[eventThree, eventFour, eventFive] forBeacon:_beaconTwo];
     NSArray *array = [_eventStorage findAllEventsForBeacon:_beacon];
     XCTAssert(array.count == 2);
     XCTAssert([array containsObject:_event] && [array containsObject:_eventTwo]);
@@ -149,8 +158,14 @@
                                                                    scheduledEndDate:nil
                                                                       lastTriggered:nil
                                                                           eventType:CREventTypeEnter];
-    [_eventStorage addEvents:@[notEvent, notEventTwo] forBeacon:_beacon];
-    XCTAssert([_eventStorage findAllNotificationEventsForBeacon:_beacon].count == 2);
+    CRNotificationEvent *notEventThree = [[CRNotificationEvent alloc] initWithEventId:2
+                                                                            threshold:1000
+                                                                   scheduledStartDate:nil
+                                                                     scheduledEndDate:nil
+                                                                        lastTriggered:nil
+                                                                            eventType:CREventTypeBoth];
+    [_eventStorage addEvents:@[notEvent, notEventTwo, notEventThree] forBeacon:_beacon];
+    XCTAssert([_eventStorage findAllNotificationEventsForBeacon:_beacon].count == 3);
 }
 
 - (void)testEventsWithSameUUIDDifferentMinor {

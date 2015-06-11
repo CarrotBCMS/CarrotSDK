@@ -39,7 +39,7 @@
 - (NSArray *)_filterEvents:(NSArray *)events type:(CREventType)type {
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         CREvent *event = (CREvent *)evaluatedObject;
-        return event.eventType == type;
+        return event.eventType == type || event.eventType == CREventTypeBoth;
     }];
     return [events filteredArrayUsingPredicate:predicate];
 }

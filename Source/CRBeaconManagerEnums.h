@@ -18,4 +18,5 @@ typedef NS_ENUM(NSInteger, CRBluetoothState) {
 typedef NS_ENUM(NSInteger, CREventType) {
     CREventTypeEnter = 0,
     CREventTypeExit,
+    CREventTypeBoth,
 };
