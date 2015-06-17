@@ -43,6 +43,7 @@
 		6061DA931B111E61002DC83B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA921B111E61002DC83B /* CoreLocation.framework */; };
 		606F0B281B1CC0C000E28436 /* CRAnalyticsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 606F0B261B1CC0C000E28436 /* CRAnalyticsProvider.h */; };
 		606F0B291B1CC0C000E28436 /* CRAnalyticsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 606F0B271B1CC0C000E28436 /* CRAnalyticsProvider.m */; };
+		6099F30C1B315B8B00FE23A8 /* CRBeacon_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 6099F30B1B315B8B00FE23A8 /* CRBeacon_Internal.h */; };
 		60AC5EC21B1DFC2600957B9C /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AC5EAF1B1DFC2600957B9C /* AFHTTPRequestOperation.h */; };
 		60AC5EC31B1DFC2600957B9C /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5EB01B1DFC2600957B9C /* AFHTTPRequestOperation.m */; };
 		60AC5EC41B1DFC2600957B9C /* AFHTTPRequestOperationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AC5EB11B1DFC2600957B9C /* AFHTTPRequestOperationManager.h */; };
@@ -137,6 +138,7 @@
 		6061DA921B111E61002DC83B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		606F0B261B1CC0C000E28436 /* CRAnalyticsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAnalyticsProvider.h; sourceTree = "<group>"; };
 		606F0B271B1CC0C000E28436 /* CRAnalyticsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAnalyticsProvider.m; sourceTree = "<group>"; };
+		6099F30B1B315B8B00FE23A8 /* CRBeacon_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeacon_Internal.h; sourceTree = "<group>"; };
 		60AC5EAF1B1DFC2600957B9C /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		60AC5EB01B1DFC2600957B9C /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		60AC5EB11B1DFC2600957B9C /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			children = (
 				6061DA8E1B111DB3002DC83B /* CRBeacon.h */,
 				6061DA8F1B111DB3002DC83B /* CRBeacon.m */,
+				6099F30B1B315B8B00FE23A8 /* CRBeacon_Internal.h */,
 				6009ED3A1B1144B00090C1A7 /* CREvent.h */,
 				6009ED3B1B1144B00090C1A7 /* CREvent.m */,
 				604225E31B1F792500115CD0 /* CREvent_Internal.h */,
@@ -437,6 +440,7 @@
 				60AC5EEF1B1DFC2A00957B9C /* UIImageView+AFNetworking.h in Headers */,
 				60AC5EF41B1DFC2A00957B9C /* UIRefreshControl+AFNetworking.h in Headers */,
 				603CC7E41B14BF8C0077A48C /* CRBeaconCache.h in Headers */,
+				6099F30C1B315B8B00FE23A8 /* CRBeacon_Internal.h in Headers */,
 				60C8BAD71B132A5B009024F8 /* CRNotificationEvent.h in Headers */,
 				6009ED371B1142A50090C1A7 /* CRBeaconManagerDelegate.h in Headers */,
 				6036C8A51B1732B800D4CA87 /* CREventCoordinator.h in Headers */,

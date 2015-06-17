@@ -7,8 +7,10 @@
 //
 
 #import "CRBeacon.h"
+#import "CRBeacon_Internal.h"
 
 @implementation CRBeacon {
+    NSUInteger _beaconId;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,6 +30,7 @@
         _major = major;
         _minor = minor;
         _beacon = nil;
+        _beaconId = 0;
     }
     
     return self;
@@ -45,6 +48,7 @@
                         major:[coder decodeObjectOfClass:[NSNumber class] forKey:@"major"]
                         minor:[coder decodeObjectOfClass:[NSNumber class] forKey:@"minor"]
                          name:[coder decodeObjectOfClass:[NSString class] forKey:@"name"]];
+    self.beaconId = [[coder decodeObjectOfClass:[NSNumber class] forKey:@"beaconId"] integerValue];
     return self;
 }
 
@@ -53,6 +57,7 @@
     [aCoder encodeObject:_major forKey:@"major"];
     [aCoder encodeObject:_minor forKey:@"minor"];
     [aCoder encodeObject:_name forKey:@"name"];
+    [aCoder encodeObject:@(_beaconId) forKey:@"beaconId"];
 }
 
 + (BOOL)supportsSecureCoding {
@@ -68,7 +73,8 @@
     if (!object ||
         ![aObject.uuid isEqual:self.uuid] ||
         ![aObject.major isEqualToNumber:self.major] ||
-        ![aObject.minor isEqualToNumber:self.minor]
+        ![aObject.minor isEqualToNumber:self.minor] ||
+        aObject.beaconId != self.beaconId
         )
     {
         return NO;
@@ -79,6 +85,18 @@
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"CRBeacon - UUID: %@ - Major: %@ - Minor: %@ - Name: %@", _uuid, _major, _minor, _name];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Accessors
+
+- (void)setBeaconId:(NSUInteger)beaconId {
+    _beaconId = beaconId;
+}
+
+- (NSUInteger)beaconId {
+    return _beaconId;
 }
 
 @end

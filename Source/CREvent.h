@@ -14,6 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CREvent : NSObject <NSSecureCoding>
 
 /**
+ Name of the event. Might be null.
+ */
+@property (strong, nullable) NSString *name;
+
+/**
  Unique event id.
  */
 @property (readonly, assign) NSUInteger eventId;
