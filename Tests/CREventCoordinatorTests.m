@@ -109,6 +109,30 @@
     XCTAssert(result.count == 1);
 }
 
+- (void)testInactiveEvent {
+    CREvent *aEvent = [[CREvent alloc] initWithEventId:1984
+                                            threshold:1000
+                                   scheduledStartDate:nil
+                                     scheduledEndDate:nil
+                                        lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-2000]
+                                            eventType:CREventTypeEnter];
+    
+    
+    CREvent *bEvent = [[CREvent alloc] initWithEventId:1982
+                                             threshold:1000
+                                    scheduledStartDate:nil
+                                      scheduledEndDate:nil
+                                         lastTriggered:[NSDate dateWithTimeIntervalSinceNow:-2000]
+                                             eventType:CREventTypeEnter];
+    bEvent.isActive = NO;
+    CREventStorage *storage = OCMPartialMock([[CREventStorage alloc] init]);
+    CREventCoordinator *coordinator = [[CREventCoordinator alloc] initWithEventStorage:storage];
+    NSArray *array = @[aEvent, bEvent];
+    OCMStub([storage findAllEventsForBeacon:[OCMArg any]]).andReturn(array);
+    NSArray *result = [coordinator validEnterEventsForBeacon:_beacon];
+    XCTAssert(result.count == 1);
+}
+
 - (void)testPositiveScheduledValidation {
     [_event __setScheduledStartDate:[NSDate dateWithTimeIntervalSinceNow:-10000]];
     [_event __setScheduledEndDate:[NSDate dateWithTimeIntervalSinceNow:100000]];

@@ -14,6 +14,10 @@
 - (void)__setScheduledStartDate:(NSDate *)startDate;
 - (void)__setLastTriggered:(NSDate *)lastTriggered;
 
+- (void)setIsActive:(BOOL)active;
+- (BOOL)isActive;
+
+
 @end
 
 @interface CRNotificationEvent (Internal)

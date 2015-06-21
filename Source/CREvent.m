@@ -7,8 +7,10 @@
 //
 
 #import "CREvent.h"
+#import "CREvent_Internal.h"
 
 @implementation CREvent {
+    BOOL _isActive;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +32,7 @@
         _eventType = eventType;
         _scheduledEndDate = endDate;
         _scheduledStartDate = startDate;
+        _isActive = true;
     }
     
     return self;
@@ -42,6 +45,8 @@
                 scheduledEndDate:[coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_scheduledEndDate"]
                    lastTriggered:[coder decodeObjectOfClass:[NSDate class] forKey:@"CREvent_lastTriggered"]
                        eventType:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_eventType"]).integerValue];
+    [self setIsActive:((NSNumber *)[coder decodeObjectOfClass:[NSNumber class] forKey:@"CREvent_isActive"]).boolValue];
+    
     return self;
 }
 
@@ -52,6 +57,7 @@
     [aCoder encodeObject:_scheduledStartDate forKey:@"CREvent_scheduledStartDate"];
     [aCoder encodeObject:_scheduledEndDate forKey:@"CREvent_scheduledEndDate"];
     [aCoder encodeObject:@(_eventType) forKey:@"CREvent_eventType"];
+    [aCoder encodeObject:@(_isActive) forKey:@"CREvent_isActive"];
 }
 
 + (BOOL)supportsSecureCoding {
@@ -74,14 +80,21 @@
     _lastTriggered = lastTriggered;
 }
 
+- (void)setIsActive:(BOOL)active {
+    _isActive = active;
+}
+
+- (BOOL)isActive {
+    return _isActive;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - NSObject
 
 - (BOOL)isEqual:(id)object {
     CREvent *aObject = (CREvent *)object;
-    if (!aObject || self.eventId != aObject.eventId)
-    {
+    if (!aObject || self.eventId != aObject.eventId) {
         return NO;
     }
     
