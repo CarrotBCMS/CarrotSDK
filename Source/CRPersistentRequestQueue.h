@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CRPersistentRequestQueue : NSObject
 
 - (id)initWithStoragePath:(NSString *)path;
-- (void)sendQueuedRequestsWithBlock:(void(^)(NSOperationQueue *queue, NSURLRequest *request))block;
+- (void)sendQueuedRequests;
 - (void)cancelQueuedRequests;
 - (void)waitUntilAllRequestsAreFinished;
 

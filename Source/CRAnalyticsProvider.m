@@ -13,7 +13,6 @@
 #import "CRBeacon.h"
 #import "CRBeacon_Internal.h"
 #import "CRPersistentRequestQueue.h"
-#import "AFNetworking.h"
 
 @interface CRAnalyticsProvider ()
 
@@ -35,7 +34,7 @@
     if(self) {
         _baseURL = url;
         _requestStore = [[CRPersistentRequestQueue alloc] initWithStoragePath:CRAnalyticsLogsDataFilePath];
-        [self _sendRequests]; // Dequeue old requests 
+        [_requestStore sendQueuedRequests]; // Dequeue old requests
     }
     
     return self;
@@ -48,14 +47,14 @@
 
 - (void)logEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon {
     [self _dispatchOperationWithJSONString:[self _JSONStringForLogWithEvent:event beacon:beacon]];
-    [self _sendRequests];
+    [_requestStore sendQueuedRequests];
 }
 
 - (void)logEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon {
     for (CREvent *event in events) {
         [self _dispatchOperationWithJSONString:[self _JSONStringForLogWithEvent:event beacon:beacon]];
     }
-    [self _sendRequests];
+    [_requestStore sendQueuedRequests];
 }
 
 - (NSString *)_JSONStringForLogWithEvent:(CREvent *)event beacon:(CRBeacon *)beacon {
@@ -96,21 +95,6 @@
     [request setHTTPBody:[string dataUsingEncoding:NSUTF8StringEncoding]];
     
     [_requestStore addRequest:request];
-}
-
-- (void)_sendRequests {
-    [_requestStore sendQueuedRequestsWithBlock:^(NSOperationQueue * __nonnull queue, NSURLRequest * __nonnull request) {
-        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        operation.responseSerializer = [AFJSONResponseSerializer serializer];
-        
-        CRLog(@"Sending log operation...");
-        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            CRLog(@"Logging response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            CRLog(@"Logging error: %@", error);
-        }];
-        [queue addOperation:operation];
-    }];
 }
 
 @end

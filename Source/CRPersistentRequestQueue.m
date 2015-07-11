@@ -8,6 +8,7 @@
 
 #import "CRPersistentRequestQueue.h"
 #import "CRDefines.h"
+#import "AFNetworking.h"
 
 @interface CRPersistentRequestQueue ()
 
@@ -83,18 +84,26 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-- (void)sendQueuedRequestsWithBlock:(void(^)(NSOperationQueue *queue, NSURLRequest *request))block {
+- (void)sendQueuedRequests {
     if (_queue.count == 0) {
         return;
     }
     // Copy all (currently stored) requests into a new array
     NSArray *queueCopy = [NSArray arrayWithArray:_queue];
     [queueCopy enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        block(_internalOperationQueue, obj);
-        [_queue removeObject:obj];
-    }];
-    [self _save];
-}
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:obj];
+        operation.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        CRLog(@"Sending log operation...");
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            CRLog(@"Logging response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+            [_queue removeObject:obj]; // Remove request from queue when finished
+            [self _save];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            CRLog(@"Logging error: %@", error);
+        }];
+        [_internalOperationQueue addOperation:operation];
+    }];}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
