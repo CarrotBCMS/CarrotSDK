@@ -22,6 +22,7 @@
     if (self) {
         _storagePath = path;
         _queue = [[NSOperationQueue alloc] init];
+        _queue.maxConcurrentOperationCount = 1;
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
         

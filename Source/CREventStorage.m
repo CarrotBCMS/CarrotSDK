@@ -41,6 +41,7 @@
         _fileManager = [NSFileManager defaultManager];
         _objects = [[NSCache alloc] init];
         _queue = [[NSOperationQueue alloc] init];
+        _queue.maxConcurrentOperationCount = 1;
         
         if (![_fileManager fileExistsAtPath:_basePath]) {
             NSError *error;

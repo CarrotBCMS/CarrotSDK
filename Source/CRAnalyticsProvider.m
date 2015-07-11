@@ -12,6 +12,7 @@
 #import "CREvent_Internal.h"
 #import "CRBeacon.h"
 #import "CRBeacon_Internal.h"
+#import "CRPersistentRequestQueue.h"
 #import "AFNetworking.h"
 
 @interface CRAnalyticsProvider ()
@@ -22,7 +23,7 @@
 @end
 
 @implementation CRAnalyticsProvider {
-    NSOperationQueue *_queue;
+    CRPersistentRequestQueue *_requestStore;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,6 +34,8 @@
     self = [super init];
     if(self) {
         _baseURL = url;
+        _requestStore = [[CRPersistentRequestQueue alloc] initWithStoragePath:CRAnalyticsLogsDataFilePath];
+        [self _sendRequests]; // Dequeue old requests 
     }
     
     return self;
@@ -44,14 +47,15 @@
 #pragma mark - Analytics
 
 - (void)logEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon {
-    NSString *string = [self _JSONStringForLogWithEvent:event beacon:beacon];
-    [self _dispatchOperationWithJSONString:string];
+    [self _dispatchOperationWithJSONString:[self _JSONStringForLogWithEvent:event beacon:beacon]];
+    [self _sendRequests];
 }
 
 - (void)logEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon {
     for (CREvent *event in events) {
-        [self logEvent:event forBeacon:beacon];
+        [self _dispatchOperationWithJSONString:[self _JSONStringForLogWithEvent:event beacon:beacon]];
     }
+    [self _sendRequests];
 }
 
 - (NSString *)_JSONStringForLogWithEvent:(CREvent *)event beacon:(CRBeacon *)beacon {
@@ -61,6 +65,7 @@
     
     NSMutableDictionary *beaconDictionary = [NSMutableDictionary dictionary];
     [beaconDictionary setObject:@(beacon.beaconId) forKey:@"id"];
+    
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     [dictionary setObject:eventDictionary forKey:@"occuredEvent"];
     [dictionary setObject:beaconDictionary forKey:@"beacon"];
@@ -89,26 +94,23 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
     [request setHTTPBody:[string dataUsingEncoding:NSUTF8StringEncoding]];
-                          
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-
-    CRLog(@"Adding log operation...");
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        CRLog(@"Logging response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        CRLog(@"Logging error: %@", error);
-    }];
     
-    [[self _queue] addOperation:operation];
+    [_requestStore addRequest:request];
 }
 
-- (NSOperationQueue *)_queue {
-    if (!_queue) {
-        _queue = [[NSOperationQueue alloc] init];
-    }
-    
-    return _queue;
+- (void)_sendRequests {
+    [_requestStore sendQueuedRequestsWithBlock:^(NSOperationQueue * __nonnull queue, NSURLRequest * __nonnull request) {
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        operation.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        CRLog(@"Sending log operation...");
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            CRLog(@"Logging response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            CRLog(@"Logging error: %@", error);
+        }];
+        [queue addOperation:operation];
+    }];
 }
 
 @end

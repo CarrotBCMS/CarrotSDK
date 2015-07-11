@@ -32,6 +32,8 @@
 		604225E41B1F792500115CD0 /* CREvent_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 604225E31B1F792500115CD0 /* CREvent_Internal.h */; };
 		604601B61B15AF4C00F32E80 /* CREventStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 604601B41B15AF4C00F32E80 /* CREventStorage.h */; };
 		604601B71B15AF4C00F32E80 /* CREventStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 604601B51B15AF4C00F32E80 /* CREventStorage.m */; };
+		6051C16D1B512A5800F5D443 /* CRPersistentRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6051C16B1B512A5800F5D443 /* CRPersistentRequestQueue.h */; };
+		6051C16E1B512A5800F5D443 /* CRPersistentRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6051C16C1B512A5800F5D443 /* CRPersistentRequestQueue.m */; };
 		6061DA691B111AF5002DC83B /* CarrotSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 6061DA681B111AF5002DC83B /* CarrotSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6061DA6F1B111AF5002DC83B /* CarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA631B111AF5002DC83B /* CarrotSDK.framework */; };
 		6061DA841B111D21002DC83B /* CRBeaconManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6061DA821B111D21002DC83B /* CRBeaconManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -124,6 +126,8 @@
 		604225E31B1F792500115CD0 /* CREvent_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREvent_Internal.h; sourceTree = "<group>"; };
 		604601B41B15AF4C00F32E80 /* CREventStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREventStorage.h; sourceTree = "<group>"; };
 		604601B51B15AF4C00F32E80 /* CREventStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventStorage.m; sourceTree = "<group>"; };
+		6051C16B1B512A5800F5D443 /* CRPersistentRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRPersistentRequestQueue.h; sourceTree = "<group>"; };
+		6051C16C1B512A5800F5D443 /* CRPersistentRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPersistentRequestQueue.m; sourceTree = "<group>"; };
 		6061DA631B111AF5002DC83B /* CarrotSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CarrotSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6061DA671B111AF5002DC83B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6061DA681B111AF5002DC83B /* CarrotSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarrotSDK.h; sourceTree = "<group>"; };
@@ -258,6 +262,15 @@
 			name = Storage;
 			sourceTree = "<group>";
 		};
+		6051C16F1B512C0200F5D443 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				6051C16B1B512A5800F5D443 /* CRPersistentRequestQueue.h */,
+				6051C16C1B512A5800F5D443 /* CRPersistentRequestQueue.m */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
 		6061DA591B111AF5002DC83B = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +331,7 @@
 		6061DA7F1B111CA5002DC83B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				6051C16F1B512C0200F5D443 /* Requests */,
 				6061DA8A1B111D95002DC83B /* CRSyncManager.h */,
 				6061DA8B1B111D95002DC83B /* CRSyncManager.m */,
 				606F0B261B1CC0C000E28436 /* CRAnalyticsProvider.h */,
@@ -454,6 +468,7 @@
 				60AC5EF61B1DFC2A00957B9C /* UIWebView+AFNetworking.h in Headers */,
 				60AC5EE91B1DFC2A00957B9C /* UIActivityIndicatorView+AFNetworking.h in Headers */,
 				6036C8AB1B174AC900D4CA87 /* CREventStorage+Filter.h in Headers */,
+				6051C16D1B512A5800F5D443 /* CRPersistentRequestQueue.h in Headers */,
 				6061DA841B111D21002DC83B /* CRBeaconManager.h in Headers */,
 				60AC5EC81B1DFC2600957B9C /* AFNetworking.h in Headers */,
 				6061DA901B111DB3002DC83B /* CRBeacon.h in Headers */,
@@ -588,6 +603,7 @@
 				603CC7E51B14BF8C0077A48C /* CRBeaconCache.m in Sources */,
 				60AC5EF01B1DFC2A00957B9C /* UIImageView+AFNetworking.m in Sources */,
 				60AC5ECA1B1DFC2600957B9C /* AFNetworkReachabilityManager.m in Sources */,
+				6051C16E1B512A5800F5D443 /* CRPersistentRequestQueue.m in Sources */,
 				60AC5ED41B1DFC2600957B9C /* AFURLSessionManager.m in Sources */,
 				6036C8AC1B174AC900D4CA87 /* CREventStorage+Filter.m in Sources */,
 				60AC5EEC1B1DFC2A00957B9C /* UIAlertView+AFNetworking.m in Sources */,
