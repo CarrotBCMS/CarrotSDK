@@ -38,6 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readonly, strong) CRBeaconStorage *beaconStorage;
 
+/**
+ The base url to bms
+ */
+@property (readonly, strong) NSURL *baseURL;
+
 ///---------------------------------------------------------------------------------------
 /// @name Lifecycle
 ///---------------------------------------------------------------------------------------
@@ -47,7 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithDelegate:(id<CRSyncManagerDelegate> __nullable)delegate
                     eventStorage:(CREventStorage*)eventStorage
-                   beaconStorage:(CRBeaconStorage *)beaconStorage;
+                   beaconStorage:(CRBeaconStorage *)beaconStorage
+                         baseURL:(NSURL *)url;
 
 ///---------------------------------------------------------------------------------------
 /// @name Sync

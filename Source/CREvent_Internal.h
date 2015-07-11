@@ -17,6 +17,7 @@
 - (void)setIsActive:(BOOL)active;
 - (BOOL)isActive;
 
+- (NSString *)_objectType;
 
 @end
 

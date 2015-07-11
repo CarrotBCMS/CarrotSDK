@@ -23,6 +23,7 @@
 - (instancetype)initWithDelegate:(id<CRSyncManagerDelegate>)delegate
                     eventStorage:(CREventStorage*)eventStorage
                    beaconStorage:(CRBeaconStorage *)beaconStorage
+                         baseURL:(NSURL *)url
 {
     self = [super init];
     
@@ -30,6 +31,7 @@
         _delegate = delegate;
         _eventStorage = eventStorage;
         _beaconStorage = beaconStorage;
+        _baseURL = url;
     }
     
     return self;

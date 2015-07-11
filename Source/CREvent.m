@@ -88,6 +88,11 @@
     return _isActive;
 }
 
+// Should be overriden
+- (NSString *)_objectType {
+    return nil;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - NSObject

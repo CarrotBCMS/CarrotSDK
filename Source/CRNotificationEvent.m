@@ -47,4 +47,8 @@
     _payload = payload;
 }
 
+- (NSString *)_objectType {
+    return @"notification";
+}
+
 @end

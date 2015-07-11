@@ -35,4 +35,8 @@
     _text = text;
 }
 
+- (NSString *)_objectType {
+    return @"text";
+}
+
 @end
