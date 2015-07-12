@@ -94,7 +94,7 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"content-type"];
     [request setHTTPBody:[string dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [_requestStore addRequest:request];
+    [_requestStore addObject:request];
 }
 
 @end

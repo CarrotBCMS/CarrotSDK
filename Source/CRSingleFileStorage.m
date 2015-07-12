@@ -7,6 +7,7 @@
 //
 
 #import "CRSingleFileStorage.h"
+#import "CRSingleFileStorage_Internal.h"
 
 @implementation CRSingleFileStorage {
     NSOperationQueue *_queue;
@@ -78,7 +79,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Private
+#pragma mark - Internal
 
 - (void)_save {
     [_queue addOperationWithBlock:^{

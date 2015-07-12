@@ -120,6 +120,7 @@
 		6036C8A71B17346B00D4CA87 /* CREventCoordinatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventCoordinatorTests.m; sourceTree = "<group>"; };
 		6036C8A91B174AC900D4CA87 /* CREventStorage+Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CREventStorage+Filter.h"; sourceTree = "<group>"; };
 		6036C8AA1B174AC900D4CA87 /* CREventStorage+Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CREventStorage+Filter.m"; sourceTree = "<group>"; };
+		603780F01B51E7A7006EB2D4 /* CRSingleFileStorage_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRSingleFileStorage_Internal.h; sourceTree = "<group>"; };
 		603CC7981B1492B40077A48C /* CRBeaconManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconManagerTests.m; sourceTree = "<group>"; };
 		603CC7E21B14BF8C0077A48C /* CRBeaconCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconCache.h; sourceTree = "<group>"; };
 		603CC7E31B14BF8C0077A48C /* CRBeaconCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconCache.m; sourceTree = "<group>"; };
@@ -252,6 +253,7 @@
 			children = (
 				6002B0D91B126D8000459AAC /* CRSingleFileStorage.h */,
 				6002B0DA1B126D8000459AAC /* CRSingleFileStorage.m */,
+				603780F01B51E7A7006EB2D4 /* CRSingleFileStorage_Internal.h */,
 				6002B0DD1B12768D00459AAC /* CRBeaconStorage.h */,
 				6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */,
 				604601B41B15AF4C00F32E80 /* CREventStorage.h */,
