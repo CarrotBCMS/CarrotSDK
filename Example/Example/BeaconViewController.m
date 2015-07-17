@@ -108,6 +108,7 @@
     backgroundLabel.text = @"No beacons in range";
     backgroundLabel.textAlignment = NSTextAlignmentCenter;
     self.tableView.backgroundView = backgroundLabel;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:_beaconManager action:@selector(startSyncing)];
 }
 
 - (void)setupCarrotSDK {
