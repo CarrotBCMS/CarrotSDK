@@ -28,7 +28,7 @@
 
     
     NSURL *urlToBMS = [NSURL URLWithString:@"http://192.168.0.105:8080"];
-    CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:@"aa1ac789-4ad4-4ee0-9626-337e1f3b4594"];
+    CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:@"107ce147-0b49-4455-ae2c-2e623fedbeb3"];
     beaconViewController.beaconManager = beaconManager;
     statusViewController.beaconManager = beaconManager;
     

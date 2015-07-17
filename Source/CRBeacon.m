@@ -77,8 +77,7 @@
     if (!object ||
         ![aObject.uuid isEqual:self.uuid] ||
         ![aObject.major isEqualToNumber:self.major] ||
-        ![aObject.minor isEqualToNumber:self.minor] ||
-        aObject.beaconId != self.beaconId
+        ![aObject.minor isEqualToNumber:self.minor] 
         )
     {
         return NO;
