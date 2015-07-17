@@ -42,6 +42,7 @@
 #pragma mark - Syncing
 
 - (void)startSyncing {
+    // This is all boilerplate as long as there is no proper sync method in action
     // Setup beacons
     CRBeacon *beacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"73676723-7400-0000-ffff-0000ffff0003"]
                                                 major:@2
