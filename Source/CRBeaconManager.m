@@ -191,7 +191,8 @@
     _syncManager = [[CRSyncManager alloc] initWithDelegate:self
                                               eventStorage:_eventStorage
                                              beaconStorage:_beaconStorage
-                                                   baseURL:_url];
+                                                   baseURL:_url
+                                                    appKey:_appKey];
     _analyticsProvider = [[CRAnalyticsProvider alloc] initWithBaseURL:_url];
     
     _bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self

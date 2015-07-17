@@ -10,8 +10,11 @@
 
 @interface CRBeacon (Internal)
 
-- (void)setBeaconId:(NSUInteger)beaconId;
+- (void)__setBeaconId:(NSUInteger)beaconId;
+
 - (NSUInteger)beaconId;
 - (NSMutableArray *)events;
+
++ (instancetype)beaconFromJSON:(NSDictionary *)dictionary;
 
 @end

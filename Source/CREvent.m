@@ -9,6 +9,11 @@
 #import "CREvent.h"
 #import "CREvent_Internal.h"
 
+#import "CRTextEvent.h"
+#import "CRNotificationEvent.h"
+
+#import "NSDate+ISO.h"
+
 @implementation CREvent {
     BOOL _isActive;
 }
@@ -88,6 +93,10 @@
     return _isActive;
 }
 
+- (void)__setEventId:(NSUInteger)eventId {
+    _eventId = eventId;
+}
+
 // Should be overriden
 - (NSString *)_objectType {
     return nil;
@@ -104,6 +113,85 @@
     }
     
     return YES;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Internal factory method
+
++ (instancetype)eventFromJSON:(NSDictionary *)dictionary {
+    NSNumber *eventId = dictionary[@"id"];
+    NSNumber *active = dictionary[@"active"];
+    NSNumber *threshold = dictionary[@"threshold"];
+    NSString *scheduledStartDate = dictionary[@"scheduledStartDate"];
+    NSString *scheduledEndDate = dictionary[@"scheduledEndDate"];
+    NSNumber *eventType = dictionary[@"eventType"];
+    NSString *objectType = dictionary[@"objectType"];
+    
+    NSString *text = dictionary[@"text"];
+    NSString *title = dictionary[@"title"];
+    NSString *message = dictionary[@"message"];
+    NSString *payload = dictionary[@"payload"];
+    
+    CREventType aEventType = eventType.integerValue;
+    
+    if (!eventId || !active || !threshold || !eventType || !objectType) {
+        return nil;
+    }
+    
+    NSDate *aScheduledStartDate = nil;
+    NSDate *aScheduledEndDate = nil;
+
+    if (aScheduledStartDate) {
+        aScheduledStartDate = [NSDate dateFromISO8601String:scheduledStartDate];
+    }
+    if (scheduledEndDate) {
+        aScheduledEndDate = [NSDate dateFromISO8601String:scheduledEndDate];
+    }
+    
+    CREvent *event = nil;
+    
+    // Create TextEvent here...
+    if ([objectType isEqualToString:@"text"]) {
+        CRTextEvent *textEvent = [[CRTextEvent alloc] initWithEventId:eventId.integerValue
+                                           threshold:threshold.doubleValue
+                                  scheduledStartDate:aScheduledStartDate
+                                    scheduledEndDate:aScheduledEndDate
+                                       lastTriggered:nil
+                                           eventType:aEventType];
+        if (text) {
+            [textEvent __setText:text];
+        }
+        event = textEvent;
+        
+    }
+    
+    // Create NotificationEvent here...
+    if ([objectType isEqualToString:@"notification"]) {
+        CRNotificationEvent *notificationEvent = [[CRNotificationEvent alloc] initWithEventId:eventId.integerValue
+                                                            threshold:threshold.doubleValue
+                                                   scheduledStartDate:aScheduledStartDate
+                                                     scheduledEndDate:aScheduledEndDate
+                                                        lastTriggered:nil
+                                                            eventType:aEventType];
+        if (message) {
+            [notificationEvent __setMessage:message];
+        }
+        if (title) {
+            [notificationEvent __setTitle:title];
+        }
+        if (payload) {
+            [notificationEvent __setPayload:payload];
+        }
+        event = notificationEvent;
+    }
+    
+    if (event) {
+        [event __setEventId:eventId.integerValue];
+        event.isActive = active.boolValue;
+    }
+
+    return event;
 }
 
 @end

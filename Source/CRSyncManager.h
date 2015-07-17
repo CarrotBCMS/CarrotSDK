@@ -43,6 +43,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readonly, strong) NSURL *baseURL;
 
+/**
+ The app key
+ */
+@property (readonly, strong) NSString *appKey;
+
 ///---------------------------------------------------------------------------------------
 /// @name Lifecycle
 ///---------------------------------------------------------------------------------------
@@ -53,7 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDelegate:(id<CRSyncManagerDelegate> __nullable)delegate
                     eventStorage:(CREventStorage*)eventStorage
                    beaconStorage:(CRBeaconStorage *)beaconStorage
-                         baseURL:(NSURL *)url;
+                         baseURL:(NSURL *)url
+                          appKey:(NSString *)appKey;
 
 ///---------------------------------------------------------------------------------------
 /// @name Sync

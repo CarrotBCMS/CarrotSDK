@@ -27,8 +27,8 @@
     StatusViewController *statusViewController = (StatusViewController *)((UINavigationController *)tabBarController.viewControllers[1]).topViewController;
 
     
-    NSURL *urlToBMS = [NSURL URLWithString:@"http://test.com"];
-    CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:@"123456"];
+    NSURL *urlToBMS = [NSURL URLWithString:@"http://192.168.0.105:8080"];
+    CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:@"aa1ac789-4ad4-4ee0-9626-337e1f3b4594"];
     beaconViewController.beaconManager = beaconManager;
     statusViewController.beaconManager = beaconManager;
     
