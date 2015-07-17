@@ -11,6 +11,7 @@
 
 @implementation CRBeacon {
     NSUInteger _beaconId;
+    NSMutableArray *_events;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +32,7 @@
         _minor = minor;
         _beacon = nil;
         _beaconId = 0;
+        _events = [NSMutableArray array];
     }
     
     return self;
@@ -49,6 +51,7 @@
                         minor:[coder decodeObjectOfClass:[NSNumber class] forKey:@"minor"]
                          name:[coder decodeObjectOfClass:[NSString class] forKey:@"name"]];
     self.beaconId = [[coder decodeObjectOfClass:[NSNumber class] forKey:@"beaconId"] integerValue];
+    _events = [coder decodeObjectOfClass:[NSArray class] forKey:@"events"];
     return self;
 }
 
@@ -58,6 +61,7 @@
     [aCoder encodeObject:_minor forKey:@"minor"];
     [aCoder encodeObject:_name forKey:@"name"];
     [aCoder encodeObject:@(_beaconId) forKey:@"beaconId"];
+    [aCoder encodeObject:_events forKey:@"events"];
 }
 
 + (BOOL)supportsSecureCoding {
@@ -73,8 +77,7 @@
     if (!object ||
         ![aObject.uuid isEqual:self.uuid] ||
         ![aObject.major isEqualToNumber:self.major] ||
-        ![aObject.minor isEqualToNumber:self.minor] ||
-        aObject.beaconId != self.beaconId
+        ![aObject.minor isEqualToNumber:self.minor] 
         )
     {
         return NO;
@@ -97,6 +100,38 @@
 
 - (NSUInteger)beaconId {
     return _beaconId;
+}
+
+- (NSMutableArray *)events {
+    return _events;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Internal factory method
+
++ (instancetype)beaconFromJSON:(NSDictionary *)dictionary {
+    NSString *uuid = dictionary[@"uuid"];
+    NSNumber *major = dictionary[@"major"];
+    NSNumber *minor = dictionary[@"minor"];
+    NSString *name = dictionary[@"name"];
+    NSNumber *beaconId = dictionary[@"id"];
+    NSArray *events = dictionary[@"events"];
+    
+    if (!uuid || !major || !minor || !name || !beaconId || !events) {
+        return nil;
+    }
+    
+    NSUUID *sUuuid = [[NSUUID alloc] initWithUUIDString:uuid];
+    if (!sUuuid) {
+        return nil;
+    }
+    
+    CRBeacon *beacon = [[CRBeacon alloc] initWithUUID:sUuuid major:major minor:minor name:name];
+    beacon.beaconId = beaconId.integerValue;
+    [beacon.events addObjectsFromArray:events];
+
+    return beacon;
 }
 
 @end

@@ -92,7 +92,7 @@
             if ((!event.scheduledStartDate && !event.scheduledEndDate) || [self _eventInSchedule:event]) {
                 // Assign a new date for "lastTriggered" - We assume that those events will get triggered eventually.
                 [event __setLastTriggered:[NSDate date]];
-                [_storage refresh:beacon];
+                [_storage refresh:event];
                 
                 // Add object to results
                 [results addObject:event];

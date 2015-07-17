@@ -46,6 +46,8 @@
 		606F0B281B1CC0C000E28436 /* CRAnalyticsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 606F0B261B1CC0C000E28436 /* CRAnalyticsProvider.h */; };
 		606F0B291B1CC0C000E28436 /* CRAnalyticsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 606F0B271B1CC0C000E28436 /* CRAnalyticsProvider.m */; };
 		6099F30C1B315B8B00FE23A8 /* CRBeacon_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 6099F30B1B315B8B00FE23A8 /* CRBeacon_Internal.h */; };
+		60A917721B5920C000BA57FE /* NSDate+ISO.h in Headers */ = {isa = PBXBuildFile; fileRef = 60A917701B5920C000BA57FE /* NSDate+ISO.h */; };
+		60A917731B5920C000BA57FE /* NSDate+ISO.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A917711B5920C000BA57FE /* NSDate+ISO.m */; };
 		60AC5EC21B1DFC2600957B9C /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AC5EAF1B1DFC2600957B9C /* AFHTTPRequestOperation.h */; };
 		60AC5EC31B1DFC2600957B9C /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5EB01B1DFC2600957B9C /* AFHTTPRequestOperation.m */; };
 		60AC5EC41B1DFC2600957B9C /* AFHTTPRequestOperationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AC5EB11B1DFC2600957B9C /* AFHTTPRequestOperationManager.h */; };
@@ -144,6 +146,8 @@
 		606F0B261B1CC0C000E28436 /* CRAnalyticsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRAnalyticsProvider.h; sourceTree = "<group>"; };
 		606F0B271B1CC0C000E28436 /* CRAnalyticsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRAnalyticsProvider.m; sourceTree = "<group>"; };
 		6099F30B1B315B8B00FE23A8 /* CRBeacon_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeacon_Internal.h; sourceTree = "<group>"; };
+		60A917701B5920C000BA57FE /* NSDate+ISO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ISO.h"; sourceTree = "<group>"; };
+		60A917711B5920C000BA57FE /* NSDate+ISO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ISO.m"; sourceTree = "<group>"; };
 		60AC5EAF1B1DFC2600957B9C /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		60AC5EB01B1DFC2600957B9C /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		60AC5EB11B1DFC2600957B9C /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 				6061DA811B111CB8002DC83B /* Common */,
 				6061DA801B111CAD002DC83B /* Persistence */,
 				6061DA7F1B111CA5002DC83B /* Network */,
+				60A9176F1B59209B00BA57FE /* Utils */,
 				6061DA661B111AF5002DC83B /* Supporting Files */,
 			);
 			path = Source;
@@ -387,6 +392,15 @@
 			name = Caching;
 			sourceTree = "<group>";
 		};
+		60A9176F1B59209B00BA57FE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				60A917701B5920C000BA57FE /* NSDate+ISO.h */,
+				60A917711B5920C000BA57FE /* NSDate+ISO.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		60AC5EAE1B1DFC2600957B9C /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +467,7 @@
 				6002B0DF1B12768D00459AAC /* CRBeaconStorage.h in Headers */,
 				60AC5ECD1B1DFC2600957B9C /* AFURLConnectionOperation.h in Headers */,
 				60AC5EC61B1DFC2600957B9C /* AFHTTPSessionManager.h in Headers */,
+				60A917721B5920C000BA57FE /* NSDate+ISO.h in Headers */,
 				60AC5EEF1B1DFC2A00957B9C /* UIImageView+AFNetworking.h in Headers */,
 				60AC5EF41B1DFC2A00957B9C /* UIRefreshControl+AFNetworking.h in Headers */,
 				603CC7E41B14BF8C0077A48C /* CRBeaconCache.h in Headers */,
@@ -612,6 +627,7 @@
 				6061DA851B111D21002DC83B /* CRBeaconManager.m in Sources */,
 				604601B71B15AF4C00F32E80 /* CREventStorage.m in Sources */,
 				60C8BAD81B132A5B009024F8 /* CRNotificationEvent.m in Sources */,
+				60A917731B5920C000BA57FE /* NSDate+ISO.m in Sources */,
 				60AC5ED21B1DFC2600957B9C /* AFURLResponseSerialization.m in Sources */,
 				60AC5EEE1B1DFC2A00957B9C /* UIButton+AFNetworking.m in Sources */,
 				6002B0DC1B126D8000459AAC /* CRSingleFileStorage.m in Sources */,

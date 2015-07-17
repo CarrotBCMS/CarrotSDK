@@ -161,7 +161,8 @@
 }
 
 - (void)syncManager:(CRSyncManager *)syncManager didFailWithError:(NSError *)error {
-    CRLog("Syncing process failed with error: %@", error);
+    CRLog("Syncing process failed");
+    _isSyncing = NO;
     
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:syncingDidFailWithError:)]) {
         [_delegate manager:self syncingDidFailWithError:error];
@@ -191,7 +192,8 @@
     _syncManager = [[CRSyncManager alloc] initWithDelegate:self
                                               eventStorage:_eventStorage
                                              beaconStorage:_beaconStorage
-                                                   baseURL:_url];
+                                                   baseURL:_url
+                                                    appKey:_appKey];
     _analyticsProvider = [[CRAnalyticsProvider alloc] initWithBaseURL:_url];
     
     _bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self

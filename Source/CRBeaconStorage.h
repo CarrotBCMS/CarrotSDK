@@ -21,6 +21,13 @@
 ///---------------------------------------------------------------------------------------
 
 /**
+Finds a specific beacon.
+
+@param beaconId The id
+*/
+- (CRBeacon *)findCRBeaconWithId:(NSUInteger)beaconId;
+
+/**
  Finds a specific beacon.
  
  @param path The uuid

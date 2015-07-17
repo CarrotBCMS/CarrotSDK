@@ -13,11 +13,14 @@
 - (void)__setScheduledEndDate:(NSDate *)endDate;
 - (void)__setScheduledStartDate:(NSDate *)startDate;
 - (void)__setLastTriggered:(NSDate *)lastTriggered;
+- (void)__setEventId:(NSUInteger)eventId;
 
 - (void)setIsActive:(BOOL)active;
 - (BOOL)isActive;
 
 - (NSString *)_objectType;
+
++ (instancetype)eventFromJSON:(NSDictionary *)dictionary;
 
 @end
 
