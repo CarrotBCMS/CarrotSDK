@@ -9,14 +9,15 @@
 #import "CRDefines.h"
 #import "CREventStorage.h"
 #import "CRBeacon.h"
+#import "CRBeacon_Internal.h"
 #import "CRNotificationEvent.h"
 
 @interface CREventStorage ()
 
-- (void)_save:(CRBeacon *)beacon;
-- (NSMutableArray *)_allEventsForBeacon:(CRBeacon *)beacon;
-- (NSMutableArray *)_addOrReplaceEvent:(CREvent *)event fromEvents:(NSMutableArray *)allEvents;
-- (NSMutableArray *)_removeEvent:(CREvent *)event fromEvents:(NSMutableArray *)allEvents;
+- (void)_save:(CREvent *)event;
+- (CREvent *)_load:(NSUInteger)eventId;
+- (void)_remove:(NSUInteger)eventId;
+- (NSArray *)_findAllEventsForBeacon:(CRBeacon *)beacon onlyNotifications:(BOOL)notifications;
 
 @end
 
@@ -59,134 +60,109 @@
 
 #pragma mark - CRUD
 
-- (void)addEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon {
-    NSMutableArray *allEvents = [self _allEventsForBeacon:beacon];
-    [self _addOrReplaceEvent:event fromEvents:allEvents];
-    [self _save:beacon];
+- (void)addEvent:(CREvent *)event {
+    [self _save:event];
+    [_objects setObject:event forKey:@(event.eventId)];
 }
 
-- (void)addEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon {
-    NSMutableArray *allEvents = [self _allEventsForBeacon:beacon];
-    [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self _addOrReplaceEvent:obj fromEvents:allEvents];
-    }];
-    
-    [self _save:beacon];
-}
-
-- (void)removeEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon {
-    NSMutableArray *allEvents = [self _allEventsForBeacon:beacon];
-    [self _removeEvent:event fromEvents: allEvents];
-    [self _save:beacon];
-}
-
-- (void)removeEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon {
-    NSMutableArray *allEvents = [self _allEventsForBeacon:beacon];
-    [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self _removeEvent:obj fromEvents:allEvents];
-    }];
-    
-    [self _save:beacon];
-}
-
-- (void)removeAllEventsForBeacon:(CRBeacon *)beacon {
-    NSString *path = [_basePath stringByAppendingPathComponent:[self filename:beacon]];
-    [_objects removeObjectForKey:[self filename:beacon]];
-    
-    NSError *error;
-    if ([_fileManager fileExistsAtPath:path isDirectory:NULL]) {
-        [_fileManager removeItemAtPath:path error:&error];
+- (void)addEvents:(NSArray *)events {
+    for (CREvent *event in events) {
+        [self addEvent:event];
     }
+}
+
+- (void)removeEventWithId:(NSUInteger)eventId {
+    [_objects removeObjectForKey:@(eventId)];
+    [self _remove:eventId];
+}
+
+- (void)removeEventsWithIds:(NSArray *)events {
+    for (NSNumber *eventId in events) {
+        [self removeEventWithId:eventId.integerValue];
+    }
+}
+
+- (void)removeAllEvents {
+    [_objects removeAllObjects];
+    NSError *error;
+    NSArray *files = [_fileManager contentsOfDirectoryAtPath:_basePath error:&error];
     
     if (error) {
-        CRLog(@"There was a error removing all events for beacon: %@ - Error: %@", beacon, error);
+        CRLog(@"There was an error accessing the storage directoy: %@", error);
+    }
+    
+    for (NSString *file in files) {
+        if(![_fileManager removeItemAtPath:[_basePath stringByAppendingPathComponent:file] error:&error] && error) {
+            CRLog(@"There was an error removing an entity: %@", error);
+        }
     }
 }
 
+- (void)refresh:(CREvent *)event {
+    [self _save:event];
+}
 
-/**
- Triggers a refresh.
- */
-- (void)refresh:(CRBeacon *)beacon {
-    [self _save:beacon];
+- (CREvent *)findEventForId:(NSUInteger)eventId {
+    CREvent *event = [_objects objectForKey:@(eventId)];
+    if (!event) {
+        event = [self _load:eventId];
+    }
+    return event; // Maybe nil
 }
 
 - (NSArray *)findAllEventsForBeacon:(CRBeacon *)beacon {
-    NSMutableArray *allEvents = [[self _allEventsForBeacon:beacon] mutableCopy];
-    [allEvents filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return ![evaluatedObject isKindOfClass:[CRNotificationEvent class]] &&
-                [evaluatedObject isKindOfClass:[CREvent class]];
-    }]];
-    
-    return [NSArray arrayWithArray:allEvents];
+    return [self _findAllEventsForBeacon:beacon onlyNotifications:NO];
 }
 
 - (NSArray *)findAllNotificationEventsForBeacon:(CRBeacon *)beacon {
-    NSMutableArray *allEvents = [[self _allEventsForBeacon:beacon] mutableCopy];
-    [allEvents filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return [evaluatedObject isKindOfClass:[CRNotificationEvent class]];
-    }]];
-     
-    return [NSArray arrayWithArray:allEvents];
+    return [self _findAllEventsForBeacon:beacon onlyNotifications:YES];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Private
 
-- (NSMutableArray *)_addOrReplaceEvent:(CREvent *)event fromEvents:(NSMutableArray *)allEvents {
-    NSUInteger index = [allEvents indexOfObject:event];
-    if (index == NSNotFound) {
-        [allEvents addObject:event];
-    } else {
-        [allEvents replaceObjectAtIndex:index withObject:event];
-    }
+- (NSArray *)_findAllEventsForBeacon:(CRBeacon *)beacon onlyNotifications:(BOOL)notifications {
+    NSMutableArray *result = [NSMutableArray array];
+    NSArray *events = [NSArray arrayWithArray:beacon.events];
     
-    return allEvents;
-}
-
-- (NSMutableArray *)_removeEvent:(CREvent *)event fromEvents:(NSMutableArray *)allEvents {
-    [allEvents removeObject:event];
-    return allEvents;
-}
-
-- (NSMutableArray *) _allEventsForBeacon:(CRBeacon *)beacon {
-    NSMutableArray *array = [_objects objectForKey:[self filename:beacon]];
-    
-    if (array) {
-        return array;
-    }
-    
-    NSString *path = [_basePath stringByAppendingPathComponent:[self filename:beacon]];
-    
-    @try {
-        if ([_fileManager fileExistsAtPath:path]) {
-            array = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    for (NSNumber *eventId in events) {
+        CREvent *event = [self findEventForId:eventId.integerValue];
+        if (event) {
+            BOOL addObject = (!notifications && [event isKindOfClass:[CREvent class]]
+                              && ![event isKindOfClass:[CRNotificationEvent class]])
+            ||(notifications && [event isKindOfClass:[CRNotificationEvent class]]);
+            
+            if (addObject) {
+                [result addObject:event];
+            }
         }
     }
-    @finally {
-        if (!array) {
-            array = [NSMutableArray array];
-        }
-    }
-    
-    [_objects setObject:array forKey:[self filename:beacon]];
-    
-    return array;
+    return [NSArray arrayWithArray:result];
 }
 
-- (void)_save:(CRBeacon *)beacon {
+- (void)_save:(CREvent *)event {
     [_queue addOperationWithBlock:^{
-        NSString *path = [_basePath stringByAppendingPathComponent:[self filename:beacon]];
-        NSMutableArray *array = [_objects objectForKey:[self filename:beacon]];
-        if (array) {
-            [NSKeyedArchiver archiveRootObject:array toFile:path];
-        }
+        NSString *path = [_basePath stringByAppendingPathComponent:[NSString stringWithFormat: @"%@", @(event.eventId)]];
+        [NSKeyedArchiver archiveRootObject:event toFile:path];
     }];
 }
 
-- (NSString *)filename:(CRBeacon *)beacon {
-    return [NSString stringWithFormat: @"%@_%@_%@", beacon.uuid.UUIDString, beacon.major, beacon.minor];
+- (CREvent *)_load:(NSUInteger)eventId {
+    NSString *path = [_basePath stringByAppendingPathComponent:[NSString stringWithFormat: @"%@", @(eventId)]];
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
 }
+
+- (void)_remove:(NSUInteger)eventId {
+    NSString *path = [_basePath stringByAppendingPathComponent:[NSString stringWithFormat: @"%@", @(eventId)]];
+    [_queue addOperationWithBlock:^{
+        NSError *error;
+        if(![_fileManager removeItemAtPath:path error:&error] && error) {
+            CRLog(@"There was an error removing an entity: %@", error);
+        }
+    }];
+
+}
+
 
 @end

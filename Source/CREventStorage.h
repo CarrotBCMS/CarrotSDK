@@ -52,43 +52,44 @@ NS_ASSUME_NONNULL_BEGIN
  @param event The event
  @param beacon The corresponding beacon
  */
-- (void)addEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon;
+- (void)addEvent:(CREvent *)event;
 
 /**
  Adds an array of events.
  
  @param events The array
- @param beacon The corresponding beacon
  */
-- (void)addEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon;
+- (void)addEvents:(NSArray *)events;
 
 /**
  Remove an event.
  
- @param event The event
- @param beacon The corresponding beacon
+ @param eventId The id
  */
-- (void)removeEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon;
+- (void)removeEventWithId:(NSUInteger)eventId;
 
 /**
  Remove an array of events.
  
- @param events The array
- @param beacon The assigned beacon
+ @param events Array with eventIds
  */
-- (void)removeEvents:(NSArray *)events forBeacon:(CRBeacon *)beacon;
+- (void)removeEventsWithIds:(NSArray *)events;
 
 /**
- Removes all events for the corresponding beacon.
- 
- @param beacon The corresponding beacon
+ Removes all events.
  */
-- (void)removeAllEventsForBeacon:(CRBeacon *)beacon;
+- (void)removeAllEvents;
 
 /**
- Manually triggers a refresh.
+ Refreshes event.
  */
-- (void)refresh:(CRBeacon *)beacon;
+- (void)refresh:(CREvent *)event;
+
+/**
+ Finds a specific event.
+ @param eventId The id
+ */
+- (CREvent *)findEventForId:(NSUInteger)eventId;
 
 /**
  Finds all events for a corresponding beacon. 

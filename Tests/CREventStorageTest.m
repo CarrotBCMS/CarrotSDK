@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "CREventStorage.h"
 #import "CRBeacon.h"
+#import "CRBeacon_Internal.h"
 #import "CREvent.h"
 #import "CRNotificationEvent.h"
 
@@ -62,6 +63,7 @@
                                             scheduledEndDate:nil
                                                lastTriggered:nil
                                                    eventType:CREventTypeEnter];
+    [_beacon.events addObjectsFromArray:@[@(_event.eventId), @(_eventTwo.eventId), @(_notEvent.eventId)]];
 }
 
 - (void)tearDown {
@@ -80,40 +82,40 @@
 
 - (void)testAddEventForBeacon {
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 0);
-    [_eventStorage addEvent:_event forBeacon:_beacon];
+    [_eventStorage addEvent:_event];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 1);
-    [_eventStorage addEvent:_event forBeacon:_beacon];
+    [_eventStorage addEvent:_event];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 1);
 }
 
 - (void)testAddEventsForBeacon {
-    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:_beacon];
+    [_eventStorage addEvents:@[_event, _eventTwo]];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 2);
 }
 
 - (void)testRemoveEventForBeacon {
-    [_eventStorage addEvents:@[_event, _eventTwo, _notEvent] forBeacon:_beacon];
-    [_eventStorage removeEvent:_event forBeacon:_beacon];
+    [_eventStorage addEvents:@[_event, _eventTwo, _notEvent]];
+    [_eventStorage removeEventWithId:_event.eventId];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 1);
     XCTAssert([[_eventStorage findAllEventsForBeacon:_beacon][0] isEqual:_eventTwo]);
 }
 
 - (void)testRemoveEventsForBeacon {
-    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:_beacon];
+    [_eventStorage addEvents:@[_event, _eventTwo]];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 2);
-    [_eventStorage removeEvents:@[_event, _eventTwo] forBeacon:_beacon];
+    [_eventStorage removeEventsWithIds:@[@(_event.eventId), @(_eventTwo.eventId)]];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 0);
 }
 
 - (void)testRemoveAllEventsForBeacon {
-    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:_beacon];
+    [_eventStorage addEvents:@[_event, _eventTwo]];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 2);
-    [_eventStorage removeAllEventsForBeacon:_beacon];
+    [_eventStorage removeAllEvents];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 0);
 }
 
 - (void)testFindAllEventsForBeacon {
-    [_eventStorage addEvents:@[_event, _eventTwo, _notEvent] forBeacon:_beacon];
+    [_eventStorage addEvents:@[_event, _eventTwo, _notEvent]];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 2);
     CREvent *eventThree = [[CREvent alloc] initWithEventId:1213
                                                  threshold:1000
@@ -127,7 +129,7 @@
                                          scheduledEndDate:nil
                                             lastTriggered:nil
                                                 eventType:CREventTypeEnter];
-    [_eventStorage addEvents:@[eventThree, eventFour] forBeacon:_beaconTwo];
+    [_eventStorage addEvents:@[eventThree, eventFour]];
     
     CREvent *eventFive = [[CREvent alloc] initWithEventId:1111
                                                 threshold:1000
@@ -136,68 +138,51 @@
                                             lastTriggered:nil
                                                 eventType:CREventTypeBoth];
     
-    [_eventStorage addEvents:@[eventThree, eventFour, eventFive] forBeacon:_beaconTwo];
+    [_eventStorage addEvents:@[eventThree, eventFour, eventFive]];
     NSArray *array = [_eventStorage findAllEventsForBeacon:_beacon];
     XCTAssert(array.count == 2);
     XCTAssert([array containsObject:_event] && [array containsObject:_eventTwo]);
 }
 
 - (void)testFindNotificationEventsForBeacon {
-    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:_beacon];
+    [_eventStorage addEvents:@[_event, _eventTwo]];
     XCTAssert([_eventStorage findAllNotificationEventsForBeacon:_beacon].count == 0);
     
-    CRNotificationEvent *notEvent = [[CRNotificationEvent alloc] initWithEventId:12
+    CRNotificationEvent *notEvent = [[CRNotificationEvent alloc] initWithEventId:123355
                                                                        threshold:1000
                                                               scheduledStartDate:nil
                                                                 scheduledEndDate:nil
                                                                    lastTriggered:nil
                                                                        eventType:CREventTypeEnter];
-    CRNotificationEvent *notEventTwo = [[CRNotificationEvent alloc] initWithEventId:1
+    CRNotificationEvent *notEventTwo = [[CRNotificationEvent alloc] initWithEventId:1332
                                                                           threshold:1000
                                                                  scheduledStartDate:nil
                                                                    scheduledEndDate:nil
                                                                       lastTriggered:nil
                                                                           eventType:CREventTypeEnter];
-    CRNotificationEvent *notEventThree = [[CRNotificationEvent alloc] initWithEventId:2
+    CRNotificationEvent *notEventThree = [[CRNotificationEvent alloc] initWithEventId:2312
                                                                             threshold:1000
                                                                    scheduledStartDate:nil
                                                                      scheduledEndDate:nil
                                                                         lastTriggered:nil
                                                                             eventType:CREventTypeBoth];
-    [_eventStorage addEvents:@[notEvent, notEventTwo, notEventThree] forBeacon:_beacon];
+    [_beacon.events addObjectsFromArray:@[@(notEvent.eventId), @(notEventTwo.eventId), @(notEventThree.eventId)]];
+    [_eventStorage addEvents:@[notEvent, notEventTwo, notEventThree]];
     XCTAssert([_eventStorage findAllNotificationEventsForBeacon:_beacon].count == 3);
 }
 
 - (void)testEventsWithSameUUIDDifferentMinor {
     CRBeacon *newBeacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@113 minor:@226];
-    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:newBeacon];
-    XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 0);
+    [newBeacon.events addObjectsFromArray:@[@(_event.eventId), @(_eventTwo.eventId)]];
+    [_eventStorage addEvents:@[_event, _eventTwo]];
+    XCTAssert([_eventStorage findAllEventsForBeacon:newBeacon].count == 2);
 }
 
 - (void)testEventsWithSameUUIDDifferentMajor {
     CRBeacon *newBeacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@116 minor:@222];
-    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:newBeacon];
-    XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 0);
+    [newBeacon.events addObjectsFromArray:@[@(_event.eventId), @(_eventTwo.eventId)]];
+    [_eventStorage addEvents:@[_event, _eventTwo]];
+    XCTAssert([_eventStorage findAllEventsForBeacon:newBeacon].count == 2);
 }
-
-- (void)testBeaconEventsFileName {
-    CRBeacon *newBeacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@116 minor:@222];
-    [_eventStorage addEvents:@[_event, _eventTwo] forBeacon:newBeacon];
-    
-    NSString *path = [_eventStorage.basePath stringByAppendingFormat:@"/%@_%@_%@", newBeacon.uuid.UUIDString, newBeacon.major, newBeacon.minor];
-    
-    // This is a little poor I know. Saving is an async method, I expect it to be written within 2 seconds though.
-    XCTestExpectation *dummyExpectation = [self expectationWithDescription:@"write file to disk"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [dummyExpectation fulfill];
-    });
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
-        BOOL dir = YES;
-        XCTAssert([_fileManager fileExistsAtPath:path isDirectory:&dir]);
-        XCTAssert(!dir);
-    }];
-}
-
 
 @end

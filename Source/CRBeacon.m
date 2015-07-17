@@ -11,6 +11,7 @@
 
 @implementation CRBeacon {
     NSUInteger _beaconId;
+    NSMutableArray *_events;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +32,7 @@
         _minor = minor;
         _beacon = nil;
         _beaconId = 0;
+        _events = [NSMutableArray array];
     }
     
     return self;
@@ -97,6 +99,10 @@
 
 - (NSUInteger)beaconId {
     return _beaconId;
+}
+
+- (NSMutableArray *)events {
+    return _events;
 }
 
 @end

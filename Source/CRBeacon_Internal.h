@@ -12,5 +12,6 @@
 
 - (void)setBeaconId:(NSUInteger)beaconId;
 - (NSUInteger)beaconId;
+- (NSMutableArray *)events;
 
 @end

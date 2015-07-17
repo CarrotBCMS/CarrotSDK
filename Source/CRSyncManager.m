@@ -102,13 +102,13 @@
     
     for (CREvent *aEvent in events) {
         if (![arrayOne containsObject:aEvent]) {
-            [_eventStorage addEvent:aEvent forBeacon:beacon];
+            [_eventStorage addEvent:aEvent];
         }
     }
     
     for (CRNotificationEvent *aEvent in eventNotification) {
         if (![arrayTwo containsObject:aEvent]) {
-            [_eventStorage addEvent:aEvent forBeacon:beacon];
+            [_eventStorage addEvent:aEvent];
         }
     }
 }
