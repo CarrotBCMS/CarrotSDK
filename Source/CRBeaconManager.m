@@ -161,7 +161,8 @@
 }
 
 - (void)syncManager:(CRSyncManager *)syncManager didFailWithError:(NSError *)error {
-    CRLog("Syncing process failed with error: %@", error);
+    CRLog("Syncing process failed");
+    _isSyncing = NO;
     
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:syncingDidFailWithError:)]) {
         [_delegate manager:self syncingDidFailWithError:error];

@@ -300,10 +300,10 @@
 			isa = PBXGroup;
 			children = (
 				6061DA681B111AF5002DC83B /* CarrotSDK.h */,
-				60A9176F1B59209B00BA57FE /* Utils */,
 				6061DA811B111CB8002DC83B /* Common */,
 				6061DA801B111CAD002DC83B /* Persistence */,
 				6061DA7F1B111CA5002DC83B /* Network */,
+				60A9176F1B59209B00BA57FE /* Utils */,
 				6061DA661B111AF5002DC83B /* Supporting Files */,
 			);
 			path = Source;

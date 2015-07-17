@@ -63,14 +63,12 @@
 
 - (void)startSyncing {
     if (!_currentOperation) {
-        CRLog(@"Start syncing...");
         [self _syncData];
     }
 }
 
 - (void)stopSyncing {
     if (_currentOperation) {
-        CRLog(@"Cancel syncing...");
         [_currentOperation cancel];
     }
 }
@@ -98,6 +96,11 @@
                                               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                   _currentOperation = nil;
                                                   [self _handleSyncResponse:responseObject operation:operation];
+                                                  
+                                                  // Call the delegate
+                                                  if ([(id<CRSyncManagerDelegate>)_delegate respondsToSelector:@selector(syncManagerDidFinishSyncing:)]) {
+                                                      [_delegate syncManagerDidFinishSyncing:self];
+                                                  }
                                               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                                   _currentOperation = nil;
                                                   CRLog(@"A synchronisation error has occured: %@", error.localizedDescription);
@@ -116,6 +119,11 @@
                                                       if (!error && json && json[@"message"]) {
                                                           CRLog(@"The server says: %@", json[@"message"]);
                                                       }
+                                                      
+                                                      // Call the delegate
+                                                      if ([(id<CRSyncManagerDelegate>)_delegate respondsToSelector:@selector(syncManager:didFailWithError:)]) {
+                                                          [_delegate syncManager:self didFailWithError:error];
+                                                      }
                                                   }
                                               }];
 }
@@ -129,9 +137,11 @@
                                                                error:&error];
     if (jsonData) {
         [self _parseAndStoreSyncData:jsonData];
-        CRLog(@"Sync was successful!");
     } else if (error) {
         CRLog(@"There was an error parsing the sync response: %@", error.localizedDescription);
+        if ([(id<CRSyncManagerDelegate>)_delegate respondsToSelector:@selector(syncManager:didFailWithError:)]) {
+            [_delegate syncManager:self didFailWithError:error];
+        }
     }
 }
 
