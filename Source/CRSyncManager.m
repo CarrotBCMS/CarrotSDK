@@ -63,12 +63,14 @@
 
 - (void)startSyncing {
     if (!_currentOperation) {
+        CRLog(@"Start syncing...");
         [self _syncData];
     }
 }
 
 - (void)stopSyncing {
     if (_currentOperation) {
+        CRLog(@"Cancel syncing...");
         [_currentOperation cancel];
     }
 }
@@ -141,11 +143,13 @@
     NSArray *deletedBeaconIds = data[@"beacons"][@"deleted"];
     
     for (NSDictionary *beaconDictionary in createdBeaconDictionaries) {
+        CRLog(@"Adding/Updating beacon with id: %@", beaconDictionary[@"id"]);
         CRBeacon *yBeacon = [CRBeacon beaconFromJSON:beaconDictionary];
         [_beaconStorage addObject:yBeacon];
     }
     
     for (NSNumber *deletedBeaconId in deletedBeaconIds) {
+        CRLog(@"Delete beacon with id: %@", deletedBeaconId);
         CRBeacon *beacon = [_beaconStorage findCRBeaconWithId:deletedBeaconId.integerValue];
         [_beaconStorage removeObject:beacon];
     }
@@ -155,11 +159,13 @@
     NSArray *deletedEventIds = data[@"events"][@"deleted"];
     
     for (NSDictionary *eventDictionary in createdEventsDictionaries) {
+        CRLog(@"Adding/Updating event with id: %@", eventDictionary[@"id"]);
         CREvent *event = [CREvent eventFromJSON:eventDictionary];
         [_eventStorage addEvent:event];
     }
     
     for (NSNumber *deletedEventId in deletedEventIds) {
+        CRLog(@"Delete event with id: %@", deletedEventId);
         [_eventStorage removeEventWithId:deletedEventId.integerValue];
     }
     
@@ -173,7 +179,7 @@
         return;
     }
     
-    NSUserDefaults *userDefaults = [[NSUserDefaults standardUserDefaults] objectForKey:LAST_SYNC];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:lastSync forKey:LAST_SYNC];
     [userDefaults synchronize];
 }
