@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class CREventStorage;
 @class CRBeaconStorage;
+@class CRBeaconEventAggregator;
 
 @interface CRSyncManager : NSObject
 
@@ -39,6 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, strong) CRBeaconStorage *beaconStorage;
 
 /**
+ The beacon-event Aggregator
+ */
+@property (readonly, strong) CRBeaconEventAggregator *aggregator;
+
+/**
  The base url to bms
  */
 @property (readonly, strong) NSURL *baseURL;
@@ -55,9 +61,10 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Init instance with storages.
  */
-- (instancetype)initWithDelegate:(id<CRSyncManagerDelegate> __nullable)delegate
+- (instancetype)initWithDelegate:(id<CRSyncManagerDelegate>)delegate
                     eventStorage:(CREventStorage*)eventStorage
                    beaconStorage:(CRBeaconStorage *)beaconStorage
+                      aggregator:(CRBeaconEventAggregator *)aggregator
                          baseURL:(NSURL *)url
                           appKey:(NSString *)appKey;
 

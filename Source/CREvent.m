@@ -133,6 +133,17 @@
     NSString *message = dictionary[@"message"];
     NSString *payload = dictionary[@"payload"];
     
+    NSArray *beacons = dictionary[@"beacons"];
+    NSMutableArray *beaconIds = [NSMutableArray array];
+
+    if (beacons) {
+        for (NSDictionary *beaconDict in beacons) {
+            if (beaconDict[@"id"]) {
+                [beaconIds addObject:beaconDict[@"id"]];
+            }
+        }
+    }
+    
     CREventType aEventType = eventType.integerValue;
     
     if (!eventId || !active || !threshold || !eventType || !objectType) {

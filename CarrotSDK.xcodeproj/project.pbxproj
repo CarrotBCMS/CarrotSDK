@@ -90,6 +90,8 @@
 		60CC3B071B15FFEF00229A55 /* CRBeaconManagerEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 60CC3B061B15FFA600229A55 /* CRBeaconManagerEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60CC3B091B1622B200229A55 /* CREventStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CC3B081B1622B200229A55 /* CREventStorageTest.m */; };
 		60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CF25B91B1456E30069053A /* CRBeaconTests.m */; };
+		60DCFA4C1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.h in Headers */ = {isa = PBXBuildFile; fileRef = 60DCFA4A1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.h */; };
+		60DCFA4D1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DCFA4B1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +192,8 @@
 		60CC3B061B15FFA600229A55 /* CRBeaconManagerEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBeaconManagerEnums.h; sourceTree = "<group>"; };
 		60CC3B081B1622B200229A55 /* CREventStorageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventStorageTest.m; sourceTree = "<group>"; };
 		60CF25B91B1456E30069053A /* CRBeaconTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconTests.m; sourceTree = "<group>"; };
+		60DCFA4A1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBeaconEventAggregator.h; sourceTree = "<group>"; };
+		60DCFA4B1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconEventAggregator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +262,8 @@
 				6002B0D91B126D8000459AAC /* CRSingleFileStorage.h */,
 				6002B0DA1B126D8000459AAC /* CRSingleFileStorage.m */,
 				603780F01B51E7A7006EB2D4 /* CRSingleFileStorage_Internal.h */,
+				60DCFA4A1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.h */,
+				60DCFA4B1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.m */,
 				6002B0DD1B12768D00459AAC /* CRBeaconStorage.h */,
 				6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */,
 				604601B41B15AF4C00F32E80 /* CREventStorage.h */,
@@ -463,6 +469,7 @@
 				604225E41B1F792500115CD0 /* CREvent_Internal.h in Headers */,
 				60AC5ED31B1DFC2600957B9C /* AFURLSessionManager.h in Headers */,
 				6009ED331B1139EC0090C1A7 /* CRDefines.h in Headers */,
+				60DCFA4C1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.h in Headers */,
 				60AC5ECB1B1DFC2600957B9C /* AFSecurityPolicy.h in Headers */,
 				6002B0DF1B12768D00459AAC /* CRBeaconStorage.h in Headers */,
 				60AC5ECD1B1DFC2600957B9C /* AFURLConnectionOperation.h in Headers */,
@@ -608,6 +615,7 @@
 				606F0B291B1CC0C000E28436 /* CRAnalyticsProvider.m in Sources */,
 				60AC5ECE1B1DFC2600957B9C /* AFURLConnectionOperation.m in Sources */,
 				6061DA911B111DB3002DC83B /* CRBeacon.m in Sources */,
+				60DCFA4D1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.m in Sources */,
 				60AC5EEA1B1DFC2A00957B9C /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				6002B0E01B12768D00459AAC /* CRBeaconStorage.m in Sources */,
 				60AC5ED01B1DFC2600957B9C /* AFURLRequestSerialization.m in Sources */,

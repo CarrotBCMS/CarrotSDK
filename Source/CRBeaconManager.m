@@ -14,6 +14,7 @@
 #import "CRBeacon.h"
 #import "CRBeaconStorage.h"
 #import "CREventStorage.h"
+#import "CRBeaconEventAggregator.h"
 #import "CREventCoordinator.h"
 #import "CRSyncManager.h"
 #import "CRAnalyticsProvider.h"
@@ -42,6 +43,7 @@
     CRBeaconCache *_beaconCache;
     CRBeaconStorage *_beaconStorage;
     CREventStorage *_eventStorage;
+    CRBeaconEventAggregator *_aggregator;
     CREventCoordinator *_eventCoordinator;
     CRSyncManager *_syncManager;
     CRAnalyticsProvider *_analyticsProvider;
@@ -185,8 +187,9 @@
 - (void)_setup {
     _regions = [NSArray array];
     _beaconCache = [[CRBeaconCache alloc] init];
-    _beaconStorage = [[CRBeaconStorage alloc] initWithStoragePath:CRBeaconDataFilePath];
-    _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:CRBeaconDataBasePath];
+    _beaconStorage = [[CRBeaconStorage alloc] initWithStoragePath:CRBeaconDataBeaconFilePath];
+    _aggregator = [[CRBeaconEventAggregator alloc] initWithStoragePath:CRBeaconDataAggregrationFilePath];
+    _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:CRBeaconBaseDataPath aggregator:_aggregator];
     _eventCoordinator = [[CREventCoordinator alloc] initWithEventStorage:_eventStorage];
     
     _syncManager = [[CRSyncManager alloc] initWithDelegate:self

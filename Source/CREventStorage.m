@@ -11,6 +11,7 @@
 #import "CRBeacon.h"
 #import "CRBeacon_Internal.h"
 #import "CRNotificationEvent.h"
+#import "CRBeaconEventAggregator.h"
 
 @interface CREventStorage ()
 
@@ -28,13 +29,14 @@
     NSFileManager *_fileManager;
     NSCache *_objects; // Using a cache here should prevent low-memory circumstances
     NSOperationQueue *_queue;
+    CRBeaconEventAggregator *_aggregator;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Initialising
 
-- (instancetype)initWithBaseStoragePath:(NSString *)path {
+- (instancetype)initWithBaseStoragePath:(NSString *)path aggregator:(CRBeaconEventAggregator *)aggregator {
     self = [super init];
     
     if (self) {
@@ -43,6 +45,7 @@
         _objects = [[NSCache alloc] init];
         _queue = [[NSOperationQueue alloc] init];
         _queue.maxConcurrentOperationCount = 1;
+        _aggregator = aggregator;
         
         if (![_fileManager fileExistsAtPath:_basePath]) {
             NSError *error;
@@ -124,7 +127,7 @@
 
 - (NSArray *)_findAllEventsForBeacon:(CRBeacon *)beacon onlyNotifications:(BOOL)notifications {
     NSMutableArray *result = [NSMutableArray array];
-    NSArray *events = [NSArray arrayWithArray:beacon.events];
+    NSArray *events = [NSArray arrayWithArray:[_aggregator eventsForBeacon:beacon.beaconId]];
     
     for (NSNumber *eventId in events) {
         CREvent *event = [self findEventForId:eventId.integerValue];

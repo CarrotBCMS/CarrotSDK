@@ -11,10 +11,7 @@
 @interface CRBeacon (Internal)
 
 - (void)__setBeaconId:(NSUInteger)beaconId;
-
 - (NSUInteger)beaconId;
-- (NSMutableArray *)events;
-
 + (instancetype)beaconFromJSON:(NSDictionary *)dictionary;
 
 @end

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class CREvent;
 @class CRBeacon;
+@class CRBeaconEventAggregator;
 
 /**
  In contrast to the `CRSingleFileStorage`, this storage persists an array containing all events for a specific beacon region
@@ -39,8 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
  Inits a Storage with given base path.
  
  @param path The base path
+ @param aggregator Instance to retrieve beacon-event relationships
  */
-- (instancetype)initWithBaseStoragePath:(NSString *)path;
+- (instancetype)initWithBaseStoragePath:(NSString *)path aggregator:(CRBeaconEventAggregator *)aggregator;
 
 ///---------------------------------------------------------------------------------------
 /// @name CRUD methods

@@ -24,6 +24,7 @@
 // Paths
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define CRBeaconDataBasePath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/.data/carrot/"]
-#define CRBeaconDataFilePath [CRBeaconDataBasePath stringByAppendingString:@"data"]
-#define CRAnalyticsLogsDataFilePath [CRBeaconDataBasePath stringByAppendingString:@"logs"]
+#define CRBeaconBaseDataPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingString:@"/.data/carrot/"]
+#define CRBeaconDataBeaconFilePath [CRBeaconBaseDataPath stringByAppendingString:@"data_b"]
+#define CRBeaconDataAggregrationFilePath [CRBeaconBaseDataPath stringByAppendingString:@"data_a"]
+#define CRAnalyticsLogsDataFilePath [CRBeaconBaseDataPath stringByAppendingString:@"logs"]

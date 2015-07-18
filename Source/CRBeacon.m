@@ -11,7 +11,6 @@
 
 @implementation CRBeacon {
     NSUInteger _beaconId;
-    NSMutableArray *_events;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +31,6 @@
         _minor = minor;
         _beacon = nil;
         _beaconId = 0;
-        _events = [NSMutableArray array];
     }
     
     return self;
@@ -46,22 +44,20 @@
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-    self = [self initWithUUID:[coder decodeObjectOfClass:[NSString class] forKey:@"uuid"]
-                        major:[coder decodeObjectOfClass:[NSNumber class] forKey:@"major"]
-                        minor:[coder decodeObjectOfClass:[NSNumber class] forKey:@"minor"]
-                         name:[coder decodeObjectOfClass:[NSString class] forKey:@"name"]];
-    self.beaconId = [[coder decodeObjectOfClass:[NSNumber class] forKey:@"beaconId"] integerValue];
-    _events = [coder decodeObjectOfClass:[NSArray class] forKey:@"events"];
+    self = [self initWithUUID:[coder decodeObjectOfClass:[NSString class] forKey:@"CRBeacon_uuid"]
+                        major:[coder decodeObjectOfClass:[NSNumber class] forKey:@"CRBeacon_major"]
+                        minor:[coder decodeObjectOfClass:[NSNumber class] forKey:@"CRBeacon_minor"]
+                         name:[coder decodeObjectOfClass:[NSString class] forKey:@"CRBeacon_name"]];
+    self.beaconId = [[coder decodeObjectOfClass:[NSNumber class] forKey:@"CRBeacon_beaconId"] integerValue];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:_uuid forKey:@"uuid"];
-    [aCoder encodeObject:_major forKey:@"major"];
-    [aCoder encodeObject:_minor forKey:@"minor"];
-    [aCoder encodeObject:_name forKey:@"name"];
-    [aCoder encodeObject:@(_beaconId) forKey:@"beaconId"];
-    [aCoder encodeObject:_events forKey:@"events"];
+    [aCoder encodeObject:_uuid forKey:@"CRBeacon_uuid"];
+    [aCoder encodeObject:_major forKey:@"CRBeacon_major"];
+    [aCoder encodeObject:_minor forKey:@"CRBeacon_minor"];
+    [aCoder encodeObject:_name forKey:@"CRBeacon_name"];
+    [aCoder encodeObject:@(_beaconId) forKey:@"CRBeacon_beaconId"];
 }
 
 + (BOOL)supportsSecureCoding {
@@ -102,10 +98,6 @@
     return _beaconId;
 }
 
-- (NSMutableArray *)events {
-    return _events;
-}
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Internal factory method
@@ -129,7 +121,6 @@
     
     CRBeacon *beacon = [[CRBeacon alloc] initWithUUID:sUuuid major:major minor:minor name:name];
     beacon.beaconId = beaconId.integerValue;
-    [beacon.events addObjectsFromArray:events];
 
     return beacon;
 }

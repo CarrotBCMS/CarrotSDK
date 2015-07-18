@@ -9,6 +9,7 @@
 #import "CRSyncManager.h"
 #import "CREventStorage.h"
 #import "CRBeaconStorage.h"
+#import "CRBeaconEventAggregator.h"
 #import "CRBeacon.h"
 #import "CRBeacon_Internal.h"
 #import "CRTextEvent.h"
@@ -17,13 +18,14 @@
 #import "CRDefines.h"
 #import "AFNetworking.h"
 
-#define LAST_SYNC @"cr_last_sync"
+#define LAST_SYNC @"CRLastSync"
 
 @interface CRSyncManager ()
 
 - (void)_updateLastSync:(NSNumber *)lastSync;
 - (void)_parseAndStoreSyncData:(NSDictionary *)data;
 - (void)_handleSyncResponse:(id)responseObject operation:(AFHTTPRequestOperation *)operation;
+- (NSArray *)_retrieveBeaconIdsFromEventDictionary:(NSDictionary *)dictionary;
 
 @end
 
@@ -39,6 +41,7 @@
 - (instancetype)initWithDelegate:(id<CRSyncManagerDelegate>)delegate
                     eventStorage:(CREventStorage*)eventStorage
                    beaconStorage:(CRBeaconStorage *)beaconStorage
+                      aggregator:(CRBeaconEventAggregator *)aggregator
                          baseURL:(NSURL *)url
                           appKey:(NSString *)appKey
 {
@@ -52,6 +55,7 @@
         _requestOperationManager = [AFHTTPRequestOperationManager manager];
         _currentOperation = nil;
         _appKey = appKey;
+        _aggregator = aggregator;
     }
     
     return self;
@@ -171,6 +175,7 @@
     for (NSDictionary *eventDictionary in createdEventsDictionaries) {
         CRLog(@"Adding/Updating event with id: %@", eventDictionary[@"id"]);
         CREvent *event = [CREvent eventFromJSON:eventDictionary];
+        [_aggregator setBeacons:[self _retrieveBeaconIdsFromEventDictionary:eventDictionary] forEvent:event.eventId];
         [_eventStorage addEvent:event];
     }
     
@@ -192,6 +197,16 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:lastSync forKey:LAST_SYNC];
     [userDefaults synchronize];
+}
+
+
+- (NSArray *)_retrieveBeaconIdsFromEventDictionary:(NSDictionary *)dictionary {
+    NSMutableArray *result = [NSMutableArray array];
+    NSArray *beacons = dictionary[@"beacons"];
+    for (NSDictionary *beaconDict in beacons) {
+        [result addObject:beaconDict[@"id"]];
+    }
+    return [NSArray arrayWithArray:result];
 }
 
 @end
