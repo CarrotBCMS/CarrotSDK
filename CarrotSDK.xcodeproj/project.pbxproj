@@ -21,6 +21,7 @@
 		6009ED3D1B1144B00090C1A7 /* CREvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3B1B1144B00090C1A7 /* CREvent.m */; };
 		6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED411B11451E0090C1A7 /* CRTextEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */; };
+		60167BE41B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60167BE31B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m */; };
 		6036C8A51B1732B800D4CA87 /* CREventCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6036C8A31B1732B800D4CA87 /* CREventCoordinator.h */; };
 		6036C8A61B1732B800D4CA87 /* CREventCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8A41B1732B800D4CA87 /* CREventCoordinator.m */; };
 		6036C8A81B17346B00D4CA87 /* CREventCoordinatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8A71B17346B00D4CA87 /* CREventCoordinatorTests.m */; };
@@ -119,6 +120,7 @@
 		6009ED3B1B1144B00090C1A7 /* CREvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREvent.m; sourceTree = "<group>"; };
 		6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTextEvent.h; sourceTree = "<group>"; };
 		6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTextEvent.m; sourceTree = "<group>"; };
+		60167BE31B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconEventAggregatorTests.m; sourceTree = "<group>"; };
 		6036C8A31B1732B800D4CA87 /* CREventCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREventCoordinator.h; sourceTree = "<group>"; };
 		6036C8A41B1732B800D4CA87 /* CREventCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventCoordinator.m; sourceTree = "<group>"; };
 		6036C8A71B17346B00D4CA87 /* CREventCoordinatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventCoordinatorTests.m; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				60053CE61B17183F00A9FA03 /* CREventTests.m */,
 				60CC3B081B1622B200229A55 /* CREventStorageTest.m */,
 				6002B0E11B1277C700459AAC /* CRSingleFileStorageTests.m */,
+				60167BE31B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				60053CDC1B16F95900A9FA03 /* CRBeaconCacheTests.m in Sources */,
 				60CC3B091B1622B200229A55 /* CREventStorageTest.m in Sources */,
 				60CF25BA1B1456E30069053A /* CRBeaconTests.m in Sources */,
+				60167BE41B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m in Sources */,
 				6002B0E21B1277C700459AAC /* CRSingleFileStorageTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

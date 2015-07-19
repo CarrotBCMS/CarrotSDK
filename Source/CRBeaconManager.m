@@ -195,6 +195,7 @@
     _syncManager = [[CRSyncManager alloc] initWithDelegate:self
                                               eventStorage:_eventStorage
                                              beaconStorage:_beaconStorage
+                                                aggregator:_aggregator
                                                    baseURL:_url
                                                     appKey:_appKey];
     _analyticsProvider = [[CRAnalyticsProvider alloc] initWithBaseURL:_url];

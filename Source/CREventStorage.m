@@ -27,7 +27,7 @@
 @implementation CREventStorage {
     NSString *_basePath;
     NSFileManager *_fileManager;
-    NSCache *_objects; // Using a cache here should prevent low-memory circumstances
+    NSMutableDictionary *_objects; // Using a cache here should prevent low-memory circumstances
     NSOperationQueue *_queue;
     CRBeaconEventAggregator *_aggregator;
 }
@@ -42,7 +42,7 @@
     if (self) {
         _basePath = path;
         _fileManager = [NSFileManager defaultManager];
-        _objects = [[NSCache alloc] init];
+        _objects = [[NSMutableDictionary alloc] init];
         _queue = [[NSOperationQueue alloc] init];
         _queue.maxConcurrentOperationCount = 1;
         _aggregator = aggregator;
@@ -64,8 +64,8 @@
 #pragma mark - CRUD
 
 - (void)addEvent:(CREvent *)event {
-    [self _save:event];
     [_objects setObject:event forKey:@(event.eventId)];
+    [self _save:event];
 }
 
 - (void)addEvents:(NSArray *)events {
@@ -131,12 +131,10 @@
     
     for (NSNumber *eventId in events) {
         CREvent *event = [self findEventForId:eventId.integerValue];
-        if (event) {
-            BOOL addObject = (!notifications && [event isKindOfClass:[CREvent class]]
-                              && ![event isKindOfClass:[CRNotificationEvent class]])
-            ||(notifications && [event isKindOfClass:[CRNotificationEvent class]]);
-            
-            if (addObject) {
+        if (event && [event isKindOfClass:[CREvent class]]) {
+            if (notifications && [event isKindOfClass:[CRNotificationEvent class]]) {
+                [result addObject:event];
+            } else if(!notifications && ![event isKindOfClass:[CRNotificationEvent class]]) {
                 [result addObject:event];
             }
         }
@@ -164,7 +162,6 @@
             CRLog(@"There was an error removing an entity: %@", error);
         }
     }];
-
 }
 
 

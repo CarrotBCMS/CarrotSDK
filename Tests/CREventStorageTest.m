@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "CREventStorage.h"
 #import "CRBeacon.h"
 #import "CRBeacon_Internal.h"
 #import "CREvent.h"
 #import "CRNotificationEvent.h"
+#import "CRBeaconEventAggregator.h"
 
 @interface CREventStorageTest : XCTestCase
 @end
@@ -28,17 +30,20 @@
     CREvent *_event;
     CREvent *_eventTwo;
     CRNotificationEvent *_notEvent;
+    CRBeaconEventAggregator *_aggregator;
 }
 
 - (void)setUp {
     [super setUp];
-    if ([_fileManager fileExistsAtPath:_eventStorage.basePath isDirectory:NULL]) {
-        [_fileManager removeItemAtPath:_eventStorage.basePath error:NULL];
-    }
     
     _fileManager = [NSFileManager defaultManager];
     _basePath = [NSTemporaryDirectory() stringByAppendingString:@"data"];
-    _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:_basePath];
+    
+    if ([_fileManager fileExistsAtPath:_basePath isDirectory:NULL]) {
+        [_fileManager removeItemAtPath:_basePath error:NULL];
+    }
+    _aggregator = OCMClassMock([CRBeaconEventAggregator class]);
+    _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:_basePath aggregator:_aggregator];
     _beacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"]
                                        major:@111
                                        minor:@222];
@@ -63,7 +68,9 @@
                                             scheduledEndDate:nil
                                                lastTriggered:nil
                                                    eventType:CREventTypeEnter];
-    [_beacon.events addObjectsFromArray:@[@(_event.eventId), @(_eventTwo.eventId), @(_notEvent.eventId)]];
+    
+    NSArray *eventIds = @[@(_event.eventId), @(_eventTwo.eventId), @(_notEvent.eventId)];
+    OCMStub([_aggregator eventsForBeacon:_beacon.beaconId]).andReturn(eventIds);
 }
 
 - (void)tearDown {
@@ -93,14 +100,13 @@
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 2);
 }
 
-- (void)testRemoveEventForBeacon {
-    [_eventStorage addEvents:@[_event, _eventTwo, _notEvent]];
-    [_eventStorage removeEventWithId:_event.eventId];
-    XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 1);
-    XCTAssert([[_eventStorage findAllEventsForBeacon:_beacon][0] isEqual:_eventTwo]);
-}
 
 - (void)testRemoveEventsForBeacon {
+    _aggregator = OCMClassMock([CRBeaconEventAggregator class]);
+    _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:_basePath aggregator:_aggregator];
+    NSArray *eventIds = @[@(_event.eventId), @(_eventTwo.eventId), @(_notEvent.eventId)];
+    OCMStub([_aggregator eventsForBeacon:_beacon.beaconId]).andReturn(eventIds);
+    
     [_eventStorage addEvents:@[_event, _eventTwo]];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 2);
     [_eventStorage removeEventsWithIds:@[@(_event.eventId), @(_eventTwo.eventId)]];
@@ -115,6 +121,12 @@
 }
 
 - (void)testFindAllEventsForBeacon {
+    _aggregator = OCMClassMock([CRBeaconEventAggregator class]);
+    _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:_basePath aggregator:_aggregator];
+    
+    NSArray *eventIds = @[@(_event.eventId), @(_eventTwo.eventId), @(_notEvent.eventId)];
+    OCMStub([_aggregator eventsForBeacon:_beacon.beaconId]).andReturn(eventIds);
+    
     [_eventStorage addEvents:@[_event, _eventTwo, _notEvent]];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 2);
     CREvent *eventThree = [[CREvent alloc] initWithEventId:1213
@@ -145,42 +157,51 @@
 }
 
 - (void)testFindNotificationEventsForBeacon {
+    _aggregator = OCMClassMock([CRBeaconEventAggregator class]);
+    _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:_basePath aggregator:_aggregator];
     [_eventStorage addEvents:@[_event, _eventTwo]];
     XCTAssert([_eventStorage findAllNotificationEventsForBeacon:_beacon].count == 0);
     
-    CRNotificationEvent *notEvent = [[CRNotificationEvent alloc] initWithEventId:123355
+    CRNotificationEvent *notEvent = [[CRNotificationEvent alloc] initWithEventId:221212
                                                                        threshold:1000
                                                               scheduledStartDate:nil
                                                                 scheduledEndDate:nil
                                                                    lastTriggered:nil
                                                                        eventType:CREventTypeEnter];
-    CRNotificationEvent *notEventTwo = [[CRNotificationEvent alloc] initWithEventId:1332
+    CRNotificationEvent *notEventTwo = [[CRNotificationEvent alloc] initWithEventId:13321321
                                                                           threshold:1000
                                                                  scheduledStartDate:nil
                                                                    scheduledEndDate:nil
                                                                       lastTriggered:nil
                                                                           eventType:CREventTypeEnter];
-    CRNotificationEvent *notEventThree = [[CRNotificationEvent alloc] initWithEventId:2312
+    CRNotificationEvent *notEventThree = [[CRNotificationEvent alloc] initWithEventId:232212
                                                                             threshold:1000
                                                                    scheduledStartDate:nil
                                                                      scheduledEndDate:nil
                                                                         lastTriggered:nil
                                                                             eventType:CREventTypeBoth];
-    [_beacon.events addObjectsFromArray:@[@(notEvent.eventId), @(notEventTwo.eventId), @(notEventThree.eventId)]];
-    [_eventStorage addEvents:@[notEvent, notEventTwo, notEventThree]];
+    
+    NSArray *eventIds = @[@(notEvent.eventId), @(notEventTwo.eventId), @(notEventThree.eventId)];
+    NSArray *events = @[notEvent, notEventTwo, notEventThree];
+    OCMStub([_aggregator eventsForBeacon:_beacon.beaconId]).andReturn(eventIds);
+    [_eventStorage addEvents:events];
     XCTAssert([_eventStorage findAllNotificationEventsForBeacon:_beacon].count == 3);
 }
 
 - (void)testEventsWithSameUUIDDifferentMinor {
     CRBeacon *newBeacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@113 minor:@226];
-    [newBeacon.events addObjectsFromArray:@[@(_event.eventId), @(_eventTwo.eventId)]];
+    
+    NSArray *eventIds = @[@(_event.eventId), @(_eventTwo.eventId)];
+    OCMStub([_aggregator eventsForBeacon:newBeacon.beaconId]).andReturn(eventIds);
     [_eventStorage addEvents:@[_event, _eventTwo]];
     XCTAssert([_eventStorage findAllEventsForBeacon:newBeacon].count == 2);
 }
 
 - (void)testEventsWithSameUUIDDifferentMajor {
     CRBeacon *newBeacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"] major:@116 minor:@222];
-    [newBeacon.events addObjectsFromArray:@[@(_event.eventId), @(_eventTwo.eventId)]];
+    
+    NSArray *eventIds = @[@(_event.eventId), @(_eventTwo.eventId)];
+    OCMStub([_aggregator eventsForBeacon:newBeacon.beaconId]).andReturn(eventIds);
     [_eventStorage addEvents:@[_event, _eventTwo]];
     XCTAssert([_eventStorage findAllEventsForBeacon:newBeacon].count == 2);
 }
