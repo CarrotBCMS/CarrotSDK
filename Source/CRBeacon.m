@@ -108,9 +108,8 @@
     NSNumber *minor = dictionary[@"minor"];
     NSString *name = dictionary[@"name"];
     NSNumber *beaconId = dictionary[@"id"];
-    NSArray *events = dictionary[@"events"];
     
-    if (!uuid || !major || !minor || !name || !beaconId || !events) {
+    if (!uuid || !major || !minor || !name || !beaconId) {
         return nil;
     }
     

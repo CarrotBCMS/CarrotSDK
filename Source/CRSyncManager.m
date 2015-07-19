@@ -111,7 +111,9 @@
                                                   if (operation.response.statusCode == 404) {
                                                       CRLog(@"Did you mistype the url to your bms root?");
                                                   }
-                                                  if (operation.response.statusCode == 400 || operation.response.statusCode == 500) {
+                                                  if (operation.response.statusCode == 400 ||
+                                                      operation.response.statusCode == 401 ||
+                                                      operation.response.statusCode == 500) {
                                                       CRLog(@"Did you mistype your app key? Does it exist?");
                                                       NSString *responseString = [operation responseString];
                                                       NSData *data= [responseString dataUsingEncoding:NSUTF8StringEncoding];
@@ -198,7 +200,6 @@
     [userDefaults setObject:lastSync forKey:LAST_SYNC];
     [userDefaults synchronize];
 }
-
 
 - (NSArray *)_retrieveBeaconIdsFromEventDictionary:(NSDictionary *)dictionary {
     NSMutableArray *result = [NSMutableArray array];

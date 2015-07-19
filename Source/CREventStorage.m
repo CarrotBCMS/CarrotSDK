@@ -158,8 +158,10 @@
     NSString *path = [_basePath stringByAppendingPathComponent:[NSString stringWithFormat: @"%@", @(eventId)]];
     [_queue addOperationWithBlock:^{
         NSError *error;
-        if(![_fileManager removeItemAtPath:path error:&error] && error) {
-            CRLog(@"There was an error removing an entity: %@", error);
+        if ([_fileManager fileExistsAtPath:path isDirectory:NULL]) {
+            if(![_fileManager removeItemAtPath:path error:&error] && error) {
+                CRLog(@"There was an error removing an entity: %@", error);
+            }
         }
     }];
 }

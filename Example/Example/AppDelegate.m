@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import <CarrotSDK/CarrotSDK.h>
 
+#define SERVER_ADDRESS @"http://192.168.0.108:8080"
+#define APP_KEY @"841bbbde-d8b1-4a75-bd79-74107c6bd1c4"
+
 @interface AppDelegate ()
 
 @end
@@ -27,8 +30,8 @@
     StatusViewController *statusViewController = (StatusViewController *)((UINavigationController *)tabBarController.viewControllers[1]).topViewController;
 
     
-    NSURL *urlToBMS = [NSURL URLWithString:@"http://192.168.0.105:8080"];
-    CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:@"107ce147-0b49-4455-ae2c-2e623fedbeb3"];
+    NSURL *urlToBMS = [NSURL URLWithString:SERVER_ADDRESS];
+    CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:APP_KEY];
     beaconViewController.beaconManager = beaconManager;
     statusViewController.beaconManager = beaconManager;
     
