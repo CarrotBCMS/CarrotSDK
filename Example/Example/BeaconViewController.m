@@ -38,9 +38,9 @@
 
 - (void)refresh:(id)sender {
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
-                                   UIActivityIndicatorViewStyleWhite];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:indicator];
+                                   UIActivityIndicatorViewStyleGray];
     [indicator startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:indicator];
     [_beaconManager startSyncing];
 }
 
@@ -103,6 +103,10 @@
 }
 
 - (void)manager:(CRBeaconManager *)beaconManager syncingDidFailWithError:(NSError *)error {
+    [self addRefreshButton];
+}
+
+- (void)managerDidFinishSyncing:(CRBeaconManager *)beaconManager {
     [self addRefreshButton];
 }
 
