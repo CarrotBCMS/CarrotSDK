@@ -165,7 +165,7 @@
     // Create TextEvent here...
     if ([objectType isEqualToString:@"text"]) {
         CRTextEvent *textEvent = [[CRTextEvent alloc] initWithEventId:eventId.integerValue
-                                           threshold:(threshold.doubleValue / 60)
+                                           threshold:(threshold.doubleValue * 60)
                                   scheduledStartDate:aScheduledStartDate
                                     scheduledEndDate:aScheduledEndDate
                                        lastTriggered:nil
@@ -180,7 +180,7 @@
     // Create NotificationEvent here...
     if ([objectType isEqualToString:@"notification"]) {
         CRNotificationEvent *notificationEvent = [[CRNotificationEvent alloc] initWithEventId:eventId.integerValue
-                                                            threshold:(threshold.doubleValue / 60)
+                                                            threshold:(threshold.doubleValue * 60)
                                                    scheduledStartDate:aScheduledStartDate
                                                      scheduledEndDate:aScheduledEndDate
                                                         lastTriggered:nil
