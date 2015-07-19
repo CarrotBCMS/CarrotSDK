@@ -122,7 +122,7 @@
 + (instancetype)eventFromJSON:(NSDictionary *)dictionary {
     NSNumber *eventId = dictionary[@"id"];
     NSNumber *active = dictionary[@"active"];
-    NSNumber *threshold = dictionary[@"threshold"];
+    NSNumber *threshold = dictionary[@"threshold"]; // It's in minutes here
     NSString *scheduledStartDate = dictionary[@"scheduledStartDate"];
     NSString *scheduledEndDate = dictionary[@"scheduledEndDate"];
     NSNumber *eventType = dictionary[@"eventType"];
@@ -165,7 +165,7 @@
     // Create TextEvent here...
     if ([objectType isEqualToString:@"text"]) {
         CRTextEvent *textEvent = [[CRTextEvent alloc] initWithEventId:eventId.integerValue
-                                           threshold:threshold.doubleValue
+                                           threshold:(threshold.doubleValue / 60)
                                   scheduledStartDate:aScheduledStartDate
                                     scheduledEndDate:aScheduledEndDate
                                        lastTriggered:nil
@@ -180,7 +180,7 @@
     // Create NotificationEvent here...
     if ([objectType isEqualToString:@"notification"]) {
         CRNotificationEvent *notificationEvent = [[CRNotificationEvent alloc] initWithEventId:eventId.integerValue
-                                                            threshold:threshold.doubleValue
+                                                            threshold:(threshold.doubleValue / 60)
                                                    scheduledStartDate:aScheduledStartDate
                                                      scheduledEndDate:aScheduledEndDate
                                                         lastTriggered:nil
