@@ -85,6 +85,15 @@
  */
 - (void)manager:(CRBeaconManager *)beaconManager syncingDidFailWithError:(NSError *)error;
 
+
+/**
+ Invoked whenever syncing finishes.
+ 
+ @see CRBeaconManager
+ @param beaconManager Beacon manager
+ */
+- (void)managerDidFinishSyncing:(CRBeaconManager *)beaconManager;
+
 ///---------------------------------------------------------------------------------------
 /// @name Bluetooth
 ///---------------------------------------------------------------------------------------
@@ -182,7 +191,7 @@
  @param beaconManager Beacon manager
  @param error Error
  */
-- (void)manager:(CRBeaconManager *)manager didFailWithError:(NSError *)error;
+- (void)manager:(CRBeaconManager *)beaconManager didFailWithError:(NSError *)error;
 
 /**
  Invoked whenever an error occurs while monitoring a specific region.
@@ -193,7 +202,7 @@
  @param region The region
  @param error Error
  */
-- (void)manager:(CRBeaconManager *)manager monitoringDidFailForRegion:(CLBeaconRegion *)region
+- (void)manager:(CRBeaconManager *)beaconManager monitoringDidFailForRegion:(CLBeaconRegion *)region
       withError:(NSError *)error;
 
 /**
@@ -206,7 +215,7 @@
  @param beaconManager Current region
  @param error Error
  */
-- (void)manager:(CRBeaconManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
+- (void)manager:(CRBeaconManager *)beaconManager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
       withError:(NSError *)error;
 
 @end

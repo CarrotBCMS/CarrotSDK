@@ -19,7 +19,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Initialising
+#pragma mark - Initialising & Actions
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -34,6 +34,14 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)refresh:(id)sender {
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
+                                   UIActivityIndicatorViewStyleWhite];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:indicator];
+    [indicator startAnimating];
+    [_beaconManager startSyncing];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,12 +102,17 @@
     NSLog(@"CarrotExample: Should present events: %@ - Beacon: %@", events, beacon);
 }
 
+- (void)manager:(CRBeaconManager *)beaconManager syncingDidFailWithError:(NSError *)error {
+    [self addRefreshButton];
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Misc
 
 - (void)setupVisuals {
     // Do some visual setup
+    [self addRefreshButton];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     backgroundLabel = [[UILabel alloc] init];
     [backgroundLabel setTranslatesAutoresizingMaskIntoConstraints:YES];
@@ -108,7 +121,10 @@
     backgroundLabel.text = @"No beacons in range";
     backgroundLabel.textAlignment = NSTextAlignmentCenter;
     self.tableView.backgroundView = backgroundLabel;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:_beaconManager action:@selector(startSyncing)];
+}
+
+- (void)addRefreshButton {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh:)];
 }
 
 - (void)setupCarrotSDK {

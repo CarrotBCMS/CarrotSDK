@@ -178,6 +178,10 @@
     if (_monitoringIsActive) {
         [self startMonitoringBeacons];
     }
+    
+    if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(managerDidFinishSyncing:)]) {
+        [_delegate managerDidFinishSyncing:self];
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

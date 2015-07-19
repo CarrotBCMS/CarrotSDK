@@ -8,6 +8,7 @@
 
 #import "CRSingleFileStorage.h"
 #import "CRSingleFileStorage_Internal.h"
+#import "CRDefines.h"
 
 @implementation CRSingleFileStorage {
     NSOperationQueue *_queue;
@@ -82,6 +83,7 @@
 #pragma mark - Internal
 
 - (void)_save {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:_objects];
     [_queue addOperationWithBlock:^{
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *dirpath = [_storagePath stringByDeletingLastPathComponent];
@@ -89,7 +91,10 @@
             [fileManager createDirectoryAtPath:dirpath withIntermediateDirectories:YES attributes:nil error:NULL];
         }
         
-        [NSKeyedArchiver archiveRootObject:_objects toFile:_storagePath];
+        NSError *error;
+        if (![data writeToFile:_storagePath options:NSDataWritingAtomic error:&error]) {
+            CRLog(@"There was an error saving some objects: %@", error);
+        }
     }];
 }
 

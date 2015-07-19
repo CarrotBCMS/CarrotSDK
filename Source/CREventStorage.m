@@ -143,9 +143,13 @@
 }
 
 - (void)_save:(CREvent *)event {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:event];
     [_queue addOperationWithBlock:^{
         NSString *path = [_basePath stringByAppendingPathComponent:[NSString stringWithFormat: @"%@", @(event.eventId)]];
-        [NSKeyedArchiver archiveRootObject:event toFile:path];
+        NSError *error;
+        if (![data writeToFile:path options:NSDataWritingAtomic error:&error]) {
+            CRLog(@"There was an error saving an event: %@", error);
+        }
     }];
 }
 
