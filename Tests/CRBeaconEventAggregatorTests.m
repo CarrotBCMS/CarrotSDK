@@ -28,4 +28,30 @@
     [super tearDown];
 }
 
+- (void)testSetBeaconsForEvents {
+    [_aggregator setBeacons:@[@1, @2, @3] forEvent:1];
+    
+    XCTAssert([[_aggregator beaconsForEvent:1] count] == 3);
+    XCTAssert([[_aggregator beaconsForEvent:1] containsObject:@1]);
+    XCTAssert([[_aggregator beaconsForEvent:1] containsObject:@2]);
+    XCTAssert([[_aggregator beaconsForEvent:1] containsObject:@3]);
+}
+
+- (void)testEventsForBeacon {
+    [_aggregator setBeacons:@[@1, @2, @3, @4] forEvent:1];
+    [_aggregator setBeacons:@[@1, @2, @5] forEvent:2];
+    
+    XCTAssert([_aggregator eventsForBeacon:2].count == 2);
+    XCTAssert([_aggregator eventsForBeacon:5].count == 1);
+    XCTAssert([[_aggregator eventsForBeacon:5][0] isEqualToNumber: @2]);
+}
+
+- (void)testBeaconsForEvent {
+    [_aggregator setBeacons:@[@1, @2, @3, @4] forEvent:1];
+    [_aggregator setBeacons:@[@1, @2, @5] forEvent:2];
+    
+    XCTAssert([_aggregator beaconsForEvent:2].count == 3);
+    XCTAssert([_aggregator beaconsForEvent:1].count == 4);
+}
+
 @end
