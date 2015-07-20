@@ -2,7 +2,7 @@
 //  CREventProxy.m
 //  CarrotSDK
 //
-//  Created by Heiko Dreyer on 20.07.15.
+//  Created by Heiko Dreyer on 07/20/15.
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
@@ -12,7 +12,6 @@
 
 @implementation CREventProxy {
     NSString *_basePath;
-    BOOL _access;
 }
 
 + (instancetype)proxyWithBasePath:(NSString *)path eventId:(NSUInteger)eventId {
@@ -22,7 +21,6 @@
 - (instancetype)initWithBasePath:(NSString *)path eventId:(NSUInteger)eventId {
     _basePath = path;
     _eventId = eventId;
-    _access = NO;
     return self;
 }
 
@@ -31,13 +29,11 @@
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
-    [self beginContentAccess];
     if (!_object) {
         [self _load]; // Load real object
     }
     
     [invocation invokeWithTarget:_object];
-    [self endContentAccess];
 }
 
 + (BOOL)respondsToSelector:(SEL)aSelector {
@@ -61,27 +57,9 @@
 }
 
 - (void)_load {
+    // Load real data here
     NSString *path = [_basePath stringByAppendingPathComponent:[NSString stringWithFormat: @"%@", @(_eventId)]];
     _object = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-}
-
-- (BOOL)beginContentAccess {
-    _access = YES;
-    return ![self isContentDiscarded];
-}
-
-- (void)endContentAccess {
-    _access = NO;
-}
-
-- (void)discardContentIfPossible {
-    if (!_access) {
-        _object = nil;
-    }
-}
-
-- (BOOL)isContentDiscarded {
-    return (_object == nil);
 }
 
 @end

@@ -2,7 +2,7 @@
 //  CREventProxy.h
 //  CarrotSDK
 //
-//  Created by Heiko Dreyer on 20.07.15.
+//  Created by Heiko Dreyer on 07/20/15.
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
@@ -12,9 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class CREvent;
 
-@interface CREventProxy : NSProxy <NSDiscardableContent>
+/**
+ Proxy class for CREvent. May discard content on memory warnings.
+ */
+@interface CREventProxy : NSProxy
 
-@property (strong, readonly, nullable) CREvent *object;
+@property (strong, nullable) CREvent *object;
 @property (assign, readonly) NSUInteger eventId;
 
 - (instancetype)initWithBasePath:(NSString *)path eventId:(NSUInteger)eventId;

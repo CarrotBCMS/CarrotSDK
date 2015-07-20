@@ -8,7 +8,7 @@
 
 #import <CarrotSDK/CarrotSDK.h>
 
-@interface CRBeacon (Internal) <NSSecureCoding, NSDiscardableContent>
+@interface CRBeacon (Internal) <NSSecureCoding>
 
 - (void)__setBeaconId:(NSUInteger)beaconId;
 - (NSUInteger)beaconId;

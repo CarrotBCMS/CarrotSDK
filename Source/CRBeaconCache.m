@@ -26,21 +26,10 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _objects = [NSMutableDictionary dictionary];
-        __weak NSMutableDictionary *__objects = _objects;
-        [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidReceiveMemoryWarningNotification
-                                                          object:[UIApplication sharedApplication]
-                                                           queue:nil
-                                                      usingBlock:^(NSNotification *notif) {
-                                                          [__objects removeAllObjects]; // Evict objects manually
-                                                      }];
+        _objects = [[NSMutableDictionary alloc] init];
     }
     
     return self;
-}
-
-- (void)dealloc {
-     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Temporarily stores beacons. See `NSCache` for memory related details.
+ Temporarily stores beacons. This is not persistent, but also not trashed during low memory circumstances.
  
  @see NSCache
  */

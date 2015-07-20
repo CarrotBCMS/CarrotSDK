@@ -27,7 +27,7 @@
 @implementation CREventStorage {
     NSString *_basePath;
     NSFileManager *_fileManager;
-    NSMutableDictionary *_objects; // Using a cache here should prevent low-memory circumstances
+    NSCache *_objects; // Using a cache here should prevent low-memory circumstances
     NSOperationQueue *_queue;
     CRBeaconEventAggregator *_aggregator;
 }
@@ -42,7 +42,7 @@
     if (self) {
         _basePath = path;
         _fileManager = [NSFileManager defaultManager];
-        _objects = [[NSMutableDictionary alloc] init];
+        _objects = [[NSCache alloc] init];
         _queue = [[NSOperationQueue alloc] init];
         _queue.maxConcurrentOperationCount = 1;
         _aggregator = aggregator;
@@ -65,7 +65,9 @@
 
 - (void)addEvent:(CREvent *)event {
     // Add a proxy instead of real object
-    [_objects setObject:[CREventProxy proxyWithBasePath:_basePath eventId:event.eventId] forKey:@(event.eventId)];
+    CREventProxy *proxy = [CREventProxy proxyWithBasePath:_basePath eventId:event.eventId];
+    proxy.object = event;
+    [_objects setObject:proxy forKey:@(event.eventId)];
     [self _save:event];
 }
 
@@ -112,7 +114,7 @@
     if (!event) {
         event = [CREventProxy proxyWithBasePath:_basePath eventId:eventId];
     }
-    return event; // Maybe nil
+    return event;
 }
 
 - (NSArray *)findAllEventsForBeacon:(CRBeacon *)beacon {
