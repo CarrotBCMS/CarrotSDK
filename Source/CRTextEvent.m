@@ -7,6 +7,7 @@
 //
 
 #import "CRTextEvent.h"
+#import "CREvent_Internal.h"
 
 @implementation CRTextEvent {
 }

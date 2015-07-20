@@ -36,7 +36,6 @@
 - (NSArray *)enteredCRBeaconsForRangedBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
     NSArray *beaconsInRange = [self _CRBeaconArrayFromBeaconArray:beacons];
     NSArray *prevBeaconsInRange = [NSArray arrayWithArray:[self CRBeaconsForUUID:region.proximityUUID]];
-
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT SELF IN %@", prevBeaconsInRange];
     return [beaconsInRange filteredArrayUsingPredicate:predicate];

@@ -7,6 +7,7 @@
 //
 
 #import "CRNotificationEvent.h"
+#import "CREvent_Internal.h"
 
 @implementation CRNotificationEvent {
 }

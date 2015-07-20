@@ -8,7 +8,7 @@
 
 #import <CarrotSDK/CarrotSDK.h>
 
-@interface CREvent (Internal)
+@interface CREvent (Internal) <NSSecureCoding>
 
 - (void)__setScheduledEndDate:(NSDate *)endDate;
 - (void)__setScheduledStartDate:(NSDate *)startDate;

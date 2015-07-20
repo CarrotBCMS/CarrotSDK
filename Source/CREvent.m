@@ -14,6 +14,9 @@
 
 #import "NSDate+ISO.h"
 
+@interface CREvent ()
+@end
+
 @implementation CREvent {
     BOOL _isActive;
 }

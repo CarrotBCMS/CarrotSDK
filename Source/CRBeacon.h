@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CRBeacon : NSObject <NSSecureCoding>
+@interface CRBeacon : NSObject
 
 /**
  Name of the beacon. Might be null.

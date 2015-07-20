@@ -191,6 +191,7 @@
 - (void)_setup {
     _regions = [NSArray array];
     _beaconCache = [[CRBeaconCache alloc] init];
+    
     _beaconStorage = [[CRBeaconStorage alloc] initWithStoragePath:CRBeaconDataBeaconFilePath];
     _aggregator = [[CRBeaconEventAggregator alloc] initWithStoragePath:CRBeaconDataAggregrationFilePath];
     _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:CRBeaconBaseDataPath aggregator:_aggregator];
@@ -329,6 +330,7 @@
         [_delegate manager:self didRangeBeacons:beacons inRegion:region];
     }
 
+    // TODO: This might not work correctly
     NSArray *enteredBeacons = [_beaconCache enteredCRBeaconsForRangedBeacons:beacons inRegion:region];
     NSArray *exitedBeacons = [_beaconCache exitedCRBeaconsRangedBeacons:beacons inRegion:region];
     
