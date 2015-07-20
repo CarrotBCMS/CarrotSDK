@@ -48,6 +48,8 @@
     CREventCoordinator *_eventCoordinator;
     CRSyncManager *_syncManager;
     CRAnalyticsProvider *_analyticsProvider;
+    
+    BOOL _fMonitoring;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +62,7 @@
 {
     self = [super init];
     if (self) {
+        _fMonitoring = YES;
         _url = url;
         _appKey = key;
         _delegate = delegate;
@@ -76,8 +79,25 @@
 #pragma mark - Monitoring
 
 - (void)startMonitoringBeacons {
+    CRLog("Start monitoring beacons.");
+    _monitoringIsActive = YES;
+    [self startSyncing];
+}
+
+- (void)stopMonitoringBeacons {
+    CRLog("Stop monitoring beacons.");
+    [[self _regions] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [_locationManager stopMonitoringForRegion:obj];
+    }];
+    [_locationManager stopUpdatingLocation];
+    _monitoringIsActive = NO;
+    _fMonitoring = NO;
+}
+
+- (void)_startMonitoringBeacons {
     if (![self isRangingAvailable] || ![self isMonitoringAvailable]) {
         CRLog("No hardware support for ranging and monitoring.");
+        _monitoringIsActive = NO;
         return;
     }
     
@@ -87,7 +107,6 @@
         [_locationManager stopRangingBeaconsInRegion:(CLBeaconRegion *)obj];
     }];
     
-    CRLog("Start monitoring beacons.");
     [[self _regions] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CRLog("Start monitoring region: %@", obj);
         CLBeaconRegion *region = (CLBeaconRegion *)obj;
@@ -98,16 +117,6 @@
         [_locationManager startMonitoringForRegion:region];
     }];
     [_locationManager startUpdatingLocation];
-    _monitoringIsActive = YES;
-}
-
-- (void)stopMonitoringBeacons {
-    CRLog("Stop monitoring beacons.");
-    [[self _regions] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [_locationManager stopMonitoringForRegion:obj];
-    }];
-    [_locationManager stopUpdatingLocation];
-    _monitoringIsActive = NO;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,11 +170,20 @@
     CRLog("Stop syncing process.");
     _isSyncing = NO;
     [_syncManager stopSyncing];
+    if (_monitoringIsActive && _fMonitoring) {
+        [self startMonitoringBeacons];
+        _fMonitoring = NO;
+    }
 }
 
 - (void)syncManager:(CRSyncManager *)syncManager didFailWithError:(NSError *)error {
     CRLog("Syncing process failed");
     _isSyncing = NO;
+    _fMonitoring = NO;
+    
+    if (_monitoringIsActive) {
+        [self _startMonitoringBeacons];
+    }
     
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:syncingDidFailWithError:)]) {
         [_delegate manager:self syncingDidFailWithError:error];
@@ -175,9 +193,10 @@
 - (void)syncManagerDidFinishSyncing:(CRSyncManager *)syncManager {
     CRLog("Syncing process finished.");
     _isSyncing = NO;
+    _fMonitoring = NO;
     
     if (_monitoringIsActive) {
-        [self startMonitoringBeacons];
+        [self _startMonitoringBeacons];
     }
     
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(managerDidFinishSyncing:)]) {
@@ -206,7 +225,7 @@
                                                 aggregator:_aggregator
                                                    baseURL:_url
                                                     appKey:_appKey];
-    _analyticsProvider = [[CRAnalyticsProvider alloc] initWithBaseURL:_url];
+    _analyticsProvider = [[CRAnalyticsProvider alloc] initWithBaseURL:_url appKey:_appKey];
     
     _bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self
                                                              queue:dispatch_get_main_queue()

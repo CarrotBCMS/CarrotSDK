@@ -29,10 +29,11 @@
 
 #pragma mark - Initialising
 
-- (instancetype)initWithBaseURL:(NSURL *)url {
+- (instancetype)initWithBaseURL:(NSURL *)url appKey:(NSString *)appKey {
     self = [super init];
     if(self) {
         _baseURL = url;
+        _appKey = appKey;
         _requestStore = [[CRPersistentRequestQueue alloc] initWithStoragePath:CRAnalyticsLogsDataFilePath];
         [_requestStore sendQueuedRequests]; // Dequeue old requests
     }
@@ -81,11 +82,11 @@
 }
 
 - (void)_dispatchOperationWithJSONString: (NSString *)string {
-    if (!string) {
+    if (!string || !_appKey) {
         return;
     }
     
-    NSURL *url = [_baseURL URLByAppendingPathComponent:@"/client/analytics/logs"];
+    NSURL *url = [_baseURL URLByAppendingPathComponent:[NSString stringWithFormat:@"/client/analytics/logs/%@", _appKey]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];

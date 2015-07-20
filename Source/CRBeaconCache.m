@@ -45,6 +45,7 @@
     if (!object) {
         object = [NSArray array];
     }
+    
     return [NSArray arrayWithArray:object];
 }
 
@@ -80,6 +81,5 @@
     
     return crBeaconArray;
 }
-
 
 @end

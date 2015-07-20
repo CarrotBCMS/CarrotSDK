@@ -37,8 +37,6 @@
 }
 
 - (void)refresh:(id)sender {
-    [[UIApplication sharedApplication] performSelector:@selector(_performMemoryWarning)];
-    return;
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
                                    UIActivityIndicatorViewStyleGray];
     [indicator startAnimating];
@@ -136,7 +134,6 @@
 - (void)setupCarrotSDK {
     // Setup CarrotSDK
     [_beaconManager grantNotficationPermission];
-    [_beaconManager startSyncing];
     [_beaconManager startMonitoringBeacons];
 }
 

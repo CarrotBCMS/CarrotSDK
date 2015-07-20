@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Inits with a base url to bms
 */
-- (instancetype)initWithBaseURL:(NSURL *)url;
+- (instancetype)initWithBaseURL:(NSURL *)url appKey:(NSString *)appKey;
 
 ///---------------------------------------------------------------------------------------
 /// @name Analytics
@@ -32,6 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
  The base url to bms
 */
 @property (readonly, strong) NSURL *baseURL;
+
+/**
+ The app key
+ */
+@property (readonly, strong) NSString *appKey;
 
 - (void)logEvent:(CREvent *)event forBeacon:(CRBeacon *)beacon;
 

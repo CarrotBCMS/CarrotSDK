@@ -111,6 +111,7 @@
                                                   if (operation.response.statusCode == 404) {
                                                       CRLog(@"Did you mistype the url to your bms root?");
                                                   }
+                                                  
                                                   if (operation.response.statusCode == 400 ||
                                                       operation.response.statusCode == 401 ||
                                                       operation.response.statusCode == 500) {
@@ -125,11 +126,11 @@
                                                       if (!error && json && json[@"message"]) {
                                                           CRLog(@"The server says: %@", json[@"message"]);
                                                       }
-                                                      
-                                                      // Call the delegate
-                                                      if ([(id<CRSyncManagerDelegate>)_delegate respondsToSelector:@selector(syncManager:didFailWithError:)]) {
-                                                          [_delegate syncManager:self didFailWithError:error];
-                                                      }
+                                                  }
+                                                  
+                                                  // Call the delegate
+                                                  if ([(id<CRSyncManagerDelegate>)_delegate respondsToSelector:@selector(syncManager:didFailWithError:)]) {
+                                                      [_delegate syncManager:self didFailWithError:error];
                                                   }
                                               }];
 }

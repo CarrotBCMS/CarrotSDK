@@ -12,7 +12,6 @@
 #import "AFNetworking.h"
 
 @implementation CRPersistentRequestQueue {
-    NSMutableArray *_queue;
     NSOperationQueue *_internalOperationQueue;
 }
 
@@ -21,39 +20,47 @@
 #pragma mark - Requests
 
 - (void)sendQueuedRequests {
-    if (_queue.count == 0) {
+    if (_objects.count == 0) {
         return;
     }
     // Copy all (currently stored) requests into a new array
-    NSArray *queueCopy = [NSArray arrayWithArray:_queue];
+    NSArray *queueCopy = [NSArray arrayWithArray:_objects];
     [queueCopy enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:obj];
         operation.responseSerializer = [AFJSONResponseSerializer serializer];
         
         CRLog(@"Sending log operation...");
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            CRLog(@"Logging response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-            [_queue removeObject:obj]; // Remove request from queue when finished
+            CRLog(@"Logging successful.");
+            [_objects removeObject:obj]; // Remove request from queue when finished
             [self _save];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             CRLog(@"Logging error: %@", error);
         }];
-        [_internalOperationQueue addOperation:operation];
+        [[self _internalOperationQueue] addOperation:operation];
     }];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)cancelQueuedRequests {
-    [_internalOperationQueue cancelAllOperations];
-    [_queue removeAllObjects];
+    [[self _internalOperationQueue] cancelAllOperations];
+    [_objects removeAllObjects];
     [self _save];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)waitUntilAllRequestsAreFinished {
-    [_internalOperationQueue waitUntilAllOperationsAreFinished];
+    [[self _internalOperationQueue] waitUntilAllOperationsAreFinished];
+}
+
+- (NSOperationQueue *)_internalOperationQueue {
+    if (!_internalOperationQueue) {
+        _internalOperationQueue = [[NSOperationQueue alloc] init];
+        _internalOperationQueue.maxConcurrentOperationCount = 1;
+    }
+    return _internalOperationQueue;
 }
 
 @end
