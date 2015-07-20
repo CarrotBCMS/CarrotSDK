@@ -8,10 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CREvent;
 
-@interface CREventProxy : NSProxy
+@interface CREventProxy : NSProxy <NSDiscardableContent>
 
-@property (strong, nullable) CREvent *object;
+@property (strong, readonly, nullable) CREvent *object;
+@property (assign, readonly) NSUInteger eventId;
+
+- (instancetype)initWithBasePath:(NSString *)path eventId:(NSUInteger)eventId;
++ (instancetype)proxyWithBasePath:(NSString *)path eventId:(NSUInteger)eventId;
+
+NS_ASSUME_NONNULL_END
 
 @end

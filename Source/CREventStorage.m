@@ -12,11 +12,11 @@
 #import "CRBeacon_Internal.h"
 #import "CRNotificationEvent.h"
 #import "CRBeaconEventAggregator.h"
+#import "CREventProxy.h"
 
 @interface CREventStorage ()
 
 - (void)_save:(CREvent *)event;
-- (CREvent *)_load:(NSUInteger)eventId;
 - (void)_remove:(NSUInteger)eventId;
 - (NSArray *)_findAllEventsForBeacon:(CRBeacon *)beacon onlyNotifications:(BOOL)notifications;
 
@@ -64,7 +64,8 @@
 #pragma mark - CRUD
 
 - (void)addEvent:(CREvent *)event {
-    [_objects setObject:event forKey:@(event.eventId)];
+    // Add a proxy instead of real object
+    [_objects setObject:[CREventProxy proxyWithBasePath:_basePath eventId:event.eventId] forKey:@(event.eventId)];
     [self _save:event];
 }
 
@@ -106,9 +107,10 @@
 }
 
 - (CREvent *)findEventForId:(NSUInteger)eventId {
-    CREvent *event = [_objects objectForKey:@(eventId)];
+    // This returns a proxy.
+    id event = [_objects objectForKey:@(eventId)];
     if (!event) {
-        event = [self _load:eventId];
+        event = [CREventProxy proxyWithBasePath:_basePath eventId:eventId];
     }
     return event; // Maybe nil
 }
@@ -153,11 +155,6 @@
     }];
 }
 
-- (CREvent *)_load:(NSUInteger)eventId {
-    NSString *path = [_basePath stringByAppendingPathComponent:[NSString stringWithFormat: @"%@", @(eventId)]];
-    return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-}
-
 - (void)_remove:(NSUInteger)eventId {
     NSString *path = [_basePath stringByAppendingPathComponent:[NSString stringWithFormat: @"%@", @(eventId)]];
     [_queue addOperationWithBlock:^{
@@ -169,6 +166,5 @@
         }
     }];
 }
-
 
 @end

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CRSingleFileStorage.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CRBeacon;
 
 /**
@@ -40,5 +42,7 @@ Finds a specific beacon.
  Finds all uuid regions.
  */
 - (NSArray *)UUIDRegions;
+
+NS_ASSUME_NONNULL_END
 
 @end

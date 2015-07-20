@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import <CarrotSDK/CarrotSDK.h>
 
-#define SERVER_ADDRESS @"http://192.168.0.108:8080"
+#define SERVER_ADDRESS @"http://192.168.0.106:8080"
 #define APP_KEY @"841bbbde-d8b1-4a75-bd79-74107c6bd1c4"
 
 @interface AppDelegate ()
