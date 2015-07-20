@@ -15,18 +15,44 @@
 
 @end
 
-@implementation CRBeaconCache
+@implementation CRBeaconCache {
+    NSMutableDictionary *_objects;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - De/-Initialising
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _objects = [NSMutableDictionary dictionary];
+        __weak NSMutableDictionary *__objects = _objects;
+        [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidReceiveMemoryWarningNotification
+                                                          object:[UIApplication sharedApplication]
+                                                           queue:nil
+                                                      usingBlock:^(NSNotification *notif) {
+                                                          [__objects removeAllObjects];
+                                                      }];
+    }
+    
+    return self;
+}
+
+- (void)dealloc {
+     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma mark - Storing, Caching and general fiddling
 
 - (void)addCRBeaconsFromRangedBeacons:(NSArray *)beacons forUUID:(NSUUID *)uuid {
-    [self setObject:[NSArray arrayWithArray:[self _CRBeaconArrayFromBeaconArray:beacons]] forKey:uuid.UUIDString];
+    [_objects setObject:[NSArray arrayWithArray:[self _CRBeaconArrayFromBeaconArray:beacons]] forKey:uuid.UUIDString];
 }
 
 - (NSArray *)CRBeaconsForUUID:(NSUUID *)uuid {
-    NSArray *object = [self objectForKey:uuid.UUIDString];
+    NSArray *object = [_objects objectForKey:uuid.UUIDString];
     if (!object) {
         object = [NSArray array];
     }

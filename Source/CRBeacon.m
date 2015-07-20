@@ -124,4 +124,12 @@
     return beacon;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Internal factory method
+
+- (BOOL)isContentDiscarded {
+    return NO;
+}
+
 @end

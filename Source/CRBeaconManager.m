@@ -18,6 +18,7 @@
 #import "CREventCoordinator.h"
 #import "CRSyncManager.h"
 #import "CRAnalyticsProvider.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @interface CRBeaconManager () <CLLocationManagerDelegate, CBCentralManagerDelegate, CRSyncManagerDelegate>
 
@@ -189,6 +190,8 @@
 #pragma mark - Private
 
 - (void)_setup {
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES; // Auto-manage activity indication
+    
     _regions = [NSArray array];
     _beaconCache = [[CRBeaconCache alloc] init];
     

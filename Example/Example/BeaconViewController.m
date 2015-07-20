@@ -37,6 +37,8 @@
 }
 
 - (void)refresh:(id)sender {
+    [[UIApplication sharedApplication] performSelector:@selector(_performMemoryWarning)];
+    return;
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
                                    UIActivityIndicatorViewStyleGray];
     [indicator startAnimating];

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @see NSCache
  */
-@interface CRBeaconCache : NSCache
+@interface CRBeaconCache : NSObject
 
 ///---------------------------------------------------------------------------------------
 /// @name Caching
