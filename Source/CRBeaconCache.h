@@ -12,9 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Temporarily stores beacons. This is not persistent, but also not trashed during low memory circumstances.
- 
- @see NSCache
+ Temporarily stores beacons. This is not persistent, objects are not getting evicted during low memory circumstances.
  */
 @interface CRBeaconCache : NSObject
 

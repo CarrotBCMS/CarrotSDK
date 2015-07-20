@@ -2,7 +2,7 @@
 //  CRBeaconEventAggregator.m
 //  CarrotSDK
 //
-//  Created by Heiko Dreyer on 18.07.15.
+//  Created by Heiko Dreyer on 07/18/15.
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
