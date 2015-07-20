@@ -32,7 +32,7 @@
                                                           object:[UIApplication sharedApplication]
                                                            queue:nil
                                                       usingBlock:^(NSNotification *notif) {
-                                                          [__objects removeAllObjects];
+                                                          [__objects removeAllObjects]; // Evict objects manually
                                                       }];
     }
     
