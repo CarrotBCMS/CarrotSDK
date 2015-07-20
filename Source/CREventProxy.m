@@ -31,11 +31,13 @@
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation {
+    [self beginContentAccess];
     if (!_object) {
         [self _load]; // Load real object
     }
     
     [invocation invokeWithTarget:_object];
+    [self endContentAccess];
 }
 
 + (BOOL)respondsToSelector:(SEL)aSelector {
