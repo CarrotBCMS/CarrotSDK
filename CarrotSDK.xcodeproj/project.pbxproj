@@ -22,8 +22,6 @@
 		6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED411B11451E0090C1A7 /* CRTextEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */; };
 		60167BE41B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60167BE31B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m */; };
-		60172B161B5CF6F100F1E8F0 /* CREventProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 60172B141B5CF6F100F1E8F0 /* CREventProxy.h */; };
-		60172B171B5CF6F100F1E8F0 /* CREventProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 60172B151B5CF6F100F1E8F0 /* CREventProxy.m */; };
 		6036C8A51B1732B800D4CA87 /* CREventCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6036C8A31B1732B800D4CA87 /* CREventCoordinator.h */; };
 		6036C8A61B1732B800D4CA87 /* CREventCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8A41B1732B800D4CA87 /* CREventCoordinator.m */; };
 		6036C8A81B17346B00D4CA87 /* CREventCoordinatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8A71B17346B00D4CA87 /* CREventCoordinatorTests.m */; };
@@ -123,8 +121,6 @@
 		6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTextEvent.h; sourceTree = "<group>"; };
 		6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTextEvent.m; sourceTree = "<group>"; };
 		60167BE31B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBeaconEventAggregatorTests.m; sourceTree = "<group>"; };
-		60172B141B5CF6F100F1E8F0 /* CREventProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREventProxy.h; sourceTree = "<group>"; };
-		60172B151B5CF6F100F1E8F0 /* CREventProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventProxy.m; sourceTree = "<group>"; };
 		6036C8A31B1732B800D4CA87 /* CREventCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CREventCoordinator.h; sourceTree = "<group>"; };
 		6036C8A41B1732B800D4CA87 /* CREventCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventCoordinator.m; sourceTree = "<group>"; };
 		6036C8A71B17346B00D4CA87 /* CREventCoordinatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREventCoordinatorTests.m; sourceTree = "<group>"; };
@@ -227,7 +223,6 @@
 		6009ED391B1144A30090C1A7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				60172B131B5CF6D600F1E8F0 /* Proxy */,
 				6061DA8E1B111DB3002DC83B /* CRBeacon.h */,
 				6061DA8F1B111DB3002DC83B /* CRBeacon.m */,
 				6099F30B1B315B8B00FE23A8 /* CRBeacon_Internal.h */,
@@ -240,15 +235,6 @@
 				60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		60172B131B5CF6D600F1E8F0 /* Proxy */ = {
-			isa = PBXGroup;
-			children = (
-				60172B141B5CF6F100F1E8F0 /* CREventProxy.h */,
-				60172B151B5CF6F100F1E8F0 /* CREventProxy.m */,
-			);
-			name = Proxy;
 			sourceTree = "<group>";
 		};
 		60374FC31B171EDD0053ADEC /* Core */ = {
@@ -489,7 +475,6 @@
 				60DCFA4C1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.h in Headers */,
 				60AC5ECB1B1DFC2600957B9C /* AFSecurityPolicy.h in Headers */,
 				6002B0DF1B12768D00459AAC /* CRBeaconStorage.h in Headers */,
-				60172B161B5CF6F100F1E8F0 /* CREventProxy.h in Headers */,
 				60AC5ECD1B1DFC2600957B9C /* AFURLConnectionOperation.h in Headers */,
 				60AC5EC61B1DFC2600957B9C /* AFHTTPSessionManager.h in Headers */,
 				60A917721B5920C000BA57FE /* NSDate+ISO.h in Headers */,
@@ -657,7 +642,6 @@
 				60AC5ED21B1DFC2600957B9C /* AFURLResponseSerialization.m in Sources */,
 				60AC5EEE1B1DFC2A00957B9C /* UIButton+AFNetworking.m in Sources */,
 				6002B0DC1B126D8000459AAC /* CRSingleFileStorage.m in Sources */,
-				60172B171B5CF6F100F1E8F0 /* CREventProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

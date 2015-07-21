@@ -39,9 +39,6 @@
     _fileManager = [NSFileManager defaultManager];
     _basePath = [NSTemporaryDirectory() stringByAppendingString:@"data"];
     
-    if ([_fileManager fileExistsAtPath:_basePath isDirectory:NULL]) {
-        [_fileManager removeItemAtPath:_basePath error:NULL];
-    }
     _aggregator = OCMClassMock([CRBeaconEventAggregator class]);
     _eventStorage = [[CREventStorage alloc] initWithBaseStoragePath:_basePath aggregator:_aggregator];
     _beacon = [[CRBeacon alloc] initWithUUID:[[NSUUID alloc] initWithUUIDString:@"123e4567-e89b-12d3-a456-426655440000"]
@@ -76,8 +73,8 @@
 - (void)tearDown {
     [super tearDown];
     
-    if ([_fileManager fileExistsAtPath:_eventStorage.basePath isDirectory:NULL]) {
-        [_fileManager removeItemAtPath:_eventStorage.basePath error:NULL];
+    if ([_fileManager fileExistsAtPath:_basePath isDirectory:NULL]) {
+        [_fileManager removeItemAtPath:_basePath error:NULL];
     }
 }
 

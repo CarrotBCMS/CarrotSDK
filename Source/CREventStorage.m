@@ -12,11 +12,11 @@
 #import "CRBeacon_Internal.h"
 #import "CRNotificationEvent.h"
 #import "CRBeaconEventAggregator.h"
-#import "CREventProxy.h"
 
 @interface CREventStorage ()
 
 - (void)_save:(CREvent *)event;
+- (CREvent *)_load:(NSUInteger)eventId;
 - (void)_remove:(NSUInteger)eventId;
 - (NSArray *)_findAllEventsForBeacon:(CRBeacon *)beacon onlyNotifications:(BOOL)notifications;
 
@@ -64,11 +64,8 @@
 #pragma mark - CRUD
 
 - (void)addEvent:(CREvent *)event {
-    // Add a proxy instead of real object
-    CREventProxy *proxy = [CREventProxy proxyWithBasePath:_basePath eventId:event.eventId];
-    proxy.object = event;
-    [_objects setObject:proxy forKey:@(event.eventId)];
     [self _save:event];
+    [_objects setObject:event forKey:@(event.eventId)];
 }
 
 - (void)addEvents:(NSArray *)events {
@@ -89,7 +86,6 @@
 }
 
 - (void)removeAllEvents {
-    [_objects removeAllObjects];
     NSError *error;
     NSArray *files = [_fileManager contentsOfDirectoryAtPath:_basePath error:&error];
     
@@ -102,6 +98,7 @@
             CRLog(@"There was an error removing an entity: %@", error);
         }
     }
+    [_objects removeAllObjects];
 }
 
 - (void)refresh:(CREvent *)event {
@@ -109,11 +106,11 @@
 }
 
 - (CREvent *)findEventForId:(NSUInteger)eventId {
-    // This returns a proxy.
-    id event = [_objects objectForKey:@(eventId)];
+    CREvent *event = [_objects objectForKey:@(eventId)];
     if (!event) {
-        event = [CREventProxy proxyWithBasePath:_basePath eventId:eventId];
+        event = [self _load:eventId];
     }
+    
     return event;
 }
 
@@ -167,6 +164,11 @@
             }
         }
     }];
+}
+
+- (CREvent *)_load:(NSUInteger)eventId {
+    NSString *path = [_basePath stringByAppendingPathComponent:[NSString stringWithFormat: @"%@", @(eventId)]];
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
 }
 
 @end
