@@ -114,6 +114,7 @@
                                                   
                                                   if (operation.response.statusCode == 400 ||
                                                       operation.response.statusCode == 401 ||
+                                                      operation.response.statusCode == 404 ||
                                                       operation.response.statusCode == 500) {
                                                       CRLog(@"Did you mistype your app key? Does it exist?");
                                                       NSString *responseString = [operation responseString];

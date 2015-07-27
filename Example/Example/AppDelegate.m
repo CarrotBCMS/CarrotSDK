@@ -9,8 +9,8 @@
 #import "AppDelegate.h"
 #import <CarrotSDK/CarrotSDK.h>
 
-#define SERVER_ADDRESS @"http://192.168.0.106:8080"
-#define APP_KEY @"841bbbde-d8b1-4a75-bd79-74107c6bd1c4"
+#define SERVER_ADDRESS @"http://carrotbms.herokuapp.com"
+#define APP_KEY @"49cbc8ee-3547-4ed5-9bfb-ca407ecf46f4"
 
 @interface AppDelegate ()
 
