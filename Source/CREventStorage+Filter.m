@@ -2,7 +2,7 @@
 //  CREventStorage+Filter.m
 //  CarrotSDK
 //
-//  Created by Heiko Dreyer on 28.05.15.
+//  Created by Heiko Dreyer on 05/28/15.
 //  Copyright (c) 2015 boxedfolder.com. All rights reserved.
 //
 
