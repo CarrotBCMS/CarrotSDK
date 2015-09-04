@@ -7,7 +7,7 @@
 //
 
 typedef NS_ENUM(NSInteger, CRBluetoothState) {
-    CRBluetoothStateUnkown = 0,
+    CRBluetoothStateUnknown = 0,
     CRBluetoothStateResetting,
     CRBluetoothStateUnsupported,
     CRBluetoothStateUnauthorized,
