@@ -150,6 +150,7 @@
         NSError *error;
         if (![data writeToFile:path options:NSDataWritingAtomic error:&error]) {
             CRLog(@"There was an error saving an event: %@", error);
+            
         }
     }];
 }

@@ -71,11 +71,11 @@
 }
 
 - (void)tearDown {
-    [super tearDown];
-    
     if ([_fileManager fileExistsAtPath:_basePath isDirectory:NULL]) {
         [_fileManager removeItemAtPath:_basePath error:NULL];
     }
+    
+    [super tearDown];
 }
 
 - (void)testInitWithStoragePath {
