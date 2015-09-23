@@ -13,12 +13,9 @@
 		603CC7B51B14A9FA0077A48C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 603CC7B31B14A9FA0077A48C /* Main.storyboard */; };
 		603CC7B71B14A9FA0077A48C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 603CC7B61B14A9FA0077A48C /* Images.xcassets */; };
 		603CC7C61B14A9FA0077A48C /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7C51B14A9FA0077A48C /* ExampleTests.m */; };
-		603CC7D91B14AA410077A48C /* CarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7D81B14AA410077A48C /* CarrotSDK.framework */; };
 		603CC7DC1B14AA5F0077A48C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7DB1B14AA5F0077A48C /* CoreLocation.framework */; };
-		603CC7DF1B14B11A0077A48C /* CarrotSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */; };
 		603CC7E01B14B11B0077A48C /* CarrotSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60AA3FE01B19C9FD006F05AA /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AA3FDF1B19C9FD006F05AA /* StatusViewController.m */; };
-		60CC3B051B15FC4400229A55 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CC3B041B15FC4400229A55 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +60,6 @@
 		603CC7DE1B14B11A0077A48C /* CarrotSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CarrotSDK.framework; path = "/Users/bfolder/Library/Developer/Xcode/DerivedData/CarrotSDK-gbrvxflweoctsvgthcjctgyygira/Build/Products/Debug-iphoneos/CarrotSDK.framework"; sourceTree = "<absolute>"; };
 		60AA3FDE1B19C9FD006F05AA /* StatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusViewController.h; sourceTree = "<group>"; };
 		60AA3FDF1B19C9FD006F05AA /* StatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewController.m; sourceTree = "<group>"; };
-		60CC3B041B15FC4400229A55 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,10 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60CC3B051B15FC4400229A55 /* CoreBluetooth.framework in Frameworks */,
 				603CC7DC1B14AA5F0077A48C /* CoreLocation.framework in Frameworks */,
-				603CC7DF1B14B11A0077A48C /* CarrotSDK.framework in Frameworks */,
-				603CC7D91B14AA410077A48C /* CarrotSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +87,6 @@
 				603CC7A51B14A9FA0077A48C /* Example */,
 				603CC7C21B14A9FA0077A48C /* ExampleTests */,
 				603CC7A41B14A9FA0077A48C /* Products */,
-				60CC3B041B15FC4400229A55 /* CoreBluetooth.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -205,7 +197,7 @@
 		603CC79B1B14A9FA0077A48C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = boxedfolder.com;
 				TargetAttributes = {
 					603CC7A21B14A9FA0077A48C = {
@@ -323,6 +315,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -395,6 +388,7 @@
 				);
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.boxedfolder.CarrotExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -410,6 +404,7 @@
 				);
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.boxedfolder.CarrotExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -418,16 +413,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.boxedfolder.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";
 			};
@@ -437,12 +430,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.boxedfolder.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Example";
 			};
