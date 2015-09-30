@@ -88,6 +88,7 @@
     CRLog("Stop monitoring beacons.");
     [[self _regions] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [_locationManager stopMonitoringForRegion:obj];
+        [_locationManager stopRangingBeaconsInRegion:(CLBeaconRegion *)obj];
     }];
     [_locationManager stopUpdatingLocation];
     _monitoringIsActive = NO;
@@ -352,7 +353,7 @@
         [_delegate manager:self didRangeBeacons:beacons inRegion:region];
     }
 
-    // TODO: This might not work correctly
+    // TODO: Problems?!
     NSArray *enteredBeacons = [_beaconCache enteredCRBeaconsForRangedBeacons:beacons inRegion:region];
     NSArray *exitedBeacons = [_beaconCache exitedCRBeaconsRangedBeacons:beacons inRegion:region];
     
