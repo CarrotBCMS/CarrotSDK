@@ -387,6 +387,7 @@
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/CarrotSDK-gbrvxflweoctsvgthcjctgyygira/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.boxedfolder.CarrotExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -403,6 +404,7 @@
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/CarrotSDK-gbrvxflweoctsvgthcjctgyygira/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.boxedfolder.CarrotExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";

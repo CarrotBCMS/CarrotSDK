@@ -12,6 +12,7 @@
 
 @class CRBeaconManager;
 @class CRBeacon;
+@class CREvent;
 @class CRNotificationEvent;
 
 @protocol CRBeaconManagerDelegate <NSObject>
@@ -68,7 +69,7 @@
  @param events An array containing all events that should be presented
  @param beacon Single beacon
  */
-- (void)manager:(CRBeaconManager *)beaconManager shouldPresentEvents:(NSArray *)events
+- (void)manager:(CRBeaconManager *)beaconManager shouldPresentEvents:(NSArray<CREvent *> *)events
          beacon:(CRBeacon *)beacon;
 
 ///---------------------------------------------------------------------------------------
@@ -176,7 +177,7 @@
  @param beacons Array with beacons
  @param region The specific region
  */
-- (void)manager:(CRBeaconManager *)beaconManager didRangeBeacons:(NSArray *)beacons
+- (void)manager:(CRBeaconManager *)beaconManager didRangeBeacons:(NSArray<CLBeacon *> *)beacons
        inRegion:(CLBeaconRegion *)region;
 
 ///---------------------------------------------------------------------------------------

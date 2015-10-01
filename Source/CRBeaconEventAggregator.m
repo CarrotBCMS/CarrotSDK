@@ -33,7 +33,7 @@
 
 #pragma mark - Crud
 
-- (void)setBeacons:(NSArray *)beaconIds forEvent:(NSUInteger)eventId {
+- (void)setBeacons:(NSArray<NSNumber *> *)beaconIds forEvent:(NSUInteger)eventId {
     NSMutableDictionary *eventBeacons = _objects[0];
     NSMutableDictionary *beaconEvents = _objects[1];
     
@@ -45,7 +45,7 @@
     // Set beacon-events
     if (beaconEvents) {
         for (NSNumber *aBeaconId in beaconIds) {
-            NSMutableSet *events = [beaconEvents objectForKey:aBeaconId];
+            NSMutableSet<NSNumber *> *events = [beaconEvents objectForKey:aBeaconId];
             if (!events) {
                 events = [NSMutableSet set];
                 [beaconEvents setObject:events forKey:aBeaconId];
@@ -58,12 +58,12 @@
     [self _save];
 }
 
-- (NSArray *)beaconsForEvent:(NSUInteger)eventId {
+- (NSArray<NSNumber *> *)beaconsForEvent:(NSUInteger)eventId {
     NSSet *objects = [(NSDictionary *)_objects[0] objectForKey:@(eventId)];
     return [objects allObjects];
 }
 
-- (NSArray *)eventsForBeacon:(NSUInteger)beaconId {
+- (NSArray<NSNumber *> *)eventsForBeacon:(NSUInteger)beaconId {
     NSSet *objects = [(NSDictionary *)_objects[1] objectForKey:@(beaconId)];
     return [objects allObjects];
 }

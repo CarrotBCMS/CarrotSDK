@@ -16,7 +16,7 @@
 
 @interface CREventCoordinator ()
 
-- (NSArray *)_updateAndReturnPermittedEvents:(NSArray*)events beacon:(CRBeacon *)beacon;
+- (NSArray<__kindof CREvent*> *)_updateAndReturnPermittedEvents:(NSArray<__kindof CREvent *> *)events beacon:(CRBeacon *)beacon;
 - (BOOL)_eventInSchedule:(CREvent *)event;
 
 @end
@@ -45,22 +45,22 @@
 #pragma mark - Coordination
 
 - (NSArray *)validEnterEventsForBeacon:(CRBeacon *)beacon {
-    NSArray *allEvents = [_storage findAllEnterEventsForBeacon:beacon];
+    NSArray<__kindof CREvent *> *allEvents = [_storage findAllEnterEventsForBeacon:beacon];
     return [self _updateAndReturnPermittedEvents:allEvents beacon:beacon];
 }
 
 - (NSArray *)validExitEventsForBeacon:(CRBeacon *)beacon {
-    NSArray *allEvents = [_storage findAllExitEventsForBeacon:beacon];
+    NSArray<__kindof CREvent *> *allEvents = [_storage findAllExitEventsForBeacon:beacon];
     return [self _updateAndReturnPermittedEvents:allEvents beacon:beacon];
 }
 
 - (NSArray *)validEnterNotificationEventsForBeacon:(CRBeacon *)beacon {
-    NSArray *allEvents = [_storage findAllNotificationEnterEventsForBeacon:beacon];
+    NSArray<CRNotificationEvent *> *allEvents = [_storage findAllNotificationEnterEventsForBeacon:beacon];
     return [self _updateAndReturnPermittedEvents:allEvents beacon:beacon];
 }
 
 - (NSArray *)validExitNotificationEventsForBeacon:(CRBeacon *)beacon {
-    NSArray *allEvents = [_storage findAllNotificationExitEventsForBeacon:beacon];
+    NSArray<CRNotificationEvent *> *allEvents = [_storage findAllNotificationExitEventsForBeacon:beacon];
     return [self _updateAndReturnPermittedEvents:allEvents beacon:beacon];
 }
 
@@ -70,7 +70,7 @@
     notification.alertTitle = event.title;
     notification.alertBody = event.message;
     notification.soundName = UILocalNotificationDefaultSoundName;
-    NSMutableDictionary *userInfo = [@{@"id": @(event.eventId)} mutableCopy];
+    NSMutableDictionary<NSString *, NSString *> *userInfo = [@{@"id": @(event.eventId)} mutableCopy];
     if (event.payload) {
         [userInfo setObject:event.payload forKey:@"payload"];
     }
@@ -83,8 +83,8 @@
 
 #pragma mark - Private
 
-- (NSArray *)_updateAndReturnPermittedEvents:(NSArray*)events beacon:(CRBeacon *)beacon {
-    NSMutableArray *results = [NSMutableArray array];
+- (NSArray<__kindof CREvent *> *)_updateAndReturnPermittedEvents:(NSArray*)events beacon:(CRBeacon *)beacon {
+    NSMutableArray<__kindof CREvent *> *results = [NSMutableArray array];
     [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CREvent *event = (CREvent *)obj;
         NSDate *lastTriggered = event.lastTriggered;

@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class CRBeacon;
+@class CLBeaconRegion;
 
 /**
  This Subclass adds several ceacon specific crud methods to the superclass.
@@ -41,7 +42,7 @@ Finds a specific beacon.
 /**
  Finds all uuid regions.
  */
-- (NSArray *)UUIDRegions;
+- (NSArray<CLBeaconRegion *> *)UUIDRegions;
 
 NS_ASSUME_NONNULL_END
 

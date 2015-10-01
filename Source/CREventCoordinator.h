@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class CRBeacon;
+@class CREvent;
 @class CREventStorage;
 @class CRNotificationEvent;
 
@@ -35,17 +36,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Init instance with storage.
  */
-- (instancetype)initWithEventStorage:(CREventStorage*)storage;
+- (instancetype)initWithEventStorage:(CREventStorage *)storage;
 
 ///---------------------------------------------------------------------------------------
 /// @name Coordination
 ///---------------------------------------------------------------------------------------
 
-- (NSArray *)validEnterEventsForBeacon:(CRBeacon *)beacon;
-- (NSArray *)validExitEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<__kindof CREvent *> *)validEnterEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<__kindof CREvent *> *)validExitEventsForBeacon:(CRBeacon *)beacon;
 
-- (NSArray *)validEnterNotificationEventsForBeacon:(CRBeacon *)beacon;
-- (NSArray *)validExitNotificationEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<CRNotificationEvent *> *)validEnterNotificationEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<CRNotificationEvent *> *)validExitNotificationEventsForBeacon:(CRBeacon *)beacon;
 
 - (void)sendLocalNotificationWithEvent:(CRNotificationEvent *)event;
 

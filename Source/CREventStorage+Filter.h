@@ -19,27 +19,27 @@
  
  @param beacon The beacon
  */
-- (NSArray *)findAllEnterEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<__kindof CREvent *> *)findAllEnterEventsForBeacon:(CRBeacon *)beacon;
 
 /**
  Finds all notification enter events for a corresponding beacon
  
  @param beacon The beacon
  */
-- (NSArray *)findAllNotificationEnterEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<CRNotificationEvent *> *)findAllNotificationEnterEventsForBeacon:(CRBeacon *)beacon;
 
 /**
  Finds all enter events for a corresponding beacon
  
  @param beacon The beacon
  */
-- (NSArray *)findAllExitEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<__kindof CREvent *> *)findAllExitEventsForBeacon:(CRBeacon *)beacon;
 
 /**
  Finds all notification enter events for a corresponding beacon
  
  @param beacon The beacon
  */
-- (NSArray *)findAllNotificationExitEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<CRNotificationEvent *> *)findAllNotificationExitEventsForBeacon:(CRBeacon *)beacon;
 
 @end

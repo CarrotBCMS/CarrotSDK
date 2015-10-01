@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class CREvent;
+@class CRNotificationEvent;
 @class CRBeacon;
 @class CRBeaconEventAggregator;
 
@@ -61,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param events The array
  */
-- (void)addEvents:(NSArray *)events;
+- (void)addEvents:(NSArray<__kindof CREvent *> *)events;
 
 /**
  Remove an event.
@@ -75,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param events Array with eventIds
  */
-- (void)removeEventsWithIds:(NSArray *)events;
+- (void)removeEventsWithIds:(NSArray<NSNumber *> *)events;
 
 /**
  Removes all events.
@@ -99,14 +100,14 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param beacon The beacon
  */
-- (NSArray *)findAllEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<__kindof CREvent *> *)findAllEventsForBeacon:(CRBeacon *)beacon;
 
 /**
  Finds all notification events for a corresponding beacon.
  
  @param beacon The beacon
  */
-- (NSArray *)findAllNotificationEventsForBeacon:(CRBeacon *)beacon;
+- (NSArray<CRNotificationEvent *> *)findAllNotificationEventsForBeacon:(CRBeacon *)beacon;
 
 @end
 

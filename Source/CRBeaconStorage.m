@@ -45,8 +45,8 @@
     return result;
 }
 
-- (NSArray *)UUIDRegions {
-    NSMutableSet *uuids = [NSMutableSet set];
+- (NSArray<CLBeaconRegion *> *)UUIDRegions {
+    NSMutableSet<CLBeaconRegion *> *uuids = [NSMutableSet set];
     NSArray *objects = [self objects];
     CLBeaconRegion *region;
     for (CRBeacon *aBeacon in objects) {

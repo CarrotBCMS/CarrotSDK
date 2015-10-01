@@ -18,7 +18,7 @@
 - (void)_save:(CREvent *)event;
 - (CREvent *)_load:(NSUInteger)eventId;
 - (void)_remove:(NSUInteger)eventId;
-- (NSArray *)_findAllEventsForBeacon:(CRBeacon *)beacon onlyNotifications:(BOOL)notifications;
+- (NSArray<__kindof CREvent *> *)_findAllEventsForBeacon:(CRBeacon *)beacon onlyNotifications:(BOOL)notifications;
 
 @end
 
@@ -79,7 +79,7 @@
     [self _remove:eventId];
 }
 
-- (void)removeEventsWithIds:(NSArray *)events {
+- (void)removeEventsWithIds:(NSArray<NSNumber *> *)events {
     for (NSNumber *eventId in events) {
         [self removeEventWithId:eventId.integerValue];
     }
@@ -114,11 +114,11 @@
     return event;
 }
 
-- (NSArray *)findAllEventsForBeacon:(CRBeacon *)beacon {
+- (NSArray<__kindof CREvent *> *)findAllEventsForBeacon:(CRBeacon *)beacon {
     return [self _findAllEventsForBeacon:beacon onlyNotifications:NO];
 }
 
-- (NSArray *)findAllNotificationEventsForBeacon:(CRBeacon *)beacon {
+- (NSArray<CRNotificationEvent *> *)findAllNotificationEventsForBeacon:(CRBeacon *)beacon {
     return [self _findAllEventsForBeacon:beacon onlyNotifications:YES];
 }
 
@@ -126,9 +126,9 @@
 
 #pragma mark - Private
 
-- (NSArray *)_findAllEventsForBeacon:(CRBeacon *)beacon onlyNotifications:(BOOL)notifications {
+- (NSArray<__kindof CREvent *> *)_findAllEventsForBeacon:(CRBeacon *)beacon onlyNotifications:(BOOL)notifications {
     NSMutableArray *result = [NSMutableArray array];
-    NSArray *events = [NSArray arrayWithArray:[_aggregator eventsForBeacon:beacon.beaconId]];
+    NSArray<NSNumber *> *events = [NSArray arrayWithArray:[_aggregator eventsForBeacon:beacon.beaconId]];
     
     for (NSNumber *eventId in events) {
         CREvent *event = [self findEventForId:eventId.integerValue];

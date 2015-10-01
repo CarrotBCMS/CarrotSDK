@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CRBeacon;
+
 /**
  Temporarily stores beacons. This is not persistent, objects are not getting evicted during low memory circumstances.
  */
@@ -29,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param beacons Beacon array
  @param uuid The UUID
  */
-- (void)addCRBeaconsFromRangedBeacons:(NSArray *)beacons forUUID:(NSUUID *)uuid;
+- (void)addCRBeaconsFromRangedBeacons:(NSArray<CLBeacon *> *)beacons forUUID:(NSUUID *)uuid;
 
 /**
  Retrieve all beacons for given id
@@ -39,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param beacons Beacon array
  @param uuid The UUID
  */
-- (NSArray *)CRBeaconsForUUID:(NSUUID *)uuid;
+- (NSArray<CRBeacon *> *)CRBeaconsForUUID:(NSUUID *)uuid;
 
 /**
  Retrieve all beacons
@@ -49,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param beacons Beacon array
  @param region The region
  */
-- (NSArray *)enteredCRBeaconsForRangedBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region;
+- (NSArray<CRBeacon *> *)enteredCRBeaconsForRangedBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region;
 
 /**
  Retrieve all beacons
@@ -59,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param beacons Beacon array
  @param region The region
  */
-- (NSArray *)exitedCRBeaconsRangedBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region;
+- (NSArray<CRBeacon *> *)exitedCRBeaconsRangedBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region;
 
 @end
 

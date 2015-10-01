@@ -10,11 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CREvent;
+@class CRBeacon;
+
 @interface CRBeaconEventAggregator : CRSingleFileStorage
 
-- (void)setBeacons:(NSArray *)beaconIds forEvent:(NSUInteger)eventId;
-- (NSArray *)eventsForBeacon:(NSUInteger)beaconId;
-- (NSArray *)beaconsForEvent:(NSUInteger)eventId;
+- (void)setBeacons:(NSArray<NSNumber *> *)beaconIds forEvent:(NSUInteger)eventId;
+- (NSArray<NSNumber *> *)eventsForBeacon:(NSUInteger)beaconId;
+- (NSArray<NSNumber *> *)beaconsForEvent:(NSUInteger)eventId;
 
 @end
 

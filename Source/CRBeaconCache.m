@@ -11,12 +11,12 @@
 
 @interface CRBeaconCache()
 
--(NSArray *)_CRBeaconArrayFromBeaconArray:(NSArray *)beacons;
+-(NSArray<CRBeacon *> *)_CRBeaconArrayFromBeaconArray:(NSArray *)beacons;
 
 @end
 
 @implementation CRBeaconCache {
-    NSMutableDictionary *_objects;
+    NSMutableDictionary<NSString *, NSArray *> *_objects;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,11 +36,11 @@
 
 #pragma mark - Storing, Caching and general fiddling
 
-- (void)addCRBeaconsFromRangedBeacons:(NSArray *)beacons forUUID:(NSUUID *)uuid {
+- (void)addCRBeaconsFromRangedBeacons:(NSArray<CLBeacon *> *)beacons forUUID:(NSUUID *)uuid {
     [_objects setObject:[NSArray arrayWithArray:[self _CRBeaconArrayFromBeaconArray:beacons]] forKey:uuid.UUIDString];
 }
 
-- (NSArray *)CRBeaconsForUUID:(NSUUID *)uuid {
+- (NSArray<CRBeacon *> *)CRBeaconsForUUID:(NSUUID *)uuid {
     NSArray *object = [_objects objectForKey:uuid.UUIDString];
     if (!object) {
         object = [NSArray array];
@@ -49,7 +49,7 @@
     return [NSArray arrayWithArray:object];
 }
 
-- (NSArray *)enteredCRBeaconsForRangedBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
+- (NSArray<CRBeacon *> *)enteredCRBeaconsForRangedBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region {
     NSArray *beaconsInRange = [self _CRBeaconArrayFromBeaconArray:beacons];
     NSArray *prevBeaconsInRange = [NSArray arrayWithArray:[self CRBeaconsForUUID:region.proximityUUID]];
     
@@ -57,7 +57,7 @@
     return [beaconsInRange filteredArrayUsingPredicate:predicate];
 }
 
-- (NSArray *)exitedCRBeaconsRangedBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
+- (NSArray<CRBeacon *> *)exitedCRBeaconsRangedBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region {
     NSArray *beaconsInRange = [self _CRBeaconArrayFromBeaconArray:beacons];
     NSArray *prevBeaconsInRange = [NSArray arrayWithArray:[self CRBeaconsForUUID:region.proximityUUID]];
     
@@ -69,7 +69,7 @@
 
 #pragma mark - Private
 
--(NSArray *)_CRBeaconArrayFromBeaconArray:(NSArray *)beacons {
+-(NSArray<CRBeacon *> *)_CRBeaconArrayFromBeaconArray:(NSArray<CLBeacon *> *)beacons {
     NSMutableArray *crBeaconArray = [NSMutableArray array];
     for (CLBeacon *beacon in beacons) {
         CRBeacon *crBeacon = [[CRBeacon alloc] initWithUUID:beacon.proximityUUID

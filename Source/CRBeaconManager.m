@@ -24,13 +24,13 @@
 
 - (void)_setup;
 - (NSString *)_stringForState:(CLRegionState)state;
-- (void)_sendLocalNotificationsAndNotifyDelegateWithEvents:(NSArray *)notificationObjects
+- (void)_sendLocalNotificationsAndNotifyDelegateWithEvents:(NSArray<CRNotificationEvent *> *)notificationObjects
                                                     beacon:(CRBeacon *)beacon;
-- (void)_notifyDelegateToPresentEvents:(NSArray *)objects beacon:(CRBeacon *)beacon;
-- (NSArray *)_regions;
+- (void)_notifyDelegateToPresentEvents:(NSArray<__kindof CREvent *> *)objects beacon:(CRBeacon *)beacon;
+- (NSArray<CLBeaconRegion *> *)_regions;
 
-- (void)_handleEnterBeacons:(NSArray *)beacons;
-- (void)_handleExitBeacons:(NSArray *)beacons;
+- (void)_handleEnterBeacons:(NSArray<CRBeacon *> *)beacons;
+- (void)_handleExitBeacons:(NSArray<CRBeacon *> *)beacons;
 
 @end
 
@@ -39,7 +39,7 @@
 @implementation CRBeaconManager {
     CLLocationManager *_locationManager;
     CBCentralManager *_bluetoothManager;
-    NSArray *_regions;
+    NSArray<CLBeaconRegion *> *_regions;
     
     CRBeaconCache *_beaconCache;
     CRBeaconStorage *_beaconStorage;
@@ -104,13 +104,13 @@
     
     // Stop ranging and monitoring beacons from previous sessions
     [_locationManager.rangedRegions enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-        [_locationManager stopMonitoringForRegion:(CLBeaconRegion *)obj];
-        [_locationManager stopRangingBeaconsInRegion:(CLBeaconRegion *)obj];
+        [_locationManager stopMonitoringForRegion:obj];
+        [_locationManager stopRangingBeaconsInRegion:obj];
     }];
     
     [[self _regions] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CRLog("Start monitoring region: %@", obj);
-        CLBeaconRegion *region = (CLBeaconRegion *)obj;
+        CLBeaconRegion *region = obj;
         region.notifyOnEntry = YES;
         region.notifyOnExit = YES;
         region.notifyEntryStateOnDisplay = YES;
@@ -262,11 +262,11 @@
     return stateString;
 }
 
-- (NSArray *)_regions {
+- (NSArray<CLBeaconRegion *> *)_regions {
     return [_beaconStorage UUIDRegions];
 }
 
-- (void)_handleEnterBeacons:(NSArray *)beacons {
+- (void)_handleEnterBeacons:(NSArray<CRBeacon *> *)beacons {
     [beacons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CRBeacon *beacon = nil;
         if ([obj isKindOfClass:[CRBeacon class]]) {
@@ -284,18 +284,18 @@
             }
             
             // Check and perform notification handling if necessary.
-            NSArray *notificationObjects = [_eventCoordinator validEnterNotificationEventsForBeacon:beacon];
+            NSArray<CRNotificationEvent *> *notificationObjects = [_eventCoordinator validEnterNotificationEventsForBeacon:beacon];
             [self _sendLocalNotificationsAndNotifyDelegateWithEvents:notificationObjects beacon:beacon];
             
             // Check and perform event handling if necessary.
-            NSArray *objects = [_eventCoordinator validEnterEventsForBeacon:beacon];
+            NSArray<__kindof CREvent *> *objects = [_eventCoordinator validEnterEventsForBeacon:beacon];
             [self _notifyDelegateToPresentEvents:objects beacon:beacon];
         }
     }];
 }
 
-- (void)_handleExitBeacons:(NSArray *)beacons {
-    [beacons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+- (void)_handleExitBeacons:(NSArray<CRBeacon *> *)beacons {
+    [beacons enumerateObjectsUsingBlock:^(CRBeacon * obj, NSUInteger idx, BOOL *stop) {
         CRBeacon *beacon = nil;
         if ([obj isKindOfClass:[CRBeacon class]]) {
             beacon = obj;
@@ -303,7 +303,7 @@
         // Find concrete CRBeacon instance in storage
         // Only call delegate if a CRBeacon was foundon instance from storage
         beacon = [_beaconStorage findCRBeaconWithUUID:beacon.uuid major:beacon.major minor:beacon.minor];
-        beacon.beacon = ((CRBeacon *)obj).beacon;
+        beacon.beacon = obj.beacon;
         
         if (beacon) {
             if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didExitBeaconRadius:)]) {
@@ -311,17 +311,17 @@
             }
             
             // Check and perform notification handling if necessary.
-            NSArray *notificationObjects = [_eventCoordinator validExitNotificationEventsForBeacon:beacon];
+            NSArray<CRNotificationEvent *> *notificationObjects = [_eventCoordinator validExitNotificationEventsForBeacon:beacon];
             [self _sendLocalNotificationsAndNotifyDelegateWithEvents:notificationObjects beacon:beacon];
             
             // Check and perform event handling if necessary.
-            NSArray *objects = [_eventCoordinator validExitEventsForBeacon:beacon];
+            NSArray<__kindof CREvent *> *objects = [_eventCoordinator validExitEventsForBeacon:beacon];
             [self _notifyDelegateToPresentEvents:objects beacon:beacon];
         }
     }];
 }
 
-- (void)_sendLocalNotificationsAndNotifyDelegateWithEvents:(NSArray *)notificationObjects
+- (void)_sendLocalNotificationsAndNotifyDelegateWithEvents:(NSArray<CRNotificationEvent *> *)notificationObjects
                                                     beacon:(CRBeacon *)beacon
 {
     for (CRNotificationEvent *event in notificationObjects) {
@@ -333,7 +333,7 @@
     }
 }
 
-- (void)_notifyDelegateToPresentEvents:(NSArray *)objects beacon:(CRBeacon *)beacon {
+- (void)_notifyDelegateToPresentEvents:(NSArray<CREvent *> *)objects beacon:(CRBeacon *)beacon {
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:shouldPresentEvents:beacon:)]) {
         if (objects && objects.count > 0) {
             [_analyticsProvider logEvents:objects forBeacon:beacon];
@@ -347,15 +347,15 @@
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager
-        didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
+        didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region
 {
     if ([(id<CRBeaconManagerDelegate>)_delegate respondsToSelector:@selector(manager:didRangeBeacons:inRegion:)]) {
         [_delegate manager:self didRangeBeacons:beacons inRegion:region];
     }
 
     // TODO: Problems?!
-    NSArray *enteredBeacons = [_beaconCache enteredCRBeaconsForRangedBeacons:beacons inRegion:region];
-    NSArray *exitedBeacons = [_beaconCache exitedCRBeaconsRangedBeacons:beacons inRegion:region];
+    NSArray<CRBeacon *> *enteredBeacons = [_beaconCache enteredCRBeaconsForRangedBeacons:beacons inRegion:region];
+    NSArray<CRBeacon *> *exitedBeacons = [_beaconCache exitedCRBeaconsRangedBeacons:beacons inRegion:region];
     
     if (enteredBeacons.count > 0) {
         CRLog(@"Entered beacons: %@", enteredBeacons);

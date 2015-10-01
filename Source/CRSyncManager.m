@@ -25,7 +25,7 @@
 - (void)_updateLastSync:(NSNumber *)lastSync;
 - (void)_parseAndStoreSyncData:(NSDictionary *)data;
 - (void)_handleSyncResponse:(id)responseObject operation:(AFHTTPRequestOperation *)operation;
-- (NSArray *)_retrieveBeaconIdsFromEventDictionary:(NSDictionary *)dictionary;
+- (NSArray<NSNumber *> *)_retrieveBeaconIdsFromEventDictionary:(NSDictionary *)dictionary;
 
 @end
 
@@ -203,7 +203,7 @@
     [userDefaults synchronize];
 }
 
-- (NSArray *)_retrieveBeaconIdsFromEventDictionary:(NSDictionary *)dictionary {
+- (NSArray<NSNumber *> *)_retrieveBeaconIdsFromEventDictionary:(NSDictionary *)dictionary {
     NSMutableArray *result = [NSMutableArray array];
     NSArray *beacons = dictionary[@"beacons"];
     for (NSDictionary *beaconDict in beacons) {
