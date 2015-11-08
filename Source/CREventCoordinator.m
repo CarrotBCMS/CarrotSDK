@@ -71,7 +71,7 @@
     notification.alertBody = event.message;
     notification.soundName = UILocalNotificationDefaultSoundName;
     NSMutableDictionary<NSString *, NSString *> *userInfo = [@{@"id": @(event.eventId)} mutableCopy];
-    if (event.payload) {
+    if (event.payload && ![event.payload isEqual:[NSNull null]]) {
         [userInfo setObject:event.payload forKey:@"payload"];
     }
     
