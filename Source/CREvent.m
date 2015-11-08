@@ -156,7 +156,7 @@
     NSDate *aScheduledStartDate = nil;
     NSDate *aScheduledEndDate = nil;
 
-    if (aScheduledStartDate) {
+    if (scheduledStartDate) {
         aScheduledStartDate = [NSDate dateFromISO8601String:scheduledStartDate];
     }
     if (scheduledEndDate) {
