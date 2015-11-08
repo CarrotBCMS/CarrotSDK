@@ -236,9 +236,14 @@
     _locationManager.delegate = self;
     _locationManager.pausesLocationUpdatesAutomatically = NO;
     
-    // Important for iOS 8 cases.
+    // Important for iOS 8
     if([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         [_locationManager requestAlwaysAuthorization];
+    }
+    
+    // Important for iOS 9
+    if ([_locationManager respondsToSelector:@selector(allowsBackgroundLocationUpdates)]) {
+        _locationManager.allowsBackgroundLocationUpdates = YES;
     }
 }
 
