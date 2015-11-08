@@ -107,7 +107,7 @@
                                                   }
                                               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                                   _currentOperation = nil;
-                                                  CRLog(@"A synchronisation error has occured: %@", error.localizedDescription);
+                                                  CRLog(@"A synchronisation error occured: %@", error.localizedDescription);
                                                   if (operation.response.statusCode == 404) {
                                                       CRLog(@"Did you mistype the url to your bms root?");
                                                   }
