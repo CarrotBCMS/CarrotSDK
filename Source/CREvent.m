@@ -1,5 +1,5 @@
 //
-//  CRContent.m
+//  CREvent.m
 //  CarrotSDK
 //
 //  Created by Heiko Dreyer on 05/23/15.

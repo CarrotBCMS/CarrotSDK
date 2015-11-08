@@ -1,5 +1,5 @@
 //
-//  CRContent.h
+//  CREvent.h
 //  CarrotSDK
 //
 //  Created by Heiko Dreyer on 05/23/15.
