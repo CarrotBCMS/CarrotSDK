@@ -1,3 +1,7 @@
+![Carrot Logo](http://temp.boxedfolder.com/smartlogo_carrot.png =476x)            
+
+[![Build Status](https://travis-ci.org/CarrotBMS/CarrotSDK.svg?branch=master)](https://travis-ci.org/CarrotBMS/CarrotSDK)            
+
 # What is Carrot?
 
 Carrot is the beacon management system for everyone. This is the corresponding iOS SDK. It syncs with the Carrot beacon management system, ranges beacons and triggers appropriate events. All beacon data is persisted locally. Thus, Beacon ranging und event triggering even works in environments with weak mobile connectivity. In order to support iBeacons the minimum deployment target is _iOS 7_.
@@ -18,7 +22,9 @@ The following installation choices are available:
 + Add all files inside folder _Source_ and _Vendor/AFNetworking/AFNetworking_ to your project.
 + Install via CocoaPods by adding ´pod 'CarrotSDK'´ to your _podfile_.
 
-## Integration
+## Integration & Features
+
+...
 
 # Example
 
