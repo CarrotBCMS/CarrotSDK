@@ -1,0 +1,5 @@
+language: objective-c
+xcode_project: CarrotSDK.xcodeproj
+xcode_scheme: CarrotSDKTests
+xcode_sdk: iphonesimulator
+osx_image: xcode7
