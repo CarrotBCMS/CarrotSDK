@@ -30,7 +30,7 @@
     <dict>
         <key>NSExceptionDomains</key>
         <dict>
-            <key>herokuapp.com</key>
+            <key>carrot.re</key>
             <dict>
                 <key>NSExceptionAllowsInsecureHTTPLoads</key>
                 <true/>
