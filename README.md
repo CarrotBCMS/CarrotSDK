@@ -24,7 +24,7 @@ The following installation choices are available:
 
 ## Integration & Features
 
-...
+_(See example project)_
 
 # Example
 
@@ -35,6 +35,8 @@ The includes example project (CarrotExample) is located inside the _Example_ fol
 The following features are still missing:
 
 + __Support for binary files__ - Carrot's current support for text and notifications should be extended to allow file attachments. The syncing process needs to be overhauled for that purpose.
+
++ __Additional documentation__
 
 # License
 
