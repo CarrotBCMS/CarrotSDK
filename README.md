@@ -24,7 +24,16 @@ The following installation choices are available:
 
 ## Integration & Features
 
-_(See example project)_
+To integrate the CarrotSDK into your project, inialize an instance of ´CRBeaconManager´ by calling the Method ´-initWithDelegate:url:appKey:´. You have to provide a ´CRBeaconManagerDelegate´ delegate, the base url to your CarrotBMS and an app key:
+
+´´´
+CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:APP_KEY];
+[beaconManager grantNotficationPermission];
+[beaconManager startMonitoringBeacons];
+´´´
+
+The call ´-grantNotficationPermission´ asks the user for the permission to send notifications. The method ´-startMonitoringBeacons´ completes the initial setup and automatically begins monitoring. An initial sync task is being triggered right after initializing. To manually trigger synchronisation with the BMS, call the method ´-startSyncing´. 
+
 
 # Example
 
