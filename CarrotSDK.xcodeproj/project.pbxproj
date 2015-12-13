@@ -21,25 +21,60 @@
 		6009ED3D1B1144B00090C1A7 /* CREvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3B1B1144B00090C1A7 /* CREvent.m */; };
 		6009ED401B11451E0090C1A7 /* CRTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6009ED411B11451E0090C1A7 /* CRTextEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */; };
-		6014AE221BB28CC600DDA034 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE0F1BB28CC600DDA034 /* AFHTTPRequestOperation.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE231BB28CC600DDA034 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE101BB28CC600DDA034 /* AFHTTPRequestOperation.m */; settings = {ASSET_TAGS = (); }; };
-		6014AE241BB28CC600DDA034 /* AFHTTPRequestOperationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE111BB28CC600DDA034 /* AFHTTPRequestOperationManager.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE251BB28CC600DDA034 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE121BB28CC600DDA034 /* AFHTTPRequestOperationManager.m */; settings = {ASSET_TAGS = (); }; };
-		6014AE261BB28CC600DDA034 /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE131BB28CC600DDA034 /* AFHTTPSessionManager.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE271BB28CC600DDA034 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE141BB28CC600DDA034 /* AFHTTPSessionManager.m */; settings = {ASSET_TAGS = (); }; };
-		6014AE281BB28CC600DDA034 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE151BB28CC600DDA034 /* AFNetworking.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE291BB28CC600DDA034 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE161BB28CC600DDA034 /* AFNetworkReachabilityManager.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE2A1BB28CC600DDA034 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE171BB28CC600DDA034 /* AFNetworkReachabilityManager.m */; settings = {ASSET_TAGS = (); }; };
-		6014AE2B1BB28CC600DDA034 /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE181BB28CC600DDA034 /* AFSecurityPolicy.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE2C1BB28CC600DDA034 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE191BB28CC600DDA034 /* AFSecurityPolicy.m */; settings = {ASSET_TAGS = (); }; };
-		6014AE2D1BB28CC600DDA034 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE1A1BB28CC600DDA034 /* AFURLConnectionOperation.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE2E1BB28CC600DDA034 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE1B1BB28CC600DDA034 /* AFURLConnectionOperation.m */; settings = {ASSET_TAGS = (); }; };
-		6014AE2F1BB28CC600DDA034 /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE1C1BB28CC600DDA034 /* AFURLRequestSerialization.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE301BB28CC600DDA034 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE1D1BB28CC600DDA034 /* AFURLRequestSerialization.m */; settings = {ASSET_TAGS = (); }; };
-		6014AE311BB28CC600DDA034 /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE1E1BB28CC600DDA034 /* AFURLResponseSerialization.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE321BB28CC600DDA034 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE1F1BB28CC600DDA034 /* AFURLResponseSerialization.m */; settings = {ASSET_TAGS = (); }; };
-		6014AE331BB28CC600DDA034 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE201BB28CC600DDA034 /* AFURLSessionManager.h */; settings = {ASSET_TAGS = (); }; };
-		6014AE341BB28CC600DDA034 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE211BB28CC600DDA034 /* AFURLSessionManager.m */; settings = {ASSET_TAGS = (); }; };
+		601355E51C1DE9D20068EA47 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CC3B021B15FC3700229A55 /* CoreBluetooth.framework */; };
+		601355E61C1DE9DC0068EA47 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061DA921B111E61002DC83B /* CoreLocation.framework */; };
+		601355E71C1DEA2F0068EA47 /* CRBeaconCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 603CC7E31B14BF8C0077A48C /* CRBeaconCache.m */; };
+		601355E81C1DEA2F0068EA47 /* CRBeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6061DA831B111D21002DC83B /* CRBeaconManager.m */; };
+		601355E91C1DEA2F0068EA47 /* CREventCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8A41B1732B800D4CA87 /* CREventCoordinator.m */; };
+		601355EA1C1DEA2F0068EA47 /* CRSingleFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DA1B126D8000459AAC /* CRSingleFileStorage.m */; };
+		601355EB1C1DEA2F0068EA47 /* CRBeaconEventAggregator.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DCFA4B1B5A5A4000AD1FB4 /* CRBeaconEventAggregator.m */; };
+		601355EC1C1DEA2F0068EA47 /* CRBeaconStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6002B0DE1B12768D00459AAC /* CRBeaconStorage.m */; };
+		601355ED1C1DEA2F0068EA47 /* CREventStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 604601B51B15AF4C00F32E80 /* CREventStorage.m */; };
+		601355EE1C1DEA2F0068EA47 /* CREventStorage+Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8AA1B174AC900D4CA87 /* CREventStorage+Filter.m */; };
+		601355EF1C1DEA2F0068EA47 /* CRBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6061DA8F1B111DB3002DC83B /* CRBeacon.m */; };
+		601355F01C1DEA2F0068EA47 /* CREvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3B1B1144B00090C1A7 /* CREvent.m */; };
+		601355F11C1DEA2F0068EA47 /* CRTextEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */; };
+		601355F21C1DEA2F0068EA47 /* CRNotificationEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C8BAD61B132A5B009024F8 /* CRNotificationEvent.m */; };
+		601355F31C1DEA2F0068EA47 /* CRPersistentRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6051C16C1B512A5800F5D443 /* CRPersistentRequestQueue.m */; };
+		601355F41C1DEA2F0068EA47 /* CRSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6061DA8B1B111D95002DC83B /* CRSyncManager.m */; };
+		601355F51C1DEA2F0068EA47 /* CRAnalyticsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 606F0B271B1CC0C000E28436 /* CRAnalyticsProvider.m */; };
+		601355F61C1DEA2F0068EA47 /* NSDate+ISO.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A917711B5920C000BA57FE /* NSDate+ISO.m */; };
+		601355FF1C1DEA2F0068EA47 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE101BB28CC600DDA034 /* AFHTTPRequestOperation.m */; };
+		601356001C1DEA2F0068EA47 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE121BB28CC600DDA034 /* AFHTTPRequestOperationManager.m */; };
+		601356011C1DEA2F0068EA47 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE141BB28CC600DDA034 /* AFHTTPSessionManager.m */; };
+		601356021C1DEA2F0068EA47 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE171BB28CC600DDA034 /* AFNetworkReachabilityManager.m */; };
+		601356031C1DEA2F0068EA47 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE191BB28CC600DDA034 /* AFSecurityPolicy.m */; };
+		601356041C1DEA2F0068EA47 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE1B1BB28CC600DDA034 /* AFURLConnectionOperation.m */; };
+		601356051C1DEA2F0068EA47 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE1D1BB28CC600DDA034 /* AFURLRequestSerialization.m */; };
+		601356061C1DEA2F0068EA47 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE1F1BB28CC600DDA034 /* AFURLResponseSerialization.m */; };
+		601356071C1DEA2F0068EA47 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE211BB28CC600DDA034 /* AFURLSessionManager.m */; };
+		601356081C1DEA2F0068EA47 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5ED71B1DFC2A00957B9C /* AFNetworkActivityIndicatorManager.m */; };
+		601356091C1DEA2F0068EA47 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5ED91B1DFC2A00957B9C /* UIActivityIndicatorView+AFNetworking.m */; };
+		6013560A1C1DEA2F0068EA47 /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5EDB1B1DFC2A00957B9C /* UIAlertView+AFNetworking.m */; };
+		6013560B1C1DEA2F0068EA47 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5EDD1B1DFC2A00957B9C /* UIButton+AFNetworking.m */; };
+		6013560C1C1DEA2F0068EA47 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5EDF1B1DFC2A00957B9C /* UIImageView+AFNetworking.m */; };
+		6013560D1C1DEA2F0068EA47 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5EE21B1DFC2A00957B9C /* UIProgressView+AFNetworking.m */; };
+		6013560E1C1DEA2F0068EA47 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5EE41B1DFC2A00957B9C /* UIRefreshControl+AFNetworking.m */; };
+		6013560F1C1DEA2F0068EA47 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC5EE61B1DFC2A00957B9C /* UIWebView+AFNetworking.m */; };
+		6014AE221BB28CC600DDA034 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE0F1BB28CC600DDA034 /* AFHTTPRequestOperation.h */; };
+		6014AE231BB28CC600DDA034 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE101BB28CC600DDA034 /* AFHTTPRequestOperation.m */; };
+		6014AE241BB28CC600DDA034 /* AFHTTPRequestOperationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE111BB28CC600DDA034 /* AFHTTPRequestOperationManager.h */; };
+		6014AE251BB28CC600DDA034 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE121BB28CC600DDA034 /* AFHTTPRequestOperationManager.m */; };
+		6014AE261BB28CC600DDA034 /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE131BB28CC600DDA034 /* AFHTTPSessionManager.h */; };
+		6014AE271BB28CC600DDA034 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE141BB28CC600DDA034 /* AFHTTPSessionManager.m */; };
+		6014AE281BB28CC600DDA034 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE151BB28CC600DDA034 /* AFNetworking.h */; };
+		6014AE291BB28CC600DDA034 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE161BB28CC600DDA034 /* AFNetworkReachabilityManager.h */; };
+		6014AE2A1BB28CC600DDA034 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE171BB28CC600DDA034 /* AFNetworkReachabilityManager.m */; };
+		6014AE2B1BB28CC600DDA034 /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE181BB28CC600DDA034 /* AFSecurityPolicy.h */; };
+		6014AE2C1BB28CC600DDA034 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE191BB28CC600DDA034 /* AFSecurityPolicy.m */; };
+		6014AE2D1BB28CC600DDA034 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE1A1BB28CC600DDA034 /* AFURLConnectionOperation.h */; };
+		6014AE2E1BB28CC600DDA034 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE1B1BB28CC600DDA034 /* AFURLConnectionOperation.m */; };
+		6014AE2F1BB28CC600DDA034 /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE1C1BB28CC600DDA034 /* AFURLRequestSerialization.h */; };
+		6014AE301BB28CC600DDA034 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE1D1BB28CC600DDA034 /* AFURLRequestSerialization.m */; };
+		6014AE311BB28CC600DDA034 /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE1E1BB28CC600DDA034 /* AFURLResponseSerialization.h */; };
+		6014AE321BB28CC600DDA034 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE1F1BB28CC600DDA034 /* AFURLResponseSerialization.m */; };
+		6014AE331BB28CC600DDA034 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6014AE201BB28CC600DDA034 /* AFURLSessionManager.h */; };
+		6014AE341BB28CC600DDA034 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6014AE211BB28CC600DDA034 /* AFURLSessionManager.m */; };
 		60167BE41B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60167BE31B5BD30B00B44EF5 /* CRBeaconEventAggregatorTests.m */; };
 		6036C8A51B1732B800D4CA87 /* CREventCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6036C8A31B1732B800D4CA87 /* CREventCoordinator.h */; };
 		6036C8A61B1732B800D4CA87 /* CREventCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6036C8A41B1732B800D4CA87 /* CREventCoordinator.m */; };
@@ -105,6 +140,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		601355DA1C1DE9590068EA47 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		6002B0D91B126D8000459AAC /* CRSingleFileStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSingleFileStorage.h; sourceTree = "<group>"; };
 		6002B0DA1B126D8000459AAC /* CRSingleFileStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSingleFileStorage.m; sourceTree = "<group>"; };
@@ -120,6 +167,7 @@
 		6009ED3B1B1144B00090C1A7 /* CREvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CREvent.m; sourceTree = "<group>"; };
 		6009ED3E1B11451E0090C1A7 /* CRTextEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRTextEvent.h; sourceTree = "<group>"; };
 		6009ED3F1B11451E0090C1A7 /* CRTextEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRTextEvent.m; sourceTree = "<group>"; };
+		601355DC1C1DE9590068EA47 /* libCarrotSDKStatic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCarrotSDKStatic.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6014AE0F1BB28CC600DDA034 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		6014AE101BB28CC600DDA034 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		6014AE111BB28CC600DDA034 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -199,6 +247,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		601355D91C1DE9590068EA47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				601355E61C1DE9DC0068EA47 /* CoreLocation.framework in Frameworks */,
+				601355E51C1DE9D20068EA47 /* CoreBluetooth.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6061DA5F1B111AF5002DC83B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -328,6 +385,7 @@
 			children = (
 				6061DA631B111AF5002DC83B /* CarrotSDK.framework */,
 				6061DA6E1B111AF5002DC83B /* CarrotSDKTests.xctest */,
+				601355DC1C1DE9590068EA47 /* libCarrotSDKStatic.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -516,6 +574,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		601355DB1C1DE9590068EA47 /* CarrotSDKStatic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 601355E41C1DE9590068EA47 /* Build configuration list for PBXNativeTarget "CarrotSDKStatic" */;
+			buildPhases = (
+				601355D81C1DE9590068EA47 /* Sources */,
+				601355D91C1DE9590068EA47 /* Frameworks */,
+				601355DA1C1DE9590068EA47 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CarrotSDKStatic;
+			productName = CarrotSDKStatic;
+			productReference = 601355DC1C1DE9590068EA47 /* libCarrotSDKStatic.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		6061DA621B111AF5002DC83B /* CarrotSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6061DA791B111AF5002DC83B /* Build configuration list for PBXNativeTarget "CarrotSDK" */;
@@ -561,6 +636,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = boxedfolder.com;
 				TargetAttributes = {
+					601355DB1C1DE9590068EA47 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					6061DA621B111AF5002DC83B = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
@@ -583,6 +661,7 @@
 			targets = (
 				6061DA621B111AF5002DC83B /* CarrotSDK */,
 				6061DA6D1B111AF5002DC83B /* CarrotSDKTests */,
+				601355DB1C1DE9590068EA47 /* CarrotSDKStatic */,
 			);
 		};
 /* End PBXProject section */
@@ -605,6 +684,46 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		601355D81C1DE9590068EA47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				601355E71C1DEA2F0068EA47 /* CRBeaconCache.m in Sources */,
+				601355E81C1DEA2F0068EA47 /* CRBeaconManager.m in Sources */,
+				601355E91C1DEA2F0068EA47 /* CREventCoordinator.m in Sources */,
+				601355EA1C1DEA2F0068EA47 /* CRSingleFileStorage.m in Sources */,
+				601355EB1C1DEA2F0068EA47 /* CRBeaconEventAggregator.m in Sources */,
+				601355EC1C1DEA2F0068EA47 /* CRBeaconStorage.m in Sources */,
+				601355ED1C1DEA2F0068EA47 /* CREventStorage.m in Sources */,
+				601355EE1C1DEA2F0068EA47 /* CREventStorage+Filter.m in Sources */,
+				601355EF1C1DEA2F0068EA47 /* CRBeacon.m in Sources */,
+				601355F01C1DEA2F0068EA47 /* CREvent.m in Sources */,
+				601355F11C1DEA2F0068EA47 /* CRTextEvent.m in Sources */,
+				601355F21C1DEA2F0068EA47 /* CRNotificationEvent.m in Sources */,
+				601355F31C1DEA2F0068EA47 /* CRPersistentRequestQueue.m in Sources */,
+				601355F41C1DEA2F0068EA47 /* CRSyncManager.m in Sources */,
+				601355F51C1DEA2F0068EA47 /* CRAnalyticsProvider.m in Sources */,
+				601355F61C1DEA2F0068EA47 /* NSDate+ISO.m in Sources */,
+				601355FF1C1DEA2F0068EA47 /* AFHTTPRequestOperation.m in Sources */,
+				601356001C1DEA2F0068EA47 /* AFHTTPRequestOperationManager.m in Sources */,
+				601356011C1DEA2F0068EA47 /* AFHTTPSessionManager.m in Sources */,
+				601356021C1DEA2F0068EA47 /* AFNetworkReachabilityManager.m in Sources */,
+				601356031C1DEA2F0068EA47 /* AFSecurityPolicy.m in Sources */,
+				601356041C1DEA2F0068EA47 /* AFURLConnectionOperation.m in Sources */,
+				601356051C1DEA2F0068EA47 /* AFURLRequestSerialization.m in Sources */,
+				601356061C1DEA2F0068EA47 /* AFURLResponseSerialization.m in Sources */,
+				601356071C1DEA2F0068EA47 /* AFURLSessionManager.m in Sources */,
+				601356081C1DEA2F0068EA47 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				601356091C1DEA2F0068EA47 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				6013560A1C1DEA2F0068EA47 /* UIAlertView+AFNetworking.m in Sources */,
+				6013560B1C1DEA2F0068EA47 /* UIButton+AFNetworking.m in Sources */,
+				6013560C1C1DEA2F0068EA47 /* UIImageView+AFNetworking.m in Sources */,
+				6013560D1C1DEA2F0068EA47 /* UIProgressView+AFNetworking.m in Sources */,
+				6013560E1C1DEA2F0068EA47 /* UIRefreshControl+AFNetworking.m in Sources */,
+				6013560F1C1DEA2F0068EA47 /* UIWebView+AFNetworking.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6061DA5E1B111AF5002DC83B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -671,6 +790,27 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		601355E21C1DE9590068EA47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		601355E31C1DE9590068EA47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		6061DA771B111AF5002DC83B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -863,6 +1003,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		601355E41C1DE9590068EA47 /* Build configuration list for PBXNativeTarget "CarrotSDKStatic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				601355E21C1DE9590068EA47 /* Debug */,
+				601355E31C1DE9590068EA47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		6061DA5D1B111AF5002DC83B /* Build configuration list for PBXProject "CarrotSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

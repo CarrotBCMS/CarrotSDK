@@ -9,14 +9,24 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>CarrotSDKStatic.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>CarrotSDKTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>601355DB1C1DE9590068EA47</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6061DA621B111AF5002DC83B</key>
 		<dict>
 			<key>primary</key>
