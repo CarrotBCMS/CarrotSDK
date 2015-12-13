@@ -12,7 +12,7 @@ Carrot is the beacon management system for everyone. This is the corresponding i
 + Integrate the framework into your own project.
 + Run the carrot beacon management system and connect it to your app.
 
-_See the Carrot repository to deploy your own copy of the beacon management system._
+_See the [Carrot repository ](https://github.com/CarrotBMS/Carrot) to deploy your own copy of the beacon management system._
 
 ## Installation
 
@@ -33,7 +33,6 @@ CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaco
 ´´´
 
 The call ´-grantNotficationPermission´ asks the user for the permission to send notifications. The method ´-startMonitoringBeacons´ completes the initial setup and automatically begins monitoring. An initial sync task is being triggered right after initializing. To manually trigger synchronisation with the BMS, call the method ´-startSyncing´. 
-
 
 # Example
 
