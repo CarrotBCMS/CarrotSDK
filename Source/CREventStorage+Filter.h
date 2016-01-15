@@ -1,5 +1,5 @@
 /*
- * Carrot - beacon management (sdk)
+ * Carrot -  beacon content management (sdk)
  * Copyright (C) 2016 Heiko Dreyer
  *
  * This program is free software: you can redistribute it and/or modify
