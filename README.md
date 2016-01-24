@@ -1,10 +1,12 @@
-![Carrot Logo](http://temp.boxedfolder.com/smartlogo_carrot.png =476x)            
-
-[![Build Status](https://travis-ci.org/CarrotBMS/CarrotSDK.svg?branch=master)](https://travis-ci.org/CarrotBMS/CarrotSDK)            
+![Carrot Logo](https://cdn.rawgit.com/CarrotBCMS/Carrot/master/client/app/images/logo_alt.svg)                                           
 
 # What is Carrot?
 
-Carrot is the beacon management system for everyone. This is the corresponding iOS SDK. It syncs with the Carrot beacon management system, ranges beacons and triggers appropriate events. All beacon data is persisted locally. Thus, Beacon ranging und event triggering even works in environments with weak mobile connectivity. In order to support iBeacons the minimum deployment target is _iOS 7_.
+Carrot is the beacon management system for everyone. This is the corresponding iOS SDK. It syncs with the Carrot beacon management system, ranges beacons and triggers appropriate events. All beacon data is persisted locally. Thus, Beacon ranging und event triggering even works in environments with weak mobile connectivity. In order to support iBeacons the minimum deployment target is _iOS 7_.  
+
+## Status
+                                                                                                                     
+[![Build Status](https://travis-ci.org/CarrotBCMS/CarrotSDK.svg?branch=master)](https://travis-ci.org/CarrotBCMS/CarrotSDK)
 
 # How to get started?
 
@@ -24,15 +26,15 @@ The following installation choices are available:
 
 ## Integration & Features
 
-To integrate the CarrotSDK into your project, inialize an instance of ´CRBeaconManager´ by calling the Method ´-initWithDelegate:url:appKey:´. You have to provide a ´CRBeaconManagerDelegate´ delegate, the base url to your CarrotBMS and an app key:
+To integrate the CarrotSDK into your project, inialize an instance of ´CRBeaconManager´ by calling the Method `-initWithDelegate:url:appKey:`. You have to provide a `CRBeaconManagerDelegate` delegate, the base url to your CarrotBMS and an app key:
 
-´´´
+```
 CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:APP_KEY];
 [beaconManager grantNotficationPermission];
 [beaconManager startMonitoringBeacons];
-´´´
+```
 
-The call ´-grantNotficationPermission´ asks the user for the permission to send notifications. The method ´-startMonitoringBeacons´ completes the initial setup and automatically begins monitoring. An initial sync task is being triggered right after initializing. To manually trigger synchronisation with the BMS, call the method ´-startSyncing´. 
+The call `-grantNotficationPermission` asks the user for the permission to send notifications. The method `-startMonitoringBeacons` completes the initial setup and automatically begins monitoring. An initial sync task is being triggered right after initializing. To manually trigger synchronisation with the BMS, call the method `-startSyncing`. 
 
 # Example
 
