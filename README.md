@@ -14,7 +14,7 @@ Carrot is the beacon management system for everyone. This is the corresponding i
 + Integrate the framework into your own project.
 + Run the carrot beacon management system and connect it to your app.
 
-_See the [Carrot repository ](https://github.com/CarrotBMS/Carrot) to deploy your own copy of the beacon management system._
+_See the [Carrot repository ](https://github.com/CarrotBCMS/Carrot) to deploy your own copy of the beacon management system._
 
 ## Installation
 
