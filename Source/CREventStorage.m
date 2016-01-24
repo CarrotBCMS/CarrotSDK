@@ -96,6 +96,8 @@
 }
 
 - (void)removeAllEvents {
+    [_objects removeAllObjects];
+    
     NSError *error;
     NSArray *files = [_fileManager contentsOfDirectoryAtPath:_basePath error:&error];
     
@@ -108,7 +110,6 @@
             CRLog(@"There was an error removing an entity: %@", error);
         }
     }
-    [_objects removeAllObjects];
 }
 
 - (void)refresh:(CREvent *)event {
