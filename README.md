@@ -2,7 +2,7 @@
 
 # What is Carrot?
 
-Carrot is the beacon management system for everyone. This is the corresponding iOS SDK. It syncs with the Carrot beacon management system, ranges beacons and triggers appropriate events. All beacon data is persisted locally. Thus, Beacon ranging und event triggering even works in environments with weak mobile connectivity. In order to support iBeacons the minimum deployment target is _iOS 7_.  
+Carrot is the beacon content management system for everyone. This is the corresponding iOS SDK. It syncs with the Carrot beacon management system, ranges beacons and triggers appropriate events. All beacon data is persisted locally. Thus, Beacon ranging und event triggering even works in environments with weak mobile connectivity. In order to support iBeacons the minimum deployment target is _iOS 7_.  
 
 ## Status
                                                                                                                      
