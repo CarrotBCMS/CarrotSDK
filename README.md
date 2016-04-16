@@ -22,11 +22,11 @@ The following installation choices are available:
 
 + Build the CarrotSDK.framework file via the corresponding project target (iOS 8+) and add it to your project.
 + Add all files inside folder _Source_ and _Vendor/AFNetworking/AFNetworking_ to your project.
-+ Install via CocoaPods by adding ´pod 'CarrotSDK'´ to your _podfile_.
++ Install via CocoaPods by adding `pod 'CarrotSDK'` to your _podfile_.
 
 ## Integration & Features
 
-To integrate the CarrotSDK into your project, inialize an instance of ´CRBeaconManager´ by calling the Method `-initWithDelegate:url:appKey:`. You have to provide a `CRBeaconManagerDelegate` delegate, the base url to your CarrotBMS and an app key:
+To integrate the CarrotSDK into your project, inialize an instance of `CRBeaconManager` by calling the Method `-initWithDelegate:url:appKey:`. You have to provide a `CRBeaconManagerDelegate` delegate, the base url to your CarrotBMS and an app key:
 
 ```
 CRBeaconManager *beaconManager = [[CRBeaconManager alloc] initWithDelegate:beaconViewController url:urlToBMS appKey:APP_KEY];
