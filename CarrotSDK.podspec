@@ -5,11 +5,11 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                    Carrot is the beacon management system for everyone. This is the corresponding iOS SDK.
                    DESC
-  s.homepage     = "http://github.com/CarrotBMS/CarrotSDK"
+  s.homepage     = "https://github.com/CarrotBCMS/CarrotSDK"
   s.license      = 'GPLv3'
   s.author       = { "Heiko Dreyer" => "mail@boxedfolder.com" }
   s.ios.deployment_target = '7.0'
-  s.source       = { :git => "http://github.com/CarrotBCMS/CarrotSDK.git", :tag => "0.5.0" }
+  s.source       = { :git => "https://github.com/CarrotBCMS/CarrotSDK.git", :tag => "0.5.0" }
   s.source_files  = 'Source/**/*.{h,m}'
   s.public_header_files = 'Source/**/*.h'
   s.requires_arc = true
