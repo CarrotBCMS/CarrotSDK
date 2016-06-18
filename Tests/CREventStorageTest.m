@@ -116,14 +116,18 @@
     
     [_eventStorage addEvents:@[_event, _eventTwo]];
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 2);
+    sleep(1); // ... sleep ?
     [_eventStorage removeEventsWithIds:@[@(_event.eventId), @(_eventTwo.eventId)]];
+    sleep(1); // ... sleep ?
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 0);
 }
 
 - (void)testRemoveAllEventsForBeacon {
     [_eventStorage addEvents:@[_event, _eventTwo]];
+    sleep(1); // ... sleep ?
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 2);
     [_eventStorage removeAllEvents];
+    sleep(1); // ... sleep ?
     XCTAssert([_eventStorage findAllEventsForBeacon:_beacon].count == 0);
 }
 
