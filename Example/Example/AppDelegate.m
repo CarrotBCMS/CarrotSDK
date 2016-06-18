@@ -19,8 +19,8 @@
 #import "AppDelegate.h"
 #import <CarrotSDK/CarrotSDK.h>
 
-#define SERVER_ADDRESS @"http://demo.carrot.re"
-#define APP_KEY @"81544bd2-bd88-438d-add7-c6d6ba7434c0"
+#define SERVER_ADDRESS @"https://app.carrot.re"
+#define APP_KEY @"ca3e38a1-4694-4363-872d-be2ae569e8b5"
 
 @interface AppDelegate ()
 
