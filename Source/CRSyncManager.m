@@ -29,7 +29,7 @@
 
 #define LAST_SYNC @"CRLastSync"
 
-@interface CRSyncManager ()
+@interface CRSyncManager () <NSURLSessionDelegate>
 
 - (void)_updateLastSync:(NSNumber *)lastSync;
 - (void)_parseAndStoreSyncData:(NSDictionary *)data;
