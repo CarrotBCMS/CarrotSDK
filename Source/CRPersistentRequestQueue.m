@@ -42,7 +42,7 @@
     NSArray *queueCopy = [NSArray arrayWithArray:_objects];
     [queueCopy enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         CRLog(@"Sending log operation...");
-        NSURLSessionDataTask *task  = [[self _backgroundSession] dataTaskWithRequest:obj
+        NSURLSessionDataTask *task  = [[self _session] dataTaskWithRequest:obj
                                                                    completionHandler:^(NSData * _Nullable data,
                                                                                        NSURLResponse * _Nullable response,
                                                                                        NSError * _Nullable error)
@@ -63,7 +63,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)cancelQueuedRequests {
-    [[self _backgroundSession] getAllTasksWithCompletionHandler:^(NSArray<__kindof NSURLSessionTask *> * _Nonnull tasks) {
+    [[self _session] getAllTasksWithCompletionHandler:^(NSArray<__kindof NSURLSessionTask *> * _Nonnull tasks) {
         for (NSURLSessionTask *task in tasks) {
             [_objects removeObject:task.originalRequest];
             [task cancel];
@@ -77,7 +77,7 @@
 
 #pragma mark - Private
 
-- (NSURLSession *)_backgroundSession {
+- (NSURLSession *)_session {
     if (_session) {
         return _session; // Early exit
     }
