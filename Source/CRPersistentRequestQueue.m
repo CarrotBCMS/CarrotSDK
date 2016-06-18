@@ -19,58 +19,74 @@
 #import "CRPersistentRequestQueue.h"
 #import "CRSingleFileStorage_Internal.h"
 #import "CRDefines.h"
-#import "AFNetworking.h"
+
+@interface CRPersistentRequestQueue () <NSURLSessionDelegate>
+@end
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation CRPersistentRequestQueue {
-    NSOperationQueue *_internalOperationQueue;
+    NSURLSession *_session;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma mark - Requests
+#pragma mark - Networking
 
 - (void)sendQueuedRequests {
     if (_objects.count == 0) {
         return;
     }
+    
     // Copy all (currently stored) requests into a new array
     NSArray *queueCopy = [NSArray arrayWithArray:_objects];
     [queueCopy enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:obj];
-        operation.responseSerializer = [AFJSONResponseSerializer serializer];
-        
         CRLog(@"Sending log operation...");
-        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSURLSessionDataTask *task  = [[self _backgroundSession] dataTaskWithRequest:obj
+                                                                   completionHandler:^(NSData * _Nullable data,
+                                                                                       NSURLResponse * _Nullable response,
+                                                                                       NSError * _Nullable error)
+        {
+            if (error) {
+                CRLog(@"Logging error: %@", error);
+                return;
+            }
+            
             CRLog(@"Logging successful.");
             [_objects removeObject:obj]; // Remove request from queue when finished
             [self _save];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            CRLog(@"Logging error: %@", error);
         }];
-        [[self _internalOperationQueue] addOperation:operation];
+        [task resume];
     }];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)cancelQueuedRequests {
-    [[self _internalOperationQueue] cancelAllOperations];
-    [_objects removeAllObjects];
-    [self _save];
+    [[self _backgroundSession] getAllTasksWithCompletionHandler:^(NSArray<__kindof NSURLSessionTask *> * _Nonnull tasks) {
+        for (NSURLSessionTask *task in tasks) {
+            [_objects removeObject:task.originalRequest];
+            [task cancel];
+        }
+        [self _save];
+    }];
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
-- (void)waitUntilAllRequestsAreFinished {
-    [[self _internalOperationQueue] waitUntilAllOperationsAreFinished];
-}
+#pragma mark - Private
 
-- (NSOperationQueue *)_internalOperationQueue {
-    if (!_internalOperationQueue) {
-        _internalOperationQueue = [[NSOperationQueue alloc] init];
-        _internalOperationQueue.maxConcurrentOperationCount = 1;
+- (NSURLSession *)_backgroundSession {
+    if (_session) {
+        return _session; // Early exit
     }
-    return _internalOperationQueue;
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    _session = [NSURLSession sessionWithConfiguration:config
+                                             delegate:self
+                                        delegateQueue:[[NSOperationQueue alloc] init]];
+    
+    return _session;
 }
-
 @end

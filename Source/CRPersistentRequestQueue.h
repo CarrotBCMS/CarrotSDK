@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)sendQueuedRequests;
 - (void)cancelQueuedRequests;
-- (void)waitUntilAllRequestsAreFinished;
 
 NS_ASSUME_NONNULL_END
 
