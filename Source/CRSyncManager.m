@@ -26,7 +26,6 @@
 #import "CRNotificationEvent.h"
 #import "CREvent_Internal.h"
 #import "CRDefines.h"
-#import "AFNetworking.h"
 
 #define LAST_SYNC @"CRLastSync"
 
@@ -34,14 +33,14 @@
 
 - (void)_updateLastSync:(NSNumber *)lastSync;
 - (void)_parseAndStoreSyncData:(NSDictionary *)data;
-- (void)_handleSyncResponse:(id)responseObject operation:(AFHTTPRequestOperation *)operation;
+- (void)_handleSyncData:(NSData *)data;
 - (NSArray<NSNumber *> *)_retrieveBeaconIdsFromEventDictionary:(NSDictionary *)dictionary;
 
 @end
 
 @implementation CRSyncManager {
-    AFHTTPRequestOperationManager *_requestOperationManager;
-    AFHTTPRequestOperation *_currentOperation;
+    NSURLSessionTask *_currentTask;
+    NSURLSession *_session;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,8 +61,7 @@
         _eventStorage = eventStorage;
         _beaconStorage = beaconStorage;
         _baseURL = url;
-        _requestOperationManager = [AFHTTPRequestOperationManager manager];
-        _currentOperation = nil;
+        _currentTask = nil;
         _appKey = appKey;
         _aggregator = aggregator;
     }
@@ -76,14 +74,14 @@
 #pragma mark - Syncing
 
 - (void)startSyncing {
-    if (!_currentOperation) {
+    if (!_currentTask) {
         [self _syncData];
     }
 }
 
 - (void)stopSyncing {
-    if (_currentOperation) {
-        [_currentOperation cancel];
+    if (_currentTask) {
+        [_currentTask cancel];
     }
 }
 
@@ -94,61 +92,67 @@
 
 - (void)_syncData {
     NSNumber *lastSync = [[NSUserDefaults standardUserDefaults] objectForKey:LAST_SYNC];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    NSMutableArray *queryItems = [NSMutableArray array];
     
     if (_appKey) {
-        parameters[@"app_key"] = _appKey;
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"app_key" value:_appKey]];
     }
     
     if (lastSync) {
-        parameters[@"ts"] = lastSync;
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"ts" value:[lastSync stringValue]]];
     }
     
-    NSURL *aPath = [_baseURL URLByAppendingPathComponent:@"sync"];
-    _currentOperation = [_requestOperationManager GET:[aPath absoluteString]
-                                           parameters:parameters
-                                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                  _currentOperation = nil;
-                                                  [self _handleSyncResponse:responseObject operation:operation];
-                                                  
-                                                  // Call the delegate
-                                                  if ([(id<CRSyncManagerDelegate>)_delegate respondsToSelector:@selector(syncManagerDidFinishSyncing:)]) {
-                                                      [_delegate syncManagerDidFinishSyncing:self];
-                                                  }
-                                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                  _currentOperation = nil;
-                                                  CRLog(@"A synchronisation error occured: %@", error.localizedDescription);
-                                                  if (operation.response.statusCode == 404) {
-                                                      CRLog(@"Did you mistype the url to your bms root?");
-                                                  }
-                                                  
-                                                  if (operation.response.statusCode == 400 ||
-                                                      operation.response.statusCode == 401 ||
-                                                      operation.response.statusCode == 404 ||
-                                                      operation.response.statusCode == 500) {
-                                                      CRLog(@"Did you mistype your app key? Does it exist?");
-                                                      NSString *responseString = [operation responseString];
-                                                      NSData *data= [responseString dataUsingEncoding:NSUTF8StringEncoding];
-                                                      error = nil;
-                                                      NSDictionary *json = [NSJSONSerialization
-                                                                            JSONObjectWithData:data
-                                                                            options:NSJSONReadingMutableContainers
-                                                                            error:&error];
-                                                      if (!error && json && json[@"message"]) {
-                                                          CRLog(@"The server says: %@", json[@"message"]);
-                                                      }
-                                                  }
-                                                  
-                                                  // Call the delegate
-                                                  if ([(id<CRSyncManagerDelegate>)_delegate respondsToSelector:@selector(syncManager:didFailWithError:)]) {
-                                                      [_delegate syncManager:self didFailWithError:error];
-                                                  }
-                                              }];
+    NSURL *aURL = [_baseURL URLByAppendingPathComponent:@"sync"];
+    NSURLComponents *components = [[NSURLComponents alloc] initWithURL:aURL resolvingAgainstBaseURL:NO];
+    [components setQueryItems:queryItems];
+    
+    _currentTask = [[self _session] dataTaskWithURL: [components URL]
+                                  completionHandler:^(NSData * _Nullable data,
+                                                      NSURLResponse * _Nullable response,
+                                                      NSError * _Nullable error)
+    {
+        _currentTask = nil;
+        NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *)response;
+        if (error) {
+            CRLog(@"A synchronisation error occured: %@", error.localizedDescription);
+            if (urlResponse.statusCode == 404) {
+                CRLog(@"Did you mistype the url to your bms root?");
+            }
+            
+            if (urlResponse.statusCode == 400 ||
+                urlResponse.statusCode == 401 ||
+                urlResponse.statusCode == 404 ||
+                urlResponse.statusCode == 500) {
+                CRLog(@"Did you mistype your app key? Does it exist?");
+                error = nil;
+                NSDictionary *json = [NSJSONSerialization
+                                      JSONObjectWithData:data
+                                      options:NSJSONReadingMutableContainers
+                                      error:&error];
+                if (!error && json && json[@"message"]) {
+                    CRLog(@"The server says: %@", json[@"message"]);
+                }
+            }
+            
+            // Call the delegate
+            if ([(id<CRSyncManagerDelegate>)_delegate respondsToSelector:@selector(syncManager:didFailWithError:)]) {
+                [_delegate syncManager:self didFailWithError:error];
+            }
+            return;
+        }
+        
+        [self _handleSyncData:data];
+        
+        // Call the delegate
+        if ([(id<CRSyncManagerDelegate>)_delegate respondsToSelector:@selector(syncManagerDidFinishSyncing:)]) {
+            [_delegate syncManagerDidFinishSyncing:self];
+        }
+
+    }];
+    [_currentTask resume];
 }
 
-- (void)_handleSyncResponse:(id)responseObject operation:(AFHTTPRequestOperation *)operation {
-    NSString *responseString = [operation responseString];
-    NSData *data= [responseString dataUsingEncoding:NSUTF8StringEncoding];
+- (void)_handleSyncData:(NSData *)data {
     NSError *error;
     NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data
                                                              options:NSJSONReadingMutableContainers
@@ -220,6 +224,19 @@
         [result addObject:beaconDict[@"id"]];
     }
     return [NSArray arrayWithArray:result];
+}
+
+- (NSURLSession *)_session {
+    if (_session) {
+        return _session; // Early exit
+    }
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    _session = [NSURLSession sessionWithConfiguration:config
+                                             delegate:self
+                                        delegateQueue:[[NSOperationQueue alloc] init]];
+    
+    return _session;
 }
 
 @end
