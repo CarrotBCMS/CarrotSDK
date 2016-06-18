@@ -47,6 +47,7 @@
                                                                                        NSURLResponse * _Nullable response,
                                                                                        NSError * _Nullable error)
         {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             if (error) {
                 CRLog(@"Logging error: %@", error);
                 return;
@@ -56,6 +57,7 @@
             [_objects removeObject:obj]; // Remove request from queue when finished
             [self _save];
         }];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         [task resume];
     }];
 }

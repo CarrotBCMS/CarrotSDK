@@ -111,6 +111,7 @@
                                                       NSURLResponse * _Nullable response,
                                                       NSError * _Nullable error)
     {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         _currentTask = nil;
         NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *)response;
         if (error) {
@@ -149,6 +150,7 @@
         }
 
     }];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [_currentTask resume];
 }
 
