@@ -229,14 +229,12 @@
 }
 
 - (NSURLSession *)_session {
-    if (_session) {
-        return _session; // Early exit
+    if (!_session) {
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _session = [NSURLSession sessionWithConfiguration:config
+                                                 delegate:self
+                                            delegateQueue:[[NSOperationQueue alloc] init]];
     }
-    
-    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    _session = [NSURLSession sessionWithConfiguration:config
-                                             delegate:self
-                                        delegateQueue:[[NSOperationQueue alloc] init]];
     
     return _session;
 }
