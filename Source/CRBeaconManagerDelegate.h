@@ -143,7 +143,6 @@
  
  @param beaconManager Beacon manager
  @param region The specific region
- @param beacons All beacons
  */
 - (void)manager:(CRBeaconManager *)beaconManager
  didEnterRegion:(CLBeaconRegion *)region;
@@ -157,7 +156,6 @@
  
  @param beaconManager Beacon manager
  @param region The specific region
- @param beacons Array with beacons
  */
 - (void)manager:(CRBeaconManager *)beaconManager
   didExitRegion:(CLBeaconRegion *)region;
