@@ -24,6 +24,7 @@ The following installation choices are available:
 + Build the CarrotSDK.framework file via the corresponding project target (iOS 8+) and add it to your project.
 + Add all files inside folder _Source_ and _Vendor/AFNetworking/AFNetworking_ to your project.
 + Install via CocoaPods by adding `pod 'CarrotSDK'` to your _podfile_.
++ Install via [Carthage](https://github.com/Carthage/Carthage)
 
 ## Integration & Features
 
