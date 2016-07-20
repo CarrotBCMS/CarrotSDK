@@ -7,6 +7,7 @@ Carrot is the beacon content management system for everyone. This is the corresp
 ## Status
                                                                                                                      
 [![Build Status](https://travis-ci.org/CarrotBCMS/CarrotSDK.svg?branch=master)](https://travis-ci.org/CarrotBCMS/CarrotSDK)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 # How to get started?
 
